@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "C.B.Mongo", "C.B.Mongo\C.B.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "C.B.Models", "C.B.Models\C.B.Models.csproj", "{875388C2-8F23-42B0-9680-603A74CC4DBF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "C.B.Mysql", "C.B.Mysql\C.B.Mysql.csproj", "{F7BD5530-ECF3-4CF2-A117-398D43FA63C0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{875388C2-8F23-42B0-9680-603A74CC4DBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{875388C2-8F23-42B0-9680-603A74CC4DBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{875388C2-8F23-42B0-9680-603A74CC4DBF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7BD5530-ECF3-4CF2-A117-398D43FA63C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7BD5530-ECF3-4CF2-A117-398D43FA63C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7BD5530-ECF3-4CF2-A117-398D43FA63C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7BD5530-ECF3-4CF2-A117-398D43FA63C0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
