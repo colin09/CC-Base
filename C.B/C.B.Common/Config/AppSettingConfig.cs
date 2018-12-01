@@ -1,35 +1,32 @@
-﻿using System.Configuration;
+﻿using Microsoft.Extensions.Configuration;
+using System.Configuration;
 
 namespace C.B.Common.Config
 {
     public class AppSettingConfig
     {
 
+        private static IConfigurationRoot Configuration = ConfigBuilder.Configuration;
 
         public static string TDES_Key
         {
-            get { return ConfigurationManager.AppSettings["TDES_Key"]; }
+            get { return "";  /* ConfigurationManager.AppSettings["TDES_Key"]; */}
         }
         public static string TDES_IV
         {
-            get { return ConfigurationManager.AppSettings["TDES_IV"]; }
+            get { return ""; /* ConfigurationManager.AppSettings["TDES_IV"];*/ }
         }
+        public static string MgConn => Get("MgConn");
+
+        public static string MgDBName => Get("MgDBName");
+
+        public static string MgPrefix => Get("MgPrefix");
 
 
-        public static string MgConn
-        {
-            get { return ConfigurationManager.AppSettings["MgConn"]; }
-        }
-        public static string MgDBName
-        {
-            get { return ConfigurationManager.AppSettings["MgDBName"]; }
-        }
-        public static string MgPrefix
-        {
-            get { return ConfigurationManager.AppSettings["MgPrefix"]; }
-        }
 
+        public static string Get(string key) => Configuration[key];
 
+        /*
         public static string MqHost
         {
             get { return ConfigurationManager.AppSettings["MqHost"]; }
@@ -52,7 +49,7 @@ namespace C.B.Common.Config
         {
             get { return ConfigurationManager.AppSettings["MqQueue"]; }
         }
-
+        */
 
 
 
