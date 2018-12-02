@@ -24,16 +24,31 @@ namespace StmWeb
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //添加认证Cookie信息
+            services.AddAuthentication(Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationDefaults.AuthenticationScheme)
+             .AddCookie(options =>
+             {
+                 options.LoginPath = new PathString("/Sys/Login/Index");
+                 options.AccessDeniedPath = new PathString("/denied");
+             });
+
             /*
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
-                options.CheckConsentNeeded = context => true;
+                options.CheckConsentNeeded = context => false; // true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
+            });
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("User", policy => policy
+                    .RequireAssertion(context => context.User.HasClaim(c => (c.Type == "Manager" || c.Type == "Develop")))
+                );
             });*/
 
-
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,6 +67,7 @@ namespace StmWeb
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+            app.UseAuthentication();
 
             app.UseMvc(routes =>
             {
