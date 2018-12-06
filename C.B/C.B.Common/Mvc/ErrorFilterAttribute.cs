@@ -24,4 +24,3 @@ namespace C.B.Common.Mvc
         }
     }
 }
-}

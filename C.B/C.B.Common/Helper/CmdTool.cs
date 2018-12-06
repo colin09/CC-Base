@@ -44,7 +44,46 @@ namespace C.B.Common.helper {
             }
         }
 
+
+        public static void RunBat(string filePath = "",string fileName = "")
+		{
+            using (Process p = new Process ()) {
+                p.StartInfo.CreateNoWindow = false;
+                p.StartInfo.UseShellExecute = true;
+                p.StartInfo.RedirectStandardError = false;
+                p.StartInfo.RedirectStandardInput = false;
+                p.StartInfo.RedirectStandardOutput = false;
+                // 初始化可执行文件的一些基础信息
+                p.StartInfo.WorkingDirectory = filePath; // 初始化可执行文件的文件夹信息
+                p.StartInfo.FileName = fileName; // 初始化可执行文件名
+                
+                p.Start();
+                p.WaitForExit (); //等待程序执行完退出进程
+                p.Close ();
+            }
+
+
+            /*
+			var startInfo = new ProcessStartInfo();
+			startInfo.CreateNoWindow = false;
+			startInfo.UseShellExecute = true;
+			startInfo.RedirectStandardError = false;
+			startInfo.RedirectStandardInput = false;
+			startInfo.RedirectStandardOutput = false;
+
+            // 初始化可执行文件的一些基础信息
+            startInfo.WorkingDirectory = filePath; // 初始化可执行文件的文件夹信息
+            startInfo.FileName = fileName; // 初始化可执行文件名
+
+            using (Process p = new Process ()) {
+                p.Start(startInfo);
+                p.WaitForExit (); //等待程序执行完退出进程
+                p.Close ();
+            }*/
+
+        }
     }
+
 
 
     /**
