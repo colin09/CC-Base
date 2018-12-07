@@ -8,10 +8,17 @@ namespace C.B.MySql.Repository.BaseM
     //public partial class EntityRepository : BaseRepository<Entity> { }
 
 
-    public partial class SysUserRepository : BaseRepository<SysUser> { }
 
 
-    //public partial class SysUserRepository : BaseRepository<SysUser> { }
+    public partial class NoticeRepository : BaseRepository<Notice> { }
+    public partial class NewsInfoRepository : BaseRepository<NewsInfo> { }
+    public partial class MessageRepository : BaseRepository<Message> { }
+    public partial class HisEventInfoRepository : BaseRepository<HisEventInfo> { }
+    public partial class FileInfoRepository : BaseRepository<FileInfo> { }
+    public partial class ExpertInfoRepository : BaseRepository<ExpertInfo> { }
+    public partial class EventTypeRepository : BaseRepository<EventType> { }
+    public partial class EventInfoRepository : BaseRepository<EventInfo> { }
+    public partial class UserInfoRepository : BaseRepository<UserInfo> { }
 
 
 

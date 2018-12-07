@@ -37,7 +37,7 @@ namespace StmWeb.Area.Sys.Controllers
                 var identity = new ClaimsIdentity();
                 identity.AddClaim(new Claim(ClaimTypes.Sid, userName));
                 identity.AddClaim(new Claim(ClaimTypes.Name, userName));
-                identity.AddClaim(new Claim(ClaimTypes.Role, "system"));
+                identity.AddClaim(new Claim(ClaimTypes.Authentication, "system"));
 
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity));
 

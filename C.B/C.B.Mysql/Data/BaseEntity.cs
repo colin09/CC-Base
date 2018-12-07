@@ -12,15 +12,12 @@ namespace C.B.MySql.Data
 
         public BaseEntity()
         {
-
-            Id = "";
             CreateTime = DateTime.Now;
             UpdateTime = DateTime.Now;
             IsDeleted = false;
         }
 
-        [MaxLength(32)]
-        public string Id { set; get; }
+        public int Id { set; get; }
 
         public DateTime CreateTime { set; get; }
 
@@ -32,10 +29,10 @@ namespace C.B.MySql.Data
 
 
 
-        public string CreateObjectId()
-        {
-            return "";   //return new Guid.NewGuid().ToString().Replace("-", "").Substring(0, 32).ToLower();
-        }
+        // public string CreateObjectId()
+        // {
+        //     return "";   //return new Guid.NewGuid().ToString().Replace("-", "").Substring(0, 32).ToLower();
+        // }
     }
 
 }
