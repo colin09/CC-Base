@@ -1,4 +1,5 @@
 ﻿using C.B.Models.Data;
+using C.B.MySql.Data;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
@@ -24,10 +25,11 @@ namespace StmWeb.Area.Sys.Controllers
         [HttpPost]
         public async Task<IActionResult> SignIn(string userName, string password)
         {
-            var json = new
+            var user = new UserInfo
             {
                 UserName = userName,
                 Password = password,
+                AuthType = UserAuthType.develop,
             };
 
             var authSuccess = true;
@@ -35,9 +37,9 @@ namespace StmWeb.Area.Sys.Controllers
             {
                 //用户标识
                 var identity = new ClaimsIdentity();
-                identity.AddClaim(new Claim(ClaimTypes.Sid, userName));
-                identity.AddClaim(new Claim(ClaimTypes.Name, userName));
-                identity.AddClaim(new Claim(ClaimTypes.Authentication, "system"));
+                identity.AddClaim(new Claim(ClaimTypes.Sid, user.UserName));
+                identity.AddClaim(new Claim(ClaimTypes.Name, user.Password));
+                identity.AddClaim(new Claim(ClaimTypes.Authentication, user.AuthType.ToString()));
 
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity));
 

@@ -6,5 +6,7 @@ namespace C.B.Models.Enums
     public enum UserAuthType
     {
         develop=1,
+        admin=2,
+        user=3,
     }
 }
