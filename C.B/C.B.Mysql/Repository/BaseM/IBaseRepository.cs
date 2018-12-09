@@ -22,11 +22,11 @@ namespace C.B.MySql.Repository.BaseM
 
         int Update(TEntity t);
 
-        int Delete(string id);
+        int Delete(int id);
 
         int Delete(TEntity t);
 
-        TEntity ReadOne(string id);
+        TEntity ReadOne(int id);
 
         #endregion
 

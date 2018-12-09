@@ -2,9 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
+    <RuntimeFrameworkVersion>2.1.6</RuntimeFrameworkVersion>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.2.0" />
     <PackageReference Include="MySql.Data.EntityFrameworkCore" Version="8.0.13" />
   </ItemGroup>
 
@@ -12,5 +14,4 @@
     <ProjectReference Include="..\C.B.Common\C.B.Common.csproj" />
     <ProjectReference Include="..\C.B.Models\C.B.Models.csproj" />
   </ItemGroup>
-
 </Project>

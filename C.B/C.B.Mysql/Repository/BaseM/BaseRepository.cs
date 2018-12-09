@@ -51,7 +51,7 @@ namespace C.B.MySql.Repository.BaseM
             return context.SaveChanges();
         }
 
-        public int Delete(string id)
+        public int Delete(int id)
         {
             var t = ReadOne(id);
             if (t == null)
@@ -70,7 +70,7 @@ namespace C.B.MySql.Repository.BaseM
             return context.SaveChanges();
         }
 
-        public TEntity ReadOne(string id)
+        public TEntity ReadOne(int id)
         {
             return context.Set<TEntity>().Where(t => t.Id == id).FirstOrDefault();
         }

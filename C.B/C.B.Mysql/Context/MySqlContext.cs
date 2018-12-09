@@ -12,16 +12,21 @@ namespace C.B.MySql.Context
         private readonly IConfiguration _config;
         private readonly string _connStr;
 
+        private const string connString = "Server=localhost;Character Set=utf8;Database=hui;Uid=sa;Pwd=sa-1234;";
+
         public MySqlContext()
         {
             _config = ConfigBuilder.Configuration;
             _connStr = _config.GetConnectionString("MySqlConnectionString");
+            System.Console.Write($"==> 1. {_connStr}");
         }
 
         public MySqlContext(IConfiguration config)
         {
             _config = config;
             _connStr = _config.GetConnectionString("MySqlConnectionString");
+            
+            System.Console.Write($"==> 2. {_connStr}");
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -30,7 +35,15 @@ namespace C.B.MySql.Context
             optionsBuilder.UseMySQL(_connStr);
         }
 
-        public DbSet<SysUser> Section { get; set; }
+        public DbSet<Notice> Notice { get; set; }
+        public DbSet<NewsInfo> NewsInfo { get; set; }
+        public DbSet<Message> Message { get; set; }
+        public DbSet<HisEventInfo> HisEventInfo { get; set; }
+        public DbSet<FileInfo> FileInfo { get; set; }
+        public DbSet<ExpertInfo> ExpertInfo { get; set; }
+        public DbSet<EventType> EventType { get; set; }
+        public DbSet<EventInfo> EventInfo { get; set; }
+        public DbSet<UserInfo> UserInfo { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

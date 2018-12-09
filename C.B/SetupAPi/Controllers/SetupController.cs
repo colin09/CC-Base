@@ -12,7 +12,7 @@ namespace SetupAPi.Controllers
     public class SetupController : ControllerBase
     {
         // GET api/values
-        [HttpGet("publish")]
+        [HttpPost("publish")]
         public ActionResult<string> Get()
         {
             var filePath = Environment.CurrentDirectory;
