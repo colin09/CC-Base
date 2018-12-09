@@ -8,7 +8,7 @@ using StmWeb.Models;
 
 namespace StmWeb.Controllers
 {
-    public class HomeController : Controller
+    public class EventController : Controller
     {
         public IActionResult Index()
         {
