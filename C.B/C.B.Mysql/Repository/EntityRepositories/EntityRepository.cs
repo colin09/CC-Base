@@ -2,8 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using C.B.MySql.Repository.BaseM;
 
-namespace C.B.MySql.Repository.BaseM
+namespace C.B.MySql.Repository.EntityRepositories
 {
     //public partial class EntityRepository : BaseRepository<Entity> { }
 
