@@ -18,7 +18,7 @@ namespace C.B.MySql.Data
         [MaxLength(32)]
         public string Department { set; get; }
         
-        public string State { set; get; }
+        public int State { set; get; }
 
         /// <summary>
         /// 权限分类：注册用户-user，管理用户-admin，开发用户-develop

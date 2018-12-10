@@ -2,9 +2,11 @@
     ViewData["Title"] = "Index";
 }
 
-<div class="card" ng-controller="mgrDevController">
+<div class="card"  ng-controller="mgrDevCtl">
     <div class="card-body">
-        <h4 class="card-title">System Users {{Title}}</h4>
+        <h4 class="card-title">{{Title}}</h4>
+        <p>名字 : <input type="text" ng-model="name"></p>
+ 	    <h1>Hello {{name}}</h1>
         <div class="table-responsive">
             <table class="table table-hover">
                 <thead>
@@ -13,7 +15,6 @@
                         <th>UserName</th>
                         <th>TrueName</th>
                         <th>Department</th>
-                        <th>State</th>
                         <th>AuthType</th>
                         <th>State</th>
                         <th>CreateTime</th>
@@ -22,26 +23,32 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Jacob</td>
-                        <td>Photoshop</td>
-                        <td class="text-danger">
-                            28.76%
-                            <i class="mdi mdi-arrow-down"></i>
-                        </td>
-                        <td>
-                            <label class="badge badge-danger">Pending</label>
-                        </td>
+                    <tr ng-repeat="item in UserList">
+                        <td ng-bind="item.Id">Id</td>
+                        <td ng-bind="item.UserName">UserName</td>
+                        <td ng-bind="item.TrueName">TrueName</td>
+                        <td ng-bind="item.Department">Department</td>
+                        <td ng-bind="item.AuthType">AuthType</td>
+                        <td ng-bind="item.State">State</td>
+                        <td ng-bind="item.CreateTime">CreateTime</td>
+                        <td ng-bind="item.UpdateTime">UpdateTime</td>
+                        <td ng-bind="item.IsDeleted">IsDeleted</td>
                     </tr>
-                    <tr>
-                        <td>Messsy</td>
-                        <td>Flash</td>
-                        <td class="text-danger">
-                            21.06%
-                            <i class="mdi mdi-arrow-down"></i>
-                        </td>
+                     <tr>
+                        <td>+</td>
+                        <td><input type="text" ng-model="newUser.UserName" /></td>
+                        <td><input type="text" ng-model="newUser.TrueName" /></td>
+                        <td><input type="text" ng-model="newUser.Department" /></td>
+                        <td>state:1</td>
                         <td>
-                            <label class="badge badge-warning">In progress</label>
+                            <select ng-model="newUser.AuthType">
+                                <option value="1">develop</option>
+                                <option value="2">admin</option>
+                                <option value="3">user</option>
+                            </select>
+                        </td>
+                        <td colspan="3">
+                            <button ng-click="AddNewUser()"> + NEW </button>
                         </td>
                     </tr>
                 </tbody>

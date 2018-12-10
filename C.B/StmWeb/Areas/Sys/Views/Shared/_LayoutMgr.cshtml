@@ -3,17 +3,22 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - 中国数字科技馆</title>
+    <title>@ViewData["Title"] - 中国数字科技馆 </title>
 
-        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
-              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
-              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
-        
-        <link rel="stylesheet" href="~/mgr/css/style.css" />
-        <link rel="stylesheet" href="~/mgr/css/materialdesignicons.min.css">
-        <!-- <link rel="stylesheet" href="~/mgr/css/materialdesignicons.min.css"> -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.5/angular.min.js"></script>
-  <script src="~/mgr/js/app.js"></script>
+    <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
+          asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+          asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+    
+    <link rel="stylesheet" href="~/mgr/css/style.css" />
+    <link rel="stylesheet" href="~/mgr/css/materialdesignicons.min.css">
+    <!-- <link rel="stylesheet" href="~/mgr/css/materialdesignicons.min.css"> -->
+    
+    <!-- <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"></script> -->
+    <!-- <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"></script> -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.5/angular.min.js"></script> -->
+    
+    <script src="https://cdn.staticfile.org/angular.js/1.4.6/angular.min.js"></script>
+    <script src="~/mgr/js/app.js"></script>
 </head>
 <body>
 
@@ -300,7 +305,7 @@
       </nav>
 
         <div class="main-panel">
-            <div class="content-wrapper">
+            <div class="content-wrapper" ng-app="managerApp">
 
                   @RenderBody()
             </div>
@@ -314,9 +319,9 @@
 
   </div>
 
-     <div class="container body-content" ng-app="managerApp">
+     <div class="container body-content">
       
-    <partial name="_CookieConsentPartial" />
+    <!-- <partial name="_CookieConsentPartial" /> -->
 
     </div>
 
@@ -343,8 +348,6 @@
   <script src="~/js/manager/misc.js"></script> -->
 <!-- <script src="https://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script> -->
 
-        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"></script>
-        <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"></script>
         <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.6/angular.min.js"></script> -->
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.5/angular.min.js"></script> -->
 <!-- <script src="~/mgr/js/app.js"></script> -->
