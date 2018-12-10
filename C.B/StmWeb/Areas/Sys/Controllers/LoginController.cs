@@ -1,4 +1,6 @@
-﻿using C.B.Models.Data;
+﻿using C.B.Common.helper;
+using C.B.Models.Data;
+using C.B.Models.Enums;
 using C.B.MySql.Data;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -32,6 +34,7 @@ namespace StmWeb.Area.Sys.Controllers
                 AuthType = UserAuthType.develop,
             };
 
+            System.Console.Write(user.ToJson());
             var authSuccess = true;
             if (authSuccess)
             {
@@ -39,7 +42,8 @@ namespace StmWeb.Area.Sys.Controllers
                 var identity = new ClaimsIdentity();
                 identity.AddClaim(new Claim(ClaimTypes.Sid, user.UserName));
                 identity.AddClaim(new Claim(ClaimTypes.Name, user.Password));
-                identity.AddClaim(new Claim(ClaimTypes.Authentication, user.AuthType.ToString()));
+                identity.AddClaim(new Claim(ClaimTypes.Role, user.AuthType.ToString()));
+                //identity.AddClaim(new Claim(ClaimTypes.Authentication, user.AuthType.ToString()));
 
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity));
 

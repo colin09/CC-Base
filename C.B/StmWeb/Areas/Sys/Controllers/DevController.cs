@@ -9,29 +9,15 @@ using StmWeb.Models;
 
 namespace StmWeb.Area.Sys.Controllers {
     [Area ("Sys")]
-    [Authorize (Roles = "develop,admin")]
-    public class ManagerController : Controller {
+    [Authorize (Roles = "develop")]
+    public class DevController : Controller {
         
         public IActionResult Index () {
             return View ();
         }
 
 
-        public IActionResult EditerBasic () {
-            return View ();
-        }
-
-
-        public IActionResult EditerStandard () {
-            return View ();
-        }
-
-
-        public IActionResult EditerFull () {
-            return View ();
-        }
-
-        public IActionResult VideoPlay () {
+        public IActionResult SysUsers () {
             return View ();
         }
 

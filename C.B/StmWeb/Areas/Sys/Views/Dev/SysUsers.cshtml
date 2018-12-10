@@ -1,0 +1,57 @@
+﻿@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="card" ng-controller="mgrDevController">
+    <div class="card-body">
+        <h4 class="card-title">System Users {{Title}}</h4>
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>UserName</th>
+                        <th>TrueName</th>
+                        <th>Department</th>
+                        <th>State</th>
+                        <th>AuthType</th>
+                        <th>State</th>
+                        <th>CreateTime</th>
+                        <th>UpdateTime</th>
+                        <th>IsDeleted</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Jacob</td>
+                        <td>Photoshop</td>
+                        <td class="text-danger">
+                            28.76%
+                            <i class="mdi mdi-arrow-down"></i>
+                        </td>
+                        <td>
+                            <label class="badge badge-danger">Pending</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Messsy</td>
+                        <td>Flash</td>
+                        <td class="text-danger">
+                            21.06%
+                            <i class="mdi mdi-arrow-down"></i>
+                        </td>
+                        <td>
+                            <label class="badge badge-warning">In progress</label>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+
+
+}
