@@ -17,13 +17,14 @@ module.controller('mgrDevCtl', function ($scope,$http) {
     };
     $scope.AddNewUser = function(){
         var url = "../../Sys/Dev/CreateSysUsers";
+        /*
         var request = {
             userName:$scope.newUser.UserName,
             trueName:$scope.newUser.TrueName,
             department:$scope.newUser.Department,
             authType:$scope.newUser.AuthType
-        };
-        $http.post(url,request).success(function(response){
+        };*/
+        $http.post(url,$scope.newUser).success(function(response){
             $scope.GetUserList();
         });
     }
@@ -35,6 +36,22 @@ module.controller('mgrDevCtl', function ($scope,$http) {
         });
     }
     $scope.GetUserList();
-    
+
+
+    $scope.records = [
+        {
+            "Name" : "Alfreds Futterkiste",
+            "Country" : "Germany"
+        },{
+            "Name" : "Berglunds snabbköp",
+            "Country" : "Sweden"
+        },{
+            "Name" : "Centro comercial Moctezuma",
+            "Country" : "Mexico"
+        },{
+            "Name" : "Ernst Handel",
+            "Country" : "Austria"
+        }
+    ];
 });
 

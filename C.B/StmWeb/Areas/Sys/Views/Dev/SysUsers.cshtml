@@ -24,15 +24,15 @@
                 </thead>
                 <tbody>
                     <tr ng-repeat="item in UserList">
-                        <td ng-bind="item.Id">Id</td>
-                        <td ng-bind="item.UserName">UserName</td>
-                        <td ng-bind="item.TrueName">TrueName</td>
-                        <td ng-bind="item.Department">Department</td>
-                        <td ng-bind="item.AuthType">AuthType</td>
-                        <td ng-bind="item.State">State</td>
-                        <td ng-bind="item.CreateTime">CreateTime</td>
-                        <td ng-bind="item.UpdateTime">UpdateTime</td>
-                        <td ng-bind="item.IsDeleted">IsDeleted</td>
+                        <td><span ng-bind="item.id">Id</span></td>
+                        <td><span ng-bind="item.userName">UserName</span></td>
+                        <td><span ng-bind="item.trueName">TrueName</span></td>
+                        <td><span ng-bind="item.department">Department</span></td>
+                        <td><span ng-bind="item.authType">AuthType</span></td>
+                        <td><span ng-bind="item.state">State</span></td>
+                        <td><span ng-bind="item.createTime">CreateTime</span></td>
+                        <td><span ng-bind="item.updateTime">UpdateTime</span></td>
+                        <td><span ng-bind="item.isDeleted">IsDeleted</span></td>
                     </tr>
                      <tr>
                         <td>+</td>
@@ -54,6 +54,10 @@
                 </tbody>
             </table>
         </div>
+    </div>
+    <div ng-repeat="x in records">
+        <td>{{x.Name}}</td>
+        <span ng-bind="x.Country"></span> 
     </div>
 </div>
 

@@ -18,7 +18,7 @@ namespace C.B.MySql.Context
         {
             _config = ConfigBuilder.Configuration;
             _connStr = _config.GetConnectionString("MySqlConnectionString");
-            System.Console.Write($"==> 1. {_connStr}");
+            System.Console.WriteLine($"==> 1. {_connStr}");
         }
 
         public MySqlContext(IConfiguration config)
@@ -26,7 +26,7 @@ namespace C.B.MySql.Context
             _config = config;
             _connStr = _config.GetConnectionString("MySqlConnectionString");
             
-            System.Console.Write($"==> 2. {_connStr}");
+            System.Console.WriteLine($"==> 2. {_connStr}");
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

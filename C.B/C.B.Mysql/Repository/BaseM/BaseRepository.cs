@@ -40,8 +40,18 @@ namespace C.B.MySql.Repository.BaseM
 
         public int Insert(TEntity t)
         {
-            context.Set<TEntity>().Add(t);
-            return context.SaveChanges();
+            try
+            {
+                context.Set<TEntity>().Add(t);
+                var result = context.SaveChanges();
+                System.Console.WriteLine($"Insert.result {result}, {typeof(TEntity)}");
+                return result;
+            }
+            catch (Exception ex)
+            {
+                System.Console.WriteLine(ex);
+            }
+            return 0;
         }
 
         public int Update(TEntity t)
