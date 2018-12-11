@@ -56,7 +56,7 @@ namespace C.B.MySql.Repository.BaseM
             var t = ReadOne(id);
             if (t == null)
                 return -1;
-            t.IsDeleted = true;
+            t.IsDeleted = 1;
             t.UpdateTime = DateTime.Now;
             Update(t);
             return context.SaveChanges();
@@ -64,7 +64,7 @@ namespace C.B.MySql.Repository.BaseM
 
         public int Delete(TEntity t)
         {
-            t.IsDeleted = true;
+            t.IsDeleted = 1;
             t.UpdateTime = DateTime.Now;
             Update(t);
             return context.SaveChanges();

@@ -14,7 +14,7 @@ namespace C.B.MySql.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.0-rtm-35687");
+                .HasAnnotation("ProductVersion", "2.1.4-rtm-31024");
 
             modelBuilder.Entity("C.B.MySql.Data.EventInfo", b =>
                 {
@@ -30,7 +30,7 @@ namespace C.B.MySql.Migrations
 
                     b.Property<int>("EventId");
 
-                    b.Property<bool>("IsDeleted");
+                    b.Property<int>("IsDeleted");
 
                     b.Property<int>("IsHot");
 
@@ -63,7 +63,7 @@ namespace C.B.MySql.Migrations
                     b.Property<string>("Icon")
                         .HasMaxLength(128);
 
-                    b.Property<bool>("IsDeleted");
+                    b.Property<int>("IsDeleted");
 
                     b.Property<int>("IsShow");
 
@@ -96,7 +96,7 @@ namespace C.B.MySql.Migrations
 
                     b.Property<DateTime>("CreateTime");
 
-                    b.Property<bool>("IsDeleted");
+                    b.Property<int>("IsDeleted");
 
                     b.Property<int>("IsShow");
 
@@ -121,7 +121,7 @@ namespace C.B.MySql.Migrations
 
                     b.Property<DateTime>("CreateTime");
 
-                    b.Property<bool>("IsDeleted");
+                    b.Property<int>("IsDeleted");
 
                     b.Property<DateTime>("UpdateTime");
 
@@ -152,7 +152,7 @@ namespace C.B.MySql.Migrations
 
                     b.Property<DateTime>("CreateTime");
 
-                    b.Property<bool>("IsDeleted");
+                    b.Property<int>("IsDeleted");
 
                     b.Property<int>("Link")
                         .HasMaxLength(128);
@@ -183,7 +183,7 @@ namespace C.B.MySql.Migrations
 
                     b.Property<DateTime>("CreateTime");
 
-                    b.Property<bool>("IsDeleted");
+                    b.Property<int>("IsDeleted");
 
                     b.Property<int>("IsHot");
 
@@ -230,7 +230,7 @@ namespace C.B.MySql.Migrations
 
                     b.Property<int>("FileId");
 
-                    b.Property<bool>("IsDeleted");
+                    b.Property<int>("IsDeleted");
 
                     b.Property<int>("IsRoll");
 
@@ -272,7 +272,7 @@ namespace C.B.MySql.Migrations
 
                     b.Property<DateTime>("CreateTime");
 
-                    b.Property<bool>("IsDeleted");
+                    b.Property<int>("IsDeleted");
 
                     b.Property<int>("IsRoll");
 
@@ -313,14 +313,14 @@ namespace C.B.MySql.Migrations
 
                     b.Property<string>("Gender");
 
-                    b.Property<bool>("IsDeleted");
+                    b.Property<int>("IsDeleted");
 
                     b.Property<string>("MobileNo");
 
                     b.Property<string>("Password")
                         .HasMaxLength(32);
 
-                    b.Property<string>("State");
+                    b.Property<int>("State");
 
                     b.Property<string>("TrueName")
                         .HasMaxLength(32);

@@ -14,7 +14,7 @@ namespace C.B.MySql.Data
         {
             CreateTime = DateTime.Now;
             UpdateTime = DateTime.Now;
-            IsDeleted = false;
+            IsDeleted = 0;
         }
 
         public int Id { set; get; }
@@ -23,7 +23,7 @@ namespace C.B.MySql.Data
 
         public DateTime UpdateTime { set; get; }
 
-        public bool IsDeleted { set; get; }
+        public int IsDeleted { set; get; }
 
 
 
