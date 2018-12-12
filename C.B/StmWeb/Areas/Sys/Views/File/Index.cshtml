@@ -1,0 +1,36 @@
+﻿@{
+    ViewData["Title"] = "Index";
+}
+
+
+<div>
+    <form id="uploadForm">
+        AJAX上传多文件： <input type="file" name="file" multiple />
+        <input type="button" value="上传" onclick="doUpload()" />
+    </form>
+</div>
+
+
+<script>
+    function doUpload() {
+
+        var formData = new FormData($("#uploadForm")[0]);
+
+        $.ajax({
+
+            url: '@Url.Action("FileSave")',
+            type: 'POST',
+            data: formData,
+            async: false,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (returndata) {
+                alert(returndata);
+            },
+            error: function (returndata) {
+                alert(returndata);
+            }
+        });
+    }
+</script>

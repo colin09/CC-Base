@@ -1,8 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.1</TargetFramework>
-    <RuntimeFrameworkVersion>2.1.5</RuntimeFrameworkVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,5 +13,7 @@
   <ItemGroup>
     <ProjectReference Include="..\C.B.Common\C.B.Common.csproj" />
     <ProjectReference Include="..\C.B.Models\C.B.Models.csproj" />
+    <ProjectReference Include="..\C.B.MySql\C.B.MySql.csproj" />
   </ItemGroup>
+  
 </Project>

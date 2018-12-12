@@ -19,31 +19,28 @@ namespace C.B.MySql.Repository.BaseM
         //     dbName = key as string;
         // }
 
-        private DbContext context
-        {
-            get
-            {
-                return new MySqlContext();
-            }
+        private DbContext _context ;
+        protected BaseRepository(){
+            _context =  new MySqlContext();
         }
 
         public IQueryable<TEntity> Entities
         {
-            get { return context.Set<TEntity>(); }
+            get { return _context.Set<TEntity>(); }
         }
 
         public int InsertBatch(IEnumerable<TEntity> list)
         {
-            context.Set<TEntity>().AddRange(list);
-            return context.SaveChanges();
+            _context.Set<TEntity>().AddRange(list);
+            return _context.SaveChanges();
         }
 
         public int Insert(TEntity t)
         {
             try
             {
-                context.Set<TEntity>().Add(t);
-                var result = context.SaveChanges();
+                _context.Set<TEntity>().Add(t);
+                var result = _context.SaveChanges();
                 System.Console.WriteLine($"Insert.result {result}, {typeof(TEntity)}");
                 return result;
             }
@@ -57,8 +54,8 @@ namespace C.B.MySql.Repository.BaseM
         public int Update(TEntity t)
         {
             //context.Set<TEntity>().Attach(t);
-            context.Entry(t).State = EntityState.Modified;
-            return context.SaveChanges();
+            _context.Entry(t).State = EntityState.Modified;
+            return _context.SaveChanges();
         }
 
         public int Delete(int id)
@@ -69,7 +66,7 @@ namespace C.B.MySql.Repository.BaseM
             t.IsDeleted = 1;
             t.UpdateTime = DateTime.Now;
             Update(t);
-            return context.SaveChanges();
+            return _context.SaveChanges();
         }
 
         public int Delete(TEntity t)
@@ -77,22 +74,22 @@ namespace C.B.MySql.Repository.BaseM
             t.IsDeleted = 1;
             t.UpdateTime = DateTime.Now;
             Update(t);
-            return context.SaveChanges();
+            return _context.SaveChanges();
         }
 
         public TEntity ReadOne(int id)
         {
-            return context.Set<TEntity>().Where(t => t.Id == id).FirstOrDefault();
+            return _context.Set<TEntity>().Where(t => t.Id == id).FirstOrDefault();
         }
 
         public IQueryable<TEntity> Where(Expression<Func<TEntity, bool>> whereLambda)
         {
-            return context.Set<TEntity>().Where(whereLambda).AsQueryable();
+            return _context.Set<TEntity>().Where(whereLambda).AsQueryable();
         }
 
         public IQueryable<TEntity> Page<S>(Pager pager, Expression<Func<TEntity, bool>> whereLambda, Expression<Func<TEntity, S>> orderbyLambda, bool isAsc)
         {
-            var result = context.Set<TEntity>().Where<TEntity>(whereLambda).AsQueryable();
+            var result = _context.Set<TEntity>().Where<TEntity>(whereLambda).AsQueryable();
             pager.TotalCount = result.Count();
             if (isAsc)
                 return result.OrderBy<TEntity, S>(orderbyLambda).Skip(pager.PageSize * (pager.PageIndex - 1)).Take(pager.PageSize).AsQueryable();
@@ -115,7 +112,7 @@ namespace C.B.MySql.Repository.BaseM
         {
             if (!this.disposed)
             {
-                if (disposing) { context.Dispose(); }
+                if (disposing) { _context.Dispose(); }
             }
             this.disposed = true;
         }
