@@ -12,9 +12,10 @@
     <link rel="stylesheet" href="~/mgr/css/style.css" />
     <link rel="stylesheet" href="~/mgr/css/materialdesignicons.min.css">
     <!-- <link rel="stylesheet" href="~/mgr/css/materialdesignicons.min.css"> -->
-<!--     
+
+    
     <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"></script>
-    <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"></script> -->
+    <!-- <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"></script> -->
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.5/angular.min.js"></script> -->
     
     <script src="https://cdn.staticfile.org/angular.js/1.4.6/angular.min.js"></script>
@@ -262,8 +263,21 @@
           <li class="nav-item">
             <a class="nav-link" href="#">
               <i class="menu-icon mdi mdi-sticker"></i>
-              <span class="menu-title">系统菜单 Icons</span>
+              <span class="menu-title">文件管理 FileManager</span>
             </a>
+            <div class="collapse show" id="auth">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item">
+                  <a class="nav-link active" href="../../Sys/Dev/Images">图片文件</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link active" href="../../Sys/Dev/Videos">视频文件</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link active" href="../../Sys/Dev/Doces">文档文件</a>
+                </li>
+              </ul>
+            </div>
           </li>
           <li class="nav-item active">
             <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
@@ -275,7 +289,6 @@
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item">
                   <a class="nav-link active" href="../../Sys/Dev/SysUsers">SystemUsers</a>
-
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="http://demo.cssmoban.com/cssthemes5/twts_144_StarAdmin/pages/samples/login.html"> Login </a>

@@ -26,7 +26,9 @@ namespace C.B.MySql.Repository.BaseM
 
         int Delete(TEntity t);
 
-        TEntity ReadOne(int id);
+        TEntity FirstOrDefault(int id);
+
+        TEntity FirstOrDefault(Expression<Func<TEntity, bool>> whereLambda);
 
         #endregion
 
@@ -35,7 +37,7 @@ namespace C.B.MySql.Repository.BaseM
 
         IQueryable<TEntity> Where(Expression<Func<TEntity, bool>> whereLambda);
 
-        IQueryable<TEntity> Page<S>(Pager pager, Expression<Func<TEntity, bool>> whereLambda, Expression<Func<TEntity, S>> orderbyLambda, bool isAsc);
+        IQueryable<TEntity> Where<S>(Pager pager, Expression<Func<TEntity, bool>> whereLambda, Expression<Func<TEntity, S>> orderbyLambda, bool isAsc);
 
 
 

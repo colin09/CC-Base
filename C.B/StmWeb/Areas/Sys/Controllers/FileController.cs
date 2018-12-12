@@ -55,11 +55,13 @@ namespace StmWeb.Area.Sys.Controllers {
         private string GetFileExt(string fileName){
 
             return "";
+
         }
 
 
 
     }
+
 
     public interface IFormFile {
 
@@ -74,4 +76,5 @@ namespace StmWeb.Area.Sys.Controllers {
         Task CopyToAsync (Stream target, CancellationToken cancellationToken);
 
     }
+
 }

@@ -5,8 +5,6 @@
 <div class="card"  ng-controller="mgrDevCtl">
     <div class="card-body">
         <h4 class="card-title">{{Title}}</h4>
-        <p>名字 : <input type="text" ng-model="name"></p>
- 	    <h1>Hello {{name}}</h1>
         <div class="table-responsive">
             <table class="table table-hover">
                 <thead>
@@ -28,7 +26,7 @@
                         <td><span ng-bind="item.userName">UserName</span></td>
                         <td><span ng-bind="item.trueName">TrueName</span></td>
                         <td><span ng-bind="item.department">Department</span></td>
-                        <td><span ng-bind="item.authType">AuthType</span></td>
+                        <td><span ng-bind="item.authTypeTxt">AuthType</span></td>
                         <td><span ng-bind="item.state">State</span></td>
                         <td><span ng-bind="item.createTime">CreateTime</span></td>
                         <td><span ng-bind="item.updateTime">UpdateTime</span></td>
