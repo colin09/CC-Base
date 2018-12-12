@@ -30,7 +30,11 @@ namespace C.B.MySql.Data
 
         public string MobileNo { set; get; }
         public string Email { set; get; }
-        public string Gender { set; get; }
+        
+        /// <summary>
+        /// 0 未知，1 男，2 女
+        /// </summary>
+        public int Gender { set; get; }
 
     }
 }

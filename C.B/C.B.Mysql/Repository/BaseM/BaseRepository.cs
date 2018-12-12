@@ -69,7 +69,7 @@ namespace C.B.MySql.Repository.BaseM
 
         public int Delete(int id)
         {
-            var t = ReadOne(id);
+            var t = FirstOrDefault(id);
             if (t == null)
                 return -1;
             t.IsDeleted = 1;
@@ -86,9 +86,15 @@ namespace C.B.MySql.Repository.BaseM
             return _context.SaveChanges();
         }
 
-        public TEntity ReadOne(int id)
+        public TEntity FirstOrDefault(int id)
         {
             return _context.Set<TEntity>().Where(t => t.Id == id).FirstOrDefault();
+        }
+
+        
+        public TEntity FirstOrDefault(Expression<Func<TEntity, bool>> whereLambda)
+        {
+            return _context.Set<TEntity>().Where(whereLambda).FirstOrDefault();
         }
 
         public IQueryable<TEntity> Where(Expression<Func<TEntity, bool>> whereLambda)
@@ -96,7 +102,7 @@ namespace C.B.MySql.Repository.BaseM
             return _context.Set<TEntity>().Where(whereLambda).AsQueryable();
         }
 
-        public IQueryable<TEntity> Page<S>(Pager pager, Expression<Func<TEntity, bool>> whereLambda, Expression<Func<TEntity, S>> orderbyLambda, bool isAsc)
+        public IQueryable<TEntity> Where<S>(Pager pager, Expression<Func<TEntity, bool>> whereLambda, Expression<Func<TEntity, S>> orderbyLambda, bool isAsc)
         {
             var result = _context.Set<TEntity>().Where<TEntity>(whereLambda).AsQueryable();
             pager.TotalCount = result.Count();

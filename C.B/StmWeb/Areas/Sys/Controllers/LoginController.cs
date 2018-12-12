@@ -15,7 +15,6 @@ namespace StmWeb.Area.Sys.Controllers
     public class LoginController : Controller
     {
         private readonly UserInfoRepository _userRepository;
-
         public LoginController()
         {
             _userRepository = new UserInfoRepository();
@@ -39,37 +38,28 @@ namespace StmWeb.Area.Sys.Controllers
             if (userName.IsEmpty() || password.IsEmpty())
                 return Json(BaseResponse.ErrorResponse("用户名或密码错误。"));
 
-            var user = new UserInfo
-            {
-                UserName = userName,
-                Password = password,
-                AuthType = UserAuthType.develop,
-            };
+            var user = _userRepository.FirstOrDefault(m => m.UserName == userName && m.Password == CryptoHelper.MD5Encrypt(password));
+            if (user == null)
+                return Json(BaseResponse.ErrorResponse("用户名或密码错误。"));
 
-            System.Console.Write(user.ToJson());
-            var authSuccess = true;
-            if (authSuccess)
-            {
-                //用户标识
-                var identity = new ClaimsIdentity();
-                identity.AddClaim(new Claim(ClaimTypes.Sid, user.UserName));
-                identity.AddClaim(new Claim(ClaimTypes.Name, user.Password));
-                identity.AddClaim(new Claim(ClaimTypes.Role, user.AuthType.ToString()));
-                //identity.AddClaim(new Claim(ClaimTypes.Authentication, user.AuthType.ToString()));
-
-                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity));
-
-                //return Redirect("/Sys/Manager/Index");
-                return Json(BaseResponse.SuccessResponse());
-            }
-            return Json(BaseResponse.ErrorResponse("用户名或密码错误。"));
+            //用户标识
+            var identity = new ClaimsIdentity();
+            identity.AddClaim(new Claim(ClaimTypes.Sid, user.UserName));
+            identity.AddClaim(new Claim(ClaimTypes.Name, user.TrueName));
+            identity.AddClaim(new Claim(ClaimTypes.Dsa, user.Department));
+            
+            identity.AddClaim(new Claim(ClaimTypes.Gender, user.Gender.ToString()));
+            identity.AddClaim(new Claim(ClaimTypes.MobilePhone, user.MobileNo));
+            identity.AddClaim(new Claim(ClaimTypes.Email, user.Email));
+            // identity.AddClaim(new Claim(ClaimTypes.UserData, user.ToJson()));
+            identity.AddClaim(new Claim(ClaimTypes.Role, user.AuthType.ToString()));
+            //identity.AddClaim(new Claim(ClaimTypes.Authentication, user.AuthType.ToString()));
+            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity));
+            return Json(BaseResponse.SuccessResponse());
         }
 
         public async Task<IActionResult> SignOut()
         {
-            //HttpContext.User.Identity.Name;
-            //HttpContext.User.Identity.AuthenticationType
-            //HttpContext.User.Claims.Select(c => new string[] { c.Type, c.Value })
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return Redirect("/Home/Index");
         }
