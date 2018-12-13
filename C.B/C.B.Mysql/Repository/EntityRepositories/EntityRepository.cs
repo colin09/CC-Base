@@ -15,7 +15,7 @@ namespace C.B.MySql.Repository.EntityRepositories
     public partial class NewsInfoRepository : BaseRepository<NewsInfo> { }
     public partial class MessageRepository : BaseRepository<Message> { }
     public partial class HisEventInfoRepository : BaseRepository<HisEventInfo> { }
-    public partial class FileInfoRepository : BaseRepository<FileInfo> { }
+    public partial class ResourceInfoRepository : BaseRepository<ResourceInfo> { }
     public partial class ExpertInfoRepository : BaseRepository<ExpertInfo> { }
     public partial class EventTypeRepository : BaseRepository<EventType> { }
     public partial class EventInfoRepository : BaseRepository<EventInfo> { }

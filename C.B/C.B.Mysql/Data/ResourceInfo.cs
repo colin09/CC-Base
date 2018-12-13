@@ -5,18 +5,18 @@ using System.ComponentModel.DataAnnotations;
 
 namespace C.B.MySql.Data
 {
-    public class FileInfo : BaseEntity
+    public class ResourceInfo : BaseEntity
     {
 
         [MaxLength(128)]
-        public string filepath { set; get; }
+        public string Filepath { set; get; }
         [MaxLength(64)]
-        public string fileMd5 { set; get; }
+        public string FileMd5 { set; get; }
         
         [MaxLength(64)]
-        public string fileName { set; get; }
+        public string FileName { set; get; }
         [MaxLength(32)]
-        public string fileType { set; get; }
+        public string FileType { set; get; }
 
 
     }

@@ -39,7 +39,7 @@ namespace C.B.MySql.Context
         public DbSet<NewsInfo> NewsInfo { get; set; }
         public DbSet<Message> Message { get; set; }
         public DbSet<HisEventInfo> HisEventInfo { get; set; }
-        public DbSet<FileInfo> FileInfo { get; set; }
+        public DbSet<ResourceInfo> ResouseInfo { get; set; }
         public DbSet<ExpertInfo> ExpertInfo { get; set; }
         public DbSet<EventType> EventType { get; set; }
         public DbSet<EventInfo> EventInfo { get; set; }
