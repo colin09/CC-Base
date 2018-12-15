@@ -1,0 +1,24 @@
+﻿@{
+    ViewData["Title"] = "Index";
+}
+
+
+    <textarea name="editor1" id="editor1" rows="10" cols="80">
+        This is my textarea to be replaced with CKEditor.
+    </textarea>
+
+    
+@section Scripts{
+
+<script src="~/Mgr/ckeditor/ckeditor.js"></script>
+
+<script>
+    CKEDITOR.replace('editor1', {
+        language: 'zh-CN',//改成中文版
+    });
+</script>
+
+
+}
+
+
