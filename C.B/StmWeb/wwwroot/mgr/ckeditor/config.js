@@ -13,10 +13,10 @@ CKEDITOR.editorConfig = function (config) {
 	//  config.filebrowserImageUploadUrl = '/uploader/upload.php?type=Images';
 	//  config.filebrowserFlashUploadUrl = '/uploader/upload.php?type=Flash';
 
-	config.filebrowserBrowseUrl = '/browser/browse.php';
-	config.filebrowserImageBrowseLinkUrl = '/browser/browse.php';
-	config.filebrowserImageBrowseUrl = '/browser/browse.php?type=Images';
-	config.filebrowserFlashBrowseUrl = '/browser/browse.php?type=Flash';
+	config.filebrowserBrowseUrl = '../../Sys/File/Checker'; //'/browser/browse.php';
+	config.filebrowserImageBrowseLinkUrl = '../../Sys/File/Checker?type=link';
+	config.filebrowserImageBrowseUrl = '../../Sys/File/Checker?type=image';
+	config.filebrowserFlashBrowseUrl = '../../Sys/File/Checker?type=flash';
 
 	config.filebrowserWindowHeight = 580;
 	// config.filebrowserWindowHeight = '50%';

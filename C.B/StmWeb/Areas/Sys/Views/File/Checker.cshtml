@@ -1,0 +1,41 @@
+﻿@{
+    ViewData["Title"] = "资源管理器";
+    Layout = "_LayoutMgr2";
+}
+
+
+    <link rel="stylesheet" href="~/mgr/image-picker/image-picker.css" />
+
+    <script src="~/mgr/image-picker/image-picker.min.js"></script>
+
+<div ng-controller="mgrFileCheckerCtl">
+    <input type="hidden" value="@ViewBag.callback" id="hdCallback" />
+
+    <ul class="nav nav-tabs">
+        <li role="presentation" ng-click="tab='image'" ng-class="tab=='image'?'active':''"><a href="#">选择图片</a></li>
+        <li role="presentation" ng-click="tab='video'" ng-class="tab=='video'?'active':''"><a href="#">选择视频</a></li>
+        <li role="presentation" ng-click="tab='doc'" ng-class="tab=='doc'?'active':''"><a href="#">选择文件</a></li>
+        <li role="presentation" ng-click="tab='upload'" ng-class="tab=='upload'?'active':''"><a href="#">上传</a></li>
+    </ul>
+    <div ng-show="tab=='image'">
+        <select class="image-picker" style="display: none;">
+            <option ng-repeat="item in ResourceList" data-img-src="{{item.url}}" value="{{item.url}}" ng-bind="item.fileName"></option>
+        </select>
+        <button type="button" class="btn btn-primary btn-fw" ng-click="Select()"> 确 定 </button>
+    </div>
+    <div ng-show="tab=='video'">
+
+    </div>
+    <div ng-show="tab=='doc'">
+
+    </div>
+    <div ng-show="tab=='upload'">
+
+    </div>
+
+
+
+</div>
+@section Scripts{
+
+}

@@ -23,11 +23,17 @@ namespace C.B.MySql.Data
         public int IsRoll{set;get;}
         
         public int ThumbId{set;get;}
+        
+        [MaxLength(128)]
+        public string ThumUrl{set;get;}
+
         public int NewsType{set;get;}
         public int FileId{set;get;}
+        [MaxLength(128)]
+        public string FileUrl{set;get;}
 
 
-        public int SortNo { set; get; }
+        public double SortNo { set; get; }
     }
 }
 

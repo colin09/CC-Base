@@ -6,7 +6,7 @@ $(function () {
         extensions: 'gif,jpg,jpeg,bmp,png',
         mimeTypes: 'image/*'
     };
-    switch($("#filtType").var()){
+    switch($("#filtType").val()){
         case "image": break;
         case "video": 
             acceptModel = {

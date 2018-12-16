@@ -17,15 +17,15 @@ namespace C.B.MySql.Data
         [MaxLength(64)]
         public string Name { set; get; }
         [MaxLength(512)]
-        public string replyContent { set; get; }
+        public string ReplyContent { set; get; }
         [MaxLength(64)]
-        public string replyName { set; get; }
-        public DateTime replyTime { set; get; }
+        public string ReplyName { set; get; }
+        public DateTime? ReplyTime { set; get; }
 
         public int IsShow{set;get;}
-        public int IsHot{set;get;}
+        public int IsTop{set;get;}
         
-        public int SortNo { set; get; }
+        public double SortNo { set; get; }
     }
 }
 

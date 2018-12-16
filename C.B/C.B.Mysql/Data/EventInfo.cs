@@ -27,11 +27,11 @@ namespace C.B.MySql.Data {
         public string Author { set; get; }
 
         public int IsShow { set; get; }
-        public int IsHot { set; get; }
+        public int IsTop { set; get; }
 
         [MaxLength (64)]
-        public string ThumbPath { set; get; }
-        public int ThumbPicId { set; get; }
+        public string ThumbUrl { set; get; }
+        public int ThumbId { set; get; }
 
         public int SortNo { set; get; }
     }

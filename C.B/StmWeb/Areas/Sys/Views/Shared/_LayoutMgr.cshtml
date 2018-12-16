@@ -5,20 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - 中国数字科技馆 </title>
 
-    <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
+    <!-- <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
           asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
-          asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+          asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" /> -->
     
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="~/mgr/css/style.css" />
-    <link rel="stylesheet" href="~/mgr/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="~/mgr/css/materialdesignicons.min.css" />
     <!-- <link rel="stylesheet" href="~/mgr/css/materialdesignicons.min.css"> -->
 
     
-    <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"></script>
+    <!-- <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"></script> -->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <!-- <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"></script> -->
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.5/angular.min.js"></script> -->
     
-    <script src="https://cdn.staticfile.org/angular.js/1.4.6/angular.min.js"></script>
+    <!-- <script src="https://cdn.staticfile.org/angular.js/1.4.6/angular.min.js"></script> -->
+    <script src="~/js/angular.min.js"></script>
     <script src="~/mgr/js/app.js"></script>
 </head>
 <body>
@@ -225,9 +229,9 @@
               <span class="menu-title">赛事介绍</span>
             </a>
             <div class="collapse show" id="ui-basic">
-              <ul class="nav flex-column sub-menu">                
+              <ul class="nav flex-column sub-menu">
                 <li class="nav-item">
-                  <a class="nav-link" href="../../Sys/Info/Event">赛事信息</a>
+                  <a class="nav-link" href="../../Sys/Info/EventIndex">赛事信息</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="../../Sys/Info/New?t=1">发布赛事</a>

@@ -57,7 +57,7 @@ namespace StmWeb.Area.Sys.Controllers
             //var date = Request;
             var files = Request.Form.Files;
             long size = files.Sum(f => f.Length);
-            string webRootPath = @"~/";
+            string webRootPath = @"../../";
             string contentRootPath = Directory.GetCurrentDirectory();
 
             var fileList = new List<ResourceInfo>();
@@ -69,9 +69,9 @@ namespace StmWeb.Area.Sys.Controllers
                     string fileExt = System.IO.Path.GetExtension(formFile.FileName); //文件扩展名，不含“.”
                     long fileSize = formFile.Length; //获得文件大小，以字节为单位
 
-                    string newFileName = System.Guid.NewGuid().ToString() + "." + fileExt; //随机生成新的文件名
-                    var filePath = webRootPath + "/upload/" + newFileName;
-                    var fileUrl = webRootPath + "/upload/" + newFileName;
+                    string newFileName = System.Guid.NewGuid().ToString() + fileExt; //随机生成新的文件名
+                    var filePath = contentRootPath + "/upload/" + newFileName;
+                    var fileUrl = webRootPath + "upload/" + newFileName;
 
                     using (var stream = new FileStream(filePath, FileMode.Create))
                     {
@@ -79,9 +79,10 @@ namespace StmWeb.Area.Sys.Controllers
                     }
                     fileList.Add(new ResourceInfo
                     {
-                        Filepath = fileUrl,
+                        Filepath = filePath,
+                        Url = fileUrl,
                         FileName = formFile.FileName,
-                        FileType = fileExt,
+                        FileType = fileExt.ToFileType(),
                         FileMd5 = "",
                     });
                 }
@@ -105,21 +106,35 @@ namespace StmWeb.Area.Sys.Controllers
             CmdTool.RunCmd(cmd, out message);
         }
 
+
+
+
+        public IActionResult Checker()
+        {
+            //request.args.get("CKEditorFuncNum")
+           var callback = Request.Query["CKEditorFuncNum"];
+            System.Console.WriteLine($" ==> callback: {callback}");
+
+            ViewBag.callback = callback;
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult Browse(string type = "image")
+        {
+            var list = _resourceInfoRepository.Where(m => m.FileType == type);
+
+            return Json(BaseResponse.SuccessResponse(list));
+        }
+
+        public IActionResult Select (string urls,string callback){
+            
+            string tpl = "<script type=\"text/javascript\">window.opener.CKEDITOR.tools.callFunction(\"{1}\", \"{0}\", \"{2}\");window.close();</script>";
+            return Content(string.Format(tpl, urls, callback, ""), "text/html");
+        }
+
+
+
+
     }
-
-    /*
-    public interface IFormFile {
-
-        string ContentType { get; }
-        string ContentDisposition { get; }
-        IHeaderDictionary Headers { get; }
-        long Length { get; }
-        string Name { get; }
-        string FileName { get; }
-        Stream OpenReadStream ();
-        void CopyTo (Stream target);
-        Task CopyToAsync (Stream target, CancellationToken cancellationToken);
-
-    }*/
-
 }

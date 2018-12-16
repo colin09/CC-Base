@@ -13,13 +13,15 @@ namespace C.B.MySql.Data
         [MaxLength(512)]
         public string Content { set; get; }
         
-        public int PidFileId { set; get; }
+        public int PicFileId { set; get; }
+        [MaxLength(128)]
+        public string PicUrl { set; get; }
         [MaxLength(32)]
         public string Author { set; get; }
 
         public int IsShow{set;get;}
         
-        public int SortNo { set; get; }
+        public double SortNo { set; get; }
     }
 }
 

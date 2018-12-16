@@ -10,12 +10,14 @@ namespace C.B.MySql.Data
 
         [MaxLength(128)]
         public string Filepath { set; get; }
+        [MaxLength(128)]
+        public string Url { set; get; }
         [MaxLength(64)]
         public string FileMd5 { set; get; }
         
         [MaxLength(64)]
         public string FileName { set; get; }
-        [MaxLength(32)]
+        [MaxLength(16)]
         public string FileType { set; get; }
 
 

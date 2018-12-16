@@ -6,11 +6,11 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace C.B.MySql.Migrations
+namespace C.B.Mysql.Migrations
 {
     [DbContext(typeof(MySqlContext))]
-    [Migration("20181212122421_0000002")]
-    partial class _0000002
+    [Migration("20181215073451_0002")]
+    partial class _0002
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -114,34 +114,6 @@ namespace C.B.MySql.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ExpertInfo");
-                });
-
-            modelBuilder.Entity("C.B.MySql.Data.FileInfo", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<DateTime>("CreateTime");
-
-                    b.Property<int>("IsDeleted");
-
-                    b.Property<DateTime>("UpdateTime");
-
-                    b.Property<string>("fileMd5")
-                        .HasMaxLength(64);
-
-                    b.Property<string>("fileName")
-                        .HasMaxLength(64);
-
-                    b.Property<string>("fileType")
-                        .HasMaxLength(32);
-
-                    b.Property<string>("filepath")
-                        .HasMaxLength(128);
-
-                    b.HasKey("Id");
-
-                    b.ToTable("FileInfo");
                 });
 
             modelBuilder.Entity("C.B.MySql.Data.HisEventInfo", b =>
@@ -297,6 +269,37 @@ namespace C.B.MySql.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Notice");
+                });
+
+            modelBuilder.Entity("C.B.MySql.Data.ResourceInfo", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("CreateTime");
+
+                    b.Property<string>("FileMd5")
+                        .HasMaxLength(64);
+
+                    b.Property<string>("FileName")
+                        .HasMaxLength(64);
+
+                    b.Property<string>("FileType")
+                        .HasMaxLength(16);
+
+                    b.Property<string>("Filepath")
+                        .HasMaxLength(128);
+
+                    b.Property<int>("IsDeleted");
+
+                    b.Property<DateTime>("UpdateTime");
+
+                    b.Property<string>("Url")
+                        .HasMaxLength(128);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ResourceInfo");
                 });
 
             modelBuilder.Entity("C.B.MySql.Data.UserInfo", b =>

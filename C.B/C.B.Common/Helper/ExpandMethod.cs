@@ -39,6 +39,29 @@ namespace C.B.Common.helper
             return date.ToString("yyyy-MM-dd");
         }
 
+        
+        public static string ToFileType(this string fileExt)
+        {
+            var fileType = "other";
+            switch (fileExt.ToLower())
+            {
+                case ".bmp":
+                case ".png":
+                case ".gif":
+                case ".jpg":
+                case ".jpeg":
+                    fileType = "image";
+                    break;
+                case ".mp4":
+                    fileType = "video";
+                    break;
+                case ".pdf":
+                case ".doc":
+                    fileType = "doc";
+                    break;
+            }
+            return fileType;
+        }
 
 
         public static string TakeString(this string str, int length)

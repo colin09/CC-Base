@@ -22,7 +22,7 @@ namespace C.B.MySql.Data
         public int IsTop{set;get;}
         public int IsRoll{set;get;}
         
-        public int SortNo { set; get; }
+        public double SortNo { set; get; }
     }
 }
 

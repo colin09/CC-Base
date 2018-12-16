@@ -114,34 +114,6 @@ namespace C.B.Mysql.Migrations
                     b.ToTable("ExpertInfo");
                 });
 
-            modelBuilder.Entity("C.B.MySql.Data.FileInfo", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<DateTime>("CreateTime");
-
-                    b.Property<int>("IsDeleted");
-
-                    b.Property<DateTime>("UpdateTime");
-
-                    b.Property<string>("fileMd5")
-                        .HasMaxLength(64);
-
-                    b.Property<string>("fileName")
-                        .HasMaxLength(64);
-
-                    b.Property<string>("fileType")
-                        .HasMaxLength(32);
-
-                    b.Property<string>("filepath")
-                        .HasMaxLength(128);
-
-                    b.HasKey("Id");
-
-                    b.ToTable("FileInfo");
-                });
-
             modelBuilder.Entity("C.B.MySql.Data.HisEventInfo", b =>
                 {
                     b.Property<int>("Id")
@@ -295,6 +267,37 @@ namespace C.B.Mysql.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Notice");
+                });
+
+            modelBuilder.Entity("C.B.MySql.Data.ResourceInfo", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("CreateTime");
+
+                    b.Property<string>("FileMd5")
+                        .HasMaxLength(64);
+
+                    b.Property<string>("FileName")
+                        .HasMaxLength(64);
+
+                    b.Property<string>("FileType")
+                        .HasMaxLength(16);
+
+                    b.Property<string>("Filepath")
+                        .HasMaxLength(128);
+
+                    b.Property<int>("IsDeleted");
+
+                    b.Property<DateTime>("UpdateTime");
+
+                    b.Property<string>("Url")
+                        .HasMaxLength(128);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ResourceInfo");
                 });
 
             modelBuilder.Entity("C.B.MySql.Data.UserInfo", b =>
