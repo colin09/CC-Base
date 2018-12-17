@@ -40,7 +40,9 @@ namespace StmWeb.Area.Sys.Controllers
             return View();
         }
 
-        public IActionResult New(int type = 1, int id = 0, int typeId = 0)
+        #region  -  EventInfo、Expert、News、Notice  添加 编辑  -
+
+        public IActionResult Editor(int type = 1, int id = 0, int typeId = 0)
         {
             ViewBag.Id = id;
             ViewBag.Type = type == 1 ? "event" : type == 2 ? "expert" : type == 3 ? "news" : type == 4 ? "notice" : "event";
@@ -215,6 +217,8 @@ namespace StmWeb.Area.Sys.Controllers
         }
 
 
+        #endregion
+
         #region -  Event  -
         public IActionResult EventIndex()
         {
@@ -253,16 +257,54 @@ namespace StmWeb.Area.Sys.Controllers
             return Json(BaseResponse.SuccessResponse());
         }
 
+        public IActionResult GetEventInfoList(int typeId)
+        {
+            var list = _eventInfoRepository.Where(m => m.IsDeleted == 0 && m.EventId == typeId);
+            return Json(BaseResponse.SuccessResponse(list));
+        }
 
 
         #endregion
 
-
-
-
-        public IActionResult Expert()
+        public IActionResult ExpertIndex()
         {
             return View();
         }
+        public IActionResult GetExpertInfoList()
+        {
+            var list = _expertInfoRepository.Where(m => m.IsDeleted == 0);
+            return Json(BaseResponse.SuccessResponse(list));
+        }
+
+        public IActionResult NewsIndex()
+        {
+            return View();
+        }
+        public IActionResult GetNewsInfoList(NewsType type)
+        {
+            var list = _newsInfoRepository.Where(m => m.IsDeleted == 0 && m.NewsType == type);
+            return Json(BaseResponse.SuccessResponse(list));
+        }
+
+        public IActionResult NoticeIndex()
+        {
+            return View();
+        }
+        public IActionResult GetNoticeList(NewsType type)
+        {
+            var list = _noticeRepository.Where(m => m.IsDeleted == 0);
+            return Json(BaseResponse.SuccessResponse(list));
+        }
+
+        public IActionResult MessageIndex()
+        {
+            return View();
+        }
+        public IActionResult GetMessageList(NewsType type)
+        {
+            var list = _messageRepository.Where(m => m.IsDeleted == 0);
+            return Json(BaseResponse.SuccessResponse(list));
+        }
+
     }
 }

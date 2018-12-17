@@ -32,16 +32,16 @@ namespace C.B.Mysql.Migrations
 
                     b.Property<int>("IsDeleted");
 
-                    b.Property<int>("IsHot");
-
                     b.Property<int>("IsShow");
+
+                    b.Property<int>("IsTop");
 
                     b.Property<int>("SortNo");
 
-                    b.Property<string>("ThumbPath")
-                        .HasMaxLength(64);
+                    b.Property<int>("ThumbId");
 
-                    b.Property<int>("ThumbPicId");
+                    b.Property<string>("ThumbUrl")
+                        .HasMaxLength(64);
 
                     b.Property<string>("Title")
                         .HasMaxLength(64);
@@ -100,9 +100,12 @@ namespace C.B.Mysql.Migrations
 
                     b.Property<int>("IsShow");
 
-                    b.Property<int>("PidFileId");
+                    b.Property<int>("PicFileId");
 
-                    b.Property<int>("SortNo");
+                    b.Property<string>("PicUrl")
+                        .HasMaxLength(128);
+
+                    b.Property<double>("SortNo");
 
                     b.Property<string>("Title")
                         .HasMaxLength(64);
@@ -157,9 +160,9 @@ namespace C.B.Mysql.Migrations
 
                     b.Property<int>("IsDeleted");
 
-                    b.Property<int>("IsHot");
-
                     b.Property<int>("IsShow");
+
+                    b.Property<int>("IsTop");
 
                     b.Property<string>("Name")
                         .HasMaxLength(64);
@@ -167,20 +170,20 @@ namespace C.B.Mysql.Migrations
                     b.Property<string>("Region")
                         .HasMaxLength(64);
 
-                    b.Property<int>("SortNo");
+                    b.Property<string>("ReplyContent")
+                        .HasMaxLength(512);
+
+                    b.Property<string>("ReplyName")
+                        .HasMaxLength(64);
+
+                    b.Property<DateTime?>("ReplyTime");
+
+                    b.Property<double>("SortNo");
 
                     b.Property<string>("Title")
                         .HasMaxLength(64);
 
                     b.Property<DateTime>("UpdateTime");
-
-                    b.Property<string>("replyContent")
-                        .HasMaxLength(512);
-
-                    b.Property<string>("replyName")
-                        .HasMaxLength(64);
-
-                    b.Property<DateTime>("replyTime");
 
                     b.HasKey("Id");
 
@@ -200,8 +203,6 @@ namespace C.B.Mysql.Migrations
 
                     b.Property<DateTime>("CreateTime");
 
-                    b.Property<int>("FileId");
-
                     b.Property<int>("IsDeleted");
 
                     b.Property<int>("IsRoll");
@@ -217,7 +218,10 @@ namespace C.B.Mysql.Migrations
 
                     b.Property<DateTime>("PubTime");
 
-                    b.Property<int>("SortNo");
+                    b.Property<double>("SortNo");
+
+                    b.Property<string>("ThumUrl")
+                        .HasMaxLength(128);
 
                     b.Property<int>("ThumbId");
 
@@ -225,6 +229,11 @@ namespace C.B.Mysql.Migrations
                         .HasMaxLength(64);
 
                     b.Property<DateTime>("UpdateTime");
+
+                    b.Property<int>("VideoId");
+
+                    b.Property<string>("VideoUrl")
+                        .HasMaxLength(128);
 
                     b.HasKey("Id");
 
@@ -257,7 +266,7 @@ namespace C.B.Mysql.Migrations
 
                     b.Property<DateTime>("PubTime");
 
-                    b.Property<int>("SortNo");
+                    b.Property<double>("SortNo");
 
                     b.Property<string>("Title")
                         .HasMaxLength(64);
