@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace C.B.Common.helper
 {
-   public class Utility
+    public class Utility
     {
 
         public static long GetSecond2015()
@@ -30,5 +31,12 @@ namespace C.B.Common.helper
             return System.DateTime.Now.ToString("yyyyMMddHHmmssfff");
         }
 
+
+        public static void DirectoryCheck(string path)
+        {
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+        }
     }
-}

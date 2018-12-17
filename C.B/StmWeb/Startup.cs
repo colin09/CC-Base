@@ -71,8 +71,8 @@ namespace StmWeb
             app.UseStaticFiles(new StaticFileOptions()
             {
                 FileProvider = new PhysicalFileProvider(
-                Path.Combine(Directory.GetCurrentDirectory(), @"upload")),
-                RequestPath = new PathString("/upload"),
+                Path.Combine(Directory.GetCurrentDirectory(), @"SourcesFile")),
+                RequestPath = new PathString("/Sources"),
                 OnPrepareResponse = ctx =>
                 {
                     ctx.Context.Response.Headers.Append("Cache-Control", "public,max-age=600");
