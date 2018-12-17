@@ -5,9 +5,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace C.B.MySql.Data
 {
+    //新闻  图片/视频/赛事
     public class NewsInfo : BaseEntity
     {
-
         [MaxLength(64)]
         public string Title { set; get; }
         [MaxLength(2048)]

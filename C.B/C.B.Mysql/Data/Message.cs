@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace C.B.MySql.Data
 {
+    //互动留言
     public class Message : BaseEntity
     {
 

@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace C.B.MySql.Data
 {
+    //通知公告
     public class Notice : BaseEntity
     {
 

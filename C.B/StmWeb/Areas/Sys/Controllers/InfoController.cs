@@ -27,7 +27,7 @@ namespace StmWeb.Area.Sys.Controllers
         {
             _eventTypeRepository = new EventTypeRepository();
             _eventInfoRepository = new EventInfoRepository();
-            
+
             _noticeRepository = new NoticeRepository();
             _newsInfoRepository = new NewsInfoRepository();
             _messageRepository = new MessageRepository();
@@ -40,8 +40,11 @@ namespace StmWeb.Area.Sys.Controllers
             return View();
         }
 
-        public IActionResult New()
+        public IActionResult New(int type = 1, int id = 0, int typeId = 0)
         {
+            ViewBag.Id = id;
+            ViewBag.Type = type == 1 ? "event" : type == 2 ? "expert" : type == 3 ? "news" : type == 4 ? "notice" : "event";
+            ViewBag.TypeId = typeId;
             return View();
         }
 

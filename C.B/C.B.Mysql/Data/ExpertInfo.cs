@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace C.B.MySql.Data
 {
+    //专家简介
     public class ExpertInfo : BaseEntity
     {
 

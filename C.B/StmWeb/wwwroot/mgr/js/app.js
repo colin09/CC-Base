@@ -89,8 +89,6 @@ module.controller('mgrFileCheckerCtl', function ($scope, $http) {
      */
 });
 
-
-
 module.controller('mgrEventInfoCtl', function ($scope, $http) {
     $scope.tab = "eventInfo";
 
@@ -211,18 +209,26 @@ module.controller('mgrEventInfoCtl', function ($scope, $http) {
     }
 
 
-    $scope.GetEventInfoList() = function (typeId) {
+    $scope.GetEventInfoList = function (typeId) {
         var url = "GetEventInfoList?type=" + typeId;
         $http.get(url).success(function (response) {
             $scope.EventInfoList = response.data;
         });
     }
 
-    $scope.AddEventInfo= function(){
-        
+    $scope.AddEventInfo = function () {
+
     };
 
     $scope.GetEventTypeList();
 
+
+});
+
+
+module.controller('mgrEditorCtl', function ($scope, $http) {
+
+    // event , expert , news , notice
+    $scope.EditType = $("#hdType").val();
 
 });
