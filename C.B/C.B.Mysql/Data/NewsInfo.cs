@@ -27,13 +27,21 @@ namespace C.B.MySql.Data
         [MaxLength(128)]
         public string ThumUrl{set;get;}
 
-        public int NewsType{set;get;}
-        public int FileId{set;get;}
+        public NewsType NewsType{set;get;}
+        public int VideoId{set;get;}
         [MaxLength(128)]
-        public string FileUrl{set;get;}
+        public string VideoUrl{set;get;}
 
 
         public double SortNo { set; get; }
+    }
+
+
+    public enum NewsType
+    {
+        ImageNews=1,
+        EventNews=2,
+        VidelNews=3,
     }
 }
 

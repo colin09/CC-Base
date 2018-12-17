@@ -120,7 +120,7 @@ namespace StmWeb.Area.Sys.Controllers
             var model = new NewsInfo
             {
                 Id = m.Id,
-                NewsType = m.TypeId,
+                NewsType = (NewsType)m.TypeId,
                 Title = m.Title,
                 Content = m.Content,
                 Author = m.Author,
@@ -128,8 +128,8 @@ namespace StmWeb.Area.Sys.Controllers
                 PubOrg = m.PubOrg,
                 ThumbId = m.ThumbId,
                 ThumUrl = m.ThumbUrl,
-                FileId = 0,
-                FileUrl = "",
+                VideoId = 0,
+                VideoUrl = "",
 
                 IsShow = m.IsShow ? 1 : 0,
                 IsTop = m.IsTop ? 1 : 0,
