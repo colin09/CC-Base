@@ -9,6 +9,7 @@ using StmWeb.Models;
 using C.B.MySql.Data;
 using C.B.MySql.Repository.EntityRepositories;
 using C.B.Models.Data;
+using C.B.Common.helper;
 
 namespace StmWeb.Area.Sys.Controllers
 {
@@ -50,30 +51,70 @@ namespace StmWeb.Area.Sys.Controllers
             return View();
         }
 
-        public IActionResult SaveEditor([FromBody]EditorModel model)
+        [HttpPost]
+        public IActionResult SaveEditor([FromForm]EditorModel model)
         {
+            var files = Request.Form.Files;
+            long size = files.Sum(f => f.Length);
+            if (size > 0)
+            {
+                var fileList = Task.Run(() => FileHelper.SaveFiles(files)).Result;
+                fileList.ToList().ForEach(item =>
+                {
+                    if (item.FileType == "image")
+                        model.ThumbUrl = item.FileUrl;
+                    if (item.FileType == "video")
+                        model.FileUrl = item.FileUrl;
+                });
+            }
+            System.Console.WriteLine($"==> EditorModel: {model.ToJson()}");
+            var result = false;
+            var action = "Editor";
             switch (model.EditType)
             {
                 case "event":
-                    ModifyEventInfo(model);
+                    result = ModifyEventInfo(model);
+                    action = "EventIndex";
                     break;
                 case "message":
-                    ModifyMessageInfo(model);
+                    result = ModifyMessageInfo(model);
+                    action = "MessageIndex";
                     break;
                 case "notice":
-                    ModifyNoticeInfo(model);
+                    result = ModifyNoticeInfo(model);
+                    action = "NoticeIndex";
                     break;
                 case "expert":
-                    ModifyExpertInfo(model);
+                    result = ModifyExpertInfo(model);
+                    action = "ExpertIndex";
                     break;
                 case "news":
-                    ModifyNewsInfo(model);
+                    result = ModifyNewsInfo(model);
+                    action = "NewsIndex";
+                    break;
+                default:
                     break;
             };
-            return View();
+            if (!result)
+                return Json(BaseResponse.ErrorResponse("数据错误。"));
+            return Json(BaseResponse.SuccessResponse($"/Sys/Info/{action}"));
+
+            return RedirectToAction(action, "Info", new { area = "Sys" }); ;
         }
 
+        public IActionResult GetEditorInfo(string type, int id)
+        {
+            switch (type)
+            {
+                case "event": var eventM = _eventInfoRepository.FirstOrDefault(id); return Json(BaseResponse.SuccessResponse(eventM));
+                case "expert": var expert = _expertInfoRepository.FirstOrDefault(id); return Json(BaseResponse.SuccessResponse(expert));
+                case "news": var news = _newsInfoRepository.FirstOrDefault(id); return Json(BaseResponse.SuccessResponse(news));
+                case "notice": var notice = _noticeRepository.FirstOrDefault(id); return Json(BaseResponse.SuccessResponse(notice));
+            }
+            return Json(BaseResponse.ErrorResponse("id 不存在。"));
+        }
 
+        [HttpPost]
         public IActionResult ModifyEditor([FromBody]EditorModel model)
         {
             switch (model.EditType)

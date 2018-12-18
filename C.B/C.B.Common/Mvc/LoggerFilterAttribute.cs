@@ -9,7 +9,7 @@ namespace C.B.Common.Mvc
         /// Action方法之后调用
         /// </summary>
         /// <param name="context"></param>
-        public void OnActionExecuted(ActionExecutedContext context)
+        public override void OnActionExecuted(ActionExecutedContext context)
         {
             //throw new NotImplementedException();
         }
@@ -19,7 +19,7 @@ namespace C.B.Common.Mvc
         /// Action方法之前调用
         /// </summary>
         /// <param name="context"></param>
-        public void OnActionExecuting(ActionExecutingContext context)
+        public override void OnActionExecuting(ActionExecutingContext context)
         {
             //throw new NotImplementedException();
         }

@@ -89,6 +89,58 @@ module.controller('mgrFileCheckerCtl', function ($scope, $http) {
      */
 });
 
+
+module.controller('mgrEditorCtl', function ($scope, $http) {
+
+    // event , expert , news , notice
+    $scope.EditType = $("#hdType").val();
+    $scope.Title = "";
+    switch($scope.EditType){
+        case "event": $scope.Title = "赛事信息编辑"; break;
+        case "expert": $scope.Title = "专家简介编辑"; break;
+        case "news": $scope.Title = "新闻信息编辑"; break;
+        case "notice": $scope.Title = "通知公告编辑"; break;
+    }
+
+    var id = $("#hdId").val();
+    if(id.length>0){
+        $http.get("GetEditorInfo?type="+$scope.EditType+"&Id="+id).success(function(response){
+            if(response.success){
+                $scope.title = response.data.title;
+                $scope.content = response.data.content;
+                $scope.pubOrg = response.data.pubOrg;
+                $scope.author = response.data.author;
+                $scope.isShow = response.data.isShow;
+                $scope.isTop = response.data.isTop;
+                $scope.isRoll = response.data.isRoll;
+            }
+        });
+    }
+
+    $scope.SubmitForm = function () {
+        var form = new FormData(document.getElementById("formEditor"));
+        $http({
+            url: "SaveEditor",
+            method: "post",
+            data: form,
+            transformRequest: angular.identity,
+            headers: {
+                'Content-Type': undefined  //angularjs设置文件上传的content-type修改方式
+            }
+        }).success(function (response) {
+            if (response.success) {
+                window.location.href = response.data;
+            }
+            else
+                alert(response.data);
+        }).error(function (message) {
+            console.log(message);
+        });
+    }
+
+
+});
+
 module.controller('mgrEventInfoCtl', function ($scope, $http) {
     $scope.tab = "eventInfo";
 
@@ -225,10 +277,15 @@ module.controller('mgrEventInfoCtl', function ($scope, $http) {
 
 });
 
-
-module.controller('mgrEditorCtl', function ($scope, $http) {
-
-    // event , expert , news , notice
-    $scope.EditType = $("#hdType").val();
-
+module.controller('mgrExpertInfoCtl', function ($scope, $http) {
+    
+});
+module.controller('mgrMessageInfoCtl', function ($scope, $http) {
+    
+});
+module.controller('mgrNewsInfoCtl', function ($scope, $http) {
+    
+});
+module.controller('mgrNoticeInfoCtl', function ($scope, $http) {
+    
 });

@@ -2,80 +2,14 @@
     ViewData["Title"] = "Index";
 }
 
-<link rel="stylesheet" href="../../mgr/css/zTreeStyle/zTreeStyle.css" type="text/css" />
-<script type="text/javascript" src="../../mgr/js/jquery.ztree.core.min.js"></script>
 
-<div ng-controller="mgrEventInfoCtl">
-  <ul class="nav nav-tabs">
-        <li role="presentation" ng-click="tab='eventType'" ng-class="tab=='eventType'?'active':''"><a href="#">赛事分类</a></li>
-        <li role="presentation" ng-click="tab='eventInfo'" ng-class="tab=='eventInfo'?'active':''"><a href="#">赛事信息</a></li>
-    </ul>
+<div ng-controller="mgrNoticeInfoCtl">
+ 
 
-<div id="divEventType" ng-show="tab=='eventType'">
-    <div class="row">
-        <div class="col-xs-4">
-            <ul id="ulEventTypes" class="ztree"></ul>
-        </div>
-        <div class="col-xs-6">
-            <table>
-                <tr>
-                    <td> 分类名称：</td>
-                    <td>
-                    <input type="text" ng-model="NewType.Name" /></td>
-                </tr>
-                <tr>
-                    <td>
-                    级别：</td>
-                    <td>
-                    <input type="text" ng-model="NewType.Level" /></td>
-                </tr>
-                <tr>
-                    <td>
-                    是否显示：</td>
-                    <td>
-                        <input type="checkbox" ng-model="NewType.Show">
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                    图标：</td>
-                    <td>
-                    <input type="text" ng-model="NewType.Icon" /></td>
-                </tr>
-                <tr>
-                    <td>
-                    排序：</td>
-                    <td>
-                    <input type="text" ng-model="NewType.SortNo" /></td>
-                </tr>
-                
-                <tr>
-                    <td></td>
-                    <td>
-                    <input type="hidden" ng-model="NewType.Id" id="hdEventTypeId" /> 
-                    <button type="button" class="btn btn-primary btn-fw" ng-click="SaveEventType()"> 添加为子类别 </button>
-                    <button type="button" class="btn btn-primary btn-fw" ng-click="ModifyEventType()"> 修补此类别 </button>
-                    <button type="button" class="btn btn-primary btn-fw" ng-click="RemoveEventType()"> 删除此类别 </button>
-                    </td>
-                </tr>
-            </table>
-        </div>
-    </div>
-
-
-</div>
-
-
-<div id="divEventInfo" ng-show="tab=='eventInfo'">
-    <div class="row">
-        <div class="col-xs-2">
-            <ul id="ulTypeShower" class="ztree"></ul>
-
-        </div>
-        <div class="col-xs-4">
+<div>
             <div class="table-responsive">                
-                <h4 class="card-title">{{EventTypeName}}</h4>
-                <button type="button" class="btn btn-success btn-fw">发布赛事</button>
+                <h3 class="card-title">通知公告</h3>
+                <hr/>
                 <table class="table table-hover">
                     <thead>
                         <tr>
@@ -110,8 +44,7 @@
                         </tr>
                     </tbody>
                 </table>
-            </div>
-        </div>
+        
     </div>
 </div>
 
