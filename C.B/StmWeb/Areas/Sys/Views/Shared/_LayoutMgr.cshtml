@@ -165,7 +165,7 @@
           </li>
           <li class="nav-item dropdown d-none d-xl-inline-block">
             <a class="nav-link dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
-              <span class="profile-text">您好, 系统管理员 !</span>
+              <span class="profile-text spnCurrentUserName">您好,--! </span>
               <img class="img-xs rounded-circle" src="~/mgr/images/face1.jpg" alt="Profile image">
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
@@ -211,7 +211,7 @@
                   <img src="~/mgr/images/face1.jpg" alt="profile image">
                 </div>
                 <div class="text-wrapper">
-                  <p class="profile-name">用户名称</p>
+                  <p class="profile-name pCurrentUserName">用户名称</p>
                   <div>
                     <small class="designation text-muted">角色</small>
                     <span class="status-indicator online"></span>
@@ -372,31 +372,12 @@
     </div>
 
   
-        <!-- <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"
-                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
-                asp-fallback-test="window.jQuery"
-                crossorigin="anonymous"
-                integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT">
-        </script>
-        <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"
-                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
-                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
-                crossorigin="anonymous"
-                integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
-        </script>  -->
+
         <script src="~/js/site.min.js" asp-append-version="true"></script>
 
 
     
-  <!-- <script src="~/js/manager/vendor.bundle.base.js"></script>
-  <script src="~/js/manager/vendor.bundle.addons.js"></script>
-  <script src="~/js/manager/off-canvas.js"></script>
-  <script src="~/js/manager/misc.js"></script> -->
-<!-- <script src="https://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script> -->
 
-        <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.6/angular.min.js"></script> -->
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.5/angular.min.js"></script> -->
-<!-- <script src="~/mgr/js/app.js"></script> -->
 
     @RenderSection("Scripts", required: false)
 

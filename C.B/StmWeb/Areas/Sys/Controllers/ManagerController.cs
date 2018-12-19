@@ -2,7 +2,11 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using C.B.Common.helper;
+using C.B.Common.Mvc;
+using C.B.Models.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -12,21 +16,23 @@ namespace StmWeb.Area.Sys.Controllers
 {
     [Area("Sys")]
     [Authorize(Roles = "develop,admin")]
-    public class ManagerController : Controller
+    public class ManagerController : MgrBaseController
     {
-        private readonly UserManager<ApplicationUser> _userManager;
-        public ManagerController(UserManager<ApplicationUser> userManager)
+        public async Task<IActionResult> Index()
         {
-            _userManager = userManager;
+            var curUser = HttpContext.User;
+            ViewBag.UserName = curUser.FindFirst(ClaimTypes.Name).Value;
+
+            return View();
         }
 
 
-        public async Task<IActionResult> Index()
+        public IActionResult GetCurrentUser()
         {
-
             var curUser = HttpContext.User;
-            ApplicationUser user = await _userManager.GetUserAsync(HttpContext.User);
-            return View();
+            var UserName = curUser.FindFirst(ClaimTypes.Name).Value;
+
+            return Json(BaseResponse.SuccessResponse(GetCurrentUser(curUser)));
         }
 
 
@@ -51,6 +57,12 @@ namespace StmWeb.Area.Sys.Controllers
         {
             return View();
         }
+
+    }
+
+
+    public class ApplicationUser : IdentityUser
+    {
 
     }
 }

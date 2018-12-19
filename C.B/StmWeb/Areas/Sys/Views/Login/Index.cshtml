@@ -97,7 +97,7 @@
                 var userName = $("#userName").val();
                 var password = $("#password").val();
 
-                $.post("../Login/SignIn", { userName: userName, password: password }).done(function (response) {
+                $.post("../../Sys/Login/SignIn", { userName: userName, password: password }).done(function (response) {
                     if (response.success)
                         window.location.href = "../../Sys/Manager/Index";
                     console.log(response);

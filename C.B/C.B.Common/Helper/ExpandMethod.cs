@@ -21,6 +21,16 @@ namespace C.B.Common.helper
             return Encoding.UTF8.GetBytes(str);
         }
 
+        public static int? ToInt(this string str)
+        {
+            if (str.IsEmpty())
+                return null;
+            var result = 0;
+            var flag = int.TryParse(str, out result);
+            if (flag)
+                return result;
+            return null;
+        }
         public static string ToJson(this object obj)
         {
             return JsonConvert.SerializeObject(obj);
@@ -39,7 +49,7 @@ namespace C.B.Common.helper
             return date.ToString("yyyy-MM-dd");
         }
 
-        
+
         public static string ToFileType(this string fileExt)
         {
             var fileType = "other";
@@ -75,6 +85,6 @@ namespace C.B.Common.helper
         }
 
 
-        
+
     }
 }

@@ -44,6 +44,8 @@ namespace StmWeb.Area.Sys.Controllers
 
             //用户标识
             var identity = new ClaimsIdentity();
+            
+            identity.AddClaim(new Claim(ClaimTypes.PrimarySid, user.Id.ToString()));
             identity.AddClaim(new Claim(ClaimTypes.Sid, user.UserName));
             identity.AddClaim(new Claim(ClaimTypes.Name, user.TrueName));
             identity.AddClaim(new Claim(ClaimTypes.Dsa, user.Department));
