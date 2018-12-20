@@ -199,6 +199,7 @@ pip-log.txt
 
 
 *.dll
+.vs/
 /.vscode
 .vs/config/applicationhost.config
 .vs/config/applicationhost.config
