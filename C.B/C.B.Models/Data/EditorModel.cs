@@ -8,6 +8,8 @@ namespace C.B.Models.Data
         public int Id{set;get;}
         public int TypeId{set;get;}
 
+        public int NewsType{set;get;}
+
         public string Title{set;get;}
         public string Content{set;get;}
         public string PubOrg { set; get; }

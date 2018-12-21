@@ -89,7 +89,7 @@ namespace StmWeb.Area.Sys.Controllers
                     action = "ExpertIndex";
                     break;
                 case "news":
-                    result = ModifyNewsInfo(model);
+                    result = ModifyNewsInfo(model);                    
                     action = "NewsIndex";
                     break;
                 default:
@@ -98,8 +98,7 @@ namespace StmWeb.Area.Sys.Controllers
             if (!result)
                 return Json(BaseResponse.ErrorResponse("数据错误。"));
             return Json(BaseResponse.SuccessResponse($"/Sys/Info/{action}"));
-
-            return RedirectToAction(action, "Info", new { area = "Sys" }); ;
+            //return RedirectToAction(action, "Info", new { area = "Sys" }); ;
         }
 
         public IActionResult GetEditorInfo(string type, int id)
@@ -166,7 +165,7 @@ namespace StmWeb.Area.Sys.Controllers
             var model = new NewsInfo
             {
                 Id = m.Id,
-                NewsType = (NewsType)m.TypeId,
+                NewsType = (NewsType)m.NewsType,
                 Title = m.Title,
                 Content = m.Content,
                 Author = m.Author,
@@ -174,8 +173,8 @@ namespace StmWeb.Area.Sys.Controllers
                 PubOrg = m.PubOrg,
                 ThumbId = m.ThumbId,
                 ThumUrl = m.ThumbUrl,
-                VideoId = 0,
-                VideoUrl = "",
+                VideoId = m.FileId,
+                VideoUrl = m.FileUrl,
 
                 IsShow = m.IsShow ? 1 : 0,
                 IsTop = m.IsTop ? 1 : 0,

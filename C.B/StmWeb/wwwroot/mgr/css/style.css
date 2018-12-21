@@ -57,8 +57,10 @@
 /* === Import template variables === */
 /*-------------------------------------------------------------------*/
 /* === SCSS Compass Functions === */
+/* 
 @import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700");
-@import url("https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700");
+@import url("https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700"); 
+*/
 @-moz-keyframes flash {
   0% {
     opacity: 1; }
@@ -10997,7 +10999,7 @@ button.close {
   border: 0;
   -webkit-appearance: none; }
 
-.modal-open {
+.modal-1-open {
   overflow: hidden; }
 
 .modal {
@@ -11010,27 +11012,27 @@ button.close {
   display: none;
   overflow: hidden;
   outline: 0; }
-  .modal-open .modal {
+  .modal-1-open .modal {
     overflow-x: hidden;
     overflow-y: auto; }
 
-.modal-dialog {
+.modal-1-dialog {
   position: relative;
   width: auto;
   margin: 10px;
   pointer-events: none; }
-  .modal.fade .modal-dialog {
+  .modal.fade .modal-1-dialog {
     transition: transform 0.4s ease;
     transform: translate(0, -25%); }
-  .modal.show .modal-dialog {
+  .modal.show .modal-1-dialog {
     transform: translate(0, 0); }
 
-.modal-dialog-centered {
+.modal-1-dialog-centered {
   display: flex;
   align-items: center;
   min-height: calc(100% - (10px * 2)); }
 
-.modal-content {
+.modal-1-content {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -11042,7 +11044,7 @@ button.close {
   border-radius: 0.3rem;
   outline: 0; }
 
-.modal-backdrop {
+.modal-1-backdrop {
   position: fixed;
   top: 0;
   right: 0;
@@ -11050,12 +11052,12 @@ button.close {
   left: 0;
   z-index: 1040;
   background-color: #000; }
-  .modal-backdrop.fade {
+  .modal-1-backdrop.fade {
     opacity: 0; }
-  .modal-backdrop.show {
+  .modal-1-backdrop.show {
     opacity: 0.5; }
 
-.modal-header {
+.modal-1-header {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
@@ -11063,31 +11065,31 @@ button.close {
   border-bottom: 1px solid #f2f2f2;
   border-top-left-radius: 0.3rem;
   border-top-right-radius: 0.3rem; }
-  .modal-header .close {
+  .modal-1-header .close {
     padding: 1rem;
     margin: -1rem -1rem -1rem auto; }
 
-.modal-title {
+.modal-1-title {
   margin-bottom: 0;
   line-height: 1.5; }
 
-.modal-body {
+.modal-1-body {
   position: relative;
   flex: 1 1 auto;
   padding: 15px; }
 
-.modal-footer {
+.modal-1-footer {
   display: flex;
   align-items: center;
   justify-content: flex-end;
   padding: 15px;
   border-top: 1px solid #f2f2f2; }
-  .modal-footer > :not(:first-child) {
+  .modal-1-footer > :not(:first-child) {
     margin-left: .25rem; }
-  .modal-footer > :not(:last-child) {
+  .modal-1-footer > :not(:last-child) {
     margin-right: .25rem; }
 
-.modal-scrollbar-measure {
+.modal-1-scrollbar-measure {
   position: absolute;
   top: -9999px;
   width: 50px;
@@ -11095,16 +11097,16 @@ button.close {
   overflow: scroll; }
 
 @media (min-width: 576px) {
-  .modal-dialog {
+  .modal-1-dialog {
     max-width: 500px;
     margin: 30px auto; }
-  .modal-dialog-centered {
+  .modal-1-dialog-centered {
     min-height: calc(100% - (30px * 2)); }
-  .modal-sm {
+  .modal-1-sm {
     max-width: 300px; } }
 
 @media (min-width: 992px) {
-  .modal-lg {
+  .modal-1-lg {
     max-width: 90%; } }
 
 .tooltip {
@@ -14137,8 +14139,9 @@ address p {
   font-family: "Poppins", sans-serif;
   font-weight: 500;
   color: #404852;
-  margin-bottom: 22px;
-  font-size: 14px;
+  /* margin-bottom: 22px; */
+  /* font-size: 14px; */
+  margin: 15px;
   text-transform: capitalize; }
   .rtl .card-title {
     text-align: right; }
@@ -14218,7 +14221,7 @@ html {
 
 .content-wrapper {
   background: #f2f8f9;
-  padding: 1.5rem 1.7rem;
+  padding: 1rem 1rem;
   width: 100%;
   -webkit-flex-grow: 1;
   flex-grow: 1; }
@@ -14243,7 +14246,7 @@ pre {
 
 /* Footer */
 .footer {
-  background: #f2f8f9;
+  background: #fff;
   padding: 20px 1rem;
   transition: all 0.25s ease;
   -moz-transition: all 0.25s ease;
@@ -14469,9 +14472,9 @@ pre {
 .demo-modal {
   position: static;
   display: block; }
-  .demo-modal .modal-dialog {
+  .demo-modal .modal-1-dialog {
     margin-top: 0 !important; }
-    .demo-modal .modal-dialog.modal-lg {
+    .demo-modal .modal-1-dialog.modal-1-lg {
       max-width: 100%; }
 
 .loader-demo-box {
@@ -16316,3 +16319,10 @@ ul {
   -moz-osx-font-smoothing: grayscale;
   font-size: 10px !important;; 
 } 
+
+.full-page{
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  flex-grow:1;
+}

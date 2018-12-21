@@ -95,7 +95,7 @@ module.controller('mgrEditorCtl', function ($scope, $http) {
     // event , expert , news , notice
     $scope.EditType = $("#hdType").val();
     $scope.Title = "";
-    switch($scope.EditType){
+    switch ($scope.EditType) {
         case "event": $scope.Title = "赛事信息编辑"; break;
         case "expert": $scope.Title = "专家简介编辑"; break;
         case "news": $scope.Title = "新闻信息编辑"; break;
@@ -103,9 +103,9 @@ module.controller('mgrEditorCtl', function ($scope, $http) {
     }
 
     var id = $("#hdId").val();
-    if(id.length>0){
-        $http.get("GetEditorInfo?type="+$scope.EditType+"&Id="+id).success(function(response){
-            if(response.success){
+    if (id.length > 0) {
+        $http.get("GetEditorInfo?type=" + $scope.EditType + "&Id=" + id).success(function (response) {
+            if (response.success) {
                 $scope.title = response.data.title;
                 $scope.content = response.data.content;
                 $scope.pubOrg = response.data.pubOrg;
@@ -138,6 +138,47 @@ module.controller('mgrEditorCtl', function ($scope, $http) {
         });
     }
 
+ 
+
+    var setting = {
+        check: {
+            enable: false,
+            chkStyle: "checkbox", //默认值
+            nocheckInherit: true,  //新加入子节点时，自动继承父节点 nocheck = true 的属性。
+            chkboxType: { "Y": "ps", "N": "ps" } //勾选 checkbox 对于父子节点的关联影响
+        },
+        data: {
+            simpleData: {
+                enable: true,
+                idKey: "id",
+                pIdKey: "parentId",
+                rootPId: 0
+            },
+            key: {
+                name: "name",
+                title: ""
+            }
+        },
+        view: {
+            showTitle: false
+        },
+        callback: {
+            onClick: zTreeOnClick
+        }
+    };
+    $scope.ShowEventTypeDialog = function () {
+        $http.get("GetEventTypes").success(function (response) {         
+            var zTreeObj1 = $.fn.zTree.init($("#ulEventTypes"), setting, response.data);
+            zTreeObj1.expandAll(true);
+            $("#myModal").show();
+        });
+
+    }
+    function zTreeOnClick(event, treeId, treeNode) {
+
+        $scope.EditorModel.eventTypeName= treeNode.name;
+        $scope.EditorModel.eventType=treeNode.id;
+    };
 
 });
 
@@ -278,14 +319,14 @@ module.controller('mgrEventInfoCtl', function ($scope, $http) {
 });
 
 module.controller('mgrExpertInfoCtl', function ($scope, $http) {
-    
+
 });
 module.controller('mgrMessageInfoCtl', function ($scope, $http) {
-    
+
 });
 module.controller('mgrNewsInfoCtl', function ($scope, $http) {
-    
+
 });
 module.controller('mgrNoticeInfoCtl', function ($scope, $http) {
-    
+
 });

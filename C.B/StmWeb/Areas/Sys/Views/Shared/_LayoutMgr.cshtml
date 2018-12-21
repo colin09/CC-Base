@@ -56,9 +56,9 @@
           <li class="nav-item dropdown">
             <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
               <i class="mdi mdi-file-document-box"></i>
-              <span class="count">7</span>
+              <!-- <span class="count">7</span> -->
             </a>
-            <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="messageDropdown">
+            <!-- <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="messageDropdown">
               <div class="dropdown-item">
                 <p class="mb-0 font-weight-normal float-left">您有7个未读邮件
                 </p>
@@ -106,14 +106,14 @@
                   </p>
                 </div>
               </a>
-            </div>
+            </div> -->
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-toggle="dropdown">
               <i class="mdi mdi-bell"></i>
-              <span class="count">4</span>
+              <!-- <span class="count">4</span> -->
             </a>
-            <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
+            <!-- <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
               <a class="dropdown-item">
                 <p class="mb-0 font-weight-normal float-left">您有4个系统消息
                 </p>
@@ -161,7 +161,7 @@
                   </p>
                 </div>
               </a>
-            </div>
+            </div> -->
           </li>
           <li class="nav-item dropdown d-none d-xl-inline-block">
             <a class="nav-link dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
@@ -224,11 +224,11 @@
             </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#ui-basic">
+            <a class="nav-link" data-toggle="collapse" href="#ui-eventInc" aria-expanded="false" aria-controls="ui-expertInc">
               <i class="menu-icon mdi mdi-television"></i>
               <span class="menu-title">赛事介绍</span>
             </a>
-            <div class="collapse show" id="ui-basic">
+            <div class="collapse show" id="ui-eventInc1">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item">
                   <a class="nav-link" href="../../Sys/Info/EventIndex">赛事信息</a>
@@ -240,12 +240,12 @@
             </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+            <a class="nav-link" data-toggle="collapse" href="#ui-expertInc" aria-expanded="false" aria-controls="ui-expertInc">
               <i class="menu-icon mdi mdi-content-copy"></i>
               <span class="menu-title">专家简介 </span>
               <i class="menu-arrow"></i>
             </a>
-            <div class="collapse show" id="ui-basic">
+            <div class="collapse show" id="ui-expertInc1">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item">
                   <a class="nav-link" href="../../Sys/Info/ExpertIndex">专家信息</a>
@@ -257,12 +257,12 @@
             </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+            <a class="nav-link" data-toggle="collapse" href="#ui-newsInfo" aria-expanded="false" aria-controls="ui-newsInfo">
               <i class="menu-icon mdi mdi-content-copy"></i>
-              <span class="menu-title">专家简介 </span>
+              <span class="menu-title">新闻信息 </span>
               <i class="menu-arrow"></i>
             </a>
-            <div class="collapse show" id="ui-basic">
+            <div class="collapse show" id="ui-newsInfo1">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item">
                   <a class="nav-link" href="../../Sys/Info/NewsIndex">新闻（图片/视频/赛事）</a>
@@ -274,12 +274,12 @@
             </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+            <a class="nav-link" data-toggle="collapse" href="#ui-notice" aria-expanded="false" aria-controls="ui-notice">
               <i class="menu-icon mdi mdi-content-copy"></i>
               <span class="menu-title">通知公告 </span>
               <i class="menu-arrow"></i>
             </a>
-            <div class="collapse show" id="ui-basic">
+            <div class="collapse show" id="ui-notice1">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item">
                   <a class="nav-link" href="../../Sys/Info/NoticeIndex">通知公告信息</a>
@@ -291,34 +291,34 @@
             </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link"  data-toggle="collapse" href="#ui-fileMgr" aria-expanded="false" aria-controls="ui-fileMgr">
               <i class="menu-icon mdi mdi-sticker"></i>
               <span class="menu-title">文件管理 FileManager</span>
             </a>
-            <div class="collapse show" id="auth">
+            <div class="collapse show" id="ui-fileMgr1">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item">
-                  <a class="nav-link active" href="../../Sys/File/Images">图片文件</a>
+                  <a class="nav-link " href="../../Sys/File/Images">图片文件</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link active" href="../../Sys/File/Videos">视频文件</a>
+                  <a class="nav-link " href="../../Sys/File/Videos">视频文件</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link active" href="../../Sys/File/Doces">文档文件</a>
+                  <a class="nav-link " href="../../Sys/File/Doces">文档文件</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link active" href="../../Sys/File/Upload">上传文件</a>
+                  <a class="nav-link " href="../../Sys/File/Upload">上传文件</a>
                 </li>
               </ul>
             </div>
           </li>
           <li class="nav-item active">
-            <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
+            <a class="nav-link" data-toggle="collapse" href="#ui-devFeature" aria-expanded="false" aria-controls="ui-devFeature">
               <i class="menu-icon mdi mdi-restart"></i>
               <span class="menu-title">develop Pages</span>
               <i class="menu-arrow"></i>
             </a>
-            <div class="collapse show" id="auth">
+            <div class="collapse show" id="ui-devFeature1">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item">
                   <a class="nav-link active" href="../../Sys/Dev/SysUsers">SystemUsers</a>
@@ -352,12 +352,11 @@
 
         <div class="main-panel">
             <div class="content-wrapper" ng-app="managerApp">
-
+              <div class="container-fluid full-page ">
                   @RenderBody()
+              </div>
             </div>
-     
-
-    </div>
+        </div>
 
 
 
