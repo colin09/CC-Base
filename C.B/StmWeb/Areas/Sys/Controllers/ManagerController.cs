@@ -18,7 +18,7 @@ namespace StmWeb.Area.Sys.Controllers
     [Authorize(Roles = "develop,admin")]
     public class ManagerController : MgrBaseController
     {
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             var curUser = HttpContext.User;
             ViewBag.UserName = curUser.FindFirst(ClaimTypes.Name).Value;

@@ -6,113 +6,121 @@
 <script type="text/javascript" src="../../mgr/js/jquery.ztree.core.min.js"></script>
 
 <div ng-controller="mgrEventInfoCtl">
-  <ul class="nav nav-tabs">
+    <ul class="nav nav-tabs">
         <li role="presentation" ng-click="tab='eventType'" ng-class="tab=='eventType'?'active':''"><a href="#">赛事分类</a></li>
         <li role="presentation" ng-click="tab='eventInfo'" ng-class="tab=='eventInfo'?'active':''"><a href="#">赛事信息</a></li>
     </ul>
 
-<div id="divEventType" ng-show="tab=='eventType'">
-    <div class="row">
-        <div class="col-xs-4">
-            <ul id="ulEventTypes" class="ztree"></ul>
-        </div>
-        <div class="col-xs-6">
-            <table>
-                <tr>
-                    <td> 分类名称：</td>
-                    <td>
-                    <input type="text" ng-model="NewType.Name" /></td>
-                </tr>
-                <tr>
-                    <td>
-                    级别：</td>
-                    <td>
-                    <input type="text" ng-model="NewType.Level" /></td>
-                </tr>
-                <tr>
-                    <td>
-                    是否显示：</td>
-                    <td>
-                        <input type="checkbox" ng-model="NewType.Show">
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                    图标：</td>
-                    <td>
-                    <input type="text" ng-model="NewType.Icon" /></td>
-                </tr>
-                <tr>
-                    <td>
-                    排序：</td>
-                    <td>
-                    <input type="text" ng-model="NewType.SortNo" /></td>
-                </tr>
-                
-                <tr>
-                    <td></td>
-                    <td>
-                    <input type="hidden" ng-model="NewType.Id" id="hdEventTypeId" /> 
-                    <button type="button" class="btn btn-primary btn-fw" ng-click="SaveEventType()"> 添加为子类别 </button>
-                    <button type="button" class="btn btn-primary btn-fw" ng-click="ModifyEventType()"> 修补此类别 </button>
-                    <button type="button" class="btn btn-primary btn-fw" ng-click="RemoveEventType()"> 删除此类别 </button>
-                    </td>
-                </tr>
-            </table>
-        </div>
-    </div>
+    <div id="divEventType" ng-show="tab=='eventType'">
+        <div class="row">
+            <div class="col-xs-4">
+                <ul id="ulEventTypes" class="ztree"></ul>
+            </div>
+            <div class="col-xs-6">
+                <table>
+                    <tr>
+                        <td> 分类名称：</td>
+                        <td>
+                            <input type="text" ng-model="NewType.Name" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            级别：
+                        </td>
+                        <td>
+                            <input type="text" ng-model="NewType.Level" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            是否显示：
+                        </td>
+                        <td>
+                            <input type="checkbox" ng-model="NewType.Show">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            图标：
+                        </td>
+                        <td>
+                            <input type="text" ng-model="NewType.Icon" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            排序：
+                        </td>
+                        <td>
+                            <input type="text" ng-model="NewType.SortNo" />
+                        </td>
+                    </tr>
 
-
-</div>
-
-
-<div id="divEventInfo" ng-show="tab=='eventInfo'">
-    <div class="row">
-        <div class="col-xs-2">
-            <ul id="ulTypeShower" class="ztree"></ul>
-
-        </div>
-        <div class="col-xs-4">
-            <div class="table-responsive">                
-                <h4 class="card-title">{{EventTypeName}}</h4>
-                <button type="button" class="btn btn-success btn-fw">发布赛事</button>
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>标题</th>
-                            <th>Author</th>
-                            <th>IsShow</th>
-                            <th>IsHot</th>
-                            
-                            <th>排序</th>
-
-                            <th>状态</th>
-                            <th>发布时间</th>
-                            <th>操作</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr ng-repeat="item in EventInfoList">
-                            <td><span ng-bind="item.id">Id</span></td>
-                            <td><span ng-bind="item.title">Title</span></td>
-                            <td><span ng-bind="item.author">Author</span></td>
-                            <td><span ng-bind="item.isShow">IsShow</span></td>
-                            <td><span ng-bind="item.isHot">IsHot</span></td>
-                            <td><span ng-bind="item.sortNo">SortNo</span></td>
-                            <td><span ng-bind="item.state">State</span></td>
-                            <td><span ng-bind="item.createTime">CreateTime</span></td>
-                            <td>
-                                <button type="button" class="btn btn-outline-primary"> ** </button>
-                                <button type="button" class="btn btn-outline-primary"> ** </button>
-                                <button type="button" class="btn btn-outline-primary"> ** </button>
-                            </td>
-                        </tr>
-                    </tbody>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <input type="hidden" ng-model="NewType.Id" id="hdEventTypeId" />
+                            <button type="button" class="btn btn-primary btn-fw" ng-click="SaveEventType()"> 添加为子类别 </button>
+                            <button type="button" class="btn btn-primary btn-fw" ng-click="ModifyEventType()"> 修 改 </button>
+                            <button type="button" class="btn btn-primary btn-fw" ng-click="RemoveEventType()"> 删 除 </button>
+                        </td>
+                    </tr>
                 </table>
             </div>
         </div>
+
+
     </div>
-</div>
+
+
+    <div id="divEventInfo" ng-show="tab=='eventInfo'">
+        <div class="row">
+            <div class="col-xs-2">
+                <ul id="ulTypeShower" class="ztree"></ul>
+
+            </div>
+            <div class="col-xs-4">
+                <div class="table-responsive">
+                    <h4 class="card-title">{{EventTypeName}}</h4>
+                    <button type="button" class="btn btn-success btn-fw" ng-click="AddEventInfo()">发布赛事</button>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>标题</th>
+                                <th>发布人</th>
+                                <th>是否显示</th>
+                                <th>是否置顶</th>
+
+                                <th>排序</th>
+
+                                <th>状态</th>
+                                <th>发布时间</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in EventInfoList">
+                                <td><span ng-bind="item.id">Id</span></td>
+                                <td><span ng-bind="item.title">Title</span></td>
+                                <td><span ng-bind="item.author">Author</span></td>
+                                <td><span ng-bind="item.isShow">IsShow</span></td>
+                                <td><span ng-bind="item.isHot">IsHot</span></td>
+                                <td><span ng-bind="item.sortNo">SortNo</span></td>
+                                <td><span ng-bind="item.state">State</span></td>
+                                <td><span ng-bind="item.createTime">CreateTime</span></td>
+                                <td>
+                                    <button type="button" class="btn btn-outline-primary"> ** </button>
+                                    <button type="button" class="btn btn-outline-primary"> ** </button>
+                                    <button type="button" class="btn btn-outline-primary"> ** </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </div>

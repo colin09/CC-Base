@@ -83,7 +83,7 @@ namespace C.B.MySql.Repository.BaseM
 
         public TEntity FirstOrDefault(int id)
         {
-            return _context.Set<TEntity>().Where(t => t.Id == id).FirstOrDefault();
+            return _context.Set<TEntity>().Where(t => t.Id == id && t.IsDeleted == 0).FirstOrDefault();
         }
 
         

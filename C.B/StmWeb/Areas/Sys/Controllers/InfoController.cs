@@ -10,6 +10,8 @@ using C.B.MySql.Data;
 using C.B.MySql.Repository.EntityRepositories;
 using C.B.Models.Data;
 using C.B.Common.helper;
+using AutoMapper;
+using C.B.MySql.Repository.Services;
 
 namespace StmWeb.Area.Sys.Controllers
 {
@@ -17,6 +19,8 @@ namespace StmWeb.Area.Sys.Controllers
     [Authorize(Roles = "develop,admin")]
     public class InfoController : Controller
     {
+        private IMapper _mapper;
+        private EditorService _editorService;
         private EventTypeRepository _eventTypeRepository;
         private EventInfoRepository _eventInfoRepository;
         private NoticeRepository _noticeRepository;
@@ -24,8 +28,10 @@ namespace StmWeb.Area.Sys.Controllers
         private MessageRepository _messageRepository;
         private ExpertInfoRepository _expertInfoRepository;
 
-        public InfoController()
+        public InfoController(IMapper mapper)
         {
+            _mapper = mapper;
+            _editorService = new EditorService(mapper);
             _eventTypeRepository = new EventTypeRepository();
             _eventInfoRepository = new EventInfoRepository();
 
@@ -47,7 +53,7 @@ namespace StmWeb.Area.Sys.Controllers
         {
             ViewBag.Id = id;
             ViewBag.Type = type == 1 ? "event" : type == 2 ? "expert" : type == 3 ? "news" : type == 4 ? "notice" : "event";
-            ViewBag.TypeId = typeId;
+
             return View();
         }
 
@@ -68,193 +74,18 @@ namespace StmWeb.Area.Sys.Controllers
                 });
             }
             System.Console.WriteLine($"==> EditorModel: {model.ToJson()}");
-            var result = false;
-            var action = "Editor";
-            switch (model.EditType)
-            {
-                case "event":
-                    result = ModifyEventInfo(model);
-                    action = "EventIndex";
-                    break;
-                case "message":
-                    result = ModifyMessageInfo(model);
-                    action = "MessageIndex";
-                    break;
-                case "notice":
-                    result = ModifyNoticeInfo(model);
-                    action = "NoticeIndex";
-                    break;
-                case "expert":
-                    result = ModifyExpertInfo(model);
-                    action = "ExpertIndex";
-                    break;
-                case "news":
-                    result = ModifyNewsInfo(model);                    
-                    action = "NewsIndex";
-                    break;
-                default:
-                    break;
-            };
+            var result = _editorService.ModifyEditor(model);
             if (!result)
                 return Json(BaseResponse.ErrorResponse("数据错误。"));
-            return Json(BaseResponse.SuccessResponse($"/Sys/Info/{action}"));
-            //return RedirectToAction(action, "Info", new { area = "Sys" }); ;
+            return Json(BaseResponse.SuccessResponse($"/Sys/Info/{model.EditType}Index"));
         }
 
-        public IActionResult GetEditorInfo(string type, int id)
+        public IActionResult GetEditorInfo(string type, int typeId = 0, int id = 0)
         {
-            switch (type)
-            {
-                case "event": var eventM = _eventInfoRepository.FirstOrDefault(id); return Json(BaseResponse.SuccessResponse(eventM));
-                case "expert": var expert = _expertInfoRepository.FirstOrDefault(id); return Json(BaseResponse.SuccessResponse(expert));
-                case "news": var news = _newsInfoRepository.FirstOrDefault(id); return Json(BaseResponse.SuccessResponse(news));
-                case "notice": var notice = _noticeRepository.FirstOrDefault(id); return Json(BaseResponse.SuccessResponse(notice));
-            }
-            return Json(BaseResponse.ErrorResponse("id 不存在。"));
+            var result = _editorService.GetEditorModel(type, typeId, id);
+            return Json(BaseResponse.SuccessResponse(result));
         }
 
-        [HttpPost]
-        public IActionResult ModifyEditor([FromBody]EditorModel model)
-        {
-            switch (model.EditType)
-            {
-                case "event":
-                    ModifyEventInfo(model);
-                    break;
-                case "message":
-                    ModifyMessageInfo(model);
-                    break;
-                case "notice":
-                    ModifyNoticeInfo(model);
-                    break;
-                case "expert":
-                    ModifyExpertInfo(model);
-                    break;
-                case "news":
-                    ModifyNewsInfo(model);
-                    break;
-            };
-            return View();
-        }
-
-        private bool ModifyEventInfo(EditorModel m)
-        {
-            var model = new EventInfo
-            {
-                Id = m.Id,
-                EventId = m.TypeId,
-                Title = m.Title,
-                Content = m.Content,
-                Author = m.Author,
-
-                ThumbId = m.ThumbId,
-                ThumbUrl = m.ThumbUrl,
-
-                IsShow = m.IsShow ? 1 : 0,
-                IsTop = m.IsTop ? 1 : 0,
-            };
-            var result = 0;
-            if (model.Id > 0)
-                result = _eventInfoRepository.Update(model);
-            else
-                result = _eventInfoRepository.Insert(model);
-            return result > 0;
-        }
-        private bool ModifyNewsInfo(EditorModel m)
-        {
-            var model = new NewsInfo
-            {
-                Id = m.Id,
-                NewsType = (NewsType)m.NewsType,
-                Title = m.Title,
-                Content = m.Content,
-                Author = m.Author,
-
-                PubOrg = m.PubOrg,
-                ThumbId = m.ThumbId,
-                ThumUrl = m.ThumbUrl,
-                VideoId = m.FileId,
-                VideoUrl = m.FileUrl,
-
-                IsShow = m.IsShow ? 1 : 0,
-                IsTop = m.IsTop ? 1 : 0,
-                IsRoll = m.IsRoll ? 1 : 0,
-                SortNo = DateTime.Now.ToOADate(),
-            };
-            var result = 0;
-            if (model.Id > 0)
-                result = _newsInfoRepository.Update(model);
-            else
-                result = _newsInfoRepository.Insert(model);
-            return result > 0;
-        }
-        private bool ModifyMessageInfo(EditorModel m)
-        {
-            var model = new Message
-            {
-                Id = m.Id,
-                Title = m.Title,
-                Content = m.Content,
-
-                Region = "",
-                Name = "",
-                ReplyContent = "",
-                ReplyName = "",
-                ReplyTime = null,
-
-                IsShow = m.IsShow ? 1 : 0,
-                IsTop = m.IsTop ? 1 : 0,
-                SortNo = DateTime.Now.ToOADate(),
-            };
-            var result = 0;
-            if (model.Id > 0)
-                result = _messageRepository.Update(model);
-            else
-                result = _messageRepository.Insert(model);
-            return result > 0;
-        }
-        private bool ModifyNoticeInfo(EditorModel m)
-        {
-            var model = new Notice
-            {
-                Id = m.Id,
-                Title = m.Title,
-                Content = m.Content,
-                Author = m.Author,
-                IsShow = m.IsShow ? 1 : 0,
-                IsTop = m.IsTop ? 1 : 0,
-                IsRoll = m.IsTop ? 1 : 0, //?????????????????????????????????????
-                PubTime = DateTime.Now,
-                PubOrg = "PubOrg",
-                SortNo = DateTime.Now.ToOADate(),
-            };
-            var result = 0;
-            if (model.Id > 0)
-                result = _noticeRepository.Update(model);
-            else
-                result = _noticeRepository.Insert(model);
-            return result > 0;
-        }
-        private bool ModifyExpertInfo(EditorModel m)
-        {
-            var model = new ExpertInfo
-            {
-                Id = m.Id,
-                Title = m.Title,
-                Content = m.Content,
-                Author = m.Author,
-                IsShow = m.IsShow ? 1 : 0,
-                SortNo = DateTime.Now.ToOADate(),
-                PicFileId = 0,
-                PicUrl = "",
-            };
-            var result = 0;
-            if (model.Id > 0)
-                result = _expertInfoRepository.Update(model);
-            else
-                result = _expertInfoRepository.Insert(model);
-            return result > 0;
-        }
 
 
         #endregion

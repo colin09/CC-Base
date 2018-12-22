@@ -103,12 +103,22 @@ module.controller('mgrEditorCtl', function ($scope, $http) {
     }
 
     var id = $("#hdId").val();
-    if (id.length > 0) {
-        $http.get("GetEditorInfo?type=" + $scope.EditType + "&Id=" + id).success(function (response) {
-            if (response.success) {
+    var typeId = $("#hdTypeId").val();
+    if (Number(id) > 0 || Number(typeId) > 0) {
+        $http.get("GetEditorInfo?type=" + $scope.EditType + "&typeId=" + typeId + "&Id=" + id).success(function (response) {
+            if (response.success && response.data != null) {
+                $("#hdId").val(response.data.id);
+                $("#hdType").val(response.data.typeName);
+                $("#hdTypeId").val(response.data.typeId);
+
                 $scope.title = response.data.title;
+                $scope.newsType = response.data.newsType;
+                $scope.eventType = response.data.typeId;
+                $scope.eventTypeName = response.data.typeName;
                 $scope.content = response.data.content;
+
                 $scope.pubOrg = response.data.pubOrg;
+                $scope.pubTime = response.data.pubTime;
                 $scope.author = response.data.author;
                 $scope.isShow = response.data.isShow;
                 $scope.isTop = response.data.isTop;
@@ -138,7 +148,7 @@ module.controller('mgrEditorCtl', function ($scope, $http) {
         });
     }
 
- 
+
 
     var setting = {
         check: {
@@ -167,7 +177,7 @@ module.controller('mgrEditorCtl', function ($scope, $http) {
         }
     };
     $scope.ShowEventTypeDialog = function () {
-        $http.get("GetEventTypes").success(function (response) {         
+        $http.get("GetEventTypes").success(function (response) {
             var zTreeObj1 = $.fn.zTree.init($("#ulEventTypes"), setting, response.data);
             zTreeObj1.expandAll(true);
             $("#myModal").show();
@@ -176,9 +186,14 @@ module.controller('mgrEditorCtl', function ($scope, $http) {
     }
     function zTreeOnClick(event, treeId, treeNode) {
 
-        $scope.EditorModel.eventTypeName= treeNode.name;
-        $scope.EditorModel.eventType=treeNode.id;
+        $scope.chkEventTypeName = treeNode.name;
+        $scope.chkEventType = treeNode.id;
     };
+
+    $scope.ChkEventTypeOver = function () {
+        $scope.eventTypeName = $scope.chkEventTypeName;
+        $scope.eventType = $scope.chkEventType;
+    }
 
 });
 
@@ -226,6 +241,8 @@ module.controller('mgrEventInfoCtl', function ($scope, $http) {
 
         if ($scope.tab == "eventInfo") {
             $scope.GetEventInfoList(treeNode.id);
+            $scope.EventTypeName = treeNote.name;
+            $scope.EventTypeId = treeNote.id;
         } else {
             //alert(treeNode.tId + ", " + treeNode.name);
             $scope.NewType.Id = treeNode.id;
@@ -310,7 +327,7 @@ module.controller('mgrEventInfoCtl', function ($scope, $http) {
     }
 
     $scope.AddEventInfo = function () {
-
+        window.location.href = "../../Sys/Info/Editor?type=1&typeId=" + $scope.EventTypeId;
     };
 
     $scope.GetEventTypeList();

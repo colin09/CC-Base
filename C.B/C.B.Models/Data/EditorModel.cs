@@ -7,6 +7,7 @@ namespace C.B.Models.Data
 
         public int Id{set;get;}
         public int TypeId{set;get;}
+        public string TypeName{set;get;}
 
         public int NewsType{set;get;}
 

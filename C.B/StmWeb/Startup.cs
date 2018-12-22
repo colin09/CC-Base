@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
+using AutoMapper;
 
 namespace StmWeb
 {
@@ -47,6 +48,9 @@ namespace StmWeb
                     .RequireAssertion(context => context.User.HasClaim(c => (c.Type == "Manager" || c.Type == "Develop")))
                 );
             });*/
+
+            services.AddAutoMapper();
+
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 

@@ -3,48 +3,45 @@
 }
 
 <div ng-controller="mgrExpertInfoCtl">
- 
-
-<div>
-            <div class="table-responsive">                
-                <h3 class="card-title">专家简介</h3>
-                <hr />
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>标题</th>
-                            <th>Author</th>
-                            <th>IsShow</th>
-                            <th>IsHot</th>
-                            
-                            <th>排序</th>
-
-                            <th>状态</th>
-                            <th>发布时间</th>
-                            <th>操作</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr ng-repeat="item in EventInfoList">
-                            <td><span ng-bind="item.id">Id</span></td>
-                            <td><span ng-bind="item.title">Title</span></td>
-                            <td><span ng-bind="item.author">Author</span></td>
-                            <td><span ng-bind="item.isShow">IsShow</span></td>
-                            <td><span ng-bind="item.isHot">IsHot</span></td>
-                            <td><span ng-bind="item.sortNo">SortNo</span></td>
-                            <td><span ng-bind="item.state">State</span></td>
-                            <td><span ng-bind="item.createTime">CreateTime</span></td>
-                            <td>
-                                <button type="button" class="btn btn-outline-primary"> ** </button>
-                                <button type="button" class="btn btn-outline-primary"> ** </button>
-                                <button type="button" class="btn btn-outline-primary"> ** </button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
 
 
-</div>
+    <div>
+        <div class="table-responsive">
+            <h3 class="card-title">专家简介</h3>
+            <hr />
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>姓名</th>
+                        <th>作者</th>
+                        <th>是否显示</th>
+
+                        <th>排序</th>
+                        <th>状态</th>
+                        <th>添加时间</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in EventInfoList">
+                        <td><span ng-bind="item.id">Id</span></td>
+                        <td><span ng-bind="item.title">Title</span></td>
+                        <td><span ng-bind="item.author">Author</span></td>
+                        <td><span ng-bind="item.isShow">IsShow</span></td>
+                        <td><span ng-bind="item.sortNo">SortNo</span></td>
+                        <td><span ng-bind="item.state">State</span></td>
+                        <td><span ng-bind="item.createTime">CreateTime</span></td>
+                        <td>
+                            <button type="button" class="btn btn-outline-primary"> 编 辑 </button>
+                            <button type="button" class="btn btn-outline-primary"> 删 除 </button>
+                            <button type="button" class="btn btn-outline-primary"> ** </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+    </div>
 </div>
