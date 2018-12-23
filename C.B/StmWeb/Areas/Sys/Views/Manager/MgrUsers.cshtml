@@ -1,0 +1,65 @@
+﻿@{
+    ViewData["Title"] = "Index";
+}
+
+
+
+
+<div class="card"  ng-controller="mgrUserCtl">
+    <div class="card-body">
+        <h4 class="card-title">{{Title}}</h4>
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>UserName</th>
+                        <th>TrueName</th>
+                        <th>Department</th>
+                        <th>AuthType</th>
+                        <th>State</th>
+                        <th>CreateTime</th>
+                        <th>UpdateTime</th>
+                        <th>IsDeleted</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in UserList">
+                        <td><span ng-bind="item.id">Id</span></td>
+                        <td><span ng-bind="item.userName">UserName</span></td>
+                        <td><span ng-bind="item.trueName">TrueName</span></td>
+                        <td><span ng-bind="item.department">Department</span></td>
+                        <td><span ng-bind="item.authTypeTxt">AuthType</span></td>
+                        <td><span ng-bind="item.state">State</span></td>
+                        <td><span ng-bind="item.createTime">CreateTime</span></td>
+                        <td><span ng-bind="item.updateTime">UpdateTime</span></td>
+                        <td><span ng-bind="item.isDeleted">IsDeleted</span></td>
+                    </tr>
+                     <tr>
+                        <td>+</td>
+                        <td><input type="text" ng-model="newUser.UserName" /></td>
+                        <td><input type="text" ng-model="newUser.TrueName" /></td>
+                        <td><input type="text" ng-model="newUser.Department" /></td>
+                        <td>state:1</td>
+                        <td>
+                            <select ng-model="newUser.AuthType">
+                                <option value="1">develop</option>
+                                <option value="2">admin</option>
+                                <option value="3">user</option>
+                            </select>
+                        </td>
+                        <td colspan="3">
+                            <button ng-click="AddNewUser()"> + NEW </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div ng-repeat="x in records">
+        <td>{{x.Name}}</td>
+        <span ng-bind="x.Country"></span> 
+    </div>
+</div>
+
+

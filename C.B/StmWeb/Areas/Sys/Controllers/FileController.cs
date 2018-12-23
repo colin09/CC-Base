@@ -31,7 +31,7 @@ namespace StmWeb.Area.Sys.Controllers
             _resourceInfoRepository = new ResourceInfoRepository();
         }
 
-        public IActionResult Images()
+        public IActionResult Resource()
         {
             return View();
         }
@@ -70,7 +70,7 @@ namespace StmWeb.Area.Sys.Controllers
 
                     var filePath = $"{contentRootPath}{fileExt.ToFileType()}/{newFileName}";
                     var fileUrl = $"{webRootPath}{fileExt.ToFileType()}/{newFileName}";
-                    
+
                     Utility.DirectoryCheck($"{contentRootPath}{fileExt.ToFileType()}");
 
                     using (var stream = new FileStream(filePath, FileMode.Create))
@@ -134,7 +134,7 @@ namespace StmWeb.Area.Sys.Controllers
         [HttpGet]
         public IActionResult Browse(string type = "image")
         {
-            var list = _resourceInfoRepository.Where(m => m.FileType == type);
+            var list = _resourceInfoRepository.Where(m => m.IsDeleted == 0 && m.FileType == type);
 
             return Json(BaseResponse.SuccessResponse(list));
         }

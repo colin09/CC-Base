@@ -1,0 +1,24 @@
+﻿@{
+    ViewData["Title"] = "Index";
+}
+<div ng-controller="mgrResourceInfoCtl">
+    
+    <ul class="nav nav-tabs">
+        <li role="presentation" ng-click="tab='image'" ng-class="tab=='image'?'active':''"><a href="#">图片</a></li>
+        <li role="presentation" ng-click="tab='video'" ng-class="tab=='video'?'active':''"><a href="#">视频</a></li>
+        <li role="presentation" ng-click="tab='doc'" ng-class="tab=='doc'?'active':''"><a href="#">其他</a></li>
+    </ul>
+
+<ul class="waterfall-list" ng-waterfall cols="6">
+        <li ng-repeat="item in ResourceList" repeat-finished>
+            <div class="data-block">
+                <img src="{{item.url}}" alt="{{item.fileName}}"/>
+                <p>{{item.title}}</p>
+                <p>{{item.fileName}}</p>
+            </div>
+        </li>
+     <div class="loadMore" ng-if="loadMore" ng-infinite-scroll ng-click="loadMoreData()">更多</div>
+</ul>
+
+
+</div>

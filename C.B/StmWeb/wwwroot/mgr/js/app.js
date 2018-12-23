@@ -1,6 +1,6 @@
 //var module = angular.module('managerApp', ['ngRoute', 'ui.calendar', 'ui.bootstrap','ngSanitize']);
 
-var module = angular.module('managerApp', ['ngSanitize']);
+var module = angular.module('managerApp', ['ngSanitize',"ngWaterfall"]);
 
 
 module.controller('mgrDevCtl', function ($scope, $http) {
@@ -48,6 +48,43 @@ module.controller('mgrDevCtl', function ($scope, $http) {
     $scope.GetUserList();
 
 });
+module.controller('mgrUserCtl', function ($scope, $http) {
+
+    $scope.newUser = {
+        AuthType: 2,
+        State: 1,
+        UserName: "",
+        TrueName: "",
+        Department: ""
+    };
+    $scope.AddNewUser = function () {
+        var url = "../../Sys/Manager/CreateSysUsers";
+        $http.post(url, $scope.newUser).success(function (response) {
+            $scope.GetUserList();
+        });
+    }
+
+    $scope.GetUserList = function () {
+        var url = "../../Sys/Manager/GetUsersByPage";
+        $http.get(url).success(function (response) {
+            if (response.success) {
+                $.each(response.data, function (index, item) {
+                    switch (item.authType) {
+                        case 1: item.authTypeTxt = "develop"; break;
+                        case 2: item.authTypeTxt = "admin"; break;
+                        case 3: item.authTypeTxt = "user"; break;
+                    }
+                });
+                $scope.UserList = response.data;
+            } else
+                alert(response.message);
+        });
+    }
+    $scope.GetUserList();
+
+});
+
+
 
 module.controller('mgrFileCheckerCtl', function ($scope, $http) {
 
@@ -90,6 +127,27 @@ module.controller('mgrFileCheckerCtl', function ($scope, $http) {
 });
 
 
+module.controller('mgrResourceInfoCtl', function ($scope, $http) {
+    $scope.tab = "image";
+
+    $scope.GetInfoList = function (type) {
+        var url = "../../Sys/File/Browse?type=" + type;
+        $http.get(url).success(function (response) {
+            if (response.success ) {
+                $scope.ResourceList = response.data;
+            }
+        });
+    };
+
+
+    $scope.$watch('tab', function (newVal, oldVal) {
+        $scope.GetInfoList(newVal);
+    });
+
+    $scope.GetInfoList($scope.tab);
+
+
+});
 module.controller('mgrEditorCtl', function ($scope, $http) {
 
     // event , expert , news , notice

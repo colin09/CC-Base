@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using C.B.Common.helper;
 using C.B.Common.Mvc;
 using C.B.Models.Data;
+using C.B.Models.Enums;
+using C.B.MySql.Repository.EntityRepositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -18,6 +20,11 @@ namespace StmWeb.Area.Sys.Controllers
     [Authorize(Roles = "develop,admin")]
     public class ManagerController : MgrBaseController
     {
+        private readonly UserInfoRepository _userRepository;
+        public ManagerController()
+        {
+            _userRepository = new UserInfoRepository();
+        }
         public IActionResult Index()
         {
             var curUser = HttpContext.User;
@@ -57,6 +64,19 @@ namespace StmWeb.Area.Sys.Controllers
         {
             return View();
         }
+
+        public IActionResult MgrUsers()
+        {
+            return View();
+        }
+
+        public IActionResult GetUsersByPage(Pager pager)
+        {
+            var userAuths = new UserAuthType[] { UserAuthType.admin, UserAuthType.user };
+            var result = _userRepository.Where(pager, m => m.IsDeleted == 0 && userAuths.Contains(m.AuthType), s => s.Id, true).ToList();
+            return Json(BaseResponse.SuccessResponse(result));
+        }
+
 
     }
 
