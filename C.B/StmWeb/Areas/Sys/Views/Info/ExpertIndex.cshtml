@@ -18,23 +18,23 @@
                         <th>是否显示</th>
 
                         <th>排序</th>
-                        <th>状态</th>
+                        <!-- <th>状态</th> -->
                         <th>添加时间</th>
                         <th>操作</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="item in EventInfoList">
+                    <tr ng-repeat="item in InfoList">
                         <td><span ng-bind="item.id">Id</span></td>
                         <td><span ng-bind="item.title">Title</span></td>
                         <td><span ng-bind="item.author">Author</span></td>
-                        <td><span ng-bind="item.isShow">IsShow</span></td>
+                        <td><span ng-bind="item.isShowTxt">IsShow</span></td>
                         <td><span ng-bind="item.sortNo">SortNo</span></td>
-                        <td><span ng-bind="item.state">State</span></td>
-                        <td><span ng-bind="item.createTime">CreateTime</span></td>
+                        <!-- <td><span ng-bind="item.stateTxt">State</span></td> -->
+                        <td><span ng-bind="item.createTimeTxt">CreateTime</span></td>
                         <td>
-                            <button type="button" class="btn btn-outline-primary"> 编 辑 </button>
-                            <button type="button" class="btn btn-outline-primary"> 删 除 </button>
+                            <button type="button" class="btn btn-outline-primary" ng-click="toModify(item.id)"> 编辑 </button>
+                            <button type="button" class="btn btn-outline-primary" ng-click="toDelete(item.id)"> 删 除 </button>
                             <button type="button" class="btn btn-outline-primary"> ** </button>
                         </td>
                     </tr>

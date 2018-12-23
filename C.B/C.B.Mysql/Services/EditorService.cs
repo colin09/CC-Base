@@ -30,8 +30,9 @@ namespace C.B.MySql.Repository.Services
         }
 
 
-        public EditorModel GetEditorModel(string type, int id = 0, int typeId = 0)
+        public EditorModel GetEditorModel(string type, int typeId = 0, int id = 0)
         {
+            System.Console.WriteLine($"service GetEditorModel ====>>  type：{type}, id:{id}, typeId:{typeId}");
             EditorModel model = null;
             switch (type)
             {
@@ -51,8 +52,6 @@ namespace C.B.MySql.Repository.Services
             return model;
         }
 
-
-
         #region -  read  -
 
         private EditorModel GetEventModel(int typeId = 0, int id = 0)
@@ -64,6 +63,7 @@ namespace C.B.MySql.Repository.Services
                 if (eventInfo != null)
                 {
                     model = _mapper.Map<EditorModel>(eventInfo);
+                    typeId = eventInfo.EventId;
                 }
             }
             if (typeId != 0)
@@ -87,6 +87,7 @@ namespace C.B.MySql.Repository.Services
                 var expert = _expertInfoRepository.FirstOrDefault(id);
                 if (expert != null)
                     model = _mapper.Map<EditorModel>(expert);
+                //Mapper.Map<ExpertInfo, EditorModel>(expert);
             }
             return model;
         }
@@ -274,6 +275,28 @@ namespace C.B.MySql.Repository.Services
 
         #endregion
 
+
+        public bool DeleteEditorModel(string type, int id = 0)
+        {
+            System.Console.WriteLine($"service DeleteEditorModel ====>>  type：{type}, id:{id}");
+            var result = 0;
+            switch (type)
+            {
+                case "event":
+                    result = _eventInfoRepository.Delete(id);
+                    break;
+                case "expert":
+                    result = _expertInfoRepository.Delete(id);
+                    break;
+                case "news":
+                    result = _newsInfoRepository.Delete(id);
+                    break;
+                case "notice":
+                    result = _noticeRepository.Delete(id);
+                    break;
+            }
+            return result > 0;
+        }
 
 
     }

@@ -11,7 +11,7 @@ namespace C.B.MySql.Data
 
         [MaxLength(64)]
         public string Title { set; get; }
-        [MaxLength(512)]
+        //[MaxLength(512)]
         public string Content { set; get; }
         
         public int PicFileId { set; get; }

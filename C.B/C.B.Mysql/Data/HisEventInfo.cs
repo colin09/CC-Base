@@ -9,7 +9,7 @@ namespace C.B.MySql.Data {
         [MaxLength (64)]
         public string Title { set; get; }
 
-        [MaxLength (2048)]
+        //[MaxLength (2048)]
         public string Content { set; get; }
         public int Year { set; get; }
 

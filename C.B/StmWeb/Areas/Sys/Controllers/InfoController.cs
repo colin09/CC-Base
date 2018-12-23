@@ -51,6 +51,7 @@ namespace StmWeb.Area.Sys.Controllers
 
         public IActionResult Editor(int type = 1, int id = 0, int typeId = 0)
         {
+            System.Console.WriteLine($" =====》 action Editor, type:{type},id:{id},typeId:{typeId}");
             ViewBag.Id = id;
             ViewBag.Type = type == 1 ? "event" : type == 2 ? "expert" : type == 3 ? "news" : type == 4 ? "notice" : "event";
 
@@ -60,6 +61,11 @@ namespace StmWeb.Area.Sys.Controllers
         [HttpPost]
         public IActionResult SaveEditor([FromForm]EditorModel model)
         {
+            System.Console.WriteLine($"==> EditorModel - 01 : {model.ToJson()}");
+            var msg = "";
+            if (!model.Validate(out msg))
+                return Json(BaseResponse.ErrorResponse(msg));
+
             var files = Request.Form.Files;
             long size = files.Sum(f => f.Length);
             if (size > 0)
@@ -73,7 +79,7 @@ namespace StmWeb.Area.Sys.Controllers
                         model.FileUrl = item.FileUrl;
                 });
             }
-            System.Console.WriteLine($"==> EditorModel: {model.ToJson()}");
+            System.Console.WriteLine($"==> EditorModel - 02 : {model.ToJson()}");
             var result = _editorService.ModifyEditor(model);
             if (!result)
                 return Json(BaseResponse.ErrorResponse("数据错误。"));
@@ -84,6 +90,12 @@ namespace StmWeb.Area.Sys.Controllers
         {
             var result = _editorService.GetEditorModel(type, typeId, id);
             return Json(BaseResponse.SuccessResponse(result));
+        }
+
+        public IActionResult DeleteEditorInfo(string type, int id = 0)
+        {
+            var result = _editorService.DeleteEditorModel(type, id);
+            return Json(new BaseResponse(result));
         }
 
 
@@ -128,10 +140,10 @@ namespace StmWeb.Area.Sys.Controllers
             return Json(BaseResponse.SuccessResponse());
         }
 
-        public IActionResult GetEventInfoList(int typeId)
+        public IActionResult GetEventInfoList(int type)
         {
-            var list = _eventInfoRepository.Where(m => m.IsDeleted == 0 && m.EventId == typeId);
-            return Json(BaseResponse.SuccessResponse(list));
+            var list = _eventInfoRepository.Where(m => m.IsDeleted == 0 && m.EventId == type);
+            return Json(BaseResponse.SuccessResponse(_mapper.Map<EditorModel[]>(list)));
         }
 
 
@@ -144,7 +156,7 @@ namespace StmWeb.Area.Sys.Controllers
         public IActionResult GetExpertInfoList()
         {
             var list = _expertInfoRepository.Where(m => m.IsDeleted == 0);
-            return Json(BaseResponse.SuccessResponse(list));
+            return Json(BaseResponse.SuccessResponse(_mapper.Map<EditorModel[]>(list)));
         }
 
         public IActionResult NewsIndex()
@@ -154,17 +166,17 @@ namespace StmWeb.Area.Sys.Controllers
         public IActionResult GetNewsInfoList(NewsType type)
         {
             var list = _newsInfoRepository.Where(m => m.IsDeleted == 0 && m.NewsType == type);
-            return Json(BaseResponse.SuccessResponse(list));
+            return Json(BaseResponse.SuccessResponse(_mapper.Map<EditorModel[]>(list)));
         }
 
         public IActionResult NoticeIndex()
         {
             return View();
         }
-        public IActionResult GetNoticeList(NewsType type)
+        public IActionResult GetNoticeList()
         {
             var list = _noticeRepository.Where(m => m.IsDeleted == 0);
-            return Json(BaseResponse.SuccessResponse(list));
+            return Json(BaseResponse.SuccessResponse(_mapper.Map<EditorModel[]>(list)));
         }
 
         public IActionResult MessageIndex()
@@ -174,7 +186,7 @@ namespace StmWeb.Area.Sys.Controllers
         public IActionResult GetMessageList(NewsType type)
         {
             var list = _messageRepository.Where(m => m.IsDeleted == 0);
-            return Json(BaseResponse.SuccessResponse(list));
+            return Json(BaseResponse.SuccessResponse(_mapper.Map<EditorModel[]>(list)));
         }
 
     }

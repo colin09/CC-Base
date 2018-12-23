@@ -1,6 +1,6 @@
 //var module = angular.module('managerApp', ['ngRoute', 'ui.calendar', 'ui.bootstrap','ngSanitize']);
 
-var module = angular.module('managerApp', []);
+var module = angular.module('managerApp', ['ngSanitize']);
 
 
 module.controller('mgrDevCtl', function ($scope, $http) {
@@ -108,7 +108,6 @@ module.controller('mgrEditorCtl', function ($scope, $http) {
         $http.get("GetEditorInfo?type=" + $scope.EditType + "&typeId=" + typeId + "&Id=" + id).success(function (response) {
             if (response.success && response.data != null) {
                 $("#hdId").val(response.data.id);
-                $("#hdType").val(response.data.typeName);
                 $("#hdTypeId").val(response.data.typeId);
 
                 $scope.title = response.data.title;
@@ -116,18 +115,28 @@ module.controller('mgrEditorCtl', function ($scope, $http) {
                 $scope.eventType = response.data.typeId;
                 $scope.eventTypeName = response.data.typeName;
                 $scope.content = response.data.content;
-
+                //CKEDITOR.instances['editor1'].setData('test'); 
                 $scope.pubOrg = response.data.pubOrg;
                 $scope.pubTime = response.data.pubTime;
                 $scope.author = response.data.author;
                 $scope.isShow = response.data.isShow;
                 $scope.isTop = response.data.isTop;
                 $scope.isRoll = response.data.isRoll;
+            } else {
+                $scope.isShow = true;
+                $scope.isTop = false;
+                $scope.isRoll = false;
             }
         });
     }
 
     $scope.SubmitForm = function () {
+        $scope.content = CKEDITOR.instances['editor1'].getData();
+        window.setTimeout(function () { $scope.SubmitData() }, 100);
+    }
+
+    $scope.SubmitData = function () {
+        console.log($scope.content);
         var form = new FormData(document.getElementById("formEditor"));
         $http({
             url: "SaveEditor",
@@ -142,7 +151,7 @@ module.controller('mgrEditorCtl', function ($scope, $http) {
                 window.location.href = response.data;
             }
             else
-                alert(response.data);
+                alert(response.message);
         }).error(function (message) {
             console.log(message);
         });
@@ -193,6 +202,7 @@ module.controller('mgrEditorCtl', function ($scope, $http) {
     $scope.ChkEventTypeOver = function () {
         $scope.eventTypeName = $scope.chkEventTypeName;
         $scope.eventType = $scope.chkEventType;
+        $("#hdTypeId").val($scope.chkEventType);
     }
 
 });
@@ -333,17 +343,123 @@ module.controller('mgrEventInfoCtl', function ($scope, $http) {
     $scope.GetEventTypeList();
 
 
+    $scope.toModify = function (id) {
+        window.location.href = "../../Sys/Info/Editor?type=1&typeId=0&Id=" + id;
+    }
+    $scope.toDelete = function (id) {
+        $http.get("../../Sys/Info/DeleteEditorInfo?type=event&Id=" + id).success(function (response) {
+            if (response.success)
+                $scope.GetInfoList();
+            else alert("删除失败。");
+        });
+    };
+
 });
 
 module.controller('mgrExpertInfoCtl', function ($scope, $http) {
+    $scope.GetInfoList = function () {
+        var url = "../../Sys/Info/GetExpertInfoList";
+        $http.get(url).success(function (response) {
+            if (response.success) {
+                $scope.InfoList = response.data;
+            }
+        });
+    };
 
+    $scope.GetInfoList();
+
+    $scope.toModify = function (id) {
+        window.location.href = "../../Sys/Info/Editor?type=2&typeId=0&Id=" + id;
+    }
+    $scope.toDelete = function (id) {
+        $http.get("../../Sys/Info/DeleteEditorInfo?type=expert&Id=" + id).success(function (response) {
+            if (response.success)
+                $scope.GetInfoList();
+            else alert("删除失败。");
+        });
+    };
 });
+
+
 module.controller('mgrMessageInfoCtl', function ($scope, $http) {
+    $scope.GetInfoList = function () {
+        var url = "../../Sys/Info/GetMessageList";
+        $http.get(url).success(function (response) {
+            if (response.success) {
+                $scope.InfoList = response.data;
+            }
+        });
+    };
+
+    $scope.GetInfoList();
+
+    $scope.toModify = function (id) {
+        window.location.href = "../../Sys/Info/Editor?type=5&typeId=0&Id=" + id;
+    }
+
+    $scope.toDelete = function (id) {
+        $http.get("../../Sys/Info/DeleteEditorInfo?type=message&Id=" + id).success(function (response) {
+            if (response.success)
+                $scope.GetInfoList();
+            else alert("删除失败。");
+        });
+    };
 
 });
 module.controller('mgrNewsInfoCtl', function ($scope, $http) {
+    $scope.tab = "eventNews";
+
+    $scope.GetInfoList = function () {
+        var type = $scope.tab == "imageNews" ? 2 : $scope.tab == "videoNews" ? 3 : 1;
+        var url = "../../Sys/Info/GetNewsInfoList?type=" + type;
+        $http.get(url).success(function (response) {
+            if (response.success) {
+                $scope.InfoList = response.data;
+            }
+        });
+    };
+
+    $scope.GetInfoList();
+
+    $scope.$watch('tab', function (newVal, oldVal) {
+        $scope.GetInfoList();
+    });
+
+    $scope.toModify = function (id) {
+        window.location.href = "../../Sys/Info/Editor?type=3&typeId=0&Id=" + id;
+    }
+    $scope.toDelete = function (id) {
+        $http.get("../../Sys/Info/DeleteEditorInfo?type=news&Id=" + id).success(function (response) {
+            if (response.success)
+                $scope.GetInfoList();
+            else alert("删除失败。");
+        });
+    };
 
 });
 module.controller('mgrNoticeInfoCtl', function ($scope, $http) {
+    $scope.GetInfoList = function () {
+        var url = "../../Sys/Info/GetNoticeList";
+        $http.get(url).success(function (response) {
+            if (response.success) {
+                $scope.InfoList = response.data;
+            }
+        });
+    };
+    $scope.GetInfoList();
+
+    $scope.toModify = function (id) {
+        window.location.href = "../../Sys/Info/Editor?type=4&typeId=0&Id=" + id;
+    }
+
+    $scope.toDelete = function (id) {
+        $http.get("../../Sys/Info/DeleteEditorInfo?type=notice&Id=" + id).success(function (response) {
+            if (response.success)
+                $scope.GetInfoList();
+            else alert("删除失败。");
+        });
+    };
+
+
 
 });

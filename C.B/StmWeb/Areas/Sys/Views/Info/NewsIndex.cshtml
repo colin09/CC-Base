@@ -4,7 +4,11 @@
 
 
 <div ng-controller="mgrNewsInfoCtl">
-
+ <ul class="nav nav-tabs">
+        <li role="presentation" ng-click="tab='eventNews'" ng-class="tab=='eventNews'?'active':''"><a href="#">赛事分类</a></li>
+        <li role="presentation" ng-click="tab='imageNews'" ng-class="tab=='imageNews'?'active':''"><a href="#">赛事信息</a></li>
+        <li role="presentation" ng-click="tab='videoNews'" ng-class="tab=='videoNews'?'active':''"><a href="#">赛事信息</a></li>
+    </ul>
 
     <div>
         <div class="table-responsive">
@@ -32,31 +36,31 @@
 
                         <th>排序</th>
 
-                        <th>状态</th>
+                        <!-- <th>状态</th> -->
                         <th>发布时间</th>
                         <th>操作</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="item in EventInfoList">
+                    <tr ng-repeat="item in InfoList">
                         <td><span ng-bind="item.id">Id</span></td>
                         <td><span ng-bind="item.newsType">NewsType</span></td>
                         <td><span ng-bind="item.title">Title</span></td>
-                        <td><span ng-bind="item.pubTime">PubTime</span></td>
+                        <td><span ng-bind="item.createTimeTxt">PubTime</span></td>
                         <td><span ng-bind="item.pubOrg">PubOrg</span></td>
                         <td><span ng-bind="item.author">Author</span></td>
 
-                        <td><span ng-bind="item.isShow">IsShow</span></td>
-                        <td><span ng-bind="item.isTop">IsTop</span></td>
-                        <td><span ng-bind="item.isRoll">IsRoll</span></td>
+                        <td><span ng-bind="item.isShowTxt">IsShow</span></td>
+                        <td><span ng-bind="item.isTopTxt">IsTop</span></td>
+                        <td><span ng-bind="item.isRollTxt">IsRoll</span></td>
 
                         <td><span ng-bind="item.ThumUrl">ThumUrl</span></td>
                         <td><span ng-bind="item.sortNo">SortNo</span></td>
-                        <td><span ng-bind="item.state">State</span></td>
+                        <!-- <td><span ng-bind="item.stateTxt">State</span></td> -->
 
                         <td>
-                            <button type="button" class="btn btn-outline-primary"> 编 辑 </button>
-                            <button type="button" class="btn btn-outline-primary"> 删 除 </button>
+                            <button type="button" class="btn btn-outline-primary" ng-click="toModify(item.id)"> 编辑 </button>
+                            <button type="button" class="btn btn-outline-primary" ng-click="toDelete(item.id)"> 删 除 </button>
                             <button type="button" class="btn btn-outline-primary"> ** </button>
                         </td>
                     </tr>

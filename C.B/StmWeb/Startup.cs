@@ -12,6 +12,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using AutoMapper;
+using C.B.Common.Mapping;
+using C.B.MySql.AutoMapperConfig;
 
 namespace StmWeb
 {
@@ -49,8 +51,8 @@ namespace StmWeb
                 );
             });*/
 
-            services.AddAutoMapper();
-
+            //services.AddAutoMapper();
+            services.AddAutoMapper(cfg => cfg.AddProfile<EditorModelMapperConfig>());
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
@@ -84,6 +86,7 @@ namespace StmWeb
             });
             app.UseCookiePolicy();
             app.UseAuthentication();
+            //Mappings.RegisterMappings();
 
             app.UseMvc(routes =>
             {
