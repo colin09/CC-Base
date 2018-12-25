@@ -7,7 +7,7 @@ body{padding-top:120px;padding-bottom:20px}.body-content{padding-left:15px;paddi
 
 .stm-navbar-inverse{background-color: #fff; border-color: #ddd;border-bottom: 1;}
 .stm-navbar-inverse .navbar-header,.navbar-collapse{padding: 50px 0; }
-.stm-navbar-inverse .navbar-collapse li{padding: 0 25px;}
+.stm-navbar-inverse .navbar-collapse li{padding: 0 15px;}
 .stm-navbar-inverse .navbar-header a{font-size: 18px; font-weight: bolder; color:#303030;}
 .stm-navbar-inverse .navbar-collapse a{font-size: 18px; font-weight: bolder; color: #303030;}
 
