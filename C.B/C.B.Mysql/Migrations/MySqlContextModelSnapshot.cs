@@ -91,8 +91,7 @@ namespace C.B.Mysql.Migrations
                     b.Property<string>("Author")
                         .HasMaxLength(32);
 
-                    b.Property<string>("Content")
-                        .HasMaxLength(512);
+                    b.Property<string>("Content");
 
                     b.Property<DateTime>("CreateTime");
 
@@ -122,8 +121,7 @@ namespace C.B.Mysql.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Content")
-                        .HasMaxLength(2048);
+                    b.Property<string>("Content");
 
                     b.Property<DateTime>("CreateTime");
 
@@ -198,8 +196,7 @@ namespace C.B.Mysql.Migrations
                     b.Property<string>("Author")
                         .HasMaxLength(32);
 
-                    b.Property<string>("Content")
-                        .HasMaxLength(2048);
+                    b.Property<string>("Content");
 
                     b.Property<DateTime>("CreateTime");
 
@@ -248,8 +245,7 @@ namespace C.B.Mysql.Migrations
                     b.Property<string>("Author")
                         .HasMaxLength(32);
 
-                    b.Property<string>("Content")
-                        .HasMaxLength(2048);
+                    b.Property<string>("Content");
 
                     b.Property<DateTime>("CreateTime");
 
