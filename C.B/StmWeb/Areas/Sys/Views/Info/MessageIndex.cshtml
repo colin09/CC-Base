@@ -7,42 +7,31 @@
 
     <div>
         <div class="table-responsive">
-            <h3 class="card-title"> Message </h3>
+            <h3 class="card-title"> 互动留言 </h3>
             <hr />
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>标题</th>
-                        <th>Author</th>
-                        <th>IsShow</th>
-                        <th>IsHot</th>
-
-                        <th>排序</th>
-
-                        <th>状态</th>
-                        <th>发布时间</th>
-                        <th>操作</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="item in EventInfoList">
-                        <td><span ng-bind="item.id">Id</span></td>
-                        <td><span ng-bind="item.title">Title</span></td>
-                        <td><span ng-bind="item.author">Author</span></td>
-                        <td><span ng-bind="item.isShow">IsShow</span></td>
-                        <td><span ng-bind="item.isHot">IsHot</span></td>
-                        <td><span ng-bind="item.sortNo">SortNo</span></td>
-                        <td><span ng-bind="item.state">State</span></td>
-                        <td><span ng-bind="item.createTime">CreateTime</span></td>
-                        <td>
-                            <button type="button" class="btn btn-outline-primary"> ** </button>
-                            <button type="button" class="btn btn-outline-primary"> ** </button>
-                            <button type="button" class="btn btn-outline-primary"> ** </button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <div ng-repeat="item in InfoList" class="messageSpan">
+                <div class="messageInfo">
+                    <h5>
+                        <span ng-bind="item.region"></span>
+                        <span ng-bind="item.title"></span>
+                        <i ng-bind="item.createTime"></i>
+                    </h5>
+                    <div class="messageContent">
+                        <p ng-bind="item.content"></p>
+                    </div>
+                </div>
+                <div class="messageReply">
+                    <h6>
+                        <span ng-bind="item.replyName"></span> 
+                        <i ng-bind="item.replyTime"></i>
+                    </h6>
+                    <div class="messageContent">
+                        <p ng-bind="item.replyContent"></p>
+                    </div>
+                </div>
+            
+            </div>
+           
 
         </div>
     </div>

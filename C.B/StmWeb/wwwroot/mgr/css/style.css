@@ -13702,9 +13702,9 @@ input:focus {
     .sidebar .nav .nav-item .nav-link {
       align-items: center;
       display: flex;
-      padding: 16px 35px;
+      padding: 10px 35px;
       white-space: nowrap;
-      height: 52px;
+      /* height: 52px; */
       color: #4a4a4a; }
       .sidebar .nav .nav-item .nav-link i.menu-arrow {
         margin-left: auto;
@@ -13795,7 +13795,7 @@ input:focus {
       padding: 0 0 0 4rem; }
       .sidebar .nav.sub-menu .nav-item .nav-link {
         color: #4a4a4a;
-        padding: 0.75rem 1rem;
+        padding: 10px 1rem;
         font-size: 12px;
         line-height: 1;
         height: auto; }
@@ -16378,3 +16378,11 @@ ul {
   border: 1px solid #cccccc;
   border-radius: 5px;
 }
+
+.messageSpan{margin:0;padding: 5px; border-bottom: #eee 1px dashed;}
+.messageSpan .messageInfo{}
+.messageSpan span{margin:0 15px 0 0; }
+.messageSpan .messageContent{padding: 2px 25px;}
+.messageSpan .messageContent p{white-space:normal;text-indent:25px;}
+
+.messageSpan .messageReply{margin:0px 25px;padding: 2px 0; background-color: #eee;border-radius:5px;}

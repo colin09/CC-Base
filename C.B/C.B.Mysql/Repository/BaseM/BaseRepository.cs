@@ -19,10 +19,11 @@ namespace C.B.MySql.Repository.BaseM
         //     dbName = key as string;
         // }
 
-        private DbContext _context ;
+        private DbContext _context;
 
 
-        protected BaseRepository(){
+        protected BaseRepository()
+        {
             _context = new MySqlContext();
         }
 
@@ -86,7 +87,7 @@ namespace C.B.MySql.Repository.BaseM
             return _context.Set<TEntity>().Where(t => t.Id == id && t.IsDeleted == 0).FirstOrDefault();
         }
 
-        
+
         public TEntity FirstOrDefault(Expression<Func<TEntity, bool>> whereLambda)
         {
             return _context.Set<TEntity>().Where(whereLambda).FirstOrDefault();
@@ -97,8 +98,10 @@ namespace C.B.MySql.Repository.BaseM
             return _context.Set<TEntity>().Where(whereLambda).AsQueryable();
         }
 
-        public IQueryable<TEntity> Where<S>(Pager pager, Expression<Func<TEntity, bool>> whereLambda, Expression<Func<TEntity, S>> orderbyLambda, bool isAsc)
+        public IQueryable<TEntity> Where<S>(Pager pager, Expression<Func<TEntity, bool>> whereLambda, Expression<Func<TEntity, S>> orderbyLambda, bool isAsc = false)
         {
+
+            //orderbyLambda = orderbyLambda != null ? orderbyLambda : (TEntity t) => t.CreateTime;
             var result = _context.Set<TEntity>().Where<TEntity>(whereLambda).AsQueryable();
             pager.TotalCount = result.Count();
             if (isAsc)

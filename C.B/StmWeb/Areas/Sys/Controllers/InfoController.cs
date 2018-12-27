@@ -140,9 +140,9 @@ namespace StmWeb.Area.Sys.Controllers
             return Json(BaseResponse.SuccessResponse());
         }
 
-        public IActionResult GetEventInfoList(int type)
+        public IActionResult GetEventInfoList(int type, Pager pager)
         {
-            var list = _eventInfoRepository.Where(m => m.IsDeleted == 0 && m.EventId == type);
+            var list = _eventInfoRepository.Where(pager, m => m.IsDeleted == 0 && m.EventId == type, s => s.CreateTime);
             return Json(BaseResponse.SuccessResponse(_mapper.Map<EditorModel[]>(list)));
         }
 
@@ -153,9 +153,9 @@ namespace StmWeb.Area.Sys.Controllers
         {
             return View();
         }
-        public IActionResult GetExpertInfoList()
+        public IActionResult GetExpertInfoList(Pager pager)
         {
-            var list = _expertInfoRepository.Where(m => m.IsDeleted == 0);
+            var list = _expertInfoRepository.Where(pager, m => m.IsDeleted == 0, s => s.CreateTime);
             return Json(BaseResponse.SuccessResponse(_mapper.Map<EditorModel[]>(list)));
         }
 
@@ -163,9 +163,9 @@ namespace StmWeb.Area.Sys.Controllers
         {
             return View();
         }
-        public IActionResult GetNewsInfoList(NewsType type)
+        public IActionResult GetNewsInfoList(NewsType type, Pager pager)
         {
-            var list = _newsInfoRepository.Where(m => m.IsDeleted == 0 && m.NewsType == type);
+            var list = _newsInfoRepository.Where(pager, m => m.IsDeleted == 0 && m.NewsType == type, s => s.CreateTime);
             return Json(BaseResponse.SuccessResponse(_mapper.Map<EditorModel[]>(list)));
         }
 
@@ -173,20 +173,28 @@ namespace StmWeb.Area.Sys.Controllers
         {
             return View();
         }
-        public IActionResult GetNoticeList()
+        public IActionResult GetNoticeList(Pager pager)
         {
-            var list = _noticeRepository.Where(m => m.IsDeleted == 0);
+            var list = _noticeRepository.Where(pager, m => m.IsDeleted == 0, s => s.CreateTime);
             return Json(BaseResponse.SuccessResponse(_mapper.Map<EditorModel[]>(list)));
         }
+
+
+
+
+
+
+
+
 
         public IActionResult MessageIndex()
         {
             return View();
         }
-        public IActionResult GetMessageList(NewsType type)
+        public IActionResult GetMessageList(NewsType type, Pager pager)
         {
-            var list = _messageRepository.Where(m => m.IsDeleted == 0);
-            return Json(BaseResponse.SuccessResponse(_mapper.Map<EditorModel[]>(list)));
+            var list = _messageRepository.Where(pager, m => m.IsDeleted == 0, s => s.CreateTime, false);
+            return Json(BaseResponse.SuccessResponse(list));
         }
 
     }

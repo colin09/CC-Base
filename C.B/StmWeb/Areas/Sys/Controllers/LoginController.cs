@@ -5,6 +5,7 @@ using C.B.MySql.Data;
 using C.B.MySql.Repository.EntityRepositories;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -33,8 +34,14 @@ namespace StmWeb.Area.Sys.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> SignIn(string userName, string password)
+        public async Task<IActionResult> SignIn(string userName, string password, string verifyCode)
         {
+            if (verifyCode.IsEmpty())
+                return Json(BaseResponse.ErrorResponse("请填写验证码。"));
+            var code = HttpContext.Session.GetString("Session.VerifyCode");
+            if (verifyCode.ToLower() != code.ToLower())
+                return Json(BaseResponse.ErrorResponse("验证码错误。"));
+
             if (userName.IsEmpty() || password.IsEmpty())
                 return Json(BaseResponse.ErrorResponse("用户名或密码错误。"));
 
@@ -44,12 +51,12 @@ namespace StmWeb.Area.Sys.Controllers
 
             //用户标识
             var identity = new ClaimsIdentity();
-            
+
             identity.AddClaim(new Claim(ClaimTypes.PrimarySid, user.Id.ToString()));
             identity.AddClaim(new Claim(ClaimTypes.Sid, user.UserName));
             identity.AddClaim(new Claim(ClaimTypes.Name, user.TrueName));
             identity.AddClaim(new Claim(ClaimTypes.Dsa, user.Department));
-            
+
             identity.AddClaim(new Claim(ClaimTypes.Gender, user.Gender.ToString()));
             identity.AddClaim(new Claim(ClaimTypes.MobilePhone, user.MobileNo));
             identity.AddClaim(new Claim(ClaimTypes.Email, user.Email));
@@ -63,7 +70,7 @@ namespace StmWeb.Area.Sys.Controllers
         public async Task<IActionResult> SignOut()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            return Redirect("/Home/Index");
+            return Json(BaseResponse.SuccessResponse());
         }
 
 
