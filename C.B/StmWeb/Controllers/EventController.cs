@@ -14,6 +14,22 @@ namespace StmWeb.Controllers
         {
             return View();
         }
+        public IActionResult Award()
+        {
+            return View();
+        }
+        public IActionResult Review()
+        {
+            return View();
+        }
+        public IActionResult Contact()
+        {
+            return View();
+        }
+        public IActionResult Active()
+        {
+            return View();
+        }
        
 
     }

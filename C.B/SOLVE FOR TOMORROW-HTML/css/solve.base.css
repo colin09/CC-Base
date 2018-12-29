@@ -1,0 +1,310 @@
+@charset "utf-8";
+/* Element Standard Style */
+html,body,ul,ol,li,dl,dt,dd,a,h1,h2,h3,h4,h5,h6,img,input,textarea,p {
+    font-family: "PingFang SC", "Microsoft YaHei", "微软雅黑", Heiti, "黑体", Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    font-size: 10px;
+    color: #666;
+}
+body{
+    min-width: 1000px;
+    background: white;
+    overflow-x: hidden;
+    -webkit-text-size-adjust: none;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+}
+button,input,textarea,select {
+    font-size: 1.3rem;
+}
+input,textarea {
+    background: transparent;
+    border: none;
+}
+img {
+    width: 100%;
+    border: none;
+    float: left;
+}
+i, em {
+    font-style: normal;
+}
+h1,h2,h3,h4,h5,h6 {
+    font-weight: normal;
+}
+button {
+    border: none;
+}
+ul,ol,dl {
+    overflow: hidden;
+}
+ul li,ol li {
+    list-style: none;
+}
+a,a:link,a:hover,a:visited {
+    text-decoration: none;
+}
+.visible {
+    display: block;
+}
+.hidden {
+    display: none;
+}
+.width-wrap{
+    width: 1000px;
+    margin: 0 auto;
+    position: relative;
+}
+.bg-lightgrey{
+    background: #f5f5f5;
+}
+.ico{
+    display: inline-block;
+    background: url(../img/ico-solve.png) no-repeat;
+    background-size: 200px auto;
+}
+/* Tap Event and Placeholder Font Color for Mobile Device */
+a,img,button,input,textarea,label,select {
+    -webkit-tap-highlight-color: transparent;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color: #999;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color: #999;
+}
+input:-ms-input-placeholder,
+textarea:-ms-input-placeholder {
+    color: #999;
+}
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder {
+    color: #999;
+}
+/* Float, Clear and Align */
+.fr, .fR {
+    float: right;
+}
+.fl, .fL {
+    float: left;
+}
+.clear {
+    clear: both;
+}
+.clearfix {
+    zoom: 1;
+}
+.clearfix:after {
+    clear: both;
+    content: "";
+    display: block;
+    height: 0;
+    overflow: hidden;
+    visibility: hidden;
+}
+.tr, .tR {
+    text-align: right;
+}
+.tl, .tL {
+    text-align: left;
+}
+.tc, .tC {
+    text-align: center;
+}
+/* Useful Color */
+.c_cheri_red {
+    color: #ff4e5c;
+}
+/* Margin and Padding*/
+.mauto{ margin-left: auto; margin-right: auto;}
+.mt0  { margin-top:  0px;}  .mb0 { margin-bottom:  0px;}
+.mt5  { margin-top:  5px;}  .mb5 { margin-bottom:  5px;}
+.mt10 { margin-top: 10px;}  .mb10 { margin-bottom: 10px;}
+.mt20 { margin-top: 20px;}  .mb20 { margin-bottom: 20px;}
+.mt30 { margin-top: 30px;}  .mb30 { margin-bottom: 30px;}
+.mt40 { margin-top: 40px;}  .mb40 { margin-bottom: 40px;}
+.mt50 { margin-top: 50px;}  .mb50 { margin-bottom: 50px;}
+.pt10 { padding-top: 10px;} .pb10 { padding-bottom: 10px;}
+.pt15 { padding-top: 15px;} .pb15 { padding-bottom: 15px;}
+.pt20 { padding-top: 20px;} .pb20 { padding-bottom: 20px;}
+.pt30 { padding-top: 30px;} .pb30 { padding-bottom: 30px;}
+.pt40 { padding-top: 40px;} .pb40 { padding-bottom: 40px;}
+.pt45 { padding-top: 45px;} .pb45 { padding-bottom: 45px;}
+.pt50 { padding-top: 50px;} .pb50 { padding-bottom: 50px;}
+/* Page has Copyright */
+html, body, .page {
+    height: 100%;
+}
+.content {
+    font-size: 1.3rem;
+    min-height: 100%;
+    position: relative;
+    width: 100%;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+}
+.footer {
+    clear: both;
+    color: #aaa;
+    height: 45px;
+    line-height: 45px;
+    margin-top: -45px;
+    position: relative;
+    text-align: center;
+}
+.content_btn {
+    padding-bottom: 93px;
+}
+.footer_btn {
+    height: 93px;
+    margin-top: -93px;
+}
+.footer_p {
+    font-size: 1rem;
+}
+.copyright {
+    color: #d9d9d9;
+}
+/* PopUp Window */
+.pop_wrap {
+    display: none;
+    position: relative;
+    width: 100%;
+}
+.pop_content {
+    background: #f5f5f5;
+    border-radius: 6px;
+    left: 50%;
+    padding: 0;
+    position: fixed;
+    top: 50%;
+    width: 800px;
+    z-index: 5;
+    transform: translateX(-400px);
+}
+.bg_mask {
+    background: #000;
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 4;
+    -moz-opacity: 0.3;
+         opacity: 0.3;
+    filter: alpha(opacity = 30);
+}
+/* use with pop_info */
+.pop_title {
+    padding: 25px 0;
+    text-align: center;
+}
+.pop_info {
+    color: #999;
+    font-size: 1.4rem;
+    padding: 0 10px 20px;
+    text-align: center;
+}
+/* single hint heading */
+.pop_hint {
+    color: #333;
+    font-size: 1.8rem;
+    font-weight: bold;
+    padding: 30px 0;
+    text-align: center;
+}
+/* share */
+.share-wrap {
+    height: 30px;
+    padding: 20px 10px 40px;
+}
+.dl-share {
+    height: 30px;
+}
+.dl-share dt {
+    color: #75757A;
+    font-size: 1.3rem;
+    line-height: 30px;
+    float: left;
+}
+.dl-share dd > a {
+    display: block;
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    float: left;
+    text-indent: -9999px;
+}
+.ico-share1 {
+    background-position: 0 -50px;
+}
+.ico-share2 {
+    background-position: -40px -50px;
+}
+.ico-share3 {
+    background-position: -80px -50px;
+}
+.ico-share4 {
+    background-position: -120px -50px;
+}
+.ico-share5 {
+    background-position: -160px -50px;
+}
+/* page navi */
+.breadcrumb {
+    width: 980px;
+    color: #A4A4A4;
+    padding: 20px 0;
+}
+.breadcrumb a {
+    font-size: 1.3rem;
+    color: #0040AB;
+}
+/* pagination */
+.pagination {
+    margin: 30px auto 100px;
+    text-align: center;
+}
+.pagination a {
+    display: inline-block;
+    width: 20px;
+    height: 33px;
+    color: #000;
+    line-height: 33px;
+    font-size: 1.5rem;
+    text-align: center;
+    margin: 0 4px;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+}
+.current {
+    border-bottom: solid #000000 3px;
+}
+.prev,
+.next {
+    width: 33px !important;
+    background: #000000;
+    margin: 0 20px !important;
+}
+.disable {
+    background: #D8D8D8;
+}
+.arrow-left {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-top: solid #ffffff 1px;
+    border-left: solid #ffffff 1px;
+    transform: rotate(-45deg);
+    margin-right: -4px;
+}
+.arrow-right {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-top: solid #ffffff 1px;
+    border-right: solid #ffffff 1px;
+    transform: rotate(45deg);
+    margin-left: -4px;
+}

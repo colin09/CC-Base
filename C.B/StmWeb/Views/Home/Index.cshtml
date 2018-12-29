@@ -1,7 +1,153 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
-    Layout = "_LayoutIndex";
 }
 
+<div ng-controller="StmIndexCtl">
+	<!-- notice & announcement start -->
+	<section>
+		<div class="notice-wrap">
+			<div class="title-wrap">
+				<h1 class="h1-title">通知公告</h1>
+				<h2 class="h2-subtitle"><span>Notice & Announcement</span></h2>
+			</div>
+			<div class="width-wrap clearfix">
+				<div class="notice-list-wrap">
+					<a href="notice-para.html">
+						<dl class="dl-notice-horizon">
+							<dt class="dt-notice-time"><span class="spn-month">11-23</span> <span class="spn-year">2018</span></dt>
+							<dt class="dt-notice-title">出国交流提前办理护照的告知声明</dt>
+							<dd class="dd-notice-detail">致所有入围总决赛的参赛选手：
+								“SOLVE FOR TOMORROW探知未来 2017年全国青年科普创新实验暨作品大赛”各赛区已纷纷进入复赛阶段，15个赛区的各比赛项目将经过激烈的角逐产生1支第1名的团队，最终将有来自全国各地的75支队伍入围总决赛。
+							</dd>
+						</dl>
+					</a>
+					<a href="notice-para.html">
+						<dl class="dl-notice-horizon">
+							<dt class="dt-notice-time"><span class="spn-month">10-15</span> <span class="spn-year">2018</span></dt>
+							<dt class="dt-notice-title">关于2017年全国青年科普创作实验暨</dt>
+							<dd class="dd-notice-detail">在各级领导的关心支持下泰安市获得了由中国科协科普部、共青团中央学校部主办的“探知未来2017年全国青年科普创新实验暨作品大赛”分赛区的承办权，并列入2017年泰山国际登山节科技版块重点工作任务。
+							</dd>
+						</dl>
+					</a>
+					<a href="notice-para.html">
+						<dl class="dl-notice-horizon">
+							<dt class="dt-notice-time"><span class="spn-month">08-30</span> <span class="spn-year">2018</span></dt>
+							<dt class="dt-notice-title">决赛名单来了，快看看有没有你，等你来参加</dt>
+							<dd class="dd-notice-detail">11月27日，由中国科协科普部、共青团中央学校部主办的“探知未来2017年全国青年科普创新实验暨作品大赛”北京赛区初赛落下了帷幕。本次比赛主要面向北京、天津、内蒙地区的中学生和大学生开展，共计征集作品1千余件。
+							</dd>
+						</dl>
+					</a>
+					<a href="notice-para.html">
+						<dl class="dl-notice-horizon">
+							<dt class="dt-notice-time"><span class="spn-month">05-13</span> <span class="spn-year">2018</span></dt>
+							<dt class="dt-notice-title">2017年全国青年科普创新实验暨</dt>
+							<dd class="dd-notice-detail">2020年，中国将开启首次火星探测，此次探测将依次实现“环绕、着陆、巡视”三个目标，这不管在我国还是在世界都是前所未有的。
+							</dd>
+						</dl>
+					</a>
+				</div>
+				<div class="more-notice-wrap">
+					<a class="ico btn-more-notice" href="notice.html"></a>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- notice & announcement end -->
 
-<img src="~/images/index.jpg" style="width:100%; margin:0;padding:0;" />
+	<!-- media center start -->
+	<section>
+		<div class="media-wrap bg-lightgrey">
+			<div class="title-wrap">
+				<h1 class="h1-title">媒体中心</h1>
+				<h2 class="h2-subtitle"><span>Media News Center</span></h2>
+			</div>
+			<div class="tabs-wrap">
+				<div class="tabs-title">
+					<a class="btn-tabs active" href="javascript:;">赛事新闻</a>
+					<a class="btn-tabs" href="javascript:;">视频中心</a>
+					<a class="btn-tabs" href="javascript:;">精选图片</a>
+				</div>
+				<!-- solve news start -->
+				<div class="tabs pic-news-wrap width-wrap clearfix">
+					<div class="one-news-wrap">
+						<a href="media-para.html">
+							<div class="img-media-wrap"><img src="~/images/img-news1.jpg" alt=""></div>
+							<h3 class="h3-news-title">决赛名单来了，快看看有没有你，等你来参加</h3>
+							<p class="publish-wrap"><span class="spn-publisher">发布人</span><span class="spn-publish-time">2018-10-30</span></p>
+						</a>
+					</div>
+					<div class="one-news-wrap">
+						<a href="media-para.html">
+							<div class="img-media-wrap"><img src="~/images/img-news2.jpg" alt=""></div>
+							<h3 class="h3-news-title">全国总决赛的通知文件（正式通知文件）</h3>
+							<p class="publish-wrap"><span class="spn-publisher">发布人</span><span class="spn-publish-time">2018-10-30</span></p>
+						</a>
+					</div>
+					<div class="one-news-wrap">
+						<a href="media-para.html">
+							<div class="img-media-wrap"><img src="~/images/img-news3.jpg" alt=""></div>
+							<h3 class="h3-news-title">2018年全国青年科普创新实验暨作品大赛</h3>
+							<p class="publish-wrap"><span class="spn-publisher">发布人</span><span class="spn-publish-time">2018-10-30</span></p>
+						</a>
+					</div>
+				</div>
+				<!-- solve news end -->
+				<!-- video news start -->
+				<div class="tabs pic-news-wrap width-wrap clearfix">
+					<div class="one-video-wrap">
+						<a href="media-para.html">
+							<div class="img-media-wrap"><img src="~/images/img-video1.jpg" alt=""></div>
+							<h3 class="h3-news-title">决赛名单来了，快看看有没有你，等你来参加</h3>
+							<p class="publish-wrap"><span class="spn-publisher">发布人</span><span class="spn-publish-time">2018-10-30</span></p>
+						</a>
+					</div>
+					<div class="one-video-wrap">
+						<a href="media-para.html">
+							<div class="img-media-wrap"><img src="~/images/img-video2.jpg" alt=""></div>
+							<h3 class="h3-news-title">全国总决赛的通知文件（正式通知文件）</h3>
+							<p class="publish-wrap"><span class="spn-publisher">发布人</span><span class="spn-publish-time">2018-10-30</span></p>
+						</a>
+					</div>
+					<div class="one-video-wrap">
+						<a href="media-para.html">
+							<div class="img-media-wrap"><img src="~/images/img-video3.jpg" alt=""></div>
+							<h3 class="h3-news-title">2018年全国青年科普创新实验暨作品大赛</h3>
+							<p class="publish-wrap"><span class="spn-publisher">发布人</span><span class="spn-publish-time">2018-10-30</span></p>
+						</a>
+					</div>
+				</div>
+				<!-- video news end -->
+				<!-- pic news start -->
+				<div class="tabs pic-news-wrap width-wrap clearfix">
+					<div class="one-news-wrap">
+						<a href="media-para.html">
+							<div class="img-media-wrap"><img src="~/images/img-news4.jpg" alt=""></div>
+							<h3 class="h3-news-title">全国总决赛的通知文件（正式通知文件）</h3>
+							<p class="publish-wrap"><span class="spn-publisher">发布人</span><span class="spn-publish-time">2018-10-30</span></p>
+						</a>
+					</div>
+					<div class="one-news-wrap">
+						<a href="media-para.html">
+							<div class="img-media-wrap"><img src="~/images/img-news5.jpg" alt=""></div>
+							<h3 class="h3-news-title">2018年全国青年科普创新实验暨作品大赛</h3>
+							<p class="publish-wrap"><span class="spn-publisher">发布人</span><span class="spn-publish-time">2018-10-30</span></p>
+						</a>
+					</div>
+					<div class="one-news-wrap">
+						<a href="media-para.html">
+							<div class="img-media-wrap"><img src="~/images/img-news6.jpg" alt=""></div>
+							<h3 class="h3-news-title">决赛名单来了，快看看有没有你，等你来参加</h3>
+							<p class="publish-wrap"><span class="spn-publisher">发布人</span><span class="spn-publish-time">2018-10-30</span></p>
+						</a>
+					</div>
+				</div>
+				<!-- pic news end -->
+			</div>
+			<div class="more-media-wrap">
+				<a class="btn-media-more" href="media.html">查看媒体中心</a>
+			</div>
+		</div>
+	</section>
+	<!-- media center end -->
+
+</div>

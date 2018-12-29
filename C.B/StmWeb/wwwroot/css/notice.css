@@ -1,0 +1,102 @@
+@charset "utf-8";
+/* notice list vertical */
+.notice-list-all-wrap {
+    width: 900px;
+    margin: 50px auto;
+}
+.notice-list-all-wrap dl {
+    padding: 0 15px;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+}
+.notice-list-all-wrap dl:hover {
+    background: #f5f5f5;
+}
+/* notice publish time */
+.dl-notice-vertical .dt-notice-time {
+    border-right: solid #4D4D4D 1px;
+    width: 57px;
+    float: left;
+    margin-right: -1px;
+    margin-top: 17px;
+    padding-right: 13px;
+}
+.dl-notice-vertical .dt-notice-time span {
+    display: block;
+    text-align: right;
+    white-space: nowrap;
+}
+.dl-notice-vertical .dt-notice-time .spn-month {
+    height: 30px;
+    color: #666666;
+    font-size: 2rem;
+}
+.dl-notice-vertical .dt-notice-time .spn-year {
+    height: 25px;
+    color: #9B9B9B;
+    font-size: 1.5rem;
+    margin-right: -1px;
+}
+/* notice headline & shortcut */
+.dl-notice-vertical .dt-notice-title {
+    border-left: solid #f5f5f5 1px;
+    color: #000000;
+    font-size: 1.5rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 0 0 0 70px;
+    padding: 15px 0 0 20px;
+}
+.dl-notice-vertical .dd-notice-detail {
+    border-left: solid #f5f5f5 1px;
+    color: #666666;
+    font-size: 1.3rem;
+    line-height: 20px;
+    margin: 0 0 0 70px;
+    padding: 12px 0 30px 20px;
+}
+/* notice para */
+.notice-cont-wrap {
+    width: 980px;
+    border-bottom: solid #E9E9E9 1px;
+    margin: 0 auto ;
+}
+.notice-title {
+    color: #000000;
+    font-size: 2.4rem;
+    line-height: 32px;
+    padding: 0 0 10px;
+}
+.notice-publish {
+    border-bottom: solid #E9E9E9 1px;
+    padding: 0 0 15px;
+    font-size: 1.3rem;
+}
+.spn-publisher {
+    color: #0040AB;
+}
+.spn-notice-time {
+    float: right;
+}
+.notice-para {
+    padding: 0 0 20px;
+}
+.notice-para p {
+    color: #333333;
+    font-size: 1.3rem;
+    line-height: 1.6rem;
+    margin: 15px 0;
+}
+.notice-para p:after {
+    clear: both;
+    content: "";
+    display: block;
+    height: 0;
+    overflow: hidden;
+    visibility: hidden;
+}
+.notice-para p strong {
+    font-size: 1.5rem;
+    line-height: 30px;
+}
