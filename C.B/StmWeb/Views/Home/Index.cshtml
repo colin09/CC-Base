@@ -12,7 +12,17 @@
 			</div>
 			<div class="width-wrap clearfix">
 				<div class="notice-list-wrap">
-					<a href="notice-para.html">
+					<a ng-repeat="notice in NoticeList" ng-href="../Notice/Detial?id=notice.id">
+						<dl class="dl-notice-horizon">
+							<dt class="dt-notice-time"><span class="spn-month" ng-bind="notice.date">11-23</span> <span class="spn-year" ng-bind="notice.year">2018</span></dt>
+							<dt class="dt-notice-title" ng-bind="notice.title">出国交流提前办理护照的告知声明</dt>
+							<dd class="dd-notice-detail" ng-bind="notice.simpleContent">致所有入围总决赛的参赛选手：
+								“SOLVE FOR TOMORROW探知未来 2017年全国青年科普创新实验暨作品大赛”各赛区已纷纷进入复赛阶段，15个赛区的各比赛项目将经过激烈的角逐产生1支第1名的团队，最终将有来自全国各地的75支队伍入围总决赛。
+							</dd>
+						</dl>
+					</a>
+
+					<!-- <a href="../Notice/Detial?id=1">
 						<dl class="dl-notice-horizon">
 							<dt class="dt-notice-time"><span class="spn-month">11-23</span> <span class="spn-year">2018</span></dt>
 							<dt class="dt-notice-title">出国交流提前办理护照的告知声明</dt>
@@ -44,10 +54,10 @@
 							<dd class="dd-notice-detail">2020年，中国将开启首次火星探测，此次探测将依次实现“环绕、着陆、巡视”三个目标，这不管在我国还是在世界都是前所未有的。
 							</dd>
 						</dl>
-					</a>
+					</a> -->
 				</div>
 				<div class="more-notice-wrap">
-					<a class="ico btn-more-notice" href="notice.html"></a>
+					<a class="ico btn-more-notice" href="../Notice/Index"></a>
 				</div>
 			</div>
 		</div>
@@ -69,7 +79,14 @@
 				</div>
 				<!-- solve news start -->
 				<div class="tabs pic-news-wrap width-wrap clearfix">
-					<div class="one-news-wrap">
+					<div class="one-news-wrap" ng-repeat="news in NewsEventList">
+						<a href="../Medias/Detail?id={{news.id}}">
+							<div class="img-media-wrap"><img src="{{news.url}}" alt=""></div>
+							<h3 class="h3-news-title" ng-bind="news.title">决赛名单来了，快看看有没有你，等你来参加</h3>
+							<p class="publish-wrap"><span class="spn-publisher" ng-bind="news.author">发布人</span><span class="spn-publish-time" ng-bind="news.date">2018-10-30</span></p>
+						</a>
+					</div>
+					<!-- <div class="one-news-wrap">
 						<a href="media-para.html">
 							<div class="img-media-wrap"><img src="~/images/img-news1.jpg" alt=""></div>
 							<h3 class="h3-news-title">决赛名单来了，快看看有没有你，等你来参加</h3>
@@ -89,12 +106,19 @@
 							<h3 class="h3-news-title">2018年全国青年科普创新实验暨作品大赛</h3>
 							<p class="publish-wrap"><span class="spn-publisher">发布人</span><span class="spn-publish-time">2018-10-30</span></p>
 						</a>
-					</div>
+					</div> -->
 				</div>
 				<!-- solve news end -->
 				<!-- video news start -->
 				<div class="tabs pic-news-wrap width-wrap clearfix">
-					<div class="one-video-wrap">
+					<div class="one-video-wrap" ng-repeat="news in NewsVideoList">
+						<a href="../Medias/Detail?id={{news.id}}">
+							<div class="img-media-wrap"><img src="{{news.url}}" alt=""></div>
+							<h3 class="h3-news-title" ng-bind="news.title">决赛名单来了，快看看有没有你，等你来参加</h3>
+							<p class="publish-wrap"><span class="spn-publisher" ng-bind="news.author">发布人</span><span class="spn-publish-time" ng-bind="news.date">2018-10-30</span></p>
+						</a>
+					</div>
+					<!-- <div class="one-video-wrap">
 						<a href="media-para.html">
 							<div class="img-media-wrap"><img src="~/images/img-video1.jpg" alt=""></div>
 							<h3 class="h3-news-title">决赛名单来了，快看看有没有你，等你来参加</h3>
@@ -114,12 +138,19 @@
 							<h3 class="h3-news-title">2018年全国青年科普创新实验暨作品大赛</h3>
 							<p class="publish-wrap"><span class="spn-publisher">发布人</span><span class="spn-publish-time">2018-10-30</span></p>
 						</a>
-					</div>
+					</div> -->
 				</div>
 				<!-- video news end -->
 				<!-- pic news start -->
 				<div class="tabs pic-news-wrap width-wrap clearfix">
-					<div class="one-news-wrap">
+					<div class="one-news-wrap" ng-repeat="news in NewsImageList">
+						<a href="../Medias/Detail?id={{news.id}}">
+							<div class="img-media-wrap"><img src="{{news.url}}" alt=""></div>
+							<h3 class="h3-news-title" ng-bind="news.title">全国总决赛的通知文件（正式通知文件）</h3>
+							<p class="publish-wrap"><span class="spn-publisher" ng-bind="news.author">发布人</span><span class="spn-publish-time" ng-bind="news.date">2018-10-30</span></p>
+						</a>
+					</div>
+					<!-- <div class="one-news-wrap">
 						<a href="media-para.html">
 							<div class="img-media-wrap"><img src="~/images/img-news4.jpg" alt=""></div>
 							<h3 class="h3-news-title">全国总决赛的通知文件（正式通知文件）</h3>
@@ -139,12 +170,12 @@
 							<h3 class="h3-news-title">决赛名单来了，快看看有没有你，等你来参加</h3>
 							<p class="publish-wrap"><span class="spn-publisher">发布人</span><span class="spn-publish-time">2018-10-30</span></p>
 						</a>
-					</div>
+					</div> -->
 				</div>
 				<!-- pic news end -->
 			</div>
 			<div class="more-media-wrap">
-				<a class="btn-media-more" href="media.html">查看媒体中心</a>
+				<a class="btn-media-more" href="../Medias/Index">查看媒体中心</a>
 			</div>
 		</div>
 	</section>

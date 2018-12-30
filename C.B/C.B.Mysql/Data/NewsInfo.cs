@@ -39,9 +39,9 @@ namespace C.B.MySql.Data
 
     public enum NewsType
     {
-        ImageNews=1,
-        EventNews=2,
-        VidelNews=3,
+        EventNews=1,
+        ImageNews=2,
+        VideoNews=3,
     }
 }
 
