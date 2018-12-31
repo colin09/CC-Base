@@ -4,28 +4,29 @@
 
 <link rel="stylesheet" type="text/css" href="~/css/notice.css">
 
+<input type="hidden" id="hdId" value="@ViewBag.Id" />
 <div ng-controller="NoticeDetailCtl">
 	<!-- media center start -->
 	<section>
 		<div class="media-wrap">
 			<div class="title-wrap">
 				<div class="width-wrap breadcrumb">
-					<a href="index.html">首页</a> >
-					<a href="notice.html">通知公告</a> >
-					出国交流提前办理护照的告知声明
+					<a href="../Home/Index">首页</a> >
+					<a href="../Notice/Index">通知公告</a> >
+					{{Model.title}}
 				</div>
 			</div>
 			<div class="notice-wrap width-wrap clearfix">
 				<!-- notice paragraph start -->
 				<div class="notice-cont-wrap">
 					<dl>
-						<dt class="notice-title">出国交流提前办理护照的告知声明</dt>
+						<dt class="notice-title" ng-bind="Model.title">出国交流提前办理护照的告知声明</dt>
 						<dd class="notice-publish">
 							发布：
-							<span class="spn-publisher">探知未来</span>
-							<span class="spn-notice-time">2018-11-23</span>
+							<span class="spn-publisher" ng-bind="Model.author">探知未来</span>
+							<span class="spn-notice-time" ng-bind="Model.longDate">2018-11-23</span>
 						</dd>
-						<dd class="notice-para">
+						<dd class="notice-para" ng-bind-html="Model.content">
 							<p><strong>
 							关于“SOLVE FOR TOMORROW探知未来 <br>
 							2017年全国青年科普创新实验暨作品大赛” <br>
@@ -76,5 +77,4 @@
 		</div>
 	</section>
 	<!-- media center end -->
-
 </div>

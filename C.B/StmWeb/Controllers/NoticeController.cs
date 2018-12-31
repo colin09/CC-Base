@@ -25,8 +25,9 @@ namespace StmWeb.Controllers
             return View();
         }
 
-        public IActionResult Detail()
+        public IActionResult Detail(int id)
         {
+            ViewBag.Id = id;
             return View();
         }
 
@@ -44,7 +45,26 @@ namespace StmWeb.Controllers
                 year = m.CreateTime.Year,
                 date = m.CreateTime.ToString("MM-dd"),
                 pubOrg = m.PubOrg,
+                author = m.Author,
             });
+            return Json(BaseResponse.SuccessResponse(response));
+        }
+
+        public IActionResult GetDetail(int id)
+        {
+            var m = _repository.FirstOrDefault(id);
+            var response =  new
+            {
+                id = m.Id,
+                title = m.Title,
+                content = m.Content,
+                simpleContent = m.Content.TakeString(200),
+                year = m.CreateTime.Year,
+                date = m.CreateTime.ToString("MM-dd"),
+                longDate = m.CreateTime.ToString("yyyy-MM-dd"),
+                pubOrg = m.PubOrg,
+                author = m.Author,
+            };
             return Json(BaseResponse.SuccessResponse(response));
         }
 
