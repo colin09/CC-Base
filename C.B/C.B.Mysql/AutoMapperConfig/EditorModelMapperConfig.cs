@@ -30,6 +30,7 @@ namespace C.B.MySql.AutoMapperConfig
 
 
             CreateMap<ExpertInfo, EditorModel>()
+                .ForMember(dest => dest.ExpertType, opt =>opt.MapFrom(f=>f.Type))
                 .ForMember(dest => dest.EditType, opt => opt.Ignore())
                 .ForMember(dest => dest.TypeId, opt => opt.Ignore())
                 .ForMember(dest => dest.TypeName, opt => opt.Ignore())

@@ -46,6 +46,54 @@ module.controller('EventIndexCtl', function ($scope, $http) {
     $("#divBanner").removeClass("ng-hide");
     $(".nav-top>li>a").eq(1).addClass("active");
 
+    $scope.getEventType = function (id) {
+        $http.get("../Event/GetTypeList?parentId=" + id).success(function (response) {
+            if (response.success) {
+                if (id == 0) {
+                    $scope.ParentTypeList = response.data;
+                    var typeId = $scope.ParentTypeList[0].id;
+                    $scope.getEventType(typeId);
+                }
+                else {
+                    $scope.typeList = response.data;
+                    var typeId = $scope.typeList[0].id;
+                    $scope.getEventInfo(typeId);
+
+                    window.setTimeout(function(){addListener();},100);
+                }
+            }
+        });
+    }
+
+    $scope.getEventInfo = function (id) {
+        $http.get("../Event/GetDetail?typeId=" + id).success(function (response) {
+            if (response.success) {
+                $scope.Model = response.data;
+            }
+        });
+    }
+
+
+    function addListener() {
+        $(".parentTypeList>a").click(function () {
+            $(".parentTypeList>a").removeClass("active");
+            $(this).addClass("active");
+            var id = $(this).data("id");
+            $scope.getEventType(id);
+        });
+        $(".typeList>a").click(function () {
+            $(".typeList>a").removeClass("active");
+            $(this).addClass("active");
+            var id = $(this).data("id");
+            $scope.getEventInfo(id);
+        });
+        
+        $(".parentTypeList>a").eq(0).addClass("active");
+        $(".typeList>a").eq(0).addClass("active");
+    }
+
+
+    $scope.getEventType(0);
 });
 
 module.controller('EventAwardCtl', function ($scope, $http) {
@@ -110,8 +158,8 @@ module.controller('MediaIndexCtl', function ($scope, $http) {
     $("#divBanner").removeClass("ng-hide");
     $(".nav-top>li>a").eq(3).addClass("active");
 
-    $scope.pager = { pageIndex: 1, pageSize: 9};
-    
+    $scope.pager = { pageIndex: 1, pageSize: 9 };
+
     $scope.InitMedia = function (newsType) {
         var request = { num1: newsType, pager: $scope.pager };
         $http.post("../Medias/GetList", request).success(function (response) {
@@ -135,11 +183,47 @@ module.controller('MediaIndexCtl', function ($scope, $http) {
     $scope.InitMedia(2);
     $scope.InitMedia(3);
 
-    
+
 
 });
+
 module.controller('ExpertIndexCtl', function ($scope, $http) {
     $("#divBanner").removeClass("ng-hide");
     $(".nav-top>li>a").eq(4).addClass("active");
 
+    $scope.getData = function (type) {
+        $http.get("../Expert/GetList?type=" + type).success(function (response) {
+            if (response.success) {
+                switch (type) {
+                    case 1:
+                        $scope.zhjList = response.data;
+                        break;
+                    case 2:
+                        $scope.YuansList = response.data;
+                        break;
+                }
+            }
+        });
+    }
+
+    $scope.getData(1);
+    $scope.getData(2);
+
+});
+
+module.controller('ExpertDetailCtl', function ($scope, $http) {
+    $("#divBanner").removeClass("ng-hide");
+    $(".nav-top>li>a").eq(4).addClass("active");
+
+
+    $scope.getData = function (id) {
+        $http.get("../Expert/GetDetail?id=" + id).success(function (response) {
+            if (response.success) {
+                $scope.Model = response.data;
+            }
+        });
+    };
+
+    var id = $("#hdId").val();
+    $scope.getData(id);
 });

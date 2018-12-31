@@ -238,7 +238,7 @@ namespace C.B.MySql.Repository.Services
                 Author = m.Author,
                 IsShow = m.IsShow ? 1 : 0,
                 IsTop = m.IsTop ? 1 : 0,
-                IsRoll = m.IsTop ? 1 : 0, //?????????????????????????????????????
+                IsRoll = m.IsRoll ? 1 : 0, //?????????????????????????????????????
                 PubTime = DateTime.Now,
                 PubOrg = "PubOrg",
                 SortNo = DateTime.Now.ToOADate(),
@@ -256,12 +256,13 @@ namespace C.B.MySql.Repository.Services
             {
                 Id = m.Id,
                 Title = m.Title,
+                Type = m.ExpertType,
                 Content = m.Content,
                 Author = m.Author,
                 IsShow = m.IsShow ? 1 : 0,
                 SortNo = DateTime.Now.ToOADate(),
-                PicFileId = 0,
-                PicUrl = "",
+                PicFileId = m.ThumbId,
+                PicUrl = m.ThumbUrl,
             };
             var result = 0;
             if (model.Id > 0)

@@ -3,6 +3,7 @@
 }
 
 <link rel="stylesheet" type="text/css" href="~/css/contest.css">
+<input type="hidden" id="hdId" value="@ViewBag.Id" />
 <div ng-controller="EventIndexCtl">
 	<!-- contest start -->
 	<section>
@@ -12,9 +13,9 @@
 				<h2 class="h2-subtitle"><span>Contest Introduction</span></h2>
 			</div>
 			<div class="contest-wrap width-wrap clearfix">
-				<div class="tabs-news-list">
-					<a class="btn-news" href="#">大赛概况</a>
-					<a class="btn-news" href="#">创意作品单元</a>
+				<div class="tabs-news-list parentTypeList">
+					<a class="btn-news" href="javascript:void(0)" ng-repeat="item in ParentTypeList" data-id="{{item.id}}" ng-bind="item.name">大赛概况</a>
+					<!-- <a class="btn-news" href="#">创意作品单元</a>
 					<a class="btn-news" href="#">未来教育</a>
 					<a class="btn-news" href="#">未来出行（大学组）</a>
 					<a class="btn-news" href="#">未来出行（中学组）</a>
@@ -22,17 +23,29 @@
 					<a class="btn-news active" href="#">风能利用</a>
 					<a class="btn-news" href="#">火星探索</a>
 					<a class="btn-news" href="#">参赛指南</a>
-					<a class="btn-news" href="#">红头文件</a>
+					<a class="btn-news" href="#">红头文件</a> -->
+				</div>
+				<div class="tabs-news-list typeList">
+					<a class="btn-news" href="javascript:void(0)" ng-repeat="item in typeList" data-id="{{item.id}}" ng-bind="item.name">大赛概况</a>
+					<!-- <a class="btn-news" href="#">创意作品单元</a>
+					<a class="btn-news" href="#">未来教育</a>
+					<a class="btn-news" href="#">未来出行（大学组）</a>
+					<a class="btn-news" href="#">未来出行（中学组）</a>
+					<a class="btn-news" href="#">科普实验单元</a>
+					<a class="btn-news active" href="#">风能利用</a>
+					<a class="btn-news" href="#">火星探索</a>
+					<a class="btn-news" href="#">参赛指南</a>
+					<a class="btn-news" href="#">红头文件</a> -->
 				</div>
 				<!-- contest para start -->
 				<div class="contest-cont-wrap">
 					<dl>
-						<dt class="contest-title">
+						<dt class="contest-title" ng-bind="Model.title">
 							SOLVE FOR TOMORROW 探知未来 <br>
 							2017年全国青年科普创新实验暨作品大赛 <br>
 							科普实验单元-风能利用命题
 						</dt>
-						<dd class="contest-para">
+						<dd class="contest-para" ng-bind-html="Model.content">
 							<p>一、命题背景</p>
 
 							<p>风能是地球表面空气流动所产生的动能，属于可再生能源。人类很早就开始利用风能，如利用风力提水、灌溉、磨面、舂米，用风帆推动船舶前进等。14世纪的欧洲，风车成为不可缺少的原动机，在荷兰风车先用于汲水，以后又用于榨油、锯木、纺织等。现在风能作为一种清洁的可持续能源，已经成为除水能外，技术最成熟、最具有规模化开发条件和商业发展前景的发电方式。</p>

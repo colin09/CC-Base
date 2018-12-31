@@ -69,7 +69,8 @@ namespace C.B.MySql.Repository.BaseM
                 return -1;
             t.IsDeleted = 1;
             t.UpdateTime = DateTime.Now;
-            Update(t);
+            //Update(t);
+            _context.Entry(t).State = EntityState.Modified;
             return _context.SaveChanges();
         }
 
@@ -77,7 +78,8 @@ namespace C.B.MySql.Repository.BaseM
         {
             t.IsDeleted = 1;
             t.UpdateTime = DateTime.Now;
-            Update(t);
+            //Update(t);
+            _context.Entry(t).State = EntityState.Modified;
             return _context.SaveChanges();
 
         }

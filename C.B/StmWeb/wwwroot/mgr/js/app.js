@@ -348,7 +348,7 @@ module.controller('mgrEventInfoCtl', function ($scope, $http) {
     }
     $scope.ModifyEventType = function () {
         $scope.NewType.IsShow = $scope.NewType.Show ? 1 : 0;
-        var url = "ModifyEventType";
+        var url = "EditEventType";
         $http.post(url, $scope.NewType).success(function (response) {
             if (response.success)
                 $scope.GetEventTypeList();
@@ -357,8 +357,8 @@ module.controller('mgrEventInfoCtl', function ($scope, $http) {
         });
     }
     $scope.RemoveEventType = function () {
-        var url = "RemoveEventType";
-        $http.post(url, { id: $scope.NewType.Id }).success(function (response) {
+        var url = "DeleteEventType?id="+$scope.NewType.Id;
+        $http.get(url).success(function (response) {
             if (response.success)
                 $scope.GetEventTypeList();
             else

@@ -14,6 +14,7 @@ namespace C.B.Models.Data
         public string TypeName { set; get; }
 
         public int NewsType { set; get; }
+        public int ExpertType{set;get;}
 
         public string Title { set; get; }
         public string Content { set; get; }

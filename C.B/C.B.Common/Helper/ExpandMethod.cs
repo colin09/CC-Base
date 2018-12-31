@@ -49,6 +49,11 @@ namespace C.B.Common.helper
             return date.ToString("yyyy-MM-dd");
         }
 
+        public static string ToDate(this DateTime date)
+        {
+            return date.ToString("yyyy-MM-dd");
+        }
+
 
         public static string ToFileType(this string fileExt)
         {

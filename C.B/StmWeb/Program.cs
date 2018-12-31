@@ -20,6 +20,6 @@ namespace StmWeb
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
-                .UseUrls("http://*:8090");
+                .UseUrls("http://*:80");
     }
 }

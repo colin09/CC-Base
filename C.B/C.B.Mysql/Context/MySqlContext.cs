@@ -34,6 +34,7 @@ namespace C.B.MySql.Context
             optionsBuilder.UseMySQL(_connStr);
         }
 
+        public DbSet<AreaInfo> AreaInfo { get; set; }
         public DbSet<Notice> Notice { get; set; }
         public DbSet<NewsInfo> NewsInfo { get; set; }
         public DbSet<Message> Message { get; set; }

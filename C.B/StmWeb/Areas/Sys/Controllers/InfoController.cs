@@ -130,12 +130,18 @@ namespace StmWeb.Area.Sys.Controllers
             var type = _eventTypeRepository.FirstOrDefault(model.Id);
             if (type == null)
                 return Json(BaseResponse.ErrorResponse("请选择一个类别进行删除操作。"));
-            _eventTypeRepository.Update(model);
+            type.Name = model.Name;
+            type.Level = model.Level;
+            type.IsShow = model.IsShow;
+            type.Icon = model.Icon;
+            type.SortNo = model.SortNo;
+            _eventTypeRepository.Update(type);
             return Json(BaseResponse.SuccessResponse());
         }
-        [HttpPost]
+
         public IActionResult DeleteEventType(int id)
         {
+            System.Console.WriteLine($"---> DeleteEventType : {id}");
             _eventTypeRepository.Delete(id);
             return Json(BaseResponse.SuccessResponse());
         }
