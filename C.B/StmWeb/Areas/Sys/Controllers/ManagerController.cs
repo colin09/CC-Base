@@ -33,13 +33,36 @@ namespace StmWeb.Area.Sys.Controllers
             return View();
         }
 
+        public IActionResult Password()
+        {
+            var curUser = HttpContext.User;
+            ViewBag.UserName = curUser.FindFirst(ClaimTypes.Name).Value;
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult ModifyPwd([FromBody]BaseRequest request)
+        {
+            var pwd = request.Key1;
+            var newPwd = request.Key1;
+            
+            var curUser = HttpContext.User;
+            var curUserInfo = GetCurrentUserInfo(curUser);
+            var m = _userRepository.FirstOrDefault(curUserInfo.Id);
+            if (m.Password != CryptoHelper.MD5Encrypt(pwd))
+                return Json(BaseResponse.ErrorResponse("原始密码错误。"));
+            m.Password = CryptoHelper.MD5Encrypt(newPwd);
+            _userRepository.Update(m);
+            return Json(BaseResponse.SuccessResponse());
+        }
+
 
         public IActionResult GetCurrentUser()
         {
             var curUser = HttpContext.User;
             var UserName = curUser.FindFirst(ClaimTypes.Name).Value;
 
-            return Json(BaseResponse.SuccessResponse(GetCurrentUser(curUser)));
+            return Json(BaseResponse.SuccessResponse(GetCurrentUserInfo(curUser)));
         }
 
 

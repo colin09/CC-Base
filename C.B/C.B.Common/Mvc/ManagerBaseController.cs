@@ -18,7 +18,7 @@ namespace C.B.Common.Mvc
 
         protected string UserName = "";
 
-        protected CurrentUser GetCurrentUser(ClaimsPrincipal curUser)
+        protected CurrentUser GetCurrentUserInfo(ClaimsPrincipal curUser)
         {
             if (_currentUser != null)
                 return _currentUser;

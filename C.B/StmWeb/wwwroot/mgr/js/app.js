@@ -49,6 +49,7 @@ module.controller('mgrDevCtl', function ($scope, $http) {
 
 });
 module.controller('mgrUserCtl', function ($scope, $http) {
+    $scope.Title = "系统用户";
 
     $scope.newUser = {
         AuthType: 2,
@@ -545,4 +546,28 @@ module.controller('mgrNoticeInfoCtl', function ($scope, $http) {
 
 
 
+});
+
+
+module.controller('mgrPasswordCtl', function ($scope, $http) {
+
+    $scope.Title = "修改密码";
+
+    $scope.ModifyPwd = function () {
+        var pwd = $("#txtPassword").val();
+        var newPwd = $("#txtNewPassword").val();
+        var chkPwd = $("#txtChkPassword").val();
+        if (newPwd != chkPwd) {
+            alert("密码不匹配。");
+        }
+        if (newPwd.length < 6)
+            alert("密码长度不能少于6位。");
+
+        $http.post("../../Sys/Manager/ModifyPwd", { key1: pwd, key2: newPwd }).success(function (response) {
+            if (response.success)
+                alert("修改成功");
+            else
+                alert("修改失败");
+        });
+    }
 });

@@ -13,14 +13,14 @@
                 <thead>
                     <tr>
                         <th>Id</th>
-                        <th>UserName</th>
-                        <th>TrueName</th>
-                        <th>Department</th>
-                        <th>AuthType</th>
-                        <th>State</th>
-                        <th>CreateTime</th>
-                        <th>UpdateTime</th>
-                        <th>IsDeleted</th>
+                        <th>用户名</th>
+                        <th>真实姓名</th>
+                        <th>部门</th>
+                        <th>账户类别</th>
+                        <th>状态</th>
+                        <th>创建时间</th>
+                        <!-- <th>UpdateTime</th> -->
+                        <!-- <th>IsDeleted</th> -->
                     </tr>
                 </thead>
                 <tbody>
@@ -32,8 +32,8 @@
                         <td><span ng-bind="item.authTypeTxt">AuthType</span></td>
                         <td><span ng-bind="item.state">State</span></td>
                         <td><span ng-bind="item.createTime">CreateTime</span></td>
-                        <td><span ng-bind="item.updateTime">UpdateTime</span></td>
-                        <td><span ng-bind="item.isDeleted">IsDeleted</span></td>
+                        <!-- <td><span ng-bind="item.updateTime">UpdateTime</span></td> -->
+                        <!-- <td><span ng-bind="item.isDeleted">IsDeleted</span></td> -->
                     </tr>
                      <tr>
                         <td>+</td>
@@ -43,7 +43,7 @@
                         <td>state:1</td>
                         <td>
                             <select ng-model="newUser.AuthType">
-                                <option value="1">develop</option>
+                                <!-- <option value="1">develop</option> -->
                                 <option value="2">admin</option>
                                 <option value="3">user</option>
                             </select>
