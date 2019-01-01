@@ -28,11 +28,11 @@
 					
 					<div class="clearfix"></div>
 					<div class="pagination">
-						<a class="prev disable" href=""><i class="arrow-left"></i></a>
-						<a class="current" href="">1</a>
-						<a class="" href="">2</a>
-						<a class="" href="">3</a>
-						<a class="next" href=""><i class="arrow-right"></i></a>
+						<a class="prev disable" href="javascript:void(0)" ng-click="Pager(1,-1)"><i class="arrow-left"></i></a>
+						<a class="current" href="" ng-bind="pagerEvent.pageIndex">1</a>
+						<a class="" href="">/</a>
+						<a class="" href="" ng-bind="pagerEvent.pageIndex">3</a>
+						<a class="next" href="javascript:void(0)" ng-click="Pager(1,1)"><i class="arrow-right"></i></a>
 					</div>
 				</div>
 				<!-- solve news end -->
@@ -48,11 +48,11 @@
 					
 					<div class="clearfix"></div>
 					<div class="pagination">
-						<a class="prev disable" href=""><i class="arrow-left"></i></a>
-						<a class="current" href="">1</a>
-						<a class="" href="">2</a>
-						<a class="" href="">3</a>
-						<a class="next" href=""><i class="arrow-right"></i></a>
+						<a class="prev disable" href="javascript:void(0)" ng-click="Pager(3,-1)"><i class="arrow-left"></i></a>
+						<a class="current" href="" ng-bind="pagerVideo.pageIndex">1</a>
+						<a class="" href="">/</a>
+						<a class="" href="" ng-bind="pagerVideo.pageCount">3</a>
+						<a class="next" href="javascript:void(0)" ng-click="Pager(3,1)"><i class="arrow-right"></i></a>
 					</div>
 				</div>
 				<!-- video news end -->
@@ -68,11 +68,11 @@
 					
 					<div class="clearfix"></div>
 					<div class="pagination">
-						<a class="prev disable" href=""><i class="arrow-left"></i></a>
-						<a class="current" href="">1</a>
-						<a class="" href="">2</a>
-						<a class="" href="">3</a>
-						<a class="next" href=""><i class="arrow-right"></i></a>
+						<a class="prev disable" href="javascript:void(0)" ng-click="Pager(2,-1)"><i class="arrow-left"></i></a>
+						<a class="current" href="" ng-bind="pagerImage.pageIndex">1</a>
+						<a class="" href="">/</a>
+						<a class="" href="" ng-bind="pagerImage.pageCount">3</a>
+						<a class="next" href="javascript:void(0)" ng-click="Pager(2,1)"><i class="arrow-right"></i></a>
 					</div>
 				</div>
 				<!-- pic news end -->

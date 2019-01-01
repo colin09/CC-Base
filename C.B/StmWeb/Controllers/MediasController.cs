@@ -48,7 +48,7 @@ namespace StmWeb.Controllers
                 video = m.VideoId,
                 date = m.CreateTime.ToString("yyyy-MM-dd"),
             });
-            return Json(BaseResponse.SuccessResponse(response));
+            return Json(BaseResponse.SuccessResponse(response,request.Pager));
         }
         public IActionResult GetDetail(int id)
         {

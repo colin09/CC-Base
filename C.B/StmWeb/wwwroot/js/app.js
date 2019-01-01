@@ -226,25 +226,63 @@ module.controller('MediaIndexCtl', function ($scope, $http) {
     $("#divBanner").removeClass("ng-hide");
     $(".nav-top>li>a").eq(3).addClass("active");
 
-    $scope.pager = { pageIndex: 1, pageSize: 9 };
+    $scope.pagerEvent = { pageIndex: 1, pageSize: 9, pageCount: 1 };
+    $scope.pagerImage = { pageIndex: 1, pageSize: 9, pageCount: 1 };
+    $scope.pagerVideo = { pageIndex: 1, pageSize: 9, pageCount: 1 };
 
     $scope.InitMedia = function (newsType) {
-        var request = { num1: newsType, pager: $scope.pager };
+        var page = $scope.pagerEvent;
+        if (newsType == 2) page = $scope.pagerImage;
+        if (newsType == 3) page = $scope.pagerVideo;
+
+        var request = { num1: newsType, pager: page };
         $http.post("../Medias/GetList", request).success(function (response) {
             if (response.success) {
                 switch (newsType) {
                     case 1:
                         $scope.NewsEventList = response.data;
+                        $scope.pagerEvent.pageCount = response.pager.pageCount;
                         break;
                     case 2:
                         $scope.NewsImageList = response.data;
+                        $scope.pagerImage.pageCount = response.pager.pageCount;
                         break;
                     case 3:
                         $scope.NewsVideoList = response.data;
+                        $scope.pagerVideo.pageCount = response.pager.pageCount;
                         break;
                 }
             }
         });
+    }
+
+    $scope.Pager = function (tab, opt) {
+        switch (tab) {
+            case 1:
+                $scope.pagerEvent.pageIndex += opt;
+                if ($scope.pagerEvent.pageIndex > $scope.pagerEvent.pageCount)
+                    $scope.pagerEvent.pageIndex = $scope.pagerEvent.pageCount;
+                if ($scope.pagerEvent.pageIndex < 1)
+                    $scope.pagerEvent.pageIndex = 1;
+                $scope.InitMedia(tab);
+                break;
+            case 2:
+                $scope.pagerImage.pageIndex += opt;
+                if ($scope.pagerImage.pageIndex > $scope.pagerImage.pageCount)
+                    $scope.pagerImage.pageIndex = $scope.pagerImage.pageCount;
+                if ($scope.pagerImage.pageIndex < 1)
+                    $scope.pagerImage.pageIndex = 1;
+                $scope.InitMedia(tab);
+                break;
+            case 3:
+                $scope.pagerVideo.pageIndex += opt;
+                if ($scope.pagerVideo.pageIndex > $scope.pagerVideo.pageCount)
+                    $scope.pagerVideo.pageIndex = $scope.pagerVideo.pageCount;
+                if ($scope.pagerVideo.pageIndex < 1)
+                    $scope.pagerVideo.pageIndex = 1;
+                $scope.InitMedia(tab);
+                break;
+        }
     }
 
     $scope.InitMedia(1);
@@ -284,7 +322,7 @@ module.controller('MediaDetailCtl', function ($scope, $http) {
                 src: vioUrl,
                 type: 'video/mp4'
             }],
-            autoplay :false
+            autoplay: false
         };
         var player = videojs('my-video', option, function () {
             console.log('Good to go!');

@@ -30,11 +30,25 @@ namespace C.B.Models.Data
                 Success = success,
             };
         }
-
+        public static BasePageResponse<T> SuccessResponse<T>(T data, Pager pager, bool success = true) where T : class
+        {
+            return new BasePageResponse<T>
+            {
+                Data = data,
+                Pager = pager,
+                Success = success,
+            };
+        }
     }
 
     public class BaseResponse<T> : BaseResponse where T : class
     {
+        public T Data { set; get; }
+    }
+
+    public class BasePageResponse<T> : BaseResponse where T : class
+    {
+        public Pager Pager { set; get; }
         public T Data { set; get; }
     }
 }

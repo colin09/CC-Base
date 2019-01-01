@@ -9,12 +9,11 @@ using Newtonsoft.Json;
 
 namespace C.B.Common.helper
 {
-    public static class FileHelper
+    public class FileHelper
     {
 
         public async static Task<FileModel[]> SaveFiles(IFormFileCollection files)
         {
-
             string webRootPath = @"../../Sources/";
             string contentRootPath = $"{Directory.GetCurrentDirectory()}/SourcesFile/";
 
@@ -37,29 +36,58 @@ namespace C.B.Common.helper
                     {
                         await formFile.CopyToAsync(stream);
                     }
-                    fileList.Add(new FileModel
+
+                    var fModel = new FileModel
                     {
                         Filepath = filePath,
                         FileUrl = fileUrl,
                         FileName = formFile.FileName,
                         FileType = fileExt.ToFileType(),
                         FileMd5 = "",
-                    });
+                    };
+
+                    if (fModel.FileType == "video")
+                    {
+                        fModel.ThumbUrl = CreateVideoThrum(fModel);
+                    }
+
+                    fileList.Add(fModel);
                 }
             }
             return fileList.ToArray();
         }
 
+        private static string CreateVideoThrum(FileModel model)
+        {
+            /**
+            # 50分钟处截屏 
+            ffmpeg -ss 00:50:00  -i RevolutionOS.rmvb sample.jpg  -r 1 -vframes 1 -an -vcodec mjpeg  
+            # 或者使用 -f 参数指定输出的格式为 mjpeg ，效果一样 
+            ffmpeg -ss 00:50:00  -i RevolutionOS.rmvb sample.jpg  -r 1 -vframes 1 -an -f mjpeg
+            */
 
+            var time = "00:01:00";
+            var fileImagePath = model.Filepath.Substring(0, model.Filepath.LastIndexOf(".")) + ".jpg";
+
+            var cmd = "ffmpeg -ss {0}  -i {1} {2}  -r 1 -vframes 1 -an -f mjpeg";
+            cmd = cmd.Frmt(time, model.Filepath, fileImagePath);
+
+            var message = "";
+            CmdTool.RunCmd(cmd, out message);
+            System.Console.WriteLine(message);
+
+            return fileImagePath;
+        }
 
     }
 
     public class FileModel
     {
-        public string FileName {set;get;}
-        public string Filepath {set;get;}
-        public string FileUrl {set;get;}
-        public string FileType {set;get;}
-        public string FileMd5 {set;get;}
+        public string FileName { set; get; }
+        public string Filepath { set; get; }
+        public string FileUrl { set; get; }
+        public string ThumbUrl { set; get; }
+        public string FileType { set; get; }
+        public string FileMd5 { set; get; }
     }
 }

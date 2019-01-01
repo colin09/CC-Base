@@ -63,7 +63,7 @@ namespace StmWeb.Area.Sys.Controllers
         [HttpPost]
         public IActionResult SaveEditor([FromForm]EditorModel model)
         {
-            System.Console.WriteLine($"==> EditorModel - 01 : {model.ToJson()}");
+            //System.Console.WriteLine($"==> EditorModel - 01 : {model.ToJson()}");
             var msg = "";
             if (!model.Validate(out msg))
                 return Json(BaseResponse.ErrorResponse(msg));
@@ -78,10 +78,13 @@ namespace StmWeb.Area.Sys.Controllers
                     if (item.FileType == "image")
                         model.ThumbUrl = item.FileUrl;
                     if (item.FileType == "video")
+                    {
+                        model.ThumbUrl = item.ThumbUrl;
                         model.FileUrl = item.FileUrl;
+                    }
                 });
             }
-            System.Console.WriteLine($"==> EditorModel - 02 : {model.ToJson()}");
+            //System.Console.WriteLine($"==> EditorModel - 02 : {model.ToJson()}");
             var result = _editorService.ModifyEditor(model);
             if (!result)
                 return Json(BaseResponse.ErrorResponse("数据错误。"));
