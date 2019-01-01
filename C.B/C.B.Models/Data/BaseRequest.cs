@@ -13,6 +13,7 @@ namespace C.B.Models.Data
         public string Key1 { set; get; }
         public string Key2 { set; get; }
         public string Key3 { set; get; }
+        public string Key4 { set; get; }
     }
 
     public class BasePageRequest : BaseRequest

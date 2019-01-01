@@ -9,6 +9,7 @@
     <ul class="nav nav-tabs">
         <li role="presentation" ng-click="tab='eventType'" ng-class="tab=='eventType'?'active':''"><a href="#">赛事分类</a></li>
         <li role="presentation" ng-click="tab='eventInfo'" ng-class="tab=='eventInfo'?'active':''"><a href="#">赛事信息</a></li>
+        <li role="presentation" ng-click="tab='eventArea'" ng-class="tab=='eventArea'?'active':''"><a href="#">赛区</a></li>
     </ul>
 
     <div id="divEventType" ng-show="tab=='eventType'">
@@ -24,14 +25,14 @@
                             <input type="text" ng-model="NewType.Name" />
                         </td>
                     </tr>
-                    <tr>
+                    <!-- <tr>
                         <td>
                             级别：
                         </td>
                         <td>
                             <input type="text" ng-model="NewType.Level" />
                         </td>
-                    </tr>
+                    </tr> -->
                     <tr>
                         <td>
                             是否显示：
@@ -40,14 +41,14 @@
                             <input type="checkbox" ng-model="NewType.Show">
                         </td>
                     </tr>
-                    <tr>
+                    <!-- <tr>
                         <td>
                             图标：
                         </td>
                         <td>
                             <input type="text" ng-model="NewType.Icon" />
                         </td>
-                    </tr>
+                    </tr> -->
                     <tr>
                         <td>
                             排序：
@@ -69,8 +70,6 @@
                 </table>
             </div>
         </div>
-
-
     </div>
 
 
@@ -121,6 +120,17 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    <div id="divEventArea" ng-show="tab=='eventArea'">
+        <br />
+       <form>
+            <div class="form-group">
+                <label for="exampleInputEmail1">赛区：  </label>
+                <textarea class="form-control" id="txtEventArea" rows="10" placeholder="多个区域以逗号分隔"></textarea>
+            </div>
+            <button type="button" class="btn btn-primary" ng-click="SaveEventArea()"> 确 定 </button>
+        </form>
     </div>
 
 </div>

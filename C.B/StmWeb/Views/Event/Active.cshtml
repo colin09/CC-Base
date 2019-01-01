@@ -13,47 +13,52 @@
 			</div>
 			<div class="command-wrap width-wrap clearfix">
 				<!-- contact start -->
-				<form action="">
+				<form >
 					<div class="inp-wrap clearfix">
 						<label for="">提问人姓名：</label>
 						<div class="inp-name-wrap">
-							<input class="inp-name" type="text" placeholder="请输入姓名">
+							<input class="inp-name" type="text" ng-model="askName" placeholder="请输入姓名">
 						</div>
 					</div>
 					<div class="inp-wrap clearfix">
 						<label for="">提问人赛区：</label>
-						<select class="select-area" name="" id="#area">
-							<option value="area">请选择赛区</option>
-							<option value="beijing">北京</option>
-							<option value="shanghai">上海</option>
-							<option value="haerbin">哈尔滨</option>
+						<select class="select-area" ng-model="askArea">
+							<option value="0" >请选择赛区</option>
+							<option ng-repeat="item in areaList" value="{{item}}" ng-bind="item">北京</option>
+							<!-- <option value="shanghai">上海</option>
+							<option value="haerbin">哈尔滨</option> -->
 						</select>
 					</div>
 					<div class="txt-wrap clearfix">
 						<label for="">提 问 内 容：</label>
-						<textarea class="txt-question" name="" id="" cols="30" rows="10" placeholder="请输入您的问题"></textarea>
+						<textarea class="txt-question" name=""  ng-model="askContent" cols="30" rows="10" placeholder="请输入您的问题"></textarea>
+					</div>
+					<div class="txt-wrap clearfix">
+						<label for="">验 证 码：</label>
+						<input class="inp-name" type="text" ng-model="askCode" placeholder="请输入验证码">
+                        <img id="imgVerifyCode" style="width:120px; height:40px; margin: 5px 15px; float:none; vertical-align: top;"/>
 					</div>
 					<div class="inp-wrap clearfix">
 						<label for=""></label>
-						<button class="btn-submit">提交问题</button>
+						<button class="btn-submit" ng-click="SubmitAsk()">提交问题</button>
 					</div>
 				</form>
-				<dl class="dl-command">
-					<dt class="question">怎么参加今年的比赛？</dt>
+				<dl class="dl-command" ng-repeat="item in AskList">
+					<dt class="question" ng-bind="item.content">怎么参加今年的比赛？</dt>
 					<dd class="ask">
-						<span class="spn-user"><i class="ico ico-user"></i>科学小能手</span>
-						<span class="spn-area"><i class="ico ico-area"></i>北京赛区</span>
+						<span class="spn-user"><i class="ico ico-user"></i>{{item.name}}</span>
+						<span class="spn-area"><i class="ico ico-area"></i>{{item.area}}</span>
 					</dd>
-					<dd class="answer">
-						<p class="p-answer">本届大赛分为创意作品单元和科普实验单元。选手可以通过官网报名大赛，还可以通过APP注册报名，并提交科普实验单元的比赛视频和比赛成绩。谢谢！</p>
+					<dd class="answer" ng-show="item.isReply==1">
+						<p class="p-answer" ng-bind="item.replyContent">本届大赛分为创意作品单元和科普实验单元。选手可以通过官网报名大赛，还可以通过APP注册报名，并提交科普实验单元的比赛视频和比赛成绩。谢谢！</p>
 						<p class="p-solve clearfix">
-							<span class="spn-time">2018-12-20</span>
-							<span class="spn-solve">探知未来</span>
+							<span class="spn-time" ng-bind="item.replyDate">2018-12-20</span>
+							<span class="spn-solve" ng-bind="item.replyName">探知未来</span>
 							<i class="ico ico-solve"></i>
 						</p>
 					</dd>
 				</dl>
-				<dl class="dl-command">
+				<!-- <dl class="dl-command">
 					<dt class="question">麻烦问一下，提交的文件是啥格式的？</dt>
 					<dd class="ask">
 						<span class="spn-user"><i class="ico ico-user"></i>创新科技</span>
@@ -97,7 +102,7 @@
 							<i class="ico ico-solve"></i>
 						</p>
 					</dd>
-				</dl>
+				</dl> -->
 				<!-- contact end -->
 			</div>
 		</div>

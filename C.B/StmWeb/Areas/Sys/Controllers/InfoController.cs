@@ -27,6 +27,7 @@ namespace StmWeb.Area.Sys.Controllers
         private NewsInfoRepository _newsInfoRepository;
         private MessageRepository _messageRepository;
         private ExpertInfoRepository _expertInfoRepository;
+        private AreaInfoRepository _areaRepository;
 
         public InfoController(IMapper mapper)
         {
@@ -39,6 +40,7 @@ namespace StmWeb.Area.Sys.Controllers
             _newsInfoRepository = new NewsInfoRepository();
             _messageRepository = new MessageRepository();
             _expertInfoRepository = new ExpertInfoRepository();
+            _areaRepository = new AreaInfoRepository();
         }
 
 
@@ -121,6 +123,10 @@ namespace StmWeb.Area.Sys.Controllers
             {
                 return Json(BaseResponse.ErrorResponse("请选择一个类别作为父节点类别。"));
             }
+            var parent = _eventTypeRepository.FirstOrDefault(model.ParentId);
+            model.Level = parent.Level + 1;
+            model.SortNo = DateTime.Now.ToOADate();
+
             _eventTypeRepository.Insert(model);
             return Json(BaseResponse.SuccessResponse());
         }
@@ -131,9 +137,9 @@ namespace StmWeb.Area.Sys.Controllers
             if (type == null)
                 return Json(BaseResponse.ErrorResponse("请选择一个类别进行删除操作。"));
             type.Name = model.Name;
-            type.Level = model.Level;
+            // type.Level = model.Level;
             type.IsShow = model.IsShow;
-            type.Icon = model.Icon;
+            // type.Icon = model.Icon;
             type.SortNo = model.SortNo;
             _eventTypeRepository.Update(type);
             return Json(BaseResponse.SuccessResponse());
@@ -151,6 +157,42 @@ namespace StmWeb.Area.Sys.Controllers
             var list = _eventInfoRepository.Where(pager, m => m.IsDeleted == 0 && m.EventId == type, s => s.CreateTime);
             return Json(BaseResponse.SuccessResponse(_mapper.Map<EditorModel[]>(list)));
         }
+
+        public IActionResult GetEventArea()
+        {
+            var list = _areaRepository.Where(m => m.IsDeleted == 0);
+            var areas = list.Select(m => m.Name).ToList();
+            var response = string.Join(",", areas);
+            return Json(BaseResponse.SuccessResponse(response));
+        }
+        public void DeleteAllEventArea()
+        {
+            var list = _areaRepository.Where(m => m.IsDeleted == 0);
+            if (list.Count() > 0)
+            {
+                list.ToList().ForEach(item =>
+                {
+                    _areaRepository.Delete(item.Id);
+                });
+            }
+        }
+        public IActionResult SaveEventArea([FromBody]BaseRequest request)
+        {
+            request.Key2 = request.Key2.Replace("，", ",");
+            if (request.Key2.IsEmpty())
+                return Json(BaseResponse.ErrorResponse("请填写赛区信息。"));
+            var areas = request.Key2.Split(",", StringSplitOptions.RemoveEmptyEntries);
+            var list = areas.Select(m => new AreaInfo
+            {
+                Name = m,
+                ParentId = 1,
+            }).ToList();
+            DeleteAllEventArea();
+            _areaRepository.InsertBatch(list);
+            return Json(BaseResponse.SuccessResponse());
+        }
+
+
 
 
         #endregion

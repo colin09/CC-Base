@@ -19,54 +19,13 @@
 				<!-- solve news start -->
 				<div class="tabs pic-news-wrap width-wrap clearfix">
 					<div class="one-news-wrap" ng-repeat="news in NewsEventList">
-						<a href="media-para.html">
+						<a href="../Medias/Detail?id={{news.id}}">
 							<div class="img-media-wrap"><img src="{{news.url}}" alt=""></div>
 							<h3 class="h3-news-title" ng-bind="new.title">决赛名单来了，快看看有没有你，等你来参加</h3>
 							<p class="publish-wrap"><span class="spn-publisher" ng-bind="new.author">发布人</span><span class="spn-publish-time" ng-bind="new.date">2018-10-30</span></p>
 						</a>
 					</div>
-					<!-- <div class="one-news-wrap">
-						<a href="media-para.html">
-							<div class="img-media-wrap"><img src="~/images/img-news1.jpg" alt=""></div>
-							<h3 class="h3-news-title">决赛名单来了，快看看有没有你，等你来参加</h3>
-							<p class="publish-wrap"><span class="spn-publisher">发布人</span><span class="spn-publish-time">2018-10-30</span></p>
-						</a>
-					</div>
-					<div class="one-news-wrap">
-						<a href="media-para.html">
-							<div class="img-media-wrap"><img src="~/images/img-news2.jpg" alt=""></div>
-							<h3 class="h3-news-title">全国总决赛的通知文件（正式通知文件）</h3>
-							<p class="publish-wrap"><span class="spn-publisher">发布人</span><span class="spn-publish-time">2018-10-30</span></p>
-						</a>
-					</div>
-					<div class="one-news-wrap">
-						<a href="media-para.html">
-							<div class="img-media-wrap"><img src="~/images/img-news3.jpg" alt=""></div>
-							<h3 class="h3-news-title">2018年全国青年科普创新实验暨作品大赛</h3>
-							<p class="publish-wrap"><span class="spn-publisher">发布人</span><span class="spn-publish-time">2018-10-30</span></p>
-						</a>
-					</div>
-					<div class="one-news-wrap">
-						<a href="media-para.html">
-							<div class="img-media-wrap"><img src="~/images/img-news4.jpg" alt=""></div>
-							<h3 class="h3-news-title">全国总决赛的通知文件（正式通知文件）</h3>
-							<p class="publish-wrap"><span class="spn-publisher">发布人</span><span class="spn-publish-time">2018-10-30</span></p>
-						</a>
-					</div>
-					<div class="one-news-wrap">
-						<a href="media-para.html">
-							<div class="img-media-wrap"><img src="~/images/img-news5.jpg" alt=""></div>
-							<h3 class="h3-news-title">2018年全国青年科普创新实验暨作品大赛</h3>
-							<p class="publish-wrap"><span class="spn-publisher">发布人</span><span class="spn-publish-time">2018-10-30</span></p>
-						</a>
-					</div>
-					<div class="one-news-wrap">
-						<a href="media-para.html">
-							<div class="img-media-wrap"><img src="~/images/img-news6.jpg" alt=""></div>
-							<h3 class="h3-news-title">决赛名单来了，快看看有没有你，等你来参加</h3>
-							<p class="publish-wrap"><span class="spn-publisher">发布人</span><span class="spn-publish-time">2018-10-30</span></p>
-						</a>
-					</div> -->
+					
 					<div class="clearfix"></div>
 					<div class="pagination">
 						<a class="prev disable" href=""><i class="arrow-left"></i></a>
@@ -86,41 +45,7 @@
 							<p class="publish-wrap"><span class="spn-publisher" ng-bind="news.author">发布人</span><span class="spn-publish-time" ng-bind="news.date">2018-10-30</span></p>
 						</a>
 					</div>
-					<!-- <div class="one-video-wrap">
-						<a href="media-para.html">
-							<div class="img-media-wrap"><img src="~/images/img-news5.jpg" alt=""></div>
-							<h3 class="h3-news-title">全国总决赛的通知文件（正式通知文件）</h3>
-							<p class="publish-wrap"><span class="spn-publisher">发布人</span><span class="spn-publish-time">2018-10-30</span></p>
-						</a>
-					</div>
-					<div class="one-video-wrap">
-						<a href="media-para.html">
-							<div class="img-media-wrap"><img src="~/images/img-news6.jpg" alt=""></div>
-							<h3 class="h3-news-title">2018年全国青年科普创新实验暨作品大赛</h3>
-							<p class="publish-wrap"><span class="spn-publisher">发布人</span><span class="spn-publish-time">2018-10-30</span></p>
-						</a>
-					</div>
-					<div class="one-video-wrap">
-						<a href="media-para.html">
-							<div class="img-media-wrap"><img src="~/images/img-video1.jpg" alt=""></div>
-							<h3 class="h3-news-title">决赛名单来了，快看看有没有你，等你来参加</h3>
-							<p class="publish-wrap"><span class="spn-publisher">发布人</span><span class="spn-publish-time">2018-10-30</span></p>
-						</a>
-					</div>
-					<div class="one-video-wrap">
-						<a href="media-para.html">
-							<div class="img-media-wrap"><img src="~/images/img-video2.jpg" alt=""></div>
-							<h3 class="h3-news-title">全国总决赛的通知文件（正式通知文件）</h3>
-							<p class="publish-wrap"><span class="spn-publisher">发布人</span><span class="spn-publish-time">2018-10-30</span></p>
-						</a>
-					</div>
-					<div class="one-video-wrap">
-						<a href="media-para.html">
-							<div class="img-media-wrap"><img src="~/images/img-video3.jpg" alt=""></div>
-							<h3 class="h3-news-title">2018年全国青年科普创新实验暨作品大赛</h3>
-							<p class="publish-wrap"><span class="spn-publisher">发布人</span><span class="spn-publish-time">2018-10-30</span></p>
-						</a>
-					</div> -->
+					
 					<div class="clearfix"></div>
 					<div class="pagination">
 						<a class="prev disable" href=""><i class="arrow-left"></i></a>
@@ -134,47 +59,13 @@
 				<!-- pic news start -->
 				<div class="tabs pic-news-wrap width-wrap clearfix">
 					<div class="one-news-wrap" ng-repeat="news in NewsImageList">
-						<a href="../Medias/Detail?id={{new.id}}">
+						<a href="../Medias/Detail?id={{news.id}}">
 							<div class="img-media-wrap"><img src="{{news.url}}" alt=""></div>
 							<h3 class="h3-news-title" ng-bind="news.title">决赛名单来了，快看看有没有你，等你来参加</h3>
 							<p class="publish-wrap"><span class="spn-publisher" ng-bind="news.author">发布人</span><span class="spn-publish-time" ng-bind="news.date">2018-10-30</span></p>
 						</a>
 					</div>
-					<!-- <div class="one-news-wrap">
-						<a href="media-para.html">
-							<div class="img-media-wrap"><img src="~/images/img-video2.jpg" alt=""></div>
-							<h3 class="h3-news-title">全国总决赛的通知文件（正式通知文件）</h3>
-							<p class="publish-wrap"><span class="spn-publisher">发布人</span><span class="spn-publish-time">2018-10-30</span></p>
-						</a>
-					</div>
-					<div class="one-news-wrap">
-						<a href="media-para.html">
-							<div class="img-media-wrap"><img src="~/images/img-video3.jpg" alt=""></div>
-							<h3 class="h3-news-title">2018年全国青年科普创新实验暨作品大赛</h3>
-							<p class="publish-wrap"><span class="spn-publisher">发布人</span><span class="spn-publish-time">2018-10-30</span></p>
-						</a>
-					</div>
-					<div class="one-news-wrap">
-						<a href="media-para.html">
-							<div class="img-media-wrap"><img src="~/images/img-news4.jpg" alt=""></div>
-							<h3 class="h3-news-title">全国总决赛的通知文件（正式通知文件）</h3>
-							<p class="publish-wrap"><span class="spn-publisher">发布人</span><span class="spn-publish-time">2018-10-30</span></p>
-						</a>
-					</div>
-					<div class="one-news-wrap">
-						<a href="media-para.html">
-							<div class="img-media-wrap"><img src="~/images/img-news5.jpg" alt=""></div>
-							<h3 class="h3-news-title">2018年全国青年科普创新实验暨作品大赛</h3>
-							<p class="publish-wrap"><span class="spn-publisher">发布人</span><span class="spn-publish-time">2018-10-30</span></p>
-						</a>
-					</div>
-					<div class="one-news-wrap">
-						<a href="media-para.html">
-							<div class="img-media-wrap"><img src="~/images/img-news6.jpg" alt=""></div>
-							<h3 class="h3-news-title">决赛名单来了，快看看有没有你，等你来参加</h3>
-							<p class="publish-wrap"><span class="spn-publisher">发布人</span><span class="spn-publish-time">2018-10-30</span></p>
-						</a>
-					</div> -->
+					
 					<div class="clearfix"></div>
 					<div class="pagination">
 						<a class="prev disable" href=""><i class="arrow-left"></i></a>

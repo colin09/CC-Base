@@ -48,10 +48,17 @@ namespace C.B.Common.helper
             var date = DateTime.Parse("1899-12-30").AddMilliseconds(Math.Round(oadate * 24 * 60 * 60 * 1000));
             return date.ToString("yyyy-MM-dd");
         }
-
         public static string ToDate(this DateTime date)
         {
+            if (date == null)
+                return "";
             return date.ToString("yyyy-MM-dd");
+        }
+        public static string ToDate(this DateTime? date)
+        {
+            if (date == null)
+                return "";
+            return date.Value.ToString("yyyy-MM-dd");
         }
 
 

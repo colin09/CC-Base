@@ -26,10 +26,15 @@ namespace StmWeb.Controllers
             return View();
         }
 
+        public IActionResult Detail(int id)
+        {
+            ViewBag.Id = id;
+            return View();
+        }
 
         public IActionResult GetList([FromBody]BasePageRequest request)
         {
-            System.Console.WriteLine($" ===>  pager:{request.Pager.ToJson()}, type:{request.Num1}");
+            //System.Console.WriteLine($" ===>  pager:{request.Pager.ToJson()}, type:{request.Num1}");
             var newType = (NewsType)request.Num1;
             var result = _repository.Where(request.Pager, m => m.NewsType == newType && m.IsDeleted == 0, m => m.CreateTime);
             var response = result.Select(m => new
@@ -43,6 +48,23 @@ namespace StmWeb.Controllers
                 video = m.VideoId,
                 date = m.CreateTime.ToString("yyyy-MM-dd"),
             });
+            return Json(BaseResponse.SuccessResponse(response));
+        }
+        public IActionResult GetDetail(int id)
+        {
+            var m = _repository.FirstOrDefault(id);
+             var response = new
+            {
+                id = m.Id,
+                type = m.NewsType,
+                title = m.Title,
+                content = m.Content,
+                pubOrg = m.PubOrg,
+                author = m.Author,
+                url = m.ThumUrl,
+                video = m.VideoUrl,
+                date = m.CreateTime.ToString("yyyy-MM-dd"),
+            };
             return Json(BaseResponse.SuccessResponse(response));
         }
 

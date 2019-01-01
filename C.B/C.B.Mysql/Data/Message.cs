@@ -23,9 +23,9 @@ namespace C.B.MySql.Data
         public string ReplyName { set; get; }
         public DateTime? ReplyTime { set; get; }
 
-        public int IsShow{set;get;}
-        public int IsTop{set;get;}
-        
+        public int IsShow { set; get; }
+        public int IsTop { set; get; }
+
         public double SortNo { set; get; }
     }
 }

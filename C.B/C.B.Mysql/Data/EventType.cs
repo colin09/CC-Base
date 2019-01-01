@@ -24,7 +24,7 @@ namespace C.B.MySql.Data {
 
         [MaxLength (128)]
         public string Icon { set; get; }
-        public int SortNo { set; get; }
+        public double SortNo { set; get; }
     }
 }
 

@@ -5,9 +5,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using C.B.Common.helper;
 using C.B.Models.Data;
+using C.B.MySql.Data;
 using C.B.MySql.Repository.EntityRepositories;
 using Microsoft.AspNetCore.Mvc;
 using StmWeb.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace StmWeb.Controllers
 {
@@ -15,11 +17,15 @@ namespace StmWeb.Controllers
     {
         private EventInfoRepository _repository;
         private EventTypeRepository _typeRepository;
+        private MessageRepository _messageRepository;
+        private AreaInfoRepository _areaRepository;
 
         public EventController()
         {
             _repository = new EventInfoRepository();
             _typeRepository = new EventTypeRepository();
+            _messageRepository = new MessageRepository();
+            _areaRepository = new AreaInfoRepository();
         }
 
         public IActionResult Index()
@@ -45,14 +51,16 @@ namespace StmWeb.Controllers
         }
 
 
-        public IActionResult GetTypeList(int parentId)
+        public IActionResult GetTypeList(int parentId, int level = 1)
         {
             var list = _typeRepository.Where(m => m.ParentId == parentId && m.IsDeleted == 0);
+            if (parentId == 0)
+                list = _typeRepository.Where(m => m.Level == level && m.IsDeleted == 0 && m.IsShow == 1);
             var response = list.Select(m => new
             {
                 id = m.Id,
                 name = m.Name,
-            });
+            }).ToList();
             return Json(BaseResponse.SuccessResponse(response));
         }
 
@@ -75,6 +83,56 @@ namespace StmWeb.Controllers
         }
 
 
+        public IActionResult GetAreaList()
+        {
+            var list = _areaRepository.Where(m => m.IsDeleted == 0);
+            var response = list.Select(m => m.Name);
+            return Json(BaseResponse.SuccessResponse(response));
+        }
+
+        [HttpPost]
+        //public IActionResult SubmitAsk(string name, string area, string content, string code)
+        public IActionResult SubmitAsk([FromBody]BaseRequest request)
+        {
+            var code = request.Key4;
+            if (code.IsEmpty())
+                return Json(BaseResponse.ErrorResponse("请填写验证码。"));
+            var vCode = HttpContext.Session.GetString("Session.VerifyCode");
+            if (vCode.ToLower() != code.ToLower())
+                return Json(BaseResponse.ErrorResponse("验证码错误。"));
+
+            HttpContext.Session.SetString ("Session.VerifyCode", "empty-empty");
+
+            var message = new Message
+            {
+                Title = "",
+                Content =  request.Key3,
+                Region =  request.Key2,
+                Name =  request.Key1,
+                IsShow = 1,
+                IsTop = 0,
+                SortNo = DateTime.Now.ToOADate(),
+            };
+            _messageRepository.Insert(message);
+            return Json(BaseResponse.SuccessResponse());
+        }
+        public IActionResult GetAskList(Pager pager)
+        {
+            var list = _messageRepository.Where(pager, m => m.IsDeleted == 0 && m.IsShow == 1, m => m.SortNo);
+            var response = list.Select(m => new
+            {
+                id = m.Id,
+                name = m.Name,
+                content = m.Content,
+                area = m.Region,
+                date = m.CreateTime.ToDate(),
+                replyName = m.ReplyName,
+                replyContent = m.ReplyContent,
+                replyDate = m.ReplyTime.ToDate(),
+                isReply = m.ReplyTime.HasValue ? 1 : 0,
+            }).ToList();
+            return Json(BaseResponse.SuccessResponse(response));
+        }
 
 
     }

@@ -41,6 +41,7 @@ namespace StmWeb.Area.Sys.Controllers
             var code = HttpContext.Session.GetString("Session.VerifyCode");
             if (verifyCode.ToLower() != code.ToLower())
                 return Json(BaseResponse.ErrorResponse("验证码错误。"));
+            HttpContext.Session.SetString ("Session.VerifyCode", "empty-empty");
 
             if (userName.IsEmpty() || password.IsEmpty())
                 return Json(BaseResponse.ErrorResponse("用户名或密码错误。"));

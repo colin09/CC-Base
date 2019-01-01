@@ -1,6 +1,6 @@
 //var module = angular.module('managerApp', ['ngRoute', 'ui.calendar', 'ui.bootstrap','ngSanitize']);
 
-var module = angular.module('managerApp', ['ngSanitize',"ngWaterfall"]);
+var module = angular.module('managerApp', ['ngSanitize', "ngWaterfall"]);
 
 
 module.controller('mgrDevCtl', function ($scope, $http) {
@@ -133,7 +133,7 @@ module.controller('mgrResourceInfoCtl', function ($scope, $http) {
     $scope.GetInfoList = function (type) {
         var url = "../../Sys/File/Browse?type=" + type;
         $http.get(url).success(function (response) {
-            if (response.success ) {
+            if (response.success) {
                 $scope.ResourceList = response.data;
             }
         });
@@ -272,10 +272,10 @@ module.controller('mgrEventInfoCtl', function ($scope, $http) {
         Id: 0,
         ParentId: 0,
         Name: "",
-        Level: "",
+        // Level: "",
         Show: true,
         IsShow: 1,
-        Icon: "",
+        // Icon: "",
         SortNo: 999
     };
     // zTree 的参数配置，深入使用请参考 API 文档（setting 配置详解）
@@ -315,16 +315,23 @@ module.controller('mgrEventInfoCtl', function ($scope, $http) {
             //alert(treeNode.tId + ", " + treeNode.name);
             $scope.NewType.Id = treeNode.id;
             $("#hdEventTypeId").val(treeNode.id);
-            $scope.NewType = {
-                Id: treeNode.id,
-                ParentId: treeNode.ParentId,
-                Name: treeNode.Name,
-                Level: treeNode.Level,
-                Show: treeNode.Show,
-                IsShow: $scope.NewType.Show ? 1 : 0,
-                Icon: treeNode.Icon,
-                SortNo: treeNode.SortNo,
-            };
+            $scope.NewType.Id = treeNode.id;
+            $scope.NewType.ParentId = treeNode.parentId;
+            $scope.NewType.Name = treeNode.name;
+            $scope.NewType.Show = treeNode.isShow == 1;
+            $scope.NewType.SortNo = treeNode.sortNo;
+
+            $scope.$apply();
+            // $scope.NewType = {
+            //     Id: treeNode.id,
+            //     ParentId: treeNode.ParentId,
+            //     Name: treeNode.Name,
+            //     Level: treeNode.Level,
+            //     Show: treeNode.Show,
+            //     IsShow: $scope.NewType.Show ? 1 : 0,
+            //     Icon: treeNode.Icon,
+            //     SortNo: treeNode.SortNo,
+            // };
         }
     };
 
@@ -357,7 +364,7 @@ module.controller('mgrEventInfoCtl', function ($scope, $http) {
         });
     }
     $scope.RemoveEventType = function () {
-        var url = "DeleteEventType?id="+$scope.NewType.Id;
+        var url = "DeleteEventType?id=" + $scope.NewType.Id;
         $http.get(url).success(function (response) {
             if (response.success)
                 $scope.GetEventTypeList();
@@ -409,6 +416,24 @@ module.controller('mgrEventInfoCtl', function ($scope, $http) {
             if (response.success)
                 $scope.GetInfoList();
             else alert("删除失败。");
+        });
+    };
+
+    $scope.GetEventArea = function () {
+        $http.get("../../Sys/Info/GetEventArea").success(function (response) {
+            if (response.success)
+                $("#txtEventArea").val(response.data);
+        });
+    };
+
+    $scope.SaveEventArea = function () {
+        var url = "../../Sys/Info/SaveEventArea";
+        var request = { key1: "eventArea", key2: $("#txtEventArea").val() };
+        $http.post(url, request).success(function (response) {
+            if (response.success) {
+                alert("保存成功！");
+            } else
+                alert("保存失败！");
         });
     };
 

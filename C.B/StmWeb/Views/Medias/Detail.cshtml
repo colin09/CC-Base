@@ -1,0 +1,85 @@
+﻿@{
+    ViewData["Title"] = "通知公告";
+}
+
+<link rel="stylesheet" type="text/css" href="~/css/notice.css">
+<link href="~/css/video-js.css" rel="stylesheet">
+
+<input type="hidden" id="hdId" value="@ViewBag.Id" />
+<div ng-controller="MediaDetailCtl">
+	 	<!-- media center start -->
+	<section>
+		<div class="media-wrap">
+			<div class="title-wrap">
+				<div class="width-wrap breadcrumb">
+					<a href="../Home/Index">首页</a> >
+					<a href="../Media/Index">媒体中心</a> >
+					{{Model.title}}
+				</div>
+			</div>
+			<div class="notice-wrap width-wrap clearfix">
+				<!-- notice paragraph start -->
+				<div class="notice-cont-wrap">
+					<dl>
+						<dt class="notice-title" ng-bind="Model.title">决赛名单来啦 看看有没有你！</dt>
+						<dd class="notice-publish">
+							发布：
+							<span class="spn-publisher" ng-bind="Model.author">探知未来</span>
+							<span class="spn-notice-time" ng-bind="Model.date">2018-11-23</span>
+						</dd>
+						<dd class="notice-para" ng-bind-html="Model.content">
+							<p><strong>2017年全国青年科普创新实验暨作品大赛决赛名单</strong></p>
+
+							<p>经过几个月的激烈角逐，全国15个分赛区复赛遴选，共计75支队伍脱颖而出，晋级”SOLVE FOR TOMORROW探知未来2017年全国青年科普创新实验暨作品大赛”全国总决赛。</p>
+
+							<p>晋级队伍将于12月23日齐聚北京，在中国科技馆开展终极对决。最终，哪些团队会夺得冠军，有机会开启境外游学之旅呢？</p>
+
+							<p>精彩即将揭晓，敬请关注！</p>
+
+							<p>晋级队伍名单如下：</p>
+
+							<!-- <p><img src="img/img-news-photo1.jpg" alt=""></p> -->
+
+							<!-- <p><img src="img/img-news-photo2.jpg" alt=""></p> -->
+						</dd>
+						
+						<dd class="notice-para">
+							
+							<p ng-show="Model.url.length>6">
+								<img src="{{Model.url}}" alt="" style="width:auto;"></p>
+							<p ng-show="Model.video != null">
+								<video id="my-video" class="video-js  vjs-default-skin vjs-fluid" controls preload="auto" width="640" height="264">
+									<!--data-setup="{}"poster="{{Model.url}}" <source src="{{Model.video}}" type='video/mp4'> -->
+									<!-- <source src="MY_VIDEO.webm" type='video/webm'> -->
+									<!-- <p class="vjs-no-js">
+										To view this video please enable JavaScript, and consider upgrading to a web browser that
+										<a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+									</p> -->
+								</video>
+							</p>
+						</dd>
+					</dl>
+				</div>
+				<!-- notice paragraph end -->
+				<!-- share start -->
+				<div class="share-wrap">
+					<dl class="dl-share">
+						<dt>分享到：</dt>
+						<dd>
+							<a class="ico ico-share1" href="#">QQ</a>
+							<a class="ico ico-share2" href="#">Sina</a>
+							<a class="ico ico-share3" href="#">wechat</a>
+							<a class="ico ico-share4" href="#">Qzone</a>
+							<a class="ico ico-share5" href="#">comments</a>
+						</dd>
+					</dl>
+				</div>
+				<!-- share end -->
+			</div>
+		</div>
+	</section>
+	<!-- media center end -->
+</div>
+
+
+<script src="~/js/video.js"></script>

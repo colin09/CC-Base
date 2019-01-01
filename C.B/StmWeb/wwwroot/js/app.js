@@ -47,19 +47,24 @@ module.controller('EventIndexCtl', function ($scope, $http) {
     $(".nav-top>li>a").eq(1).addClass("active");
 
     $scope.getEventType = function (id) {
-        $http.get("../Event/GetTypeList?parentId=" + id).success(function (response) {
+        $http.get("../Event/GetTypeList?level=1&parentId=" + id).success(function (response) {
             if (response.success) {
                 if (id == 0) {
                     $scope.ParentTypeList = response.data;
-                    var typeId = $scope.ParentTypeList[0].id;
+                    var typeId = -1;
+                    if (response.data.length > 0)
+                        typeId = $scope.ParentTypeList[0].id;
                     $scope.getEventType(typeId);
+                    window.setTimeout(function () { addParentTypeListener(); }, 100);
                 }
                 else {
                     $scope.typeList = response.data;
-                    var typeId = $scope.typeList[0].id;
+                    var typeId = -1;
+                    if (response.data.length > 0)
+                        typeId = $scope.typeList[0].id;
                     $scope.getEventInfo(typeId);
 
-                    window.setTimeout(function(){addListener();},100);
+                    window.setTimeout(function () { addTypeListener(); }, 100);
                 }
             }
         });
@@ -74,21 +79,24 @@ module.controller('EventIndexCtl', function ($scope, $http) {
     }
 
 
-    function addListener() {
+    function addParentTypeListener() {
         $(".parentTypeList>a").click(function () {
             $(".parentTypeList>a").removeClass("active");
             $(this).addClass("active");
             var id = $(this).data("id");
             $scope.getEventType(id);
         });
+        $(".parentTypeList>a").eq(0).addClass("active");
+    }
+
+    function addTypeListener() {
         $(".typeList>a").click(function () {
             $(".typeList>a").removeClass("active");
             $(this).addClass("active");
             var id = $(this).data("id");
             $scope.getEventInfo(id);
         });
-        
-        $(".parentTypeList>a").eq(0).addClass("active");
+
         $(".typeList>a").eq(0).addClass("active");
     }
 
@@ -111,6 +119,66 @@ module.controller('EventReviewCtl', function ($scope, $http) {
 module.controller('EventActiveCtl', function ($scope, $http) {
     $("#divBanner").removeClass("ng-hide");
     $(".nav-top>li>a").eq(7).addClass("active");
+
+    $scope.GetAreaList = function () {
+        $http.get("../Event/GetAreaList").success(function (response) {
+            if (response.success) {
+                $scope.areaList = response.data;
+            }
+        });
+    };
+
+    function getVerifyCode() {
+        $.get("../Common/GetVerifyCodeImg").done(function (response) {
+            if (response.success)
+                $("#imgVerifyCode").attr("src", "data:image/jpeg;base64," + response.data);
+        });
+    }
+
+    $("#imgVerifyCode").click(function () {
+        getVerifyCode();
+    });
+    getVerifyCode();
+
+    $scope.SubmitAsk = function () {
+        var url = '../Event/SubmitAsk';
+        if ($scope.askArea == "0" || $scope.askArea == undefined) {
+            alert("请选择赛区");
+            return;
+        }
+        if ($scope.askContent.length < 6) {
+            alert("请输入您的问题");
+            return;
+        }
+        var request = {
+            key1: $scope.askName,
+            key2: $scope.askArea,
+            key3: $scope.askContent,
+            key4: $scope.askCode
+        };
+        $http.post(url, request).success(function (response) {
+            if (response.success) {
+                $scope.askContent = "";
+                getVerifyCode();
+
+                $scope.GetDataList();
+            } else
+                alert(response.message);
+        });
+    };
+
+    $scope.GetDataList = function () {
+        var pager = { pageIndex: 1, pageSize: 20 };
+        $http.post("../Event/GetAskList", pager).success(function (response) {
+            if (response.success) {
+                $scope.AskList = response.data;
+            }
+        });
+    }
+
+
+    $scope.GetAreaList();
+    $scope.GetDataList();
 
 });
 
@@ -182,8 +250,56 @@ module.controller('MediaIndexCtl', function ($scope, $http) {
     $scope.InitMedia(1);
     $scope.InitMedia(2);
     $scope.InitMedia(3);
+});
+
+module.controller('MediaDetailCtl', function ($scope, $http) {
+    $("#divBanner").removeClass("ng-hide");
+    $(".nav-top>li>a").eq(3).addClass("active");
 
 
+    $scope.InitMedia = function () {
+        var id = $("#hdId").val();
+        $http.get("../Medias/GetDetail?id=" + id).success(function (response) {
+            if (response.success && response.data != null) {
+                $scope.Model = response.data;
+                switch (response.data.type) {
+                    case 1: // event
+                        break;
+                    case 2: // image
+                        break;
+                    case 3: // video
+                        InitVideoPlayer(response.data.url, response.data.video);
+                        break;
+                }
+            }
+        });
+    }
+    $scope.InitMedia();
+
+
+    function InitVideoPlayer(imgUrl, vioUrl) {
+        var option = {
+            poster: imgUrl,
+            sources: [{
+                src: vioUrl,
+                type: 'video/mp4'
+            }],
+            autoplay :false
+        };
+        var player = videojs('my-video', option, function () {
+            console.log('Good to go!');
+            //this.play(); // if you don't trust autoplay for some reason
+        });
+        player.on('play', function () {
+            console.log('开始/恢复播放');
+        });
+        player.on('pause', function () {
+            console.log('暂停播放');
+        });
+        player.on('ended', function () {
+            console.log('结束播放');
+        });
+    }
 
 });
 
