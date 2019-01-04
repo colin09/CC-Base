@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using C.B.Common.helper;
+using C.B.Common.Mvc;
 using C.B.Models.Data;
 using C.B.MySql.Repository.EntityRepositories;
 using Microsoft.AspNetCore.Mvc;
@@ -11,7 +12,7 @@ using StmWeb.Models;
 
 namespace StmWeb.Controllers
 {
-    public class ExpertController : Controller
+    public class ExpertController : BaseController // Controller
     {
 
         private ExpertInfoRepository _repository;

@@ -10,10 +10,11 @@ using C.B.MySql.Repository.EntityRepositories;
 using Microsoft.AspNetCore.Mvc;
 using StmWeb.Models;
 using Microsoft.AspNetCore.Http;
+using C.B.Common.Mvc;
 
 namespace StmWeb.Controllers
 {
-    public class EventController : Controller
+    public class EventController : BaseController // Controller
     {
         private EventInfoRepository _repository;
         private EventTypeRepository _typeRepository;
@@ -101,14 +102,14 @@ namespace StmWeb.Controllers
             if (vCode.ToLower() != code.ToLower())
                 return Json(BaseResponse.ErrorResponse("验证码错误。"));
 
-            HttpContext.Session.SetString ("Session.VerifyCode", "empty-empty");
+            HttpContext.Session.SetString("Session.VerifyCode", "empty-empty");
 
             var message = new Message
             {
                 Title = "",
-                Content =  request.Key3,
-                Region =  request.Key2,
-                Name =  request.Key1,
+                Content = request.Key3,
+                Region = request.Key2,
+                Name = request.Key1,
                 IsShow = 1,
                 IsTop = 0,
                 SortNo = DateTime.Now.ToOADate(),

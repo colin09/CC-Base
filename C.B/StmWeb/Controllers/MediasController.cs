@@ -9,10 +9,11 @@ using C.B.MySql.Repository.EntityRepositories;
 using Microsoft.AspNetCore.Mvc;
 using StmWeb.Models;
 using C.B.Common.helper;
+using C.B.Common.Mvc;
 
 namespace StmWeb.Controllers
 {
-    public class MediasController : Controller
+    public class MediasController : BaseController // Controller
     {
         private NewsInfoRepository _repository;
 

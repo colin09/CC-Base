@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
+using C.B.Common.Config;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 
@@ -68,7 +69,8 @@ namespace C.B.Common.helper
             ffmpeg -ss 00:50:00  -i RevolutionOS.rmvb sample.jpg  -r 1 -vframes 1 -an -f mjpeg
             */
 
-            var time = "00:00:10";
+            //var time = "00:00:10";
+            var time = AppSettingConfig.VideoThumbTime;
             var filepath = model.Filepath.Replace('/','\\');
             var fileImagePath = filepath.Substring(0, filepath.LastIndexOf(".")) + ".jpg";
 

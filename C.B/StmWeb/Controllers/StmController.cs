@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using C.B.Common.Mvc;
 using Microsoft.AspNetCore.Mvc;
 using StmWeb.Models;
 
 namespace StmWeb.Controllers
 {
-    public class StmController : Controller
+    public class StmController : BaseController // Controller
     {
         public IActionResult Index()
         {

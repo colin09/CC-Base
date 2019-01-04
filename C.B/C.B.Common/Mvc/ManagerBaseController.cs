@@ -9,7 +9,7 @@ namespace C.B.Common.Mvc
 {
 
     [Area("Sys")]
-    // [Authorize(Roles = "develop,admin")]
+    [ErrorFilterAttribute]
     public class MgrBaseController : Controller
     {
 

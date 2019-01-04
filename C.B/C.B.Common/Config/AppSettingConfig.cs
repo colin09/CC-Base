@@ -23,6 +23,7 @@ namespace C.B.Common.Config
         public static string MgPrefix => Get("MgPrefix");
 
 
+        public static string VideoThumbTime => Get("VideoThumbTime");
 
         public static string Get(string key) => Configuration[key];
 
