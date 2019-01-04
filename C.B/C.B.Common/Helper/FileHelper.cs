@@ -48,7 +48,8 @@ namespace C.B.Common.helper
 
                     if (fModel.FileType == "video")
                     {
-                        fModel.ThumbUrl = CreateVideoThrum(fModel);
+                        //fModel.ThumbUrl = CreateVideoThrum(fModel);
+                        fModel.ThumbUrl = fModel.FileUrl.Substring(0, fModel.FileUrl.LastIndexOf(".")) + ".jpg";
                     }
 
                     fileList.Add(fModel);
