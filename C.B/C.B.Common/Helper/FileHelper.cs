@@ -68,11 +68,12 @@ namespace C.B.Common.helper
             ffmpeg -ss 00:50:00  -i RevolutionOS.rmvb sample.jpg  -r 1 -vframes 1 -an -f mjpeg
             */
 
-            var time = "00:01:00";
-            var fileImagePath = model.Filepath.Substring(0, model.Filepath.LastIndexOf(".")) + ".jpg";
+            var time = "00:00:10";
+            var filepath = model.Filepath.Replace('/','\\');
+            var fileImagePath = filepath.Substring(0, filepath.LastIndexOf(".")) + ".jpg";
 
             var cmd = "ffmpeg -ss {0}  -i {1} {2}  -r 1 -vframes 1 -an -f mjpeg";
-            cmd = cmd.Frmt(time, model.Filepath, fileImagePath);
+            cmd = cmd.Frmt(time, filepath, fileImagePath);
 
             var message = "";
             CmdTool.RunCmd(cmd, out message);
