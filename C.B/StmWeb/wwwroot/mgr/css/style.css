@@ -16380,9 +16380,11 @@ ul {
 }
 
 .messageSpan{margin:0;padding: 5px; border-bottom: #eee 1px dashed;}
-.messageSpan .messageInfo{}
+.messageSpan .messageInfo button {margin-left: 25px;}
 .messageSpan span{margin:0 15px 0 0; }
 .messageSpan .messageContent{padding: 2px 25px;}
 .messageSpan .messageContent p{white-space:normal;text-indent:25px;}
 
 .messageSpan .messageReply{margin:0px 25px;padding: 2px 0; background-color: #eee;border-radius:5px;}
+
+.fz14{font-size:14px; line-height: 25px;}

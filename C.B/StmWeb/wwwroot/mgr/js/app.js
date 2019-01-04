@@ -489,6 +489,28 @@ module.controller('mgrMessageInfoCtl', function ($scope, $http) {
         });
     };
 
+    $scope.ShowReplyDialog = function (message) {
+        $("#modelTitle").text(message.region);
+        $("#modelLabel").text(message.name);
+        $("#modelContent").val(message.content);
+        $("#hdModelId").val(message.id);
+
+        $("#replyModal").show();
+    }
+
+    $scope.SaveReply = function () {
+        var request = {
+            num1: $("#hdModelId").val(),
+            key1: $("#modelContent").val(),
+            flag1: $('#chkIsShow').prop('checked')
+        };
+        var url = "../../Sys/Info/SaveMessageReply";
+        $http.post(url, request).success(function (response) {
+            if (response.success)
+                console.log("success");
+        });
+    }
+
 });
 module.controller('mgrNewsInfoCtl', function ($scope, $http) {
     $scope.tab = "eventNews";

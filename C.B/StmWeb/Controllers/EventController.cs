@@ -110,7 +110,7 @@ namespace StmWeb.Controllers
                 Content = request.Key3,
                 Region = request.Key2,
                 Name = request.Key1,
-                IsShow = 1,
+                IsShow = 0,
                 IsTop = 0,
                 SortNo = DateTime.Now.ToOADate(),
             };

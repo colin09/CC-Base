@@ -13,14 +13,15 @@
                 <div class="messageInfo">
                     <h5>
                         <span ng-bind="item.region"></span>
-                        <span ng-bind="item.title"></span>
+                        <span ng-bind="item.name"></span>
                         <i ng-bind="item.createTime"></i>
+                        <button class="btn btn-inverse-light btn-sm" ng-show="item.replyTime == null" ng-click="ShowReplyDialog(item)"  data-toggle="modal" data-target="#replyModal">回复</button>
                     </h5>
                     <div class="messageContent">
                         <p ng-bind="item.content"></p>
                     </div>
                 </div>
-                <div class="messageReply">
+                <div class="messageReply" ng-show="item.replyTime != null">
                     <h6>
                         <span ng-bind="item.replyName"></span> 
                         <i ng-bind="item.replyTime"></i>
@@ -36,4 +37,41 @@
         </div>
     </div>
 
+
+
+    <div class="modal fade" id="replyModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="modelTitle">互动留言回复</h4>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1" id="modelLabel">label</label>
+                            <textarea class="form-control fz14" id="modelContent" readonly="readonly">
+
+                            </textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputFile">回复 </label>
+                            <textarea class="form-control fz14" id="modelReply" rows="8"></textarea>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                            <input type="checkbox" value="1" id="chkIsShow"> 显示
+                            </label>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <input type="hidden" id="hdModelId" value="0">
+                    <button type="button" class="btn btn-default" data-dismiss="modal"> 取 消 </button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="SaveReply()"> 确 定 </button>
+                    
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 </div>

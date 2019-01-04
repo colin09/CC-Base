@@ -12,12 +12,14 @@ using C.B.Models.Data;
 using C.B.Common.helper;
 using AutoMapper;
 using C.B.MySql.Repository.Services;
+using C.B.Common.Mvc;
+using System.Security.Claims;
 
 namespace StmWeb.Area.Sys.Controllers
 {
     [Area("Sys")]
     [Authorize(Roles = "develop,admin")]
-    public class InfoController : Controller
+    public class InfoController : MgrBaseController
     {
         private IMapper _mapper;
         private EditorService _editorService;
@@ -246,6 +248,21 @@ namespace StmWeb.Area.Sys.Controllers
         {
             var list = _messageRepository.Where(pager, m => m.IsDeleted == 0, s => s.CreateTime, false);
             return Json(BaseResponse.SuccessResponse(list));
+        }
+
+        public IActionResult SaveMessageReply([FromBody]BaseRequest request)
+        {
+            var msg = _messageRepository.FirstOrDefault(request.Num1);
+            if (msg == null)
+                return Json(BaseResponse.ErrorResponse("留言不存在"));
+
+            var curUser = HttpContext.User;
+            
+            msg.ReplyName = curUser.FindFirst(ClaimTypes.Name).Value;
+            msg.ReplyContent = request.Key1;
+            msg.ReplyTime = DateTime.Now;
+            _messageRepository.Update(msg);
+            return Json(BaseResponse.SuccessResponse());
         }
 
     }
