@@ -111,8 +111,7 @@ namespace C.B.MySql.Repository.BaseM
             else
                 return result.OrderByDescending(orderbyLambda).Skip(pager.PageSize * (pager.PageIndex - 1)).Take(pager.PageSize).AsQueryable();
         }
-
-
+        
 
 
         public void Dispose()

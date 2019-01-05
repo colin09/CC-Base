@@ -37,7 +37,14 @@ namespace StmWeb.Controllers
         {
             //System.Console.WriteLine($" ===>  pager:{request.Pager.ToJson()}, type:{request.Num1}");
             var newType = (NewsType)request.Num1;
-            var result = _repository.Where(request.Pager, m => m.NewsType == newType && m.IsDeleted == 0, m => m.CreateTime);
+            //var result = _repository.Where(request.Pager, m => m.NewsType == newType && m.IsDeleted == 0, m => m.CreateTime);
+
+            var query = _repository.Where(m => m.NewsType == newType && m.IsDeleted == 0);
+            request.Pager.TotalCount = query.Count();
+
+            var result = query.OrderByDescending(m => m.IsTop).ThenByDescending(m => m.CreateTime)
+                .Skip(request.Pager.PageSize * (request.Pager.PageIndex - 1)).Take(request.Pager.PageSize);
+
             var response = result.Select(m => new
             {
                 id = m.Id,
@@ -48,13 +55,13 @@ namespace StmWeb.Controllers
                 url = m.ThumUrl,
                 video = m.VideoId,
                 date = m.CreateTime.ToString("yyyy-MM-dd"),
-            });
-            return Json(BaseResponse.SuccessResponse(response,request.Pager));
+            }).ToList();
+            return Json(BaseResponse.SuccessResponse(response, request.Pager));
         }
         public IActionResult GetDetail(int id)
         {
             var m = _repository.FirstOrDefault(id);
-             var response = new
+            var response = new
             {
                 id = m.Id,
                 type = m.NewsType,

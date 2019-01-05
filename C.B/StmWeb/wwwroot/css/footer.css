@@ -63,7 +63,7 @@
 }
 /* footer contact */
 .ul-contact {
-    width: 800px;
+    width: 900px;
     margin: 0 auto;
     padding-top: 40px;
 }
@@ -99,7 +99,7 @@
 }
 /* footer qrcode */
 .ul-qrcode {
-    width: 540px;
+    width: 360px;
     margin: 0 auto;
 }
 .ul-qrcode li {

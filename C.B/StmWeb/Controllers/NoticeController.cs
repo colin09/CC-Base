@@ -36,7 +36,13 @@ namespace StmWeb.Controllers
 
         public IActionResult GetList([FromBody]Pager pager)
         {
-            var result = _repository.Where(pager, m => m.IsDeleted == 0, m => m.CreateTime);
+            //var result = _repository.Where(pager, m => m.IsDeleted == 0, m => m.CreateTime);
+            var query = _repository.Where(m => m.IsDeleted == 0);
+            pager.TotalCount = query.Count();
+
+            var result = query.OrderByDescending(m => m.IsTop).ThenByDescending(m => m.CreateTime)
+                .Skip(pager.PageSize * (pager.PageIndex - 1)).Take(pager.PageSize);
+
             var response = result.Select(m => new
             {
                 id = m.Id,
@@ -54,7 +60,7 @@ namespace StmWeb.Controllers
         public IActionResult GetDetail(int id)
         {
             var m = _repository.FirstOrDefault(id);
-            var response =  new
+            var response = new
             {
                 id = m.Id,
                 title = m.Title,

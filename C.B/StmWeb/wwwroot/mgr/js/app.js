@@ -174,7 +174,7 @@ module.controller('mgrEditorCtl', function ($scope, $http) {
                 $scope.eventType = response.data.typeId;
                 $scope.eventTypeName = response.data.typeName;
                 $scope.content = response.data.content;
-                //CKEDITOR.instances['editor1'].setData('test'); 
+                CKEDITOR.instances['editor1'].setData(response.data.content); 
                 $scope.pubOrg = response.data.pubOrg;
                 $scope.pubTime = response.data.pubTime;
                 $scope.author = response.data.author;
