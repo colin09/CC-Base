@@ -501,7 +501,7 @@ module.controller('mgrMessageInfoCtl', function ($scope, $http) {
     $scope.SaveReply = function () {
         var request = {
             num1: $("#hdModelId").val(),
-            key1: $("#modelContent").val(),
+            key1: $("#modelReply").val(),
             flag1: $('#chkIsShow').prop('checked')
         };
         var url = "../../Sys/Info/SaveMessageReply";
