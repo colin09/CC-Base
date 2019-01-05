@@ -257,10 +257,11 @@ namespace StmWeb.Area.Sys.Controllers
                 return Json(BaseResponse.ErrorResponse("留言不存在"));
 
             var curUser = HttpContext.User;
-            
+
             msg.ReplyName = curUser.FindFirst(ClaimTypes.Name).Value;
             msg.ReplyContent = request.Key1;
             msg.ReplyTime = DateTime.Now;
+            msg.IsShow = request.Flag1 ? 1 : 0;
             _messageRepository.Update(msg);
             return Json(BaseResponse.SuccessResponse());
         }
