@@ -1,4 +1,4 @@
-@charset "utf-8";
+﻿@charset "utf-8";
 /* contest */
 .contest-wrap {}
 .contest-wrap .tabs-news-list {
@@ -43,6 +43,7 @@
 .awards-title {
     color: #000;
     font-size: 2.4rem;
+    text-align: center;
     border-bottom: solid #E9E9E9 1px;
     padding: 10px 0 25px;
 }

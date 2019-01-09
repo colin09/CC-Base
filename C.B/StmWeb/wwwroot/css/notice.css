@@ -1,4 +1,4 @@
-@charset "utf-8";
+﻿@charset "utf-8";
 /* notice list vertical */
 .notice-list-all-wrap {
     width: 900px;
@@ -67,6 +67,7 @@
     font-size: 2.4rem;
     line-height: 32px;
     padding: 0 0 10px;
+    text-align: center;
 }
 .notice-publish {
     border-bottom: solid #E9E9E9 1px;
