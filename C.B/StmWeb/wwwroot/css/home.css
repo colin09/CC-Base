@@ -50,11 +50,12 @@
 .dl-notice-horizon .dt-notice-title {
     color: #000000;
     font-size: 1.5rem;
-    white-space: nowrap;
+    white-space: pre-wrap;
     overflow: hidden;
     text-overflow: ellipsis;
     padding: 0 15px;
     margin: 15px 0 10px;
+    height: 45px;
 }
 .dl-notice-horizon .dd-notice-detail {
     height: 60px;

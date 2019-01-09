@@ -16,6 +16,8 @@
                         <span ng-bind="item.name"></span>
                         <i ng-bind="item.createTime"></i>
                         <button class="btn btn-inverse-light btn-sm" ng-show="item.replyTime == null" ng-click="ShowReplyDialog(item)"  data-toggle="modal" data-target="#replyModal">回复</button>
+                        <button class="btn btn-inverse-light btn-sm" ng-show="item.isShow == 0" ng-click="modifyShow(item.id)">显示</button>
+                        <button class="btn btn-inverse-light btn-sm" ng-show="item.isShow == 1" ng-click="modifyShow(item.id)">隐藏</button>
                     </h5>
                     <div class="messageContent">
                         <p ng-bind="item.content"></p>

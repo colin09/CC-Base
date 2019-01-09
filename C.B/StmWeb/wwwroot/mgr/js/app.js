@@ -96,11 +96,28 @@ module.controller('mgrFileCheckerCtl', function ($scope, $http) {
         var url = "../../Sys/File/Browse?type=" + type;
         $http.get(url).success(function (response) {
             if (response.success) {
-                $scope.ResourceList = response.data;
+                switch (type) {
+                    case "image":
+                        $scope.ResourceImgList = response.data;
+                        break;
+                    case "video":
+                        $scope.ResourceVioList = response.data;
+                        break;
+                    case "doc":
+                        $scope.ResourceDocList = response.data;
+                        break;
+                }
 
                 window.setTimeout(function () {
-                    $("select.image-picker").imagepicker({
+
+                    $("select.imgPickerImg").imagepicker({
                         hide_select: false,
+                    });
+                    $("select.imgPickerVio").imagepicker({
+                        hide_select: true,
+                    });
+                    $("select.imgPickerDoc").imagepicker({
+                        hide_select: true,
                     });
                 }, 100);
             }
@@ -115,12 +132,20 @@ module.controller('mgrFileCheckerCtl', function ($scope, $http) {
 
     $scope.Select = function () {
         var files = $("select.image-picker").val();
+        if ($scope.tab != "image")
+            files = $("#chkFileUrl").val();
         var callback = $("#hdCallback").val();
         //window.opener.CKEDITOR.tools.callFunction(files, callback, "");
 
         window.location.href = "Select?urls=" + files + "&callback=" + callback;
     }
 
+
+    $scope.setFilCheck = function (file) {
+        // file.fileType;
+        // file.url;
+        $("#chkFileUrl").val(file.url);
+    }
 
     /**
      * window.parent.CKEDITOR.tools.callFunction(imgUrl, callback, "");
@@ -174,7 +199,7 @@ module.controller('mgrEditorCtl', function ($scope, $http) {
                 $scope.eventType = response.data.typeId;
                 $scope.eventTypeName = response.data.typeName;
                 $scope.content = response.data.content;
-                CKEDITOR.instances['editor1'].setData(response.data.content); 
+                CKEDITOR.instances['editor1'].setData(response.data.content);
                 $scope.pubOrg = response.data.pubOrg;
                 $scope.pubTime = response.data.pubTime;
                 $scope.author = response.data.author;
@@ -268,6 +293,7 @@ module.controller('mgrEditorCtl', function ($scope, $http) {
 
 module.controller('mgrEventInfoCtl', function ($scope, $http) {
     $scope.tab = "eventInfo";
+    $scope.eventInfoType = "";
 
     $scope.NewType = {
         Id: 0,
@@ -309,9 +335,10 @@ module.controller('mgrEventInfoCtl', function ($scope, $http) {
     function zTreeOnClick(event, treeId, treeNode) {
 
         if ($scope.tab == "eventInfo") {
+            $scope.eventInfoType = treeNode.id;
             $scope.GetEventInfoList(treeNode.id);
-            $scope.EventTypeName = treeNote.name;
-            $scope.EventTypeId = treeNote.id;
+            $scope.EventTypeName = treeNode.name;
+            $scope.EventTypeId = treeNode.id;
         } else {
             //alert(treeNode.tId + ", " + treeNode.name);
             $scope.NewType.Id = treeNode.id;
@@ -415,7 +442,7 @@ module.controller('mgrEventInfoCtl', function ($scope, $http) {
     $scope.toDelete = function (id) {
         $http.get("../../Sys/Info/DeleteEditorInfo?type=event&Id=" + id).success(function (response) {
             if (response.success)
-                $scope.GetInfoList();
+                $scope.GetEventInfoList($scope.eventInfoType);
             else alert("删除失败。");
         });
     };
@@ -486,6 +513,15 @@ module.controller('mgrMessageInfoCtl', function ($scope, $http) {
             if (response.success)
                 $scope.GetInfoList();
             else alert("删除失败。");
+        });
+    };
+
+
+    $scope.modifyShow = function (id) {
+        $http.get("../../Sys/Info/ModifyMessageShow?Id=" + id).success(function (response) {
+            if (response.success)
+                $scope.GetInfoList();
+            else alert("操作失败。");
         });
     };
 

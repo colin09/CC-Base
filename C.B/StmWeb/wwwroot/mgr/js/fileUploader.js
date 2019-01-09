@@ -3,9 +3,10 @@ $(function () {
 
     var acceptModel = {
         title: 'Images',
-        extensions: 'gif,jpg,jpeg,bmp,png',
-        mimeTypes: 'image/*'
+        extensions: 'gif,jpg,jpeg,bmp,png,doc,pdf,txt,docx,mp4',
+        mimeTypes: '*/*'
     };
+    /*
     switch($("#filtType").val()){
         case "image": break;
         case "video": 
@@ -25,12 +26,11 @@ $(function () {
         case "doc": 
             acceptModel = {
                 title: 'Doc',
-                extensions: 'doc,pdf,txt',
-                mimeTypes: '*/*'
+                extensions: 'doc,pdf,txt,docx',
+                mimeTypes: '* /*'
             };
-        break;
-        
-    }
+        break;        
+    }*/
 
 
     var $wrap = $('#uploader'),
@@ -82,7 +82,7 @@ $(function () {
     uploader = WebUploader.create({
         pick: {
             id: '#filePicker',
-            label: '点击选择图片'
+            label: '点击选择文件'
         },
         dnd: '#uploader .queueList',
         paste: document.body,

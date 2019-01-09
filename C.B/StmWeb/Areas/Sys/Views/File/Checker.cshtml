@@ -15,24 +15,40 @@
         <li role="presentation" ng-click="tab='image'" ng-class="tab=='image'?'active':''"><a href="#">选择图片</a></li>
         <li role="presentation" ng-click="tab='video'" ng-class="tab=='video'?'active':''"><a href="#">选择视频</a></li>
         <li role="presentation" ng-click="tab='doc'" ng-class="tab=='doc'?'active':''"><a href="#">选择文件</a></li>
-        <li role="presentation" ng-click="tab='upload'" ng-class="tab=='upload'?'active':''"><a href="#">上传</a></li>
+        <!-- <li role="presentation" ng-click="tab='upload'" ng-class="tab=='upload'?'active':''"><a href="#">上传</a></li> -->
+        <li role="presentation">
+            <button type="button" class="btn btn-primary btn-fw" ng-click="Select()"> 确 定 </button>
+        </li>
     </ul>
     <div ng-show="tab=='image'">
-        <select class="image-picker" style="display: none;">
-            <option ng-repeat="item in ResourceList" data-img-src="{{item.url}}" value="{{item.url}}" ng-bind="item.fileName"></option>
+
+        <select class="image-picker imgPickerImg" style="display: none;">
+            <option ng-repeat="item in ResourceImgList" data-img-src="{{item.url}}" value="{{item.url}}" ng-bind="item.fileName"></option>
         </select>
-        <button type="button" class="btn btn-primary btn-fw" ng-click="Select()"> 确 定 </button>
     </div>
     <div ng-show="tab=='video'">
-
+        <select class="image-picker imgPickerVio" style="display: none;">
+            <option ng-repeat="item in ResourceVioList" data-img-src="../../mgr/images/video2.jpg" value="{{item.url}}" ng-bind="item.fileName"></option>
+        </select>
     </div>
-    <div ng-show="tab=='doc'">
-
+    <div ng-show="tab=='doc'">        
+        <!-- <select class="image-picker imgPickerDoc" style="display: none;">
+            <option ng-repeat="item in ResourceDocList" data-img-src="../../mgr/images/doc.jpg" value="{{item.url}}" ng-bind="item.fileName"></option>
+        </select> -->
+        <ul class="thumbnails image_picker_selector">
+            <li ng-repeat="item in ResourceDocList" ng-click="setFilCheck(item)">
+                <div class="thumbnail selected ">
+                    <img class="image_picker_image" src="../../mgr/images/doc.jpg">
+                    <p ng-bind="item.fileName"></p>
+                </div>
+            </li>
+        </ul>
     </div>
     <div ng-show="tab=='upload'">
 
     </div>
 
+        <input type="hidden" id="chkFileUrl" value="" />
 
 
 </div>

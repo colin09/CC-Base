@@ -7,12 +7,16 @@
     <script src="~/mgr/js/fileUploader.js"></script>
 
 <input type="hidden" value="image" id="filtType" />
-
+ <ul class="nav nav-tabs">
+        <li role="presentation" data-type="image" class="presentation"><a href="#">上传图片</a></li>
+        <li role="presentation" data-type="video" class="presentation"><a href="#">上传视频</a></li>
+        <li role="presentation" data-type="doc" class="presentation"><a href="#">上传文档</a></li>
+    </ul>
 <div id="uploader" class="wu-example">
     <div class="queueList">
         <div id="dndArea" class="placeholder">
-            <div id="filePicker" class="webuploader-container"><div class="webuploader-pick">点击选择图片</div><div id="rt_rt_1cujjhg0kbcr15jngp71hhmeu31" style="position: absolute; top: 0px; left: 448.008px; width: 169px; height: 44px; overflow: hidden; bottom: auto; right: auto;"><input type="file" name="file" class="webuploader-element-invisible" multiple="multiple" accept="image/*"><label style="opacity: 0; width: 100%; height: 100%; display: block; cursor: pointer; background: rgb(255, 255, 255);"></label></div></div>
-            <p>或将照片拖到这里，单次最多可选300张</p>
+            <div id="filePicker" class="webuploader-container"><div class="webuploader-pick">点击选择文件</div><div id="rt_rt_1cujjhg0kbcr15jngp71hhmeu31" style="position: absolute; top: 0px; left: 448.008px; width: 169px; height: 44px; overflow: hidden; bottom: auto; right: auto;"><input type="file" name="file" class="webuploader-element-invisible" multiple="multiple" accept="image/*"><label style="opacity: 0; width: 100%; height: 100%; display: block; cursor: pointer; background: rgb(255, 255, 255);"></label></div></div>
+            <!-- <p>或将照片拖到这里，单次最多可选300张</p> -->
         </div>
     <ul class="filelist"></ul></div>
     <div class="statusBar" style="display:none;">
@@ -25,33 +29,17 @@
         </div>
     </div>
 </div>
-<!-- <div>
-    <form id="uploadForm">
-        AJAX上传多文件： <input type="file" name="file" multiple />
-        <input type="button" value="上传" onclick="doUpload()" />
-    </form>
-</div> -->
+
 
 
 <script>
-    function doUpload() {
-
-        var formData = new FormData($("#uploadForm")[0]);
-
-        $.ajax({
-            url: 'FileSave")',
-            type: 'POST',
-            data: formData,
-            async: false,
-            cache: false,
-            contentType: false,
-            processData: false,
-            success: function (returndata) {
-                alert(returndata);
-            },
-            error: function (returndata) {
-                alert(returndata);
-            }
+    $(function(){
+        $("li.presentation").click(function(){
+            $("li.presentation").removeClass("active");
+            $(this).addClass("active");
+            $("#filtType").val($(this).data("type"));
         });
-    }
+
+    });
+
 </script>

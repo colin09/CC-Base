@@ -266,5 +266,15 @@ namespace StmWeb.Area.Sys.Controllers
             return Json(BaseResponse.SuccessResponse());
         }
 
+        public IActionResult ModifyMessageShow(int id)
+        {
+            var msg = _messageRepository.FirstOrDefault(id);
+            if (msg == null)
+                return Json(BaseResponse.ErrorResponse("留言不存在"));
+            msg.IsShow = (msg.IsShow + 1) % 2;
+            _messageRepository.Update(msg);
+            return Json(BaseResponse.SuccessResponse());
+        }
+
     }
 }
