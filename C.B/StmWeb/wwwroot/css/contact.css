@@ -1,11 +1,11 @@
-@charset "utf-8";
+﻿@charset "utf-8";
 /* contact */
 .ul-location {
-    padding-bottom: 50px;
+    padding-bottom: 60px;
 }
 .ul-location > li {
     width: 33.33%;
-    height: 255px;
+    height: 275px;
     float: left;
     padding: 20px 15px;
     -webkit-box-sizing: border-box;
