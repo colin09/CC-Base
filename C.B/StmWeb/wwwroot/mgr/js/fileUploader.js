@@ -6,31 +6,42 @@ $(function () {
         extensions: 'gif,jpg,jpeg,bmp,png,doc,pdf,txt,docx,mp4',
         mimeTypes: '*/*'
     };
-    /*
-    switch($("#filtType").val()){
-        case "image": break;
-        case "video": 
-            acceptModel = {
-                title: 'Videos',
-                extensions: 'mp4,mkv',
-                mimeTypes: 'video/*'
-            };
-        break;
-        case "audio": 
-            acceptModel = {
-                title: 'Audios',
-                extensions: 'mp3',
-                mimeTypes: 'audio/*'
-            };
-        break;
-        case "doc": 
-            acceptModel = {
-                title: 'Doc',
-                extensions: 'doc,pdf,txt,docx',
-                mimeTypes: '* /*'
-            };
-        break;        
-    }*/
+
+    $("li.presentation").click(function () {
+        $("li.presentation").removeClass("active");
+        $(this).addClass("active");
+        $("#filtType").val($(this).data("type"));
+
+
+        switch ($("#filtType").val()) {
+            case "image": break;
+            case "video":
+                acceptModel = {
+                    label: "点击选择图片",
+                    title: 'Videos',
+                    extensions: 'mp4,mkv',
+                    mimeTypes: 'video/*'
+                };
+                break;
+            case "audio":
+                acceptModel = {
+                    label: "点击选择视频",
+                    title: 'Audios',
+                    extensions: 'mp3',
+                    mimeTypes: 'audio/*'
+                };
+                break;
+            case "doc":
+                acceptModel = {
+                    label: "点击选择文件",
+                    title: 'Doc',
+                    extensions: 'doc,pdf,txt,docx',
+                    mimeTypes: '* /*'
+                };
+                break;
+        }
+        InitUploader();
+    });
 
 
     var $wrap = $('#uploader'),
@@ -102,6 +113,33 @@ $(function () {
         fileSizeLimit: 5 * 1024 * 1024,    // 200 M
         fileSingleSizeLimit: 1 * 1024 * 1024    // 50 M
     });
+
+    function InitUploader() {
+        uploader = WebUploader.create({
+            pick: {
+                id: '#filePicker',
+                label: acceptModel.label
+            },
+            dnd: '#uploader .queueList',
+            paste: document.body,
+            accept: {
+                title: acceptModel.title, //'Images',
+                extensions: acceptModel.extensions, //'gif,jpg,jpeg,bmp,png',
+                mimeTypes: acceptModel.mimeTypes //'image/*'
+            },
+
+            // swf文件路径
+            swf: '~mgr/js/Uploader.swf',
+            disableGlobalDnd: true,
+            chunked: true,
+            // server: 'http://webuploader.duapp.com/server/fileupload.php',
+            server: '../../Sys/File/FileSave',
+            fileNumLimit: 300,
+            fileSizeLimit: 5 * 1024 * 1024,    // 200 M
+            fileSingleSizeLimit: 1 * 1024 * 1024    // 50 M
+        });
+    }
+
 
     // 添加“添加文件”的按钮，
     uploader.addButton({
