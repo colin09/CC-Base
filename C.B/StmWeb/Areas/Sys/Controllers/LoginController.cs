@@ -59,8 +59,8 @@ namespace StmWeb.Area.Sys.Controllers
             identity.AddClaim(new Claim(ClaimTypes.Dsa, user.Department));
 
             identity.AddClaim(new Claim(ClaimTypes.Gender, user.Gender.ToString()));
-            identity.AddClaim(new Claim(ClaimTypes.MobilePhone, user.MobileNo));
-            identity.AddClaim(new Claim(ClaimTypes.Email, user.Email));
+            identity.AddClaim(new Claim(ClaimTypes.MobilePhone, "user.MobileNo"));
+            identity.AddClaim(new Claim(ClaimTypes.Email, "user.Email"));
             // identity.AddClaim(new Claim(ClaimTypes.UserData, user.ToJson()));
             identity.AddClaim(new Claim(ClaimTypes.Role, user.AuthType.ToString()));
             //identity.AddClaim(new Claim(ClaimTypes.Authentication, user.AuthType.ToString()));
