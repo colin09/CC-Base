@@ -7,39 +7,35 @@ using C.B.Common.Mvc;
 using Microsoft.AspNetCore.Mvc;
 using StmWeb.Models;
 
-namespace StmWeb.Controllers
-{
+namespace StmWeb.Controllers {
     public class HomeController : BaseController // Controller
     {
-        public IActionResult Index()
-        {
-            return View();
-        }
-       
+        public IActionResult Index () {
+            // var log = C.B.Common.logger.Logger.Current ();
+            // log.Info ("111111111111111111");
 
-        public IActionResult About()
-        {
+            return View ();
+        }
+
+        public IActionResult About () {
             ViewData["Message"] = "Your application description page.";
 
-            return View();
+            return View ();
         }
 
-        public IActionResult Contact()
-        {
+        public IActionResult Contact () {
             ViewData["Message"] = "Your contact page.";
 
-            return View();
+            return View ();
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
+        public IActionResult Privacy () {
+            return View ();
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        [ResponseCache (Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error () {
+            return View (new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }
