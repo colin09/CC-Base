@@ -24,3 +24,7 @@
     color: #333333;
     padding-left: 10px;
 }
+
+.contact-wrap .contact-down{margin-left: 15px;}
+.contact-wrap .contact-down a{cursor: pointer;color: #435d7c;}
+.contact-wrap .contact-down a:focus{text-decoration: underline;color: #0366d6;}
