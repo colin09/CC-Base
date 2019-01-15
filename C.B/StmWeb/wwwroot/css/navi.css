@@ -1,4 +1,4 @@
-@charset "utf-8";
+﻿@charset "utf-8";
 /* header logo */
 .header-wrap {
     max-width: 1280px;
@@ -36,7 +36,7 @@
     height: 79px;
     line-height: 75px;
     padding: 0 14px;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     box-sizing: border-box;
 }
 .nav-top li a.active {
