@@ -11,8 +11,8 @@ namespace StmWeb.Controllers {
     public class HomeController : BaseController // Controller
     {
         public IActionResult Index () {
-            // var log = C.B.Common.logger.Logger.Current ();
-            // log.Info ("111111111111111111");
+            var log = C.B.Common.logger.Logger.Current ();
+            log.Info ("111111111111111111");
 
             return View ();
         }

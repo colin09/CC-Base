@@ -247,7 +247,7 @@ namespace C.B.Common.Helper
             bitmap.Save(stream, ImageFormat.Jpeg);
             //输出图片流  
             return stream.ToArray();
-            Convert.ToBase64String(stream.ToArray());
+            //Convert.ToBase64String(stream.ToArray());
         }
         
         /// <summary>

@@ -42,7 +42,7 @@ module.controller('StmIndexCtl', function ($scope, $http) {
     $scope.InitData();
 });
 
-module.controller('EventIndexCtl', function ($scope, $http) {
+module.controller('EventIndexCtl', function ($scope, $http,$sce) {
     $("#divBanner").removeClass("ng-hide");
     $(".nav-top>li>a").eq(1).addClass("active");
 
@@ -74,6 +74,7 @@ module.controller('EventIndexCtl', function ($scope, $http) {
         $http.get("../Event/GetDetail?typeId=" + id).success(function (response) {
             if (response.success) {
                 $scope.Model = response.data;
+                $scope.Model.content = $sce.trustAsHtml(response.data.content);
             }
         });
     }
@@ -213,6 +214,7 @@ module.controller('NoticeDetailCtl', function ($scope, $http) {
         $http.get("../Notice/GetDetail?id=" + id).success(function (response) {
             if (response.success) {
                 $scope.Model = response.data;
+                $scope.Model.content = $sce.trustAsHtml(response.data.content);
             }
         });
     }
@@ -300,6 +302,7 @@ module.controller('MediaDetailCtl', function ($scope, $http) {
         $http.get("../Medias/GetDetail?id=" + id).success(function (response) {
             if (response.success && response.data != null) {
                 $scope.Model = response.data;
+                $scope.Model.content = $sce.trustAsHtml(response.data.content);
                 switch (response.data.type) {
                     case 1: // event
                         break;
@@ -374,6 +377,7 @@ module.controller('ExpertDetailCtl', function ($scope, $http) {
         $http.get("../Expert/GetDetail?id=" + id).success(function (response) {
             if (response.success) {
                 $scope.Model = response.data;
+                $scope.Model.content = $sce.trustAsHtml(response.data.content);
             }
         });
     };
