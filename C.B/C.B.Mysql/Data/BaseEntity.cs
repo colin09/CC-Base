@@ -7,10 +7,10 @@ using System.ComponentModel.DataAnnotations;
 namespace C.B.MySql.Data
 {
 
-    public class BaseEntity
+    public class BaseEntity000000000000
     {
 
-        public BaseEntity()
+        public BaseEntity000000000000()
         {
             CreateTime = DateTime.Now;
             UpdateTime = DateTime.Now;

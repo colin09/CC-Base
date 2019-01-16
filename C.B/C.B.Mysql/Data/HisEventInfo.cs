@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
+using C.B.Models.Data;
 
 namespace C.B.MySql.Data {
     public class HisEventInfo : BaseEntity {

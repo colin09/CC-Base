@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.ComponentModel.DataAnnotations;
 using C.B.Models.Enums;
+using C.B.Models.Data;
 
 namespace C.B.MySql.Data
 {
