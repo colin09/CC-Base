@@ -52,19 +52,24 @@ module.controller('EventIndexCtl', function ($scope, $http) {
                 if (id == 0) {
                     $scope.ParentTypeList = response.data;
                     var typeId = -1;
-                    if (response.data.length > 0)
+                    if (response.data.length > 0) {
                         typeId = $scope.ParentTypeList[0].id;
-                    $scope.getEventType(typeId);
-                    window.setTimeout(function () { addParentTypeListener(); }, 100);
+                        $scope.getEventType(typeId);
+                        window.setTimeout(function () { addParentTypeListener(); }, 100);
+                    } else {
+
+                    }
                 }
                 else {
                     $scope.typeList = response.data;
                     var typeId = -1;
-                    if (response.data.length > 0)
+                    if (response.data.length > 0) {
                         typeId = $scope.typeList[0].id;
-                    $scope.getEventInfo(typeId);
-
-                    window.setTimeout(function () { addTypeListener(); }, 100);
+                        $scope.getEventInfo(typeId);
+                        window.setTimeout(function () { addTypeListener(); }, 100);
+                    }else{
+                        $scope.getEventInfo(id);
+                    }
                 }
             }
         });
