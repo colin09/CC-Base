@@ -42,7 +42,7 @@ module.controller('StmIndexCtl', function ($scope, $http) {
     $scope.InitData();
 });
 
-module.controller('EventIndexCtl', function ($scope, $http,$sce) {
+module.controller('EventIndexCtl', function ($scope, $http, $sce) {
     $("#divBanner").removeClass("ng-hide");
     $(".nav-top>li>a").eq(1).addClass("active");
 
@@ -52,19 +52,22 @@ module.controller('EventIndexCtl', function ($scope, $http,$sce) {
                 if (id == 0) {
                     $scope.ParentTypeList = response.data;
                     var typeId = -1;
-                    if (response.data.length > 0)
+                    if (response.data.length > 0) {
                         typeId = $scope.ParentTypeList[0].id;
-                    $scope.getEventType(typeId);
-                    window.setTimeout(function () { addParentTypeListener(); }, 100);
+                        $scope.getEventType(typeId);
+                        window.setTimeout(function () { addParentTypeListener(); }, 100);
+                    }
                 }
                 else {
                     $scope.typeList = response.data;
                     var typeId = -1;
-                    if (response.data.length > 0)
+                    if (response.data.length > 0) {
                         typeId = $scope.typeList[0].id;
-                    $scope.getEventInfo(typeId);
-
-                    window.setTimeout(function () { addTypeListener(); }, 100);
+                        $scope.getEventInfo(typeId);
+                        window.setTimeout(function () { addTypeListener(); }, 100);
+                    } else {
+                        $scope.getEventInfo(id);
+                    }
                 }
             }
         });
@@ -206,7 +209,7 @@ module.controller('NoticeIndexCtl', function ($scope, $http) {
     $scope.getData();
 });
 
-module.controller('NoticeDetailCtl', function ($scope, $http,$sce) {
+module.controller('NoticeDetailCtl', function ($scope, $http, $sce) {
     $("#divBanner").removeClass("ng-hide");
     $(".nav-top>li>a").eq(2).addClass("active");
 
@@ -292,7 +295,7 @@ module.controller('MediaIndexCtl', function ($scope, $http) {
     $scope.InitMedia(3);
 });
 
-module.controller('MediaDetailCtl', function ($scope, $http,$sce) {
+module.controller('MediaDetailCtl', function ($scope, $http, $sce) {
     $("#divBanner").removeClass("ng-hide");
     $(".nav-top>li>a").eq(3).addClass("active");
 
@@ -368,7 +371,7 @@ module.controller('ExpertIndexCtl', function ($scope, $http) {
 
 });
 
-module.controller('ExpertDetailCtl', function ($scope, $http,$sce) {
+module.controller('ExpertDetailCtl', function ($scope, $http, $sce) {
     $("#divBanner").removeClass("ng-hide");
     $(".nav-top>li>a").eq(4).addClass("active");
 
