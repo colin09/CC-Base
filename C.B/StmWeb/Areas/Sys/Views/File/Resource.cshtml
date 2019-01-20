@@ -12,7 +12,9 @@
 <ul class="waterfall-list" ng-waterfall cols="6">
         <li ng-repeat="item in ResourceList" repeat-finished>
             <div class="data-block">
-                <img src="{{item.url}}" alt="{{item.fileName}}"/>
+                <img src="{{item.url}}" alt="{{item.fileName}}" ng-show="item.fileType=='image'" style="width:200px;"/>
+                <img src="../../mgr/images/video2.jpg" alt="{{item.fileName}}" ng-show="item.fileType=='video'" style="width:200px;" />
+                <img src="../../mgr/images/doc.jpg" alt="{{item.fileName}}" ng-show="item.fileType=='doc'" style="width:200px;" />
                 <p>{{item.title}}</p>
                 <p>{{item.fileName}}</p>
             </div>

@@ -2,46 +2,12 @@ $(function () {
     //var $ = jQuery,    // just in case. Make sure it's not an other libaray.
 
     var acceptModel = {
+        label: "点击选择图片",
         title: 'Images',
         extensions: 'gif,jpg,jpeg,bmp,png,doc,pdf,txt,docx,mp4',
         mimeTypes: '*/*'
     };
 
-    $("li.presentation").click(function () {
-        $("li.presentation").removeClass("active");
-        $(this).addClass("active");
-        $("#filtType").val($(this).data("type"));
-
-
-        switch ($("#filtType").val()) {
-            case "image": break;
-            case "video":
-                acceptModel = {
-                    label: "点击选择图片",
-                    title: 'Videos',
-                    extensions: 'mp4,mkv',
-                    mimeTypes: 'video/*'
-                };
-                break;
-            case "audio":
-                acceptModel = {
-                    label: "点击选择视频",
-                    title: 'Audios',
-                    extensions: 'mp3',
-                    mimeTypes: 'audio/*'
-                };
-                break;
-            case "doc":
-                acceptModel = {
-                    label: "点击选择文件",
-                    title: 'Doc',
-                    extensions: 'doc,pdf,txt,docx',
-                    mimeTypes: '* /*'
-                };
-                break;
-        }
-        InitUploader();
-    });
 
 
     var $wrap = $('#uploader'),
@@ -484,4 +450,49 @@ $(function () {
 
     $upload.addClass('state-' + state);
     updateTotalProgress();
+
+
+    
+    $("li.presentation").click(function () {
+        $("li.presentation").removeClass("active");
+        $(this).addClass("active");
+        $("#filtType").val($(this).data("type"));
+
+        switch ($("#filtType").val()) {
+            case "image":
+                acceptModel = {
+                    label: "点击选择图片",
+                    title: 'Images',
+                    extensions: 'gif,jpg,jpeg,bmp,png,doc,pdf,txt,docx,mp4',
+                    mimeTypes: '*/*'
+                }; 
+                break;
+            case "video":
+                acceptModel = {
+                    label: "点击选择图片",
+                    title: 'Videos',
+                    extensions: 'mp4,mkv',
+                    mimeTypes: 'video/*'
+                };
+                break;
+            case "audio":
+                acceptModel = {
+                    label: "点击选择视频",
+                    title: 'Audios',
+                    extensions: 'mp3',
+                    mimeTypes: 'audio/*'
+                };
+                break;
+            case "doc":
+                acceptModel = {
+                    label: "点击选择文件",
+                    title: 'Doc',
+                    extensions: 'doc,pdf,txt,docx',
+                    mimeTypes: '* /*'
+                };
+                break;
+        }
+        uploader.options.accept= acceptModel;
+        uploader.options.pick.label= acceptModel.label;
+    });
 });

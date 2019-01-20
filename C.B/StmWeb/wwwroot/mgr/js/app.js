@@ -155,11 +155,18 @@ module.controller('mgrFileCheckerCtl', function ($scope, $http) {
 
 module.controller('mgrResourceInfoCtl', function ($scope, $http) {
     $scope.tab = "image";
-
     $scope.GetInfoList = function (type) {
         var url = "../../Sys/File/Browse?type=" + type;
         $http.get(url).success(function (response) {
             if (response.success) {
+                if ($scope.tab == "doc")
+                    $.each(response.data, function (index, item) {
+                        item.url = "../../mgr/images/doc.jpg";
+                    });
+                else if ($scope.tab == "video")
+                    $.each(response.data, function (index, item) {
+                        item.url = "../../mgr/images/video2.jpg";
+                    });
                 $scope.ResourceList = response.data;
             }
         });

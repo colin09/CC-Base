@@ -25,7 +25,7 @@ input,textarea {
 img {
     width: 100%;
     border: none;
-    float: left;
+    /* float: left; */
 }
 i, em {
     font-style: normal;
