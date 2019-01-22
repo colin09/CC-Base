@@ -64,7 +64,7 @@ namespace C.B.Common.helper
 
         public static string ToFileType(this string fileExt)
         {
-            var fileType = "other";
+            var fileType = "doc";
             switch (fileExt.ToLower())
             {
                 case ".bmp":
@@ -79,6 +79,7 @@ namespace C.B.Common.helper
                     break;
                 case ".pdf":
                 case ".doc":
+                case ".docx":
                     fileType = "doc";
                     break;
             }
