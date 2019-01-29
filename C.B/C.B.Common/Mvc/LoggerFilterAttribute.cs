@@ -29,9 +29,9 @@ namespace C.B.Common.Mvc {
                 // dynamic result = context.Result.GetType ().Name == "EmptyResult" ? new { Value = "无返回结果" } : context.Result as dynamic;
                 // response = result == null? "": result.Value.ToJson ();
                 if (context.Result is Microsoft.AspNetCore.Mvc.ObjectResult) {
-                    response = (((Microsoft.AspNetCore.Mvc.ObjectResult) context.Result).Value).ToJson();
+                    response = (((Microsoft.AspNetCore.Mvc.ObjectResult) context.Result).Value).ToJson ();
                 }
-            } catch (System.Exception) { }
+            } catch (System.Exception ex) { response = ex.Message; }
 
             var action = new StringBuilder ();
             action.AppendLine ($"[{method}] {host}{path}");
