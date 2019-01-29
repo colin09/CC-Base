@@ -25,7 +25,7 @@ namespace C.B.Common.Mvc {
             var queryString = context.HttpContext.Request.QueryString;
 
             dynamic result = context.Result.GetType ().Name == "EmptyResult" ? new { Value = "无返回结果" } : context.Result as dynamic;
-            var response = result == null? "": result.ToJson ();
+            var response = result == null? "": result.Value.ToJson ();
 
             var action = new StringBuilder ();
             action.AppendLine ($"[{method}] {host}{path}");
