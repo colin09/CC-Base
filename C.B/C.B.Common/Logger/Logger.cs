@@ -13,9 +13,13 @@ namespace C.B.Common.logger {
         static Logger () {
             //log = log4net.LogManager.GetLogger (typeof (Logger));
 
-            var repository = log4net.LogManager.CreateRepository ("NETCoreRepository");
-            XmlConfigurator.Configure (repository, new FileInfo ("configurations/log4net.config"));
-            log = log4net.LogManager.GetLogger (repository.Name, (typeof (Logger)));
+            // var repository = log4net.LogManager.CreateRepository ("NETCoreRepository");
+            // XmlConfigurator.Configure (repository, new FileInfo ("configurations/log4net.config"));
+            // log = log4net.LogManager.GetLogger (repository.Name, (typeof (Logger)));
+            
+            var repository = log4net.LogManager.CreateRepository("NETCoreRepository");
+            log4net.Config.XmlConfigurator.Configure(repository, new System.IO.FileInfo("configurations/log4net.config"));
+            log = log4net.LogManager.GetLogger(repository.Name,"NETCorelog4net");
         }
 
         public static log4net.ILog Current () {

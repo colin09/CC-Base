@@ -9,6 +9,7 @@ namespace C.B.Common.Mvc
 {
 
     [ErrorFilterAttribute]
+    [LoggerFilterAttribute]
     public class BaseController : Controller
     {
 
