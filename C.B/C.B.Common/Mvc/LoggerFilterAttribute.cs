@@ -38,7 +38,9 @@ namespace C.B.Common.Mvc {
             action.AppendLine ($" ====>> ");
             action.AppendLine ($" {response}");
             action.AppendLine ($"time:{Stopwatch.Elapsed.TotalMilliseconds} ");
-            log.Info (action.ToString ());
+            
+            var log = Logger.Current ();
+            log.Info(action.ToString());
         }
 
         /// <summary>
@@ -49,7 +51,6 @@ namespace C.B.Common.Mvc {
 
             Stopwatch = new Stopwatch ();
             Stopwatch.Start ();
-            var log = Logger.Current ();
             args = context.ActionArguments.ToJson ();
 
             /*
