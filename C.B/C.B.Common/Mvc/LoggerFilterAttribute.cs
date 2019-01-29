@@ -23,9 +23,13 @@ namespace C.B.Common.Mvc {
             var method = context.HttpContext.Request.Method;
             var path = context.HttpContext.Request.Path;
             var queryString = context.HttpContext.Request.QueryString;
+            var response = "";
 
-            dynamic result = context.Result.GetType ().Name == "EmptyResult" ? new { Value = "无返回结果" } : context.Result as dynamic;
-            var response = result == null? "": result.Value.ToJson ();
+            try {
+                dynamic result = context.Result.GetType ().Name == "EmptyResult" ? new { Value = "无返回结果" } : context.Result as dynamic;
+                response = result == null? "": result.Value.ToJson ();
+            } catch (System.Exception) {
+            }
 
             var action = new StringBuilder ();
             action.AppendLine ($"[{method}] {host}{path}");
@@ -33,7 +37,7 @@ namespace C.B.Common.Mvc {
             action.AppendLine ($" {args}");
             action.AppendLine ($" ====>> ");
             action.AppendLine ($" {response}");
-            action.AppendLine ($"time:{Stopwatch.Elapsed.TotalMilliseconds} ");            
+            action.AppendLine ($"time:{Stopwatch.Elapsed.TotalMilliseconds} ");
             log.Info (action.ToString ());
         }
 
