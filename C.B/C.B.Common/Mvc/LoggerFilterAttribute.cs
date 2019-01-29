@@ -26,10 +26,12 @@ namespace C.B.Common.Mvc {
             var response = "";
 
             try {
-                dynamic result = context.Result.GetType ().Name == "EmptyResult" ? new { Value = "无返回结果" } : context.Result as dynamic;
-                response = result == null? "": result.Value.ToJson ();
-            } catch (System.Exception) {
-            }
+                // dynamic result = context.Result.GetType ().Name == "EmptyResult" ? new { Value = "无返回结果" } : context.Result as dynamic;
+                // response = result == null? "": result.Value.ToJson ();
+                if (context.Result is Microsoft.AspNetCore.Mvc.ObjectResult) {
+                    response = (((Microsoft.AspNetCore.Mvc.ObjectResult) context.Result).Value).ToJson();
+                }
+            } catch (System.Exception) { }
 
             var action = new StringBuilder ();
             action.AppendLine ($"[{method}] {host}{path}");
@@ -38,9 +40,9 @@ namespace C.B.Common.Mvc {
             action.AppendLine ($" ====>> ");
             action.AppendLine ($" {response}");
             action.AppendLine ($"time:{Stopwatch.Elapsed.TotalMilliseconds} ");
-            
+
             var log = Logger.Current ();
-            log.Info(action.ToString());
+            log.Info (action.ToString ());
         }
 
         /// <summary>
