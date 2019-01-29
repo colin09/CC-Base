@@ -23,13 +23,15 @@ namespace C.B.Common.Mvc {
             var method = context.HttpContext.Request.Method;
             var path = context.HttpContext.Request.Path;
             var queryString = context.HttpContext.Request.QueryString;
-            var response = "";
+            var response = "|";
 
             try {
+                response += context.Result.GetType().Name;
+                response += "|";
                 // dynamic result = context.Result.GetType ().Name == "EmptyResult" ? new { Value = "无返回结果" } : context.Result as dynamic;
                 // response = result == null? "": result.Value.ToJson ();
                 if (context.Result is Microsoft.AspNetCore.Mvc.ObjectResult) {
-                    response = (((Microsoft.AspNetCore.Mvc.ObjectResult) context.Result).Value).ToJson ();
+                    response += (((Microsoft.AspNetCore.Mvc.ObjectResult) context.Result).Value).ToJson ();
                 }
             } catch (System.Exception ex) { response = ex.Message; }
 
