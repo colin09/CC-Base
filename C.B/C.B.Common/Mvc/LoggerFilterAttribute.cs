@@ -5,8 +5,10 @@ using C.B.Common.helper;
 using C.B.Common.logger;
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace C.B.Common.Mvc {
-    public class LoggerFilterAttribute : ActionFilterAttribute {
+namespace C.B.Common.Mvc
+{
+    public class LoggerFilterAttribute : ActionFilterAttribute
+    {
 
         private Stopwatch Stopwatch { get; set; }
         private log4net.ILog log { get; set; }
@@ -16,46 +18,50 @@ namespace C.B.Common.Mvc {
         /// Action方法之后调用
         /// </summary>
         /// <param name="context"></param>
-        public override void OnActionExecuted (ActionExecutedContext context) {
-            Stopwatch.Stop ();
+        public override void OnActionExecuted(ActionExecutedContext context)
+        {
+            Stopwatch.Stop();
 
             var host = context.HttpContext.Request.Host;
             var method = context.HttpContext.Request.Method;
             var path = context.HttpContext.Request.Path;
             var queryString = context.HttpContext.Request.QueryString;
-            var response = "|";
+            var response = " | ";
 
-            try {
+            try
+            {
                 response += context.Result.GetType().Name;
-                response += "|";
+                response += " | ";
                 // dynamic result = context.Result.GetType ().Name == "EmptyResult" ? new { Value = "无返回结果" } : context.Result as dynamic;
                 // response = result == null? "": result.Value.ToJson ();
-                if (context.Result is Microsoft.AspNetCore.Mvc.ObjectResult) {
-                    response += (((Microsoft.AspNetCore.Mvc.ObjectResult) context.Result).Value).ToJson ();
+                if (context.Result is Microsoft.AspNetCore.Mvc.JsonResult)
+                {
+                    response += (((Microsoft.AspNetCore.Mvc.JsonResult)context.Result).Value).ToJson();
                 }
-            } catch (System.Exception ex) { response = ex.Message; }
+            }
+            catch (System.Exception ex) { response += ex.Message; }
 
-            var action = new StringBuilder ();
-            action.AppendLine ($"[{method}] {host}{path}");
-            action.AppendLine ($" {queryString}");
-            action.AppendLine ($" {args}");
-            action.AppendLine ($" ====>> ");
-            action.AppendLine ($" {response}");
-            action.AppendLine ($"time:{Stopwatch.Elapsed.TotalMilliseconds} ");
+            var action = new StringBuilder();
+            action.AppendLine($"[{method}] {host}{path}{queryString}");
+            action.AppendLine($" {args}");
+            
+            action.AppendLine($" ====>> {response}");
+            action.AppendLine($"time : [{Stopwatch.Elapsed.TotalMilliseconds}]");
 
-            var log = Logger.Current ();
-            log.Info (action.ToString ());
+            var log = Logger.Current();
+            log.Info(action.ToString());
         }
 
         /// <summary>
         /// Action方法之前调用
         /// </summary>
         /// <param name="context"></param>
-        public override void OnActionExecuting (ActionExecutingContext context) {
+        public override void OnActionExecuting(ActionExecutingContext context)
+        {
 
-            Stopwatch = new Stopwatch ();
-            Stopwatch.Start ();
-            args = context.ActionArguments.ToJson ();
+            Stopwatch = new Stopwatch();
+            Stopwatch.Start();
+            args = context.ActionArguments.ToJson();
 
             /*
             var host = context.HttpContext.Request.Host;
