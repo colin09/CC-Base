@@ -36,7 +36,7 @@ namespace C.B.Common.Mvc
                 // response = result == null? "": result.Value.ToJson ();
                 if (context.Result is Microsoft.AspNetCore.Mvc.JsonResult)
                 {
-                    response += (((Microsoft.AspNetCore.Mvc.JsonResult)context.Result).Value).ToJson();
+                    //response += (((Microsoft.AspNetCore.Mvc.JsonResult)context.Result).Value).ToJson();
                 }
             }
             catch (System.Exception ex) { response += ex.Message; }
