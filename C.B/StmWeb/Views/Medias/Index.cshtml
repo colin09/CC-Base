@@ -21,8 +21,8 @@
 					<div class="one-news-wrap" ng-repeat="news in NewsEventList">
 						<a href="../Medias/Detail?id={{news.id}}">
 							<div class="img-media-wrap"><img src="{{news.url}}" alt=""></div>
-							<h3 class="h3-news-title" ng-bind="new.title">决赛名单来了，快看看有没有你，等你来参加</h3>
-							<p class="publish-wrap"><span class="spn-publisher" ng-bind="new.author">发布人</span><span class="spn-publish-time" ng-bind="new.date">2018-10-30</span></p>
+							<h3 class="h3-news-title" ng-bind="news.title">决赛名单来了，快看看有没有你，等你来参加</h3>
+							<p class="publish-wrap"><span class="spn-publisher" ng-bind="news.author">发布人</span><span class="spn-publish-time" ng-bind="news.date">2018-10-30</span></p>
 						</a>
 					</div>
 					

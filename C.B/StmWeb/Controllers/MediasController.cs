@@ -61,6 +61,8 @@ namespace StmWeb.Controllers
         public IActionResult GetDetail(int id)
         {
             var m = _repository.FirstOrDefault(id);
+            if(m==null)
+                return Json(BaseResponse.ErrorResponse("id 错误。"));
             var response = new
             {
                 id = m.Id,
