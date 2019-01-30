@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace C.B.Common.Mvc
 {
 
-    [ErrorFilterAttribute]
+    [ErrorFilter,LoggerFilter]
     public class BaseController : Controller
     {
 

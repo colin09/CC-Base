@@ -9,7 +9,7 @@ namespace C.B.Common.Mvc
 {
 
     [Area("Sys")]
-    [ErrorFilterAttribute]
+    [ErrorFilter,LoggerFilter]
     public class MgrBaseController : Controller
     {
 
