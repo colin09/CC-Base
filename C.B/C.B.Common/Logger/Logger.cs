@@ -16,10 +16,10 @@ namespace C.B.Common.logger {
             // var repository = log4net.LogManager.CreateRepository ("NETCoreRepository");
             // XmlConfigurator.Configure (repository, new FileInfo ("configurations/log4net.config"));
             // log = log4net.LogManager.GetLogger (repository.Name, (typeof (Logger)));
-            
-            var repository = log4net.LogManager.CreateRepository("NETCoreRepository");
-            log4net.Config.XmlConfigurator.Configure(repository, new System.IO.FileInfo("configurations/log4net.config"));
-            log = log4net.LogManager.GetLogger(repository.Name,"NETCorelog4net");
+
+            var repository = log4net.LogManager.CreateRepository ("NETCoreRepository");
+            log4net.Config.XmlConfigurator.Configure (repository, new System.IO.FileInfo ($"{Directory.GetCurrentDirectory()}/configurations/log4net.config"));
+            log = log4net.LogManager.GetLogger (repository.Name, (typeof (Logger)));
         }
 
         public static log4net.ILog Current () {
