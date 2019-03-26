@@ -60,6 +60,8 @@ namespace C.B.Common.helper {
                 case ".mp4":
                     fileType = "video";
                     break;
+                case ".xlsx":
+                case ".xls":
                 case ".pdf":
                 case ".doc":
                 case ".docx":

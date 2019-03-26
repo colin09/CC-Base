@@ -4,7 +4,7 @@ $(function () {
     var acceptModel = {
         label: "点击选择图片",
         title: 'Images',
-        extensions: 'gif,jpg,jpeg,bmp,png,doc,pdf,txt,docx,mp4',
+        extensions: 'gif,jpg,jpeg,bmp,png,doc,pdf,txt,docx,mp4,xlsx,xls',
         mimeTypes: '*/*'
     };
 
@@ -463,7 +463,7 @@ $(function () {
                 acceptModel = {
                     label: "点击选择图片",
                     title: 'Images',
-                    extensions: 'gif,jpg,jpeg,bmp,png,doc,pdf,txt,docx,mp4',
+                    extensions: 'gif,jpg,jpeg,bmp,png,doc,pdf,txt,docx,mp4,xlsx,xls',
                     mimeTypes: '*/*'
                 }; 
                 break;
@@ -487,7 +487,7 @@ $(function () {
                 acceptModel = {
                     label: "点击选择文件",
                     title: 'Doc',
-                    extensions: 'doc,pdf,txt,docx',
+                    extensions: 'doc,pdf,txt,docx,xlsx,xls',
                     mimeTypes: '* /*'
                 };
                 break;

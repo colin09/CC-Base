@@ -18,140 +18,141 @@
 
 </head>
 <body>
-<div class="content" ng-app="stmApp">
-	<!-- navi start -->
-	<header>
-		<div class="header-wrap">
-			<h1 class="logo">
-				<a class="btn-logo" href="../Home/Index">SOLVE FOR TOMORROW 探知未来</a>
-			</h1>
-			<nav>
-				<ul class="nav-top">
-					<li><a class="" href="../Home/Index">首页</a></li>
-					<li><a class="" href="../Event/Index">赛事介绍</a></li>
-					<li><a class="" href="../Notice/Index">通知公告</a></li>
-					<li><a class="" href="../Medias/Index">媒体中心</a></li>
-					<li><a class="" href="../Expert/Index">专家团队</a></li>
-					<li><a class="" href="../Event/Award">奖项设置</a></li>
-					<li><a class="" href="../Event/Review">往届回顾</a></li>
-					<li><a class="" href="../Event/Active">互动留言</a></li>
-					<li><a class="" href="../Event/Contact"><i class="ico ico-email"></i>赛事报名</a></li>
-				</ul>
-			</nav>
-		</div>
-	</header> 、
-	<!-- navi end -->
+    <div class="content" ng-app="stmApp">
+        <!-- navi start -->
+        <header>
+            <div class="header-wrap">
+                <h1 class="logo">
+                    <a class="btn-logo" href="../Home/Index">SOLVE FOR TOMORROW 探知未来</a>
+                </h1>
+                <nav>
+                    <ul class="nav-top">
+                        <li><a class="" href="../Home/Index">首页</a></li>
+                        <li><a class="" href="../Event/Index">赛事介绍</a></li>
+                        <li><a class="" href="../Notice/Index">通知公告</a></li>
+                        <li><a class="" href="../Medias/Index">媒体中心</a></li>
+                        <li><a class="" href="../Expert/Index">专家团队</a></li>
+                        <li><a class="" href="../Event/Award">奖项设置</a></li>
+                        <li><a class="" href="../Event/Review">往届回顾</a></li>
+                        <li><a class="" href="../Event/Active">互动留言</a></li>
+                        <li><a class="" href="../Event/Contact"><i class="ico ico-email"></i>分赛区联系方式</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header> 、
+        <!-- navi end -->
+        <!-- slidesjs start -->
+        <section class="ng-hide" id="divSlides">
+            <div id="homeSlidesJs" class="slides-wrap">
+                <!-- 单张图片，请删除class值"slides-wrap" <div id="homeSlidesJs" class="slides-wrap">-->
+                <div><img src="~/images/slides-img.jpg"></div>
+                <div><img src="~/images/slides-01-img.jpg"></div>
+                @*<div><img src="~/images/slides-img.jpg"></div>*@
+            </div>
+        </section>
+        <!-- slidesjs end -->
+        <!-- top banner start -->
+        <section class="ng-hide" id="divBanner">
+            <div class="top-banner clearfix">
+                <img src="~/images/topbanner.jpg">
+            </div>
+        </section>
+        <!-- top banner end -->
+        @RenderBody()
 
-	<!-- slidesjs start -->
-	<section class="ng-hide" id="divSlides">
-        <div id="homeSlidesJs" class="">
-            <!-- 单张图片，请删除class值"slides-wrap" <div id="homeSlidesJs" class="slides-wrap">-->
-            <div><img src="~/images/slides-img.jpg"></div>
-            <div><img src="~/images/slides-img.jpg"></div>
-        <div><img src="~/images/slides-img.jpg"></div>
-        </div>
-	</section>
-	<!-- slidesjs end -->
-	<!-- top banner start -->
-	<section class="ng-hide" id="divBanner">
-		<div class="top-banner clearfix">
-			<img src="~/images/topbanner.jpg">
-		</div>
-	</section>
-	<!-- top banner end -->
-	 @RenderBody()
+        <!-- footer start -->
+        <footer>
+            <div class="footer-wrap">
+                <div class="sponsor-wrap width-wrap clearfix ng-hide" id="divFooterOne">
+                    <div class="sponsor-one">
+                        <dl class="dl-sponsor">
+                            <!-- <dt>主办单位</dt>
+                            <dd>
+                                <div><img src="~/images/ico-footer-01.jpg" alt="中国科协科普部"></div>
+                                <div><img src="~/images/ico-footer-02.jpg" alt="共青团中央学校部"></div>
+                            </dd> -->
 
-	<!-- footer start -->
-	<footer>
-		<div class="footer-wrap">
-			<div class="sponsor-wrap width-wrap clearfix ng-hide" id="divFooterOne">
-				<div class="sponsor-one">
-					<dl class="dl-sponsor">
-						<!-- <dt>主办单位</dt>
-						<dd>
-							<div><img src="~/images/ico-footer-01.jpg" alt="中国科协科普部"></div>
-							<div><img src="~/images/ico-footer-02.jpg" alt="共青团中央学校部"></div>
-						</dd> -->
-						
-							<dt>主办</dt><dd style="font-size:12px;color:#ddd;">中国科学技术协会</dd>
-							@*<dt>承办指导</dt><dd style="font-size:12px;color:#ddd;">中国科协科普部</dd><dd style="font-size:12px;color:#ddd;">共青团中央青年发展部</dd>*@
-							
-					</dl>
-					<dl class="dl-sponsor">
-                        <dt>承办</dt>
-						<dd>
-							<div><img src="~/images/ico-footer-03.jpg" alt="中国科学技术馆"></div>
-							<div><img src="~/images/ico-footer-04.jpg" alt="中国科协青少年科技中心"></div>
-						</dd>
-					</dl>
-				</div>
-				<div class="sponsor-two">
-					<dl class="dl-sponsor">
-						<dt>分赛区承办</dt>
-						<dd>
-							<div><img src="~/images/ico-footer-03.jpg" alt="中国科学技术馆"></div>
-							<div><img src="~/images/ico-footer-09.jpg" alt="湖南省科学技术馆"></div>
-							<div><img src="~/images/ico-footer-14.jpg" alt="西藏自然科学博物馆"></div>
-							<div><img src="~/images/ico-footer-05.jpg" alt="山西省科学技术馆"></div>
-							<div><img src="~/images/ico-footer-10.jpg" alt="广东科学中心"></div>
-							<div><img src="~/images/ico-footer-15.jpg" alt="甘肃科技馆"></div>
-							<div><img src="~/images/ico-footer-06.jpg" alt="黑龙江省科学技术馆"></div>
-							<div><img src="~/images/ico-footer-11.jpg" alt="重庆科技馆"></div>
-							<div><img src="~/images/ico-footer-16.jpg" alt="青海省科学技术馆"></div>
-							<div><img src="~/images/ico-footer-07.jpg" alt="安徽省科学技术馆"></div>
-							<div><img src="~/images/ico-footer-12.jpg" alt="四川科技馆"></div>
-							<div><img src="~/images/ico-footer-17.jpg" alt="东莞市科学技术博物馆"></div>
-							<div><img src="~/images/ico-footer-08.jpg" alt="山西省科技馆"></div>
-							<div><img src="~/images/ico-footer-13.jpg" alt="贵州科学技术馆"></div>
-							<div><img src="~/images/ico-footer-18.jpg" alt="泰安市科技馆"></div>
-						</dd>
-					</dl>
-				</div>
-				<div class="sponsor-three">
-					<dl class="dl-sponsor">
-						<dt>独家公益捐助</dt>
-						<dd>
-							<div><img src="~/images/ico-footer-19.jpg" alt="SAMSUNG"></div>
-						</dd>
-					</dl>
-				</div>
-				<div class="sponsor-four">
-					<dl class="dl-sponsor">
-						<dt>公益支持单位</dt>
-						<dd>
-							<div><img src="~/images/ico-footer-20.jpg" alt="中国青少年发展基金会"></div>
-							<div><img src="~/images/ico-footer-21.jpg" alt="中国科技馆发展基金会"></div>
-						</dd>
-					</dl>
-				</div>
-			</div>
-			<div class="contact-wrap width-wrap clearfix">
-				<ul class="ul-contact">
-					<li><i class="ico ico-cont1"></i>中国科学技术馆</li>
-					<li><i class="ico ico-cont2"></i>010-59041092</li>
-					<li><i class="ico ico-cont3"></i>北京市朝阳区北辰东路5号</li>
-					<li><i class="ico ico-cont4"></i>100012</li>
-				</ul>
-				<ul class="ul-qrcode">
-					<li><img src="~/images/qrcode1.jpg" alt=""></li>
-					<li><img src="~/images/qrcode2.jpg" alt=""></li>
-					<!-- <li><img src="~/images/qrcode3.jpg" alt=""></li> -->
-				</ul>
-			</div>
-		</div>
-	</footer>
-	<!-- footer end -->
+                            <dt>主办</dt>
+                            <dd style="font-size:12px;color:#ddd;">中国科学技术协会</dd>
+                            @*<dt>承办指导</dt><dd style="font-size:12px;color:#ddd;">中国科协科普部</dd><dd style="font-size:12px;color:#ddd;">共青团中央青年发展部</dd>*@
 
-	<a class="btn-scrolltop" href="javascript:;"><i class="ico"></i>TOP</a>
+                        </dl>
+                        <dl class="dl-sponsor">
+                            <dt>承办</dt>
+                            <dd>
+                                <div><img src="~/images/ico-footer-03.jpg" alt="中国科学技术馆"></div>
+                                <div><img src="~/images/ico-footer-04.jpg" alt="中国科协青少年科技中心"></div>
+                            </dd>
+                        </dl>
+                    </div>
+                    <div class="sponsor-two">
+                        <dl class="dl-sponsor">
+                            <dt>分赛区承办</dt>
+                            <dd>
+                                <div><img src="~/images/ico-footer-03.jpg" alt="中国科学技术馆"></div>
+                                <div><img src="~/images/ico-footer-09.jpg" alt="湖南省科学技术馆"></div>
+                                <div><img src="~/images/ico-footer-14.jpg" alt="西藏自然科学博物馆"></div>
+                                <div><img src="~/images/ico-footer-05.jpg" alt="山西省科学技术馆"></div>
+                                <div><img src="~/images/ico-footer-10.jpg" alt="广东科学中心"></div>
+                                <div><img src="~/images/ico-footer-15.jpg" alt="甘肃科技馆"></div>
+                                <div><img src="~/images/ico-footer-06.jpg" alt="黑龙江省科学技术馆"></div>
+                                <div><img src="~/images/ico-footer-11.jpg" alt="重庆科技馆"></div>
+                                <div><img src="~/images/ico-footer-16.jpg" alt="青海省科学技术馆"></div>
+                                <div><img src="~/images/ico-footer-07.jpg" alt="安徽省科学技术馆"></div>
+                                <div><img src="~/images/ico-footer-12.jpg" alt="四川科技馆"></div>
+                                <div><img src="~/images/ico-footer-17.jpg" alt="东莞市科学技术博物馆"></div>
+                                <div><img src="~/images/ico-footer-08.jpg" alt="山西省科技馆"></div>
+                                <div><img src="~/images/ico-footer-13.jpg" alt="贵州科学技术馆"></div>
+                                <div><img src="~/images/ico-footer-18.jpg" alt="泰安市科技馆"></div>
+                            </dd>
+                        </dl>
+                    </div>
+                    <div class="sponsor-three">
+                        <dl class="dl-sponsor">
+                            <dt>独家公益捐助</dt>
+                            <dd>
+                                <div><img src="~/images/ico-footer-19.jpg" alt="SAMSUNG"></div>
+                            </dd>
+                        </dl>
+                    </div>
+                    <div class="sponsor-four">
+                        <dl class="dl-sponsor">
+                            <dt>公益支持单位</dt>
+                            <dd>
+                                <div><img src="~/images/ico-footer-20.jpg" alt="中国青少年发展基金会"></div>
+                                <div><img src="~/images/ico-footer-21.jpg" alt="中国科技馆发展基金会"></div>
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+                <div class="contact-wrap width-wrap clearfix">
+                    <ul class="ul-contact">
+                        <li><i class="ico ico-cont1"></i>中国科学技术馆</li>
+                        <li><i class="ico ico-cont2"></i>010-59041092</li>
+                        <li><i class="ico ico-cont3"></i>北京市朝阳区北辰东路5号</li>
+                        <li><i class="ico ico-cont4"></i>100012</li>
+                    </ul>
+                    <ul class="ul-qrcode">
+                        <li><img src="~/images/qrcode1.jpg" alt=""></li>
+                        <li><img src="~/images/qrcode2.jpg" alt=""></li>
+                        <!-- <li><img src="~/images/qrcode3.jpg" alt=""></li> -->
+                    </ul>
+                </div>
+            </div>
+        </footer>
+        <!-- footer end -->
 
-</div>
-<script src="~/lib/jquery/dist/jquery.min.js"></script>
-<!-- <script type="text/javascript" src="~/js/jquery-1.11.0.min.js"></script> -->
-<script type="text/javascript" src="~/js/angular.min.js"></script>
-<script src="https://cdn.bootcss.com/angular-sanitize/1.4.6/angular-sanitize.min.js"></script>
-<script type="text/javascript" src="~/js/app.js"></script>
+        <a class="btn-scrolltop" href="javascript:;"><i class="ico"></i>TOP</a>
 
-<script type="text/javascript" src="~/js/jquery.slides.min.js"></script>
-<script type="text/javascript" src="~/js/solve.base.js"></script>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <!-- <script type="text/javascript" src="~/js/jquery-1.11.0.min.js"></script> -->
+    <script type="text/javascript" src="~/js/angular.min.js"></script>
+    <script type="text/javascript" src="~/js/angular-sanitize.min.js"></script>
+    @*<script src="https://cdn.bootcss.com/angular-sanitize/1.4.6/angular-sanitize.min.js"></script>*@
+    <script type="text/javascript" src="~/js/app.js"></script>
+
+    <script type="text/javascript" src="~/js/jquery.slides.min.js"></script>
+    <script type="text/javascript" src="~/js/solve.base.js"></script>
 </body>
 </html>
