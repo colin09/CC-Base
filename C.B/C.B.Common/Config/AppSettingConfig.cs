@@ -1,31 +1,29 @@
-﻿using Microsoft.Extensions.Configuration;
-using System.Configuration;
+﻿using System.Configuration;
+using Microsoft.Extensions.Configuration;
 
-namespace C.B.Common.Config
-{
-    public class AppSettingConfig
-    {
+namespace C.B.Common.Config {
+    public class AppSettingConfig {
 
         private static IConfigurationRoot Configuration = ConfigBuilder.Configuration;
 
-        public static string TDES_Key
-        {
-            get { return "";  /* ConfigurationManager.AppSettings["TDES_Key"]; */}
+        public static string TDES_Key {
+            get { return ""; /* ConfigurationManager.AppSettings["TDES_Key"]; */ }
         }
-        public static string TDES_IV
-        {
+        public static string TDES_IV {
             get { return ""; /* ConfigurationManager.AppSettings["TDES_IV"];*/ }
         }
-        public static string MgConn => Get("MgConn");
+        public static string MgConn => Get ("MgConn");
 
-        public static string MgDBName => Get("MgDBName");
+        public static string MgDBName => Get ("MgDBName");
 
-        public static string MgPrefix => Get("MgPrefix");
+        public static string MgPrefix => Get ("MgPrefix");
 
+        public static string EsUrl => Get ("EsUrl");
+        public static string EsDefaultIndex => Get ("EsDefaultIndex");
 
-        public static string VideoThumbTime => Get("VideoThumbTime");
+        public static string VideoThumbTime => Get ("VideoThumbTime");
 
-        public static string Get(string key) => Configuration[key];
+        public static string Get (string key) => Configuration[key];
 
         /*
         public static string MqHost
@@ -51,9 +49,6 @@ namespace C.B.Common.Config
             get { return ConfigurationManager.AppSettings["MqQueue"]; }
         }
         */
-
-
-
 
     }
 }

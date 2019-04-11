@@ -10,7 +10,8 @@ namespace C.B.Test {
             Console.WriteLine ("Hello start...");
 
             // GetVerifyCodeImage ();
-            SqliteRepositoryInsert();
+            //SqliteRepositoryInsert();
+            EsIndex ();
         }
 
         static void DbInsert () {
@@ -42,9 +43,15 @@ namespace C.B.Test {
             repository.Insert (new C.B.Sqlite.Data.UserInfo ());
             Console.WriteLine ("RepositoryInsert Over!");
 
-            var users = repository.Where (m => true).ToList();
-            Console.WriteLine (users.Count());
+            var users = repository.Where (m => true).ToList ();
+            Console.WriteLine (users.Count ());
 
+        }
+
+        static void EsIndex () {
+            var service = new C.B.Search.Services.ESSettingService ();
+            service.AutoMap ();
+            service.IndexDocument ();
         }
 
     }
