@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using C.B.Common.helper;
 using C.B.Search.Client;
 using C.B.Search.Data;
@@ -34,7 +35,7 @@ namespace C.B.Search.Services {
             );
             /*
             var createIndexResponse = _client.CreateIndex("myindex");*/
-            System.Console.WriteLine (createIndexResponse.DebugInformation.ToJson());
+            System.Console.WriteLine (createIndexResponse.DebugInformation.ToJson ());
 
             var searchResponse = _client.Search<EventInfoES> (s => s
                 .Query (q => q
@@ -53,7 +54,13 @@ namespace C.B.Search.Services {
                 SortNo = 1,
             };
             var indexResponse = _client.IndexDocument (model);
+
+            var content = new EsContent { Id = "16tyjty", Title = "Title", Content = "Content", Author = "author", Url = "url" };
+            var indexResponse2 = _client.IndexDocument (content);
+
+            // _client.BulkAll(new List<EventInfoES>(),null);
             System.Console.WriteLine (indexResponse);
+            System.Console.WriteLine (indexResponse2);
         }
 
         public void Search (string key) {

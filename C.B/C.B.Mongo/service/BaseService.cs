@@ -35,6 +35,11 @@ namespace C.B.Mongo.service
             MgClient.Insert<T>(model);
         }
 
+        public void InsertMany(IEnumerable<T> models)
+        {
+            MgClient.InsertMany<T>(models);
+        }
+
         public long Update(FilterDefinition<T> filter, UpdateDefinition<T> update)
         {
             return MgClient.Update<T>(filter, update);

@@ -16,6 +16,7 @@
     <ProjectReference Include="..\C.B.MySql\C.B.MySql.csproj" />
     <ProjectReference Include="..\C.B.Sqlite\C.B.Sqlite.csproj" />
     <ProjectReference Include="..\C.B.Search\C.B.Search.csproj" />
+    <ProjectReference Include="..\C.B.Mongo\C.B.Mongo.csproj" />
   </ItemGroup>
   
 </Project>

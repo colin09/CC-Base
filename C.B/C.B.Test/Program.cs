@@ -1,7 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using C.B.Common.Helper;
+using C.B.Models.Data;
+using C.B.Mongo.service;
 using C.B.MySql;
+using C.B.Search.Data;
+using C.B.Search.Services;
 using C.B.Test.MySql;
 
 namespace C.B.Test {
@@ -11,7 +16,9 @@ namespace C.B.Test {
 
             // GetVerifyCodeImage ();
             //SqliteRepositoryInsert();
-            EsIndex ();
+            //EsIndex ();
+            // Mg2Es ();
+            SearchEs ();
         }
 
         static void DbInsert () {
@@ -52,6 +59,43 @@ namespace C.B.Test {
             var service = new C.B.Search.Services.ESSettingService ();
             service.AutoMap ();
             service.IndexDocument ();
+        }
+
+        static void Mg2Es () {
+            var mgService = new MgContentService ();
+            var esService = new EsContentSevcice ();
+
+            // var content = new EsContent { Id = "16tyjty", Title = "Title", Content = "Content", Author = "author", Url = "url" };
+            // esService.Index (content);
+
+            int pageIndex = 1, pageSize = 50;
+            var pageCount = 0;
+            do {
+                var mgList = mgService.SearchPage (new Models.Data.Pager { PageIndex = pageIndex, PageSize = pageSize });
+                pageCount = mgList.Count ();
+
+                if (pageCount > 0) {
+                    var esList = new List<EsContent> ();
+                    mgList.ForEach (m => {
+                        esList.Add (new EsContent {
+                            Id = m.StringId,
+                                Title = m.Title,
+                                Content = m.Content,
+                                Author = m.Author,
+                                Url = m.Url,
+                        });
+                    });
+                    esService.BulkAll (esList);
+                }
+                pageIndex++;
+            }
+            while (pageCount > 0);
+        }
+
+        static void SearchEs () {
+            var esService = new EsContentSevcice ();
+            var page = new Pager ();
+            esService.Search ("多维数组", page);
         }
 
     }

@@ -2,9 +2,9 @@ using Nest;
 
 namespace C.B.Search.Data
 {
-    public class EventInfoES
+    public class EventInfoES: ESBase
     {
-        public string Id { set; get; }
+        //public string Id { set; get; }
 
         [Text(Name = "title", Analyzer = "ik_smart")]
         public string Title { set; get; }

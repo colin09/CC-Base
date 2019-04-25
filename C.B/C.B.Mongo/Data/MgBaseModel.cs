@@ -25,7 +25,6 @@ namespace C.B.Mongo.data
         [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
         public DateTime UpdateTime { set; get; } = DateTime.Now;
 
-        [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
         public bool IsDelete { set; get; } = false;
 
 

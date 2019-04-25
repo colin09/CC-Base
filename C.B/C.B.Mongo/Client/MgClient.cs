@@ -51,6 +51,14 @@ namespace C.B.Mongo.client
             var collection = _database.GetCollection<T>(new T().GetCollectionName());
             collection.InsertOneAsync(model);
         }
+        public static void InsertMany<T>(IEnumerable<T> models) where T : MgBaseModel, new()
+        {
+            if (_database == null)
+                getClient();
+
+            var collection = _database.GetCollection<T>(new T().GetCollectionName());
+            collection.InsertManyAsync(models);
+        }
 
         public static List<T> Search<T>(FilterDefinition<T> filter) where T : MgBaseModel, new()
         {

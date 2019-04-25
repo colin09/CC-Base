@@ -20,6 +20,7 @@ namespace C.B.Common.Config {
 
         public static string EsUrl => Get ("EsUrl");
         public static string EsDefaultIndex => Get ("EsDefaultIndex");
+        public static string EsIndexPrefix => Get ("EsIndexPrefix");
 
         public static string VideoThumbTime => Get ("VideoThumbTime");
 
