@@ -12,6 +12,9 @@ namespace C.B.Test {
 
             //GetVerifyCodeImage ();
             TakeHtml ();
+
+            W2h.ConvertWord ();
+
         }
 
         static void InitLog () {
