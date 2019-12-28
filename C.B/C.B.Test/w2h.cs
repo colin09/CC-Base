@@ -81,24 +81,16 @@ namespace C.B.Test {
                                 foreach (var text in textList) {
                                     sb.Append (
                                         $"<span style=\"");
-                                    if (!string.IsNullOrWhiteSpace (ctr.rPr?.color?.val)) {
-                                        sb.Append (
-                                            $"color:#{ctr.rPr.color.val};");
-                                    }
-
-                                    if (ctr?.rPr?.sz != null) {
-                                        sb.Append (
-                                            $"font-size:{ctr.rPr.sz.val}px;");
-                                    }
-
-                                    if (!string.IsNullOrWhiteSpace (ctr.rPr?.rFonts?.cs)) {
-                                        sb.Append (
-                                            $"font-family:{ctr.rPr.rFonts.cs};");
-                                    }
-
-                                    sb.Append (
-                                        $"\">");
-
+                                    if (!string.IsNullOrWhiteSpace (ctr.rPr?.color?.val)) 
+                                        sb.Append ($"color:#{ctr.rPr.color.val};");
+                                    
+                                    if (ctr?.rPr?.sz != null) 
+                                        sb.Append ($"font-size:{ctr.rPr.sz.val}px;");
+                                    
+                                    if (!string.IsNullOrWhiteSpace (ctr.rPr?.rFonts?.cs)) 
+                                        sb.Append ($"font-family:{ctr.rPr.rFonts.cs};");
+                                    
+                                    sb.Append ($"\">");
                                     sb.Append (text.Value);
                                     sb.Append ("</span>");
                                 }
