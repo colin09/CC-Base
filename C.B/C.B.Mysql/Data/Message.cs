@@ -1,37 +1,36 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.ComponentModel.DataAnnotations;
 
-namespace C.B.MySql.Data
-{
-    //互动留言
-    public class Message : BaseEntity
-    {
+namespace C.B.MySql.Data {
+  //互动留言
+  public class Message : BaseEntity {
 
-        [MaxLength(64)]
-        public string Title { set; get; }
-        [MaxLength(512)]
-        public string Content { set; get; }
-        [MaxLength(64)]
-        public string Region { set; get; }
-        [MaxLength(64)]
-        public string Name { set; get; }
-        [MaxLength(512)]
-        public string ReplyContent { set; get; }
-        [MaxLength(64)]
-        public string ReplyName { set; get; }
-        public DateTime? ReplyTime { set; get; }
+    [MaxLength (64)]
+    public string Title { set; get; }
 
-        public int IsShow { set; get; }
-        public int IsTop { set; get; }
+    [MaxLength (512)]
+    public string Content { set; get; }
 
-        public double SortNo { set; get; }
-    }
+    [MaxLength (64)]
+    public string Region { set; get; }
+
+    [MaxLength (64)]
+    public string Name { set; get; }
+
+    [MaxLength (512)]
+    public string ReplyContent { set; get; }
+
+    [MaxLength (64)]
+    public string ReplyName { set; get; }
+    public DateTime? ReplyTime { set; get; }
+
+    public int IsShow { set; get; }
+    public int IsTop { set; get; }
+
+    public double SortNo { set; get; }
+
+  }
 }
-
-
-
 
 /*
 DROP TABLE IF EXISTS `message`;

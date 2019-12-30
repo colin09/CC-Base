@@ -67,10 +67,10 @@ namespace StmWeb.Area.Sys.Controllers {
                 var fileList = Task.Run (() => FileHelper.SaveFiles (files)).Result;
                 fileList.ToList ().ForEach (item => {
                     if (item.FileType == "image")
-                        model.ThumbUrl = item.FileUrl;
+                        model.ImageUrl = item.FileUrl;
                     if (item.FileType == "video") {
-                        model.ThumbUrl = item.ThumbUrl;
-                        model.FileUrl = item.FileUrl;
+                        model.ImageUrl = item.ThumbUrl;
+                        model.VideoUrl = item.FileUrl;
                     }
                     if (item.FileType == "doc") {
 
@@ -100,7 +100,7 @@ namespace StmWeb.Area.Sys.Controllers {
             var httpClient = new HttpClientHelper ();
             var response = httpClient.GetString (wordConverApiUrl);
             var result = response.DesJson<BaseResponse> ();
-            
+
         }
 
         #endregion

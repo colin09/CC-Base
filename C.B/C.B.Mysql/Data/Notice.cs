@@ -1,34 +1,32 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.ComponentModel.DataAnnotations;
 
-namespace C.B.MySql.Data
-{
-    //通知公告
-    public class Notice : BaseEntity
-    {
+namespace C.B.MySql.Data {
+  //通知公告
+  public class Notice : BaseEntity {
 
-        [MaxLength(64)]
-        public string Title { set; get; }
-        //[MaxLength(2048)]
-        public string Content { set; get; }
-        public DateTime PubTime { set; get; }
-        [MaxLength(64)]
-        public string PubOrg { set; get; }
-        [MaxLength(32)]
-        public string Author { set; get; }
+    [MaxLength (64)]
+    public string Title { set; get; }
 
-        public int IsShow{set;get;}
-        public int IsTop{set;get;}
-        public int IsRoll{set;get;}
-        
-        public double SortNo { set; get; }
-    }
+    [MaxLength (512)]
+    public string Content { set; get; }
+    public DateTime PubTime { set; get; }
+
+    [MaxLength (64)]
+    public string PubOrg { set; get; }
+
+    [MaxLength (32)]
+    public string Author { set; get; }
+
+    public int IsShow { set; get; }
+    public int IsTop { set; get; }
+    public int IsRoll { set; get; }
+
+    public double SortNo { set; get; }
+    public int DocumentId { get; set; }
+
+  }
 }
-
-
-
 
 /*
 DROP TABLE IF EXISTS `notice`;

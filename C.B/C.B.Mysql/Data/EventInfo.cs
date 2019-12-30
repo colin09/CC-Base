@@ -1,40 +1,41 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace C.B.MySql.Data {
 
+  /// <summary>
+  /// 赛事内容
+  /// </summary>
+  public class EventInfo : BaseEntity {
     /// <summary>
-    /// 赛事内容
+    /// 赛事Id
     /// </summary>
-    public class EventInfo : BaseEntity {
-        /// <summary>
-        /// 赛事Id
-        /// </summary>
-        /// <value></value>
-        public int EventId { set; get; }
+    /// <value></value>
+    public int EventId { set; get; }
 
-        [MaxLength (64)]
-        public string Title { set; get; }
-        /// <summary>
-        /// 内容，图文混排
-        /// </summary>
-        /// <value></value>
-        public string Content { set; get; }
+    [MaxLength (64)]
+    public string Title { set; get; }
+    /// <summary>
+    /// 内容，图文混排
+    /// </summary>
+    /// <value></value>
+    [MaxLength (512)]
+    public string Content { set; get; }
 
-        [MaxLength (32)]
-        public string Author { set; get; }
+    [MaxLength (32)]
+    public string Author { set; get; }
 
-        public int IsShow { set; get; }
-        public int IsTop { set; get; }
+    public int IsShow { set; get; }
+    public int IsTop { set; get; }
 
-        [MaxLength (64)]
-        public string ThumbUrl { set; get; }
-        public int ThumbId { set; get; }
+    [MaxLength (64)]
+    public string ThumbUrl { set; get; }
+    public int ThumbId { set; get; }
 
-        public int SortNo { set; get; }
-    }
+    public int SortNo { set; get; }
+
+    public int DocumentId { get; set; }
+
+  }
 }
 
 /*

@@ -1,52 +1,49 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.ComponentModel.DataAnnotations;
 
-namespace C.B.MySql.Data
-{
+namespace C.B.MySql.Data {
     //新闻  图片/视频/赛事
-    public class NewsInfo : BaseEntity
-    {
-        [MaxLength(64)]
+    public class NewsInfo : BaseEntity {
+        [MaxLength (64)]
         public string Title { set; get; }
-        //[MaxLength(2048)]
+
+        [MaxLength (512)]
         public string Content { set; get; }
         public DateTime PubTime { set; get; }
-        [MaxLength(64)]
+
+        [MaxLength (64)]
         public string PubOrg { set; get; }
-        [MaxLength(32)]
+
+        [MaxLength (32)]
         public string Author { set; get; }
 
-        public int IsShow{set;get;}
-        public int IsTop{set;get;}
-        public int IsRoll{set;get;}
-        
-        public int ThumbId{set;get;}
-        
-        [MaxLength(128)]
-        public string ThumUrl{set;get;}
+        public int IsShow { set; get; }
+        public int IsTop { set; get; }
+        public int IsRoll { set; get; }
 
-        public NewsType NewsType{set;get;}
-        public int VideoId{set;get;}
-        [MaxLength(128)]
-        public string VideoUrl{set;get;}
+        public int ThumbId { set; get; }
 
+        [MaxLength (128)]
+        public string ThumUrl { set; get; }
+
+        public NewsType NewsType { set; get; }
+        public int VideoId { set; get; }
+
+        [MaxLength (128)]
+        public string VideoUrl { set; get; }
 
         public double SortNo { set; get; }
+
+        public int DocumentId { get; set; }
+
     }
 
-
-    public enum NewsType
-    {
-        EventNews=1,
-        ImageNews=2,
-        VideoNews=3,
+    public enum NewsType {
+        EventNews = 1,
+        ImageNews = 2,
+        VideoNews = 3,
     }
 }
-
-
-
 
 /*
 DROP TABLE IF EXISTS `newsinfo`;

@@ -126,6 +126,32 @@ namespace C.B.MySql.Repository.Services {
             return result;
         }
 
+        private void SaveDocument (EditorModel model) {
+
+            var document = new Document () {
+                Title = model.Title,
+                SubTitle = model.SubTitle,
+                Author = model.Author,
+                PublishTime = DateTime.Now,
+                DocType = model.DocUrl.IsNotEmpty () ? 2 : 1,
+            };
+            if (model.DocUrl.IsEmpty ())
+                document.Content = model.Content;
+            else {
+                var apiClient = new HttpClientHelper ();
+                var url = Common.Config.AppSettingConfig.Get ("FWork_Office_API");
+                var request = new { filePath = model.DocUrl };
+                var response = apiClient.DoPostPut<object> (System.Net.Http.HttpMethod.Post, url, request);
+                var result = response.DesJson<BaseResponse> ();
+                if (result.Success) {
+                    document.Content = result.Message;
+                    document.SimpleContent = result.Message;
+                }
+            }
+            // save to db ...
+            //...
+        }
+
         #region -  modify   -
 
         private bool ModifyEventInfo (EditorModel m) {
@@ -136,8 +162,8 @@ namespace C.B.MySql.Repository.Services {
                 Content = m.Content,
                 Author = m.Author,
 
-                ThumbId = m.ThumbId,
-                ThumbUrl = m.ThumbUrl,
+                ThumbId = m.ImageId,
+                ThumbUrl = m.ImageUrl,
 
                 IsShow = m.IsShow ? 1 : 0,
                 IsTop = m.IsTop ? 1 : 0,
@@ -160,10 +186,10 @@ namespace C.B.MySql.Repository.Services {
             news.Author = m.Author;
 
             news.PubOrg = m.PubOrg;
-            news.ThumbId = m.ThumbUrl.IsEmpty () ? news.ThumbId : m.ThumbId;
-            news.ThumUrl = m.ThumbUrl.IsEmpty () ? news.ThumUrl : m.ThumbUrl;
-            news.VideoId = m.FileUrl.IsEmpty () ? news.VideoId : m.FileId;
-            news.VideoUrl = m.FileUrl.IsEmpty () ? news.VideoUrl : m.FileUrl;
+            news.ThumbId = m.ImageId;
+            news.ThumUrl = m.ImageUrl.IsEmpty () ? news.ThumUrl : m.ImageUrl;
+            news.VideoId = m.VideoId;
+            news.VideoUrl = m.VideoUrl.IsEmpty () ? news.VideoUrl : m.VideoUrl;
 
             news.IsShow = m.IsShow ? 1 : 0;
             news.IsTop = m.IsTop ? 1 : 0;

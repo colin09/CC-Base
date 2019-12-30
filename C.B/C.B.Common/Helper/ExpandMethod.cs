@@ -11,6 +11,9 @@ namespace C.B.Common.helper {
         public static bool IsEmpty (this string str) {
             return string.IsNullOrWhiteSpace (str);
         }
+        public static bool IsNotEmpty (this string str) {
+            return !string.IsNullOrWhiteSpace (str);
+        }
         public static byte[] ToByte (this string str) {
             return Encoding.UTF8.GetBytes (str);
         }
@@ -80,7 +83,7 @@ namespace C.B.Common.helper {
                 return str;
             var tem = System.Text.RegularExpressions.Regex.Replace (str, "<[^>]+>", "");
             tem = System.Text.RegularExpressions.Regex.Replace (tem, @"&[^;]*;", "");
-            
+
             if (!string.IsNullOrEmpty (tem.Trim ()) && tem.Length > length)
                 return tem.Substring (0, length);
             return tem;
