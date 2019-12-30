@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace C.B.MySql.Data {
+namespace C.B.MySql.Data
+{
 
     /// <summary>
     /// 赛事分区

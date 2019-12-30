@@ -18,6 +18,7 @@ namespace C.B.Models.Data
 
         public string Title { set; get; }
         public string Content { set; get; }
+        
         public string PubOrg { set; get; }
         //public string Region { set; get; }
 

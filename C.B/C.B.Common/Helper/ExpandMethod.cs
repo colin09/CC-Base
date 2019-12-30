@@ -62,7 +62,11 @@ namespace C.B.Common.helper {
                     break;
                 case ".xlsx":
                 case ".xls":
+                    fileType = "xls";
+                    break;
                 case ".pdf":
+                    fileType = "pdf";
+                    break;
                 case ".doc":
                 case ".docx":
                     fileType = "doc";

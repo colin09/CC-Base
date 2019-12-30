@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using System.Diagnostics;
+﻿using System.Diagnostics;
 
 namespace C.B.Common.helper {
     public class CmdTool {
@@ -44,9 +39,7 @@ namespace C.B.Common.helper {
             }
         }
 
-
-        public static void RunBat(string filePath = "",string fileName = "")
-		{
+        public static void RunBat (string filePath = "", string fileName = "") {
             using (Process p = new Process ()) {
                 p.StartInfo.CreateNoWindow = false;
                 p.StartInfo.UseShellExecute = true;
@@ -56,12 +49,11 @@ namespace C.B.Common.helper {
                 // 初始化可执行文件的一些基础信息
                 p.StartInfo.WorkingDirectory = filePath; // 初始化可执行文件的文件夹信息
                 p.StartInfo.FileName = fileName; // 初始化可执行文件名
-                
-                p.Start();
+
+                p.Start ();
                 p.WaitForExit (); //等待程序执行完退出进程
                 p.Close ();
             }
-
 
             /*
 			var startInfo = new ProcessStartInfo();
@@ -83,8 +75,6 @@ namespace C.B.Common.helper {
 
         }
     }
-
-
 
     /**
     # 50分钟处截屏 

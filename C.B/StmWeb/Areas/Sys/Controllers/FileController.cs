@@ -1,19 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using C.B.Common.helper;
 using C.B.Models.Data;
-using C.B.Models.Enums;
 using C.B.MySql.Data;
 using C.B.MySql.Repository.EntityRepositories;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using StmWeb.Models;
 
 namespace StmWeb.Area.Sys.Controllers
 {
