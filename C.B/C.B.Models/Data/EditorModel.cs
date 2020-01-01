@@ -43,8 +43,10 @@ namespace C.B.Models.Data {
         public string IsTopTxt => IsTop ? "是" : "否";
         public string IsRollTxt => IsRoll ? "是" : "否";
         public string StateTxt => State == 1 ? "启用" : "取消";
-
         public string CreateTimeTxt => CreateTime.ToString ("yyyy-MM-dd HH:mm");
+
+        public int documentId { set; get; }
+        public DocumentModel document { set; get; }
 
         public bool Validate (out string message) {
             var flag = true;
@@ -59,4 +61,5 @@ namespace C.B.Models.Data {
             return flag;
         }
     }
+
 }

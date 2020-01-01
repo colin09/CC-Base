@@ -93,15 +93,7 @@ namespace StmWeb.Area.Sys.Controllers {
             var result = _editorService.DeleteEditorModel (type, id);
             return Json (new BaseResponse (result));
         }
-
-        private void ConvertDocFile (EditorModel model, string fileName) {
-            var wordConverApiUrl = AppSettingConfig.Get ("WordConvertUrl");
-            var url = $"{wordConverApiUrl}?filePath={fileName}";
-            var httpClient = new HttpClientHelper ();
-            var response = httpClient.GetString (wordConverApiUrl);
-            var result = response.DesJson<BaseResponse> ();
-
-        }
+ 
 
         #endregion
 

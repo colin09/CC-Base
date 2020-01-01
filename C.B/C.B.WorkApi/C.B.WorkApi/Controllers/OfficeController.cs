@@ -1,10 +1,7 @@
 ﻿using C.B.WorkApi.Utinity;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
+using C.B.WorkApi.Models;
 
 namespace C.B.WorkApi.Controllers
 {
@@ -13,19 +10,19 @@ namespace C.B.WorkApi.Controllers
 
 
 
-        // GET api/values/5
-        public bool ConvertWord(string filePath)
+        [HttpPost]
+        public BaseResponse ConvertWord(string filePath)
         {
             try
             {
                 var word = new WordConvert();
-                word.Convert(filePath);
+                var result = word.Convert(filePath);
 
-                return true;
+                return new BaseResponse<DocResponse>(result);
             }
             catch (Exception ex)
             {
-                return false;
+                return BaseResponse.Error(ex.Message);
             }
 
         }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using C.B.WorkApi.Models;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -15,20 +16,23 @@ namespace C.B.WorkApi.Utinity
 
         //private string rootPath = ConfigManager.WordHtmlRootPath;
 
-        public void Convert(string wordFilePath)
+        public DocResponse Convert(string wordFilePath)
         {
-            var htmlPath = GetPathByDocToHTML(wordFilePath);
+            var content = "";
+            var htmlPath = GetPathByDocToHTML(wordFilePath, out content);
             var filesPath = $"{ConfigManager.WordHtmlRootPath}\\{htmlPath.Replace("html", "files")}";
 
             var imgConvert = new ImageConvert();
             imgConvert.CompressImage(filesPath);
 
             Console.WriteLine(htmlPath);
+            return new DocResponse { content = content, htmlPath = htmlPath };
         }
 
 
-        private string GetPathByDocToHTML(string sourceFilePath)
+        private string GetPathByDocToHTML(string sourceFilePath, out string content)
         {
+            content = "";
             if (string.IsNullOrEmpty(sourceFilePath))
             {
                 return "0";//没有文件
@@ -79,11 +83,11 @@ namespace C.B.WorkApi.Utinity
             wordType.InvokeMember("Quit", System.Reflection.BindingFlags.InvokeMethod, null, word, null);
 
             //转化HTML页面统一编码格式
-            TransHTMLEncoding(saveFileName);
+            content = TransHTMLEncoding(saveFileName);
 
             return $"{flagName}\\{flagName}.html";
         }
-        private void TransHTMLEncoding(string strFilePath)
+        private string TransHTMLEncoding(string strFilePath)
         {
             try
             {
@@ -94,12 +98,18 @@ namespace C.B.WorkApi.Utinity
                 System.IO.StreamWriter writer = new System.IO.StreamWriter(strFilePath, false, Encoding.Default);
                 writer.Write(html);
                 writer.Close();
+
+                return html.TakeString(500);
             }
             catch (Exception ex)
             {
                 // Page.ClientScript.RegisterStartupScript(Page.ClientScript.GetType(), "myscript", "<script>alert('" + ex.Message + "')</script>");
+                throw ex;
             }
         }
+
+
+
 
     }
 }

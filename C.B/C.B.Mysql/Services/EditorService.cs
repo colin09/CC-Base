@@ -1,6 +1,7 @@
 using System;
 using AutoMapper;
 using C.B.Common.helper;
+using C.B.Models.Contracts;
 using C.B.Models.Data;
 using C.B.MySql.Data;
 using C.B.MySql.Repository.EntityRepositories;
@@ -14,6 +15,7 @@ namespace C.B.MySql.Repository.Services {
         private NewsInfoRepository _newsInfoRepository;
         private MessageRepository _messageRepository;
         private ExpertInfoRepository _expertInfoRepository;
+        private DocumentRepository _documentRepository;
 
         public EditorService (IMapper mapper) {
             _eventTypeRepository = new EventTypeRepository ();
@@ -23,6 +25,7 @@ namespace C.B.MySql.Repository.Services {
             _newsInfoRepository = new NewsInfoRepository ();
             _messageRepository = new MessageRepository ();
             _expertInfoRepository = new ExpertInfoRepository ();
+            _documentRepository = new DocumentRepository ();
 
             _mapper = mapper;
         }
@@ -56,6 +59,8 @@ namespace C.B.MySql.Repository.Services {
                 if (eventInfo != null) {
                     model = _mapper.Map<EditorModel> (eventInfo);
                     typeId = eventInfo.EventId;
+                    var doc = _documentRepository.FirstOrDefault (model.documentId);
+                    model.document = _mapper.Map<DocumentModel> (doc);
                 }
             }
             if (typeId != 0) {
@@ -73,9 +78,11 @@ namespace C.B.MySql.Repository.Services {
 
             if (id != 0) {
                 var expert = _expertInfoRepository.FirstOrDefault (id);
-                if (expert != null)
+                if (expert != null) {
                     model = _mapper.Map<EditorModel> (expert);
-                //Mapper.Map<ExpertInfo, EditorModel>(expert);
+                    var doc = _documentRepository.FirstOrDefault (model.documentId);
+                    model.document = _mapper.Map<DocumentModel> (doc);
+                }
             }
             return model;
         }
@@ -85,8 +92,11 @@ namespace C.B.MySql.Repository.Services {
 
             if (id != 0) {
                 var news = _newsInfoRepository.FirstOrDefault (id);
-                if (news != null)
+                if (news != null) {
                     model = _mapper.Map<EditorModel> (news);
+                    var doc = _documentRepository.FirstOrDefault (model.documentId);
+                    model.document = _mapper.Map<DocumentModel> (doc);
+                }
             }
             return model;
         }
@@ -96,8 +106,11 @@ namespace C.B.MySql.Repository.Services {
 
             if (id != 0) {
                 var notice = _noticeRepository.FirstOrDefault (id);
-                if (notice != null)
+                if (notice != null) {
                     model = _mapper.Map<EditorModel> (notice);
+                    var doc = _documentRepository.FirstOrDefault (model.documentId);
+                    model.document = _mapper.Map<DocumentModel> (doc);
+                }
             }
             return model;
         }
@@ -105,28 +118,29 @@ namespace C.B.MySql.Repository.Services {
         #endregion
 
         public bool ModifyEditor (EditorModel model) {
+            var document = SaveDocument (model);
             var result = false;
             switch (model.EditType) {
                 case "event":
-                    result = ModifyEventInfo (model);
+                    result = ModifyEventInfo (model, document);
                     break;
                 case "message":
                     result = ModifyMessageInfo (model);
                     break;
                 case "notice":
-                    result = ModifyNoticeInfo (model);
+                    result = ModifyNoticeInfo (model, document);
                     break;
                 case "expert":
-                    result = ModifyExpertInfo (model);
+                    result = ModifyExpertInfo (model, document);
                     break;
                 case "news":
-                    result = ModifyNewsInfo (model);
+                    result = ModifyNewsInfo (model, document);
                     break;
             };
             return result;
         }
 
-        private void SaveDocument (EditorModel model) {
+        private Document SaveDocument (EditorModel model) {
 
             var document = new Document () {
                 Title = model.Title,
@@ -142,31 +156,33 @@ namespace C.B.MySql.Repository.Services {
                 var url = Common.Config.AppSettingConfig.Get ("FWork_Office_API");
                 var request = new { filePath = model.DocUrl };
                 var response = apiClient.DoPostPut<object> (System.Net.Http.HttpMethod.Post, url, request);
-                var result = response.DesJson<BaseResponse> ();
+                var result = response.DesJson<BaseResponse<DocResponse>> ();
                 if (result.Success) {
-                    document.Content = result.Message;
-                    document.SimpleContent = result.Message;
+                    document.Content = result.Data.content;
+                    document.SimpleContent = result.Data.content;
+                    document.Url = result.Data.htmlPath;
                 }
             }
-            // save to db ...
-            //...
+            _documentRepository.Insert (document);
+            return document;
         }
 
         #region -  modify   -
 
-        private bool ModifyEventInfo (EditorModel m) {
+        private bool ModifyEventInfo (EditorModel m, Document document) {
             var model = new EventInfo {
                 Id = m.Id,
                 EventId = m.TypeId,
-                Title = m.Title,
-                Content = m.Content,
-                Author = m.Author,
+                Title = document.Title,
+                Content = document.Content,
+                Author = document.Author,
 
                 ThumbId = m.ImageId,
                 ThumbUrl = m.ImageUrl,
 
                 IsShow = m.IsShow ? 1 : 0,
                 IsTop = m.IsTop ? 1 : 0,
+                DocumentId = document.Id,
             };
             var result = 0;
             if (model.Id > 0)
@@ -175,15 +191,15 @@ namespace C.B.MySql.Repository.Services {
                 result = _eventInfoRepository.Insert (model);
             return result > 0;
         }
-        private bool ModifyNewsInfo (EditorModel m) {
+        private bool ModifyNewsInfo (EditorModel m, Document document) {
             var news = _newsInfoRepository.FirstOrDefault (m.Id);
             if (news == null) news = new NewsInfo ();
 
             news.Id = m.Id;
             news.NewsType = (NewsType) m.NewsType;
-            news.Title = m.Title;
-            news.Content = m.Content;
-            news.Author = m.Author;
+            news.Title = document.Title;
+            news.Content = document.Content;
+            news.Author = document.Author;
 
             news.PubOrg = m.PubOrg;
             news.ThumbId = m.ImageId;
@@ -195,6 +211,7 @@ namespace C.B.MySql.Repository.Services {
             news.IsTop = m.IsTop ? 1 : 0;
             news.IsRoll = m.IsRoll ? 1 : 0;
             news.SortNo = DateTime.Now.ToOADate ();
+            news.DocumentId = document.Id;
 
             var result = 0;
             if (news.Id > 0)
@@ -226,18 +243,19 @@ namespace C.B.MySql.Repository.Services {
                 result = _messageRepository.Insert (model);
             return result > 0;
         }
-        private bool ModifyNoticeInfo (EditorModel m) {
+        private bool ModifyNoticeInfo (EditorModel m, Document document) {
             var model = new Notice {
                 Id = m.Id,
-                Title = m.Title,
-                Content = m.Content,
-                Author = m.Author,
+                Title = document.Title,
+                Content = document.Content,
+                Author = document.Author,
                 IsShow = m.IsShow ? 1 : 0,
                 IsTop = m.IsTop ? 1 : 0,
                 IsRoll = m.IsRoll ? 1 : 0, //?????????????????????????????????????
                 PubTime = DateTime.Now,
                 PubOrg = "PubOrg",
                 SortNo = DateTime.Now.ToOADate (),
+                DocumentId = document.Id,
             };
             var result = 0;
             if (model.Id > 0)
@@ -246,17 +264,18 @@ namespace C.B.MySql.Repository.Services {
                 result = _noticeRepository.Insert (model);
             return result > 0;
         }
-        private bool ModifyExpertInfo (EditorModel m) {
+        private bool ModifyExpertInfo (EditorModel m, Document document) {
             var model = new ExpertInfo {
                 Id = m.Id,
-                Title = m.Title,
                 Type = m.ExpertType,
-                Content = m.Content,
-                Author = m.Author,
+                Title = document.Title,
+                Content = document.Content,
+                Author = document.Author,
                 IsShow = m.IsShow ? 1 : 0,
                 SortNo = DateTime.Now.ToOADate (),
-                PicFileId = m.ThumbId,
-                PicUrl = m.ThumbUrl,
+                PicFileId = m.ImageId,
+                PicUrl = m.ImageUrl,
+                DocumentId = document.Id,
             };
             var result = 0;
             if (model.Id > 0)
