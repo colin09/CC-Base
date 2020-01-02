@@ -1,33 +1,23 @@
-
-
-
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace C.B.MySql.Data
-{
+namespace C.B.MySql.Data {
 
-    public class BaseEntity
-    {
+    public class BaseEntity {
 
-        public BaseEntity()
-        {
+        public BaseEntity () {
             CreateTime = DateTime.Now;
             UpdateTime = DateTime.Now;
             IsDeleted = 0;
         }
 
-        public int Id { set; get; }
+        public long Id { set; get; }
 
         public DateTime CreateTime { set; get; }
 
         public DateTime UpdateTime { set; get; }
 
         public int IsDeleted { set; get; }
-
-
-
-
 
         // public string CreateObjectId()
         // {
@@ -36,5 +26,3 @@ namespace C.B.MySql.Data
     }
 
 }
-
-

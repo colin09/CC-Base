@@ -44,6 +44,7 @@ namespace C.B.MySql.Context
         public DbSet<EventType> EventType { get; set; }
         public DbSet<EventInfo> EventInfo { get; set; }
         public DbSet<UserInfo> UserInfo { get; set; }
+        public DbSet<Document> Document { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

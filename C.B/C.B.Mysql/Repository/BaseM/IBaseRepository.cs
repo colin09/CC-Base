@@ -21,11 +21,11 @@ namespace C.B.MySql.Repository.BaseM
 
         int Update(TEntity t);
 
-        int Delete(int id);
+        int Delete(long id);
 
         int Delete(TEntity t);
 
-        TEntity FirstOrDefault(int id);
+        TEntity FirstOrDefault(long id);
 
         TEntity FirstOrDefault(Expression<Func<TEntity, bool>> whereLambda);
 

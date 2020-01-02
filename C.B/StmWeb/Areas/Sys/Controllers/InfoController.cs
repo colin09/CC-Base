@@ -72,9 +72,8 @@ namespace StmWeb.Area.Sys.Controllers {
                         model.ImageUrl = item.ThumbUrl;
                         model.VideoUrl = item.FileUrl;
                     }
-                    if (item.FileType == "doc") {
-
-                    }
+                    if (item.FileType == "doc")
+                        model.DocUrl = item.FileUrl;
                 });
             }
             //System.Console.WriteLine($"==> EditorModel - 02 : {model.ToJson()}");
@@ -93,7 +92,6 @@ namespace StmWeb.Area.Sys.Controllers {
             var result = _editorService.DeleteEditorModel (type, id);
             return Json (new BaseResponse (result));
         }
- 
 
         #endregion
 

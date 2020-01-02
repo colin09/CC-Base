@@ -21,7 +21,7 @@ namespace C.B.MySql.Data {
     public int IsShow { set; get; }
     public double SortNo { set; get; }
 
-    public int DocumentId { get; set; }
+    public long DocumentId { get; set; }
 
   }
 }

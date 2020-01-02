@@ -61,7 +61,7 @@ namespace C.B.MySql.Repository.BaseM
             return _context.SaveChanges();
         }
 
-        public int Delete(int id)
+        public int Delete(long id)
         {
             var t = FirstOrDefault(id);
             if (t == null)
@@ -83,7 +83,7 @@ namespace C.B.MySql.Repository.BaseM
 
         }
 
-        public TEntity FirstOrDefault(int id)
+        public TEntity FirstOrDefault(long id)
         {
             return _context.Set<TEntity>().Where(t => t.Id == id && t.IsDeleted == 0).FirstOrDefault();
         }

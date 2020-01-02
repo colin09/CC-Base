@@ -33,7 +33,7 @@ namespace C.B.MySql.Data {
 
     public int SortNo { set; get; }
 
-    public int DocumentId { get; set; }
+    public long DocumentId { get; set; }
 
   }
 }

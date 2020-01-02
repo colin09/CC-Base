@@ -23,7 +23,7 @@ namespace C.B.MySql.Data {
     public int IsRoll { set; get; }
 
     public double SortNo { set; get; }
-    public int DocumentId { get; set; }
+    public long DocumentId { get; set; }
 
   }
 }

@@ -6,7 +6,7 @@ namespace C.B.Models.Data {
     public class EditorModel {
         public string EditType { set; get; }
 
-        public int Id { set; get; }
+        public long Id { set; get; }
         public int TypeId { set; get; }
         public string TypeName { set; get; }
 
@@ -45,7 +45,7 @@ namespace C.B.Models.Data {
         public string StateTxt => State == 1 ? "启用" : "取消";
         public string CreateTimeTxt => CreateTime.ToString ("yyyy-MM-dd HH:mm");
 
-        public int documentId { set; get; }
+        public long documentId { set; get; }
         public DocumentModel document { set; get; }
 
         public bool Validate (out string message) {

@@ -143,6 +143,7 @@ namespace C.B.MySql.Repository.Services {
         private Document SaveDocument (EditorModel model) {
 
             var document = new Document () {
+                Id = (long) IdGenerator.GetLongId (),
                 Title = model.Title,
                 SubTitle = model.SubTitle,
                 Author = model.Author,
@@ -163,7 +164,8 @@ namespace C.B.MySql.Repository.Services {
                     document.Url = result.Data.htmlPath;
                 }
             }
-            _documentRepository.Insert (document);
+            var r = _documentRepository.Insert (document);
+            System.Console.WriteLine ($"------> insert document , {r}");
             return document;
         }
 
