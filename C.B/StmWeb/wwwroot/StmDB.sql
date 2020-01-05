@@ -1,18 +1,19 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : 
+ Source Server         : local
  Source Server Type    : MySQL
- Source Server Version : 50724
- Source Host           : 127.0.0.1:3306
+ Source Server Version : 80013
+ Source Host           : localhost:3306
  Source Schema         : StmDB
 
  Target Server Type    : MySQL
- Target Server Version : 50724
+ Target Server Version : 80013
  File Encoding         : 65001
 
- Date: 25/12/2018 17:27:20
+ Date: 03/01/2020 20:44:23
 */
+
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
@@ -21,12 +22,33 @@ SET FOREIGN_KEY_CHECKS = 0;
 CREATE DATABASE `StmDB` CHARACTER SET 'utf8mb4' COLLATE 'utf8mb4_unicode_ci';
 USE StmDB;
 
+
+-- ----------------------------
+-- Table structure for Document
+-- ----------------------------
+DROP TABLE IF EXISTS `Document`;
+CREATE TABLE `Document`  (
+  `Id` bigint(20) NOT NULL,
+  `DocType` int(8) NULL DEFAULT NULL,
+  `Title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `SubTitle` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `Content` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
+  `SimpleContent` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
+  `Url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `Author` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `PublishTime` datetime(0) NULL DEFAULT NULL,
+  `CreateTime` datetime(0) NULL DEFAULT NULL,
+  `UpdateTime` datetime(0) NULL DEFAULT NULL,
+  `IsDeleted` bit(8) NULL DEFAULT NULL,
+  PRIMARY KEY (`Id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
 -- ----------------------------
 -- Table structure for EventInfo
 -- ----------------------------
 DROP TABLE IF EXISTS `EventInfo`;
 CREATE TABLE `EventInfo`  (
-  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `Id` bigint(11) NOT NULL AUTO_INCREMENT,
   `CreateTime` datetime(0) NOT NULL,
   `UpdateTime` datetime(0) NOT NULL,
   `IsDeleted` int(11) NOT NULL,
@@ -39,6 +61,7 @@ CREATE TABLE `EventInfo`  (
   `ThumbUrl` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `ThumbId` int(11) NOT NULL,
   `SortNo` int(11) NOT NULL,
+  `DocumentId` bigint(20) NOT NULL,
   PRIMARY KEY (`Id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
@@ -58,14 +81,14 @@ CREATE TABLE `EventType`  (
   `Icon` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `SortNo` int(11) NOT NULL,
   PRIMARY KEY (`Id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for ExpertInfo
 -- ----------------------------
 DROP TABLE IF EXISTS `ExpertInfo`;
 CREATE TABLE `ExpertInfo`  (
-  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `Id` bigint(11) NOT NULL AUTO_INCREMENT,
   `CreateTime` datetime(0) NOT NULL,
   `UpdateTime` datetime(0) NOT NULL,
   `IsDeleted` int(11) NOT NULL,
@@ -76,6 +99,7 @@ CREATE TABLE `ExpertInfo`  (
   `Author` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `IsShow` int(11) NOT NULL,
   `SortNo` double NOT NULL,
+  `DocumentId` bigint(20) NOT NULL,
   PRIMARY KEY (`Id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
@@ -124,7 +148,7 @@ CREATE TABLE `Message`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `NewsInfo`;
 CREATE TABLE `NewsInfo`  (
-  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `Id` bigint(11) NOT NULL AUTO_INCREMENT,
   `CreateTime` datetime(0) NOT NULL,
   `UpdateTime` datetime(0) NOT NULL,
   `IsDeleted` int(11) NOT NULL,
@@ -142,6 +166,7 @@ CREATE TABLE `NewsInfo`  (
   `VideoId` int(11) NOT NULL,
   `VideoUrl` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `SortNo` double NOT NULL,
+  `DocumentId` bigint(20) NOT NULL,
   PRIMARY KEY (`Id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
@@ -150,7 +175,7 @@ CREATE TABLE `NewsInfo`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `Notice`;
 CREATE TABLE `Notice`  (
-  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `Id` bigint(11) NOT NULL AUTO_INCREMENT,
   `CreateTime` datetime(0) NOT NULL,
   `UpdateTime` datetime(0) NOT NULL,
   `IsDeleted` int(11) NOT NULL,
@@ -163,6 +188,7 @@ CREATE TABLE `Notice`  (
   `IsTop` int(11) NOT NULL,
   `IsRoll` int(11) NOT NULL,
   `SortNo` double NOT NULL,
+  `DocumentId` bigint(20) NOT NULL,
   PRIMARY KEY (`Id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
@@ -202,7 +228,7 @@ CREATE TABLE `UserInfo`  (
   `Email` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
   `Gender` int(11) NOT NULL,
   PRIMARY KEY (`Id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for __EFMigrationsHistory
@@ -217,10 +243,6 @@ CREATE TABLE `__EFMigrationsHistory`  (
 SET FOREIGN_KEY_CHECKS = 1;
 
 
-
--- ----------------------------
--- Init data
--- ----------------------------
 
 
 INSERT INTO `EventType` (`CreateTime`,`UpdateTime`,`IsDeleted`,`ParentId`,`Name`,`Level`,`IsShow`,`Icon`,`SortNo`)

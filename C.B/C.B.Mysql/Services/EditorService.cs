@@ -163,7 +163,7 @@ namespace C.B.MySql.Repository.Services {
                 if (result.Success) {
                     document.Content = result.Data.content;
                     document.SimpleContent = result.Data.content;
-                    document.Url = result.Data.htmlPath;
+                    document.Url = $"../Sources/html/{result.Data.htmlPath.Replace('\\','/')}";
                 }
             }
             var r = _documentRepository.Insert (document);

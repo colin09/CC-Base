@@ -26,7 +26,7 @@
 							<span class="spn-publisher" ng-bind="Model.author">探知未来</span>
 							<span class="spn-notice-time" ng-bind="Model.longDate">2018-11-23</span>
 						</dd>
-						<dd class="notice-para" ng-bind-html="Model.content">
+						<dd class="notice-para" ng-if="Model.document.docType==1" ng-bind-html="Model.content">
 							<p><strong>
 							关于“SOLVE FOR TOMORROW探知未来 <br>
 							2017年全国青年科普创新实验暨作品大赛” <br>
@@ -56,6 +56,10 @@
 
 								2017年12月1日</p>
 						</dd>
+						<dd class="notice-para" ng-if="Model.document.docType==2">
+							<iframe src="{{Model.document.url}}" id="frameDoc" frameborder="0" scrolling="no" width="100%" height="1000" onload="changeFrameHeight()"></iframe>							
+						</dd>
+
 					</dl>
 				</div>
 				<!-- notice paragraph end -->

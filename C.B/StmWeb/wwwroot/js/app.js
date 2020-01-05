@@ -218,6 +218,13 @@ module.controller('NoticeDetailCtl', function ($scope, $http, $sce) {
             if (response.success) {
                 $scope.Model = response.data;
                 $scope.Model.content = $sce.trustAsHtml(response.data.content);
+
+                window.setTimeout(function () {
+                    var iframe = document.createElementById('frameDoc');
+                    var iwindow = iframe.contentWindow;
+                    var idoc = iwindow.document;
+                    iframe.height = idoc.body.offsetHeight;
+                }, 1000);
             }
         });
     }
@@ -225,6 +232,14 @@ module.controller('NoticeDetailCtl', function ($scope, $http, $sce) {
         var id = $("#hdId").val();
         $scope.getData(id);
     }, 100);
+
+    function changeFrameHeight() {
+        var ifm = document.getElementById("frameDoc");
+        ifm.height = document.documentElement.clientHeight;
+    }
+    window.οnresize = function () {
+        changeFrameHeight();
+    }
 });
 
 module.controller('MediaIndexCtl', function ($scope, $http) {
