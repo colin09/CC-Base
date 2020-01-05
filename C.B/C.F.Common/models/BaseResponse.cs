@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace C.B.WorkApi.Models
+namespace C.F.Common.models
 {
+
     public class BaseResponse
     {
         public BaseResponse() { }
@@ -32,8 +34,4 @@ namespace C.B.WorkApi.Models
         public T data { get; set; }
 
     }
-
-
-
-
 }

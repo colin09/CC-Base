@@ -141,7 +141,6 @@ namespace C.B.MySql.Repository.Services {
         }
 
         private Document SaveDocument (EditorModel model) {
-
             var document = new Document () {
                 Id = (long) IdGenerator.GetLongId (),
                 Title = model.Title,
@@ -154,9 +153,12 @@ namespace C.B.MySql.Repository.Services {
                 document.Content = model.Content;
             else {
                 var apiClient = new HttpClientHelper ();
-                var url = Common.Config.AppSettingConfig.Get ("FWork_Office_API");
-                var request = new { filePath = model.DocUrl };
-                var response = apiClient.DoPostPut<object> (System.Net.Http.HttpMethod.Post, url, request);
+                var baseUrl = Common.Config.AppSettingConfig.Get ("FWork_Office_API");
+
+                var request = new DocRequest { filePath = model.DocUrl };
+                var response = apiClient.DoPostPut<object> (System.Net.Http.HttpMethod.Post, baseUrl, request);
+                // var url = $"{baseUrl}?filePath={model.DocUrl}";
+                // var response = apiClient.GetString (url);
                 var result = response.DesJson<BaseResponse<DocResponse>> ();
                 if (result.Success) {
                     document.Content = result.Data.content;

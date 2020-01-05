@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace C.B.WorkApi.Utinity
+namespace C.F.Common.extensions
 {
-    public static class Extensions
+    public static class StringExtensions
     {
         public static string TakeString(this string html, int length)
         {

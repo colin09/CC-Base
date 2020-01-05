@@ -73,7 +73,7 @@ namespace StmWeb.Area.Sys.Controllers {
                         model.VideoUrl = item.FileUrl;
                     }
                     if (item.FileType == "doc")
-                        model.DocUrl = item.FileUrl;
+                        model.DocUrl = item.Filepath;
                 });
             }
             //System.Console.WriteLine($"==> EditorModel - 02 : {model.ToJson()}");

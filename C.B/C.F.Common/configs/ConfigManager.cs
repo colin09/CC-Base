@@ -1,13 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
-namespace C.B.WorkApi.Utinity
+namespace C.F.Common.configs
 {
     public class ConfigManager
     {
 
+
+
+
+        #region
 
 
 
@@ -81,6 +82,11 @@ namespace C.B.WorkApi.Utinity
                 }
             }
         }
+
+
+
+        #endregion 
+
 
 
     }

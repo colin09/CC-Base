@@ -1,12 +1,14 @@
-﻿using System;
+﻿using C.F.Common.configs;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
-using System.Web;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace C.B.WorkApi.Utinity
+namespace C.F.Common.utinity
 {
     public class ImageConvert
     {
@@ -147,6 +149,5 @@ namespace C.B.WorkApi.Utinity
             }
 
         }
-
     }
 }

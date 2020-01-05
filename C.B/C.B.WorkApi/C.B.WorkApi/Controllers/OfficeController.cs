@@ -1,7 +1,7 @@
-﻿using C.B.WorkApi.Utinity;
+﻿using C.F.Common.models;
+using C.F.Common.utinity;
 using System;
 using System.Web.Http;
-using C.B.WorkApi.Models;
 
 namespace C.B.WorkApi.Controllers
 {
@@ -11,18 +11,18 @@ namespace C.B.WorkApi.Controllers
 
 
         [HttpPost]
-        public BaseResponse ConvertWord(string filePath)
+        public BaseResponse ConvertWord([FromBody]DocRequest request)
         {
             try
             {
                 var word = new WordConvert();
-                var result = word.Convert(filePath);
+                var result = word.Convert(request.filePath);
 
                 return new BaseResponse<DocResponse>(result);
             }
             catch (Exception ex)
             {
-                return BaseResponse.Error(ex.Message);
+                return BaseResponse.Error(ex.ToString());
             }
 
         }

@@ -131,13 +131,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\BaseResponse.cs" />
-    <Compile Include="Models\DocResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Utinity\ConfigManager.cs" />
-    <Compile Include="Utinity\Extensions.cs" />
-    <Compile Include="Utinity\ImageConvert.cs" />
-    <Compile Include="Utinity\WordConvert.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
@@ -155,6 +149,12 @@
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\C.F.Common\C.F.Common.csproj">
+      <Project>{7fc383b0-cb78-4176-b050-816489ac9f41}</Project>
+      <Name>C.F.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

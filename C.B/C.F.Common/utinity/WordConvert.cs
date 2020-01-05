@@ -1,20 +1,15 @@
-﻿using C.B.WorkApi.Models;
+﻿using C.F.Common.configs;
+using C.F.Common.extensions;
+using C.F.Common.models;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
-using System.Web;
 
-namespace C.B.WorkApi.Utinity
+namespace C.F.Common.utinity
 {
     public class WordConvert
     {
-        //private string appRoot = AppDomain.CurrentDomain.BaseDirectory;
-        //private string rootPath = @"C:\Users\Colin\Desktop\log\";
-        //private string wordFilePath = @"E:\bak-desktop\LED多媒体信息发布平台方案.docx";
 
-        //private string rootPath = ConfigManager.WordHtmlRootPath;
 
         public DocResponse Convert(string wordFilePath)
         {
@@ -107,6 +102,9 @@ namespace C.B.WorkApi.Utinity
                 throw ex;
             }
         }
+
+
+
 
 
 
