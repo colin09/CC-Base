@@ -149,9 +149,10 @@ namespace C.B.MySql.Repository.Services {
                 PublishTime = DateTime.Now,
                 DocType = model.DocUrl.IsNotEmpty () ? 2 : 1,
             };
-            if (model.DocUrl.IsEmpty ())
+            if (model.DocUrl.IsEmpty ()) {
                 document.Content = model.Content;
-            else {
+                document.Url = "";
+            } else {
                 var apiClient = new HttpClientHelper ();
                 var baseUrl = Common.Config.AppSettingConfig.Get ("FWork_Office_API");
 

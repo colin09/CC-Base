@@ -45,7 +45,7 @@
 							2017年全国青年科普创新实验暨作品大赛 <br>
 							科普实验单元-风能利用命题
 						</dt>
-						<dd class="contest-para" ng-bind-html="Model.content">
+						<dd class="contest-para" ng-if="Model.document.docType==1" ng-bind-html="Model.content">
 							<p>一、命题背景</p>
 
 							<p>风能是地球表面空气流动所产生的动能，属于可再生能源。人类很早就开始利用风能，如利用风力提水、灌溉、磨面、舂米，用风帆推动船舶前进等。14世纪的欧洲，风车成为不可缺少的原动机，在荷兰风车先用于汲水，以后又用于榨油、锯木、纺织等。现在风能作为一种清洁的可持续能源，已经成为除水能外，技术最成熟、最具有规模化开发条件和商业发展前景的发电方式。</p>
@@ -127,6 +127,9 @@
 							<p>（5）选手最终排名按“有效行驶时间”由短到长的顺序依次进行排列以确定比赛名次，用时短者获胜。</p>
 
 							<p>（6）若两队出现同分情况，则由赛事组织方加赛决定胜出者。</p>
+						</dd>
+						<dd class="contest-para"  ng-if="Model.document.docType==2">
+							<iframe src="{{Model.document.url}}" id="frameDoc" frameborder="0" scrolling="no" width="100%" onload="setIframeHeight()"></iframe>							
 						</dd>
 					</dl>
 				</div>

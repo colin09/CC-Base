@@ -34,10 +34,13 @@
 						<div class="professor-img"><img src="{{Model.url}}" alt=""></div>
 						<dl class="dl-proforlio">
 							<dt class="professor-name" ng-bind="Model.name">欧阳自远</dt>
-							<dd class="professor-intro"  ng-bind-html="Model.content">
+							<dd class="professor-intro"  ng-if="Model.document.docType==1" ng-bind-html="Model.content">
 								<p>著名天体化学与地球化学家，中国月球探测工程首任首席科学家，被誉为“嫦娥之父”，中国科学院院士、发展中国家科学院院士，国际宇航科学院院士。系统开展各类地外物质、月球科学、比较行星学和天体化学研究，是我国天体化学领域的开创者。</p>
 								<p>国内外发表论文590余篇，出版学术专著17部，主编著作24部。成果获全国科学大会奖、国家自然科学奖、国家科技进步特等奖等多个奖项。</p>
 								<p>2014年11月，为弘扬欧阳自远的学术贡献和科学精神，将一颗1996年发现并获得国际永久编号第8919号小行星，被命名为“欧阳自远星”。</p>
+							</dd>							
+							<dd class="professor-intro" ng-if="Model.document.docType==2" >
+								<iframe src="{{Model.document.url}}" id="frameDoc" frameborder="0" scrolling="no" width="100%" onload="setIframeHeight()"></iframe>							
 							</dd>
 						</dl>
 					</div>

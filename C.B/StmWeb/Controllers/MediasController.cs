@@ -16,10 +16,12 @@ namespace StmWeb.Controllers
     public class MediasController : BaseController // Controller
     {
         private NewsInfoRepository _repository;
+        private DocumentRepository _documentRepository;
 
         public MediasController()
         {
             _repository = new NewsInfoRepository();
+            _documentRepository = new DocumentRepository ();
         }
 
         public IActionResult Index()
@@ -63,6 +65,7 @@ namespace StmWeb.Controllers
             var m = _repository.FirstOrDefault(id);
             if(m==null)
                 return Json(BaseResponse.ErrorResponse("id 错误。"));
+            var doc = _documentRepository.FirstOrDefault (m.DocumentId);
             var response = new
             {
                 id = m.Id,
@@ -74,6 +77,7 @@ namespace StmWeb.Controllers
                 url = m.ThumUrl,
                 video = m.VideoUrl,
                 date = m.CreateTime.ToString("yyyy-MM-dd"),
+                document = doc,
             };
             return Json(BaseResponse.SuccessResponse(response));
         }

@@ -27,7 +27,7 @@
 							<span class="spn-publisher" ng-bind="Model.author">探知未来</span>
 							<span class="spn-notice-time" ng-bind="Model.date">2018-11-23</span>
 						</dd>
-						<dd class="notice-para" ng-bind-html="Model.content">
+						<dd class="notice-para" ng-if="Model.document.docType==1" ng-bind-html="Model.content">
 							<p><strong>2017年全国青年科普创新实验暨作品大赛决赛名单</strong></p>
 
 							<p>经过几个月的激烈角逐，全国15个分赛区复赛遴选，共计75支队伍脱颖而出，晋级”SOLVE FOR TOMORROW探知未来2017年全国青年科普创新实验暨作品大赛”全国总决赛。</p>
@@ -41,8 +41,10 @@
 							<!-- <p><img src="img/img-news-photo1.jpg" alt=""></p> -->
 
 							<!-- <p><img src="img/img-news-photo2.jpg" alt=""></p> -->
+						</dd>						
+						<dd class="notice-para" ng-if="Model.document.docType==2" >
+							<iframe src="{{Model.document.url}}" id="frameDoc" frameborder="0" scrolling="no" width="100%" onload="setIframeHeight()"></iframe>							
 						</dd>
-						
 						<dd class="notice-para">
 							
 							<!-- <p ng-show="Model.url.length>6">

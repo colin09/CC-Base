@@ -77,7 +77,8 @@ module.controller('EventIndexCtl', function ($scope, $http, $sce) {
         $http.get("../Event/GetDetail?typeId=" + id).success(function (response) {
             if (response.success) {
                 $scope.Model = response.data;
-                $scope.Model.content = $sce.trustAsHtml(response.data.content);
+                if (response.data)
+                    $scope.Model.content = $sce.trustAsHtml(response.data.content);
             }
         });
     }
