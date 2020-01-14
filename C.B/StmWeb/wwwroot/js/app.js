@@ -21,7 +21,7 @@ module.controller('StmIndexCtl', function ($scope, $http) {
     }
 
     $scope.InitMedia = function (newsType) {
-        var request = { num1: newsType, pager: { pageIndex: 1, pageSize: 4 } };
+        var request = { num1: newsType, pager: { pageIndex: 1, pageSize: 6 } };
         $http.post("../Medias/GetList", request).success(function (response) {
             if (response.success) {
                 switch (newsType) {

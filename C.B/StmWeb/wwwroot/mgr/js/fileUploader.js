@@ -469,7 +469,7 @@ $(function () {
                 break;
             case "video":
                 acceptModel = {
-                    label: "点击选择图片",
+                    label: "点击选择视频",
                     title: 'Videos',
                     extensions: 'mp4,mkv',
                     mimeTypes: 'video/*'
@@ -492,6 +492,8 @@ $(function () {
                 };
                 break;
         }
+        uploader.options.accept = acceptModel;
+
         uploader.options.accept= acceptModel;
         uploader.options.pick.label= acceptModel.label;
     });
