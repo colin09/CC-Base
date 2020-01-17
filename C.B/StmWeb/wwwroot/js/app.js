@@ -77,7 +77,8 @@ module.controller('EventIndexCtl', function ($scope, $http, $sce) {
         $http.get("../Event/GetDetail?typeId=" + id).success(function (response) {
             if (response.success) {
                 $scope.Model = response.data;
-                $scope.Model.content = $sce.trustAsHtml(response.data.content);
+                if (response.data)
+                    $scope.Model.content = $sce.trustAsHtml(response.data.content);
             }
         });
     }
@@ -219,12 +220,12 @@ module.controller('NoticeDetailCtl', function ($scope, $http, $sce) {
                 $scope.Model = response.data;
                 $scope.Model.content = $sce.trustAsHtml(response.data.content);
 
-                window.setTimeout(function () {
-                    var iframe = document.createElementById('frameDoc');
-                    var iwindow = iframe.contentWindow;
-                    var idoc = iwindow.document;
-                    iframe.height = idoc.body.offsetHeight;
-                }, 1000);
+                // window.setTimeout(function () {
+                //     var iframe = document.createElementById('frameDoc');
+                //     var iwindow = iframe.contentWindow;
+                //     var idoc = iwindow.document;
+                //     iframe.height = idoc.body.offsetHeight;
+                // }, 1000);
             }
         });
     }
@@ -233,12 +234,19 @@ module.controller('NoticeDetailCtl', function ($scope, $http, $sce) {
         $scope.getData(id);
     }, 100);
 
-    function changeFrameHeight() {
-        var ifm = document.getElementById("frameDoc");
-        ifm.height = document.documentElement.clientHeight;
-    }
+    function setIframeHeight() {
+        // var iframe = document.getElementById('frameDoc');
+        var iframe = document.getElementsByTagName('iframe');
+        if (iframe) {
+            var iframeWin = iframe.contentWindow || iframe.contentDocument.parentWindow;
+            if (iframeWin.document.body) {
+                console.log(iframeWin.document.documentElement.scrollHeight || iframeWin.document.body.scrollHeight);
+                iframe.height = iframeWin.document.documentElement.scrollHeight || iframeWin.document.body.scrollHeight;
+            }
+        }
+    };
     window.οnresize = function () {
-        changeFrameHeight();
+        setIframeHeight();
     }
 });
 

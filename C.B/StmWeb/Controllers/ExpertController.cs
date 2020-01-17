@@ -16,9 +16,11 @@ namespace StmWeb.Controllers
     {
 
         private ExpertInfoRepository _repository;
+        private DocumentRepository _documentRepository;
         public ExpertController()
         {
             _repository = new ExpertInfoRepository();
+            _documentRepository = new DocumentRepository ();
         }
 
 
@@ -49,6 +51,7 @@ namespace StmWeb.Controllers
         public IActionResult GetDetail(int id)
         {
             var m = _repository.FirstOrDefault(id);
+            var doc = _documentRepository.FirstOrDefault (m.DocumentId);
             var response = new
             {
                 id = m.Id,
@@ -57,6 +60,7 @@ namespace StmWeb.Controllers
                 type = m.Type,
                 url = m.PicUrl,
                 date = m.CreateTime.ToDate(),
+                document = doc,
             };
             return Json(BaseResponse.SuccessResponse(response));
         }

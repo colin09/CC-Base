@@ -154,5 +154,22 @@
 
     <script type="text/javascript" src="~/js/jquery.slides.min.js"></script>
     <script type="text/javascript" src="~/js/solve.base.js"></script>
+        
+    <script>
+        function setIframeHeight() {
+            var iframe = document.getElementById('frameDoc');
+            //var iframe = document.getElementsByTagName('iframe');
+            if (iframe) {
+                var iframeWin = iframe.contentWindow || iframe.contentDocument.parentWindow;
+                if (iframeWin.document.body) {
+                    console.log(iframeWin.document.documentElement.scrollHeight || iframeWin.document.body.scrollHeight);
+                    iframe.height = iframeWin.document.documentElement.scrollHeight || iframeWin.document.body.scrollHeight;
+                }
+            }
+        };
+        window.οnresize = function () {
+            setIframeHeight();
+        }
+    </script>
 </body>
 </html>
