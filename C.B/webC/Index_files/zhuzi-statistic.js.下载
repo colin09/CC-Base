@@ -1,1 +1,0 @@
-;var copyright='zhuzi.me';
