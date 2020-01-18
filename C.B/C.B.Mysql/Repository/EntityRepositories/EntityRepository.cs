@@ -17,4 +17,10 @@ namespace C.B.MySql.Repository.EntityRepositories {
 
     public partial class DocumentRepository : BaseRepository<Document> { }
 
+    public partial class AuthNavsRepository : BaseRepository<AuthNavs> { }
+    public partial class AuthRoleRepository : BaseRepository<AuthRole> { }
+    public partial class AuthUserRepository : BaseRepository<AuthUser> { }
+    public partial class AuthRoleNavsRepository : BaseRepository<AuthRoleNavs> { }
+    public partial class AuthUserNavsRepository : BaseRepository<AuthUserNavs> { }
+
 }

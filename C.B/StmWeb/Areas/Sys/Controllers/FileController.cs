@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace StmWeb.Area.Sys.Controllers
 {
     [Area("Sys")]
-    [Authorize(Roles = "develop,admin")]
+    [Authorize(Roles = "system,admin")]
     public class FileController : Controller
     {
 

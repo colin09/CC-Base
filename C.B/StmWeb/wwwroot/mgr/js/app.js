@@ -636,3 +636,52 @@ module.controller('mgrPasswordCtl', function ($scope, $http) {
         });
     }
 });
+
+
+module.controller('mgrNavCtl', function ($scope, $http) {
+
+    $scope.Title = "System Nav";
+
+
+    // zTree 的参数配置，深入使用请参考 API 文档（setting 配置详解）
+    var setting = {
+        check: {
+            enable: false,
+            chkStyle: "checkbox", //默认值
+            nocheckInherit: true,  //新加入子节点时，自动继承父节点 nocheck = true 的属性。
+            chkboxType: { "Y": "ps", "N": "ps" } //勾选 checkbox 对于父子节点的关联影响
+        },
+        data: {
+            simpleData: {
+                enable: true,
+                idKey: "id",
+                pIdKey: "parentId",
+                rootPId: 0
+            },
+            key: {
+                name: "name",
+                title: ""
+            }
+        },
+        view: {
+            showTitle: false
+        },
+        callback: {
+            onClick: zTreeOnClick
+        }
+    };
+    function zTreeOnClick(event, treeId, treeNode) {
+
+        $scope.NewType.Id = treeNode.id;
+        $("#hdEventTypeId").val(treeNode.id);
+        $scope.NewType.Id = treeNode.id;
+        $scope.NewType.ParentId = treeNode.parentId;
+        $scope.NewType.Name = treeNode.name;
+        $scope.NewType.Show = treeNode.isShow == 1;
+        $scope.NewType.SortNo = treeNode.sortNo;
+
+        $scope.$apply();
+    }
+
+
+});

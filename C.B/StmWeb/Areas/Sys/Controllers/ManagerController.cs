@@ -17,7 +17,7 @@ using StmWeb.Models;
 namespace StmWeb.Area.Sys.Controllers
 {
     [Area("Sys")]
-    [Authorize(Roles = "develop,admin")]
+    [Authorize(Roles = "system,admin")]
     public class ManagerController : MgrBaseController
     {
         private readonly UserInfoRepository _userRepository;

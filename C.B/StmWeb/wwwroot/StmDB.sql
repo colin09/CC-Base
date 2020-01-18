@@ -18,7 +18,7 @@
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
-
+--DROP DATABASE IF EXISTS `StmDB`;
 CREATE DATABASE `StmDB` CHARACTER SET 'utf8mb4' COLLATE 'utf8mb4_unicode_ci';
 USE StmDB;
 
@@ -228,7 +228,112 @@ CREATE TABLE `UserInfo`  (
   `Email` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
   `Gender` int(11) NOT NULL,
   PRIMARY KEY (`Id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for AuthNavs
+-- ----------------------------
+DROP TABLE IF EXISTS `AuthNavs`;
+CREATE TABLE `AuthNavs`  (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `CreateTime` datetime(0) NOT NULL,
+  `UpdateTime` datetime(0) NOT NULL,
+  `IsDeleted` int(11) NOT NULL,
+  `ParentId`  int(11) NOT NULL,
+  `NavCode` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `NavType` int(11) NOT NULL,
+  `Title` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `Desc` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `Icon` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `Url` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `Module` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `Target` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `Sort` int(11) NOT NULL,
+  PRIMARY KEY (`Id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+
+-- ----------------------------
+-- Table structure for AuthRole
+-- ----------------------------
+DROP TABLE IF EXISTS `AuthRole`;
+CREATE TABLE `AuthRole`  (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `CreateTime` datetime(0) NOT NULL,
+  `UpdateTime` datetime(0) NOT NULL,
+  `IsDeleted` int(11) NOT NULL,
+  `AuthRoleType` int(11) NOT NULL,
+  `RoleName` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `RoleCode` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `Sort` int(11) NOT NULL,
+  PRIMARY KEY (`Id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for AuthRoleNavs
+-- ----------------------------
+DROP TABLE IF EXISTS `AuthRoleNavs`;
+CREATE TABLE `AuthRoleNavs`  (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `CreateTime` datetime(0) NOT NULL,
+  `UpdateTime` datetime(0) NOT NULL,
+  `IsDeleted` int(11) NOT NULL,
+  `AuthRoleId` int(11) NOT NULL,
+  `AuthNavId` int(11) NOT NULL,
+  `Sort` int(11) NOT NULL,
+  PRIMARY KEY (`Id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+
+-- ----------------------------
+-- Table structure for AuthUser
+-- ----------------------------
+DROP TABLE IF EXISTS `AuthUser`;
+CREATE TABLE `AuthUser`  (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `CreateTime` datetime(0) NOT NULL,
+  `UpdateTime` datetime(0) NOT NULL,
+  `IsDeleted` int(11) NOT NULL,
+  `UserName` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `Password` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `TrueName` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `MobileNo` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `EMail` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `LastLoginTime` datetime(0) NOT NULL,
+  `Status` int(11) NOT NULL,
+  `AuthRoleId` int(11) NOT NULL,
+  PRIMARY KEY (`Id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+
+-- ----------------------------
+-- Table structure for AuthUserNavs
+-- ----------------------------
+DROP TABLE IF EXISTS `AuthUserNavs`;
+CREATE TABLE `AuthUserNavs`  (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `CreateTime` datetime(0) NOT NULL,
+  `UpdateTime` datetime(0) NOT NULL,
+  `IsDeleted` int(11) NOT NULL,
+  `AuthUserId` int(11) NOT NULL,
+  `AuthNavId` int(11) NOT NULL,
+  `Sort` int(11) NOT NULL,
+  PRIMARY KEY (`Id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 -- ----------------------------
 -- Table structure for __EFMigrationsHistory
@@ -250,3 +355,14 @@ VALUES ('2018-12-16 16:45:31', '2018-12-16 16:45:31', '0', '0', '赛事分类', 
 
 INSERT INTO `UserInfo` (`CreateTime`,`UpdateTime`,`IsDeleted`,`UserName`,`Password`,`TrueName`,`Department`,`State`,`AuthType`,`MobileNo`,`Email`,`Gender`)
 VALUES ('2018-12-12 12:12:12', '2018-12-12 12:12:12', '0', 'dev', 'e10adc3949ba59abbe56e057f20f883e', 'developer', 'developer', '1', '1', '18900001111', '1@q.com', '0');
+
+
+
+
+INSERT INTO `StmDB`.`AuthRole`(`CreateTime`, `UpdateTime`, `IsDeleted`,`AuthRoleType`, `RoleName`, `RoleCode`, `Sort`) 
+VALUES (now(), now(), 0, 0, 'System', 'System', 0);
+
+INSERT INTO `StmDB`.`AuthUser`(`CreateTime`, `UpdateTime`, `IsDeleted`, `UserName`, `Password`, `TrueName`, `MobileNo`, `EMail`, `LastLoginTime`, `Status`, `AuthRoleId`) 
+VALUES (now(),now(), 0, 'System', 'e10adc3949ba59abbe56e057f20f883e', 'System', '99999999999', '99@99.com', now(), 1, 1);
+
+

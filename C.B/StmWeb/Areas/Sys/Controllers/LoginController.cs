@@ -1,4 +1,6 @@
-﻿using C.B.Common.helper;
+﻿using System.Security.Claims;
+using System.Threading.Tasks;
+using C.B.Common.helper;
 using C.B.Models.Data;
 using C.B.Models.Enums;
 using C.B.MySql.Data;
@@ -7,75 +9,65 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
-using System.Threading.Tasks;
 
-namespace StmWeb.Area.Sys.Controllers
-{
-    [Area("Sys")]
-    public class LoginController : Controller
-    {
-        private readonly UserInfoRepository _userRepository;
-        public LoginController()
-        {
-            _userRepository = new UserInfoRepository();
+namespace StmWeb.Area.Sys.Controllers {
+    [Area ("Sys")]
+    public class LoginController : Controller {
+        //private readonly UserInfoRepository _userRepository;
+        private readonly AuthUserRepository _authUserRepository;
+        private readonly AuthRoleRepository _authRoleRepository;
+        public LoginController () {
+            // _userRepository = new UserInfoRepository ();
+            _authUserRepository = new AuthUserRepository ();
+            _authRoleRepository = new AuthRoleRepository ();
         }
 
-
-        public IActionResult Index()
-        {
-            return View();
+        public IActionResult Index () {
+            return View ();
         }
-
-
-
-
-
-
 
         [HttpPost]
-        public async Task<IActionResult> SignIn(string userName, string password, string verifyCode)
-        {
-            if (verifyCode.IsEmpty())
-                return Json(BaseResponse.ErrorResponse("请填写验证码。"));
-            var code = HttpContext.Session.GetString("Session.VerifyCode");
-            if (verifyCode.ToLower() != code.ToLower())
-                return Json(BaseResponse.ErrorResponse("验证码错误。"));
+        public async Task<IActionResult> SignIn (string userName, string password, string verifyCode) {
+            if (verifyCode.IsEmpty ())
+                return Json (BaseResponse.ErrorResponse ("请填写验证码。"));
+            var code = HttpContext.Session.GetString ("Session.VerifyCode");
+            if (verifyCode.ToLower () != code.ToLower ())
+                return Json (BaseResponse.ErrorResponse ("验证码错误。"));
             HttpContext.Session.SetString ("Session.VerifyCode", "empty-empty");
 
-            if (userName.IsEmpty() || password.IsEmpty())
-                return Json(BaseResponse.ErrorResponse("用户名或密码错误。"));
+            if (userName.IsEmpty () || password.IsEmpty ())
+                return Json (BaseResponse.ErrorResponse ("用户名或密码错误。"));
 
-            var user = _userRepository.FirstOrDefault(m => m.UserName == userName && m.Password == CryptoHelper.MD5Encrypt(password));
-            if (user == null)
-                return Json(BaseResponse.ErrorResponse("用户名或密码错误。"));
+            // var user = _userRepository.FirstOrDefault (m => m.UserName == userName && m.Password == CryptoHelper.MD5Encrypt (password));
+            var user = _authUserRepository.FirstOrDefault (m => m.UserName == userName && m.Password == CryptoHelper.MD5Encrypt (password));
+            if (user == null) return Json (BaseResponse.ErrorResponse ("用户名或密码错误。"));
+            var role = _authRoleRepository.FirstOrDefault (m => m.Id == user.AuthRoleId);
+            if (role == null || (int) role.AuthRoleType > 1) return Json (BaseResponse.ErrorResponse ("权限不足，无法登录。"));
 
+            System.Console.WriteLine ($"-------------> role.type : {role.AuthRoleType.ToString()}");
             //用户标识
-            var identity = new ClaimsIdentity();
+            var identity = new ClaimsIdentity ();
 
-            identity.AddClaim(new Claim(ClaimTypes.PrimarySid, user.Id.ToString()));
-            identity.AddClaim(new Claim(ClaimTypes.Sid, user.UserName));
-            identity.AddClaim(new Claim(ClaimTypes.Name, user.TrueName));
-            identity.AddClaim(new Claim(ClaimTypes.Dsa, user.Department));
+            identity.AddClaim (new Claim (ClaimTypes.PrimarySid, user.Id.ToString ()));
+            identity.AddClaim (new Claim (ClaimTypes.Sid, user.UserName));
+            identity.AddClaim (new Claim (ClaimTypes.Name, user.TrueName));
 
-            identity.AddClaim(new Claim(ClaimTypes.Gender, user.Gender.ToString()));
-            identity.AddClaim(new Claim(ClaimTypes.MobilePhone, "user.MobileNo"));
-            identity.AddClaim(new Claim(ClaimTypes.Email, "user.Email"));
-            // identity.AddClaim(new Claim(ClaimTypes.UserData, user.ToJson()));
-            identity.AddClaim(new Claim(ClaimTypes.Role, user.AuthType.ToString()));
-            //identity.AddClaim(new Claim(ClaimTypes.Authentication, user.AuthType.ToString()));
-            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity));
-            return Json(BaseResponse.SuccessResponse());
+            identity.AddClaim (new Claim (ClaimTypes.PrimaryGroupSid, user.AuthRoleId.ToString ()));
+            identity.AddClaim (new Claim (ClaimTypes.Role, role.AuthRoleType.ToString ()));
+
+            identity.AddClaim (new Claim (ClaimTypes.Gender, "0"));
+            identity.AddClaim (new Claim (ClaimTypes.MobilePhone, user.MobileNo));
+            identity.AddClaim (new Claim (ClaimTypes.Email, user.EMail));
+            // identity.AddClaim(new Claim(ClaimTypes.UserData, user.ToJson())); 
+            identity.AddClaim (new Claim (ClaimTypes.Authentication, role.ToJson ()));
+            await HttpContext.SignInAsync (CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal (identity));
+            return Json (BaseResponse.SuccessResponse ());
         }
 
-        public async Task<IActionResult> SignOut()
-        {
-            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            return Json(BaseResponse.SuccessResponse());
+        public async Task<IActionResult> SignOut () {
+            await HttpContext.SignOutAsync (CookieAuthenticationDefaults.AuthenticationScheme);
+            return Json (BaseResponse.SuccessResponse ());
         }
-
-
-
 
         /* AuthenticationScheme
 
@@ -118,7 +110,6 @@ namespace StmWeb.Area.Sys.Controllers
 
          */
 
-
         /* JwtClaimTypes
 
             1.---------------------------------------------------------------------------------------
@@ -151,10 +142,6 @@ namespace StmWeb.Area.Sys.Controllers
 
 
          */
-
-
-
-
 
     }
 }
