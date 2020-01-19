@@ -1,0 +1,65 @@
+﻿@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="card"  ng-controller="mgrUserNavCtl">
+    <div class="card-body">
+        <h4 class="card-title">{{Title}}</h4>
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>UserName</th>
+                        <th>TrueName</th>
+                        <th>MobileNo</th>
+                        <th>EMail</th>
+                        <th>AuthRoleType</th>
+                        <th>AuthRoleName</th>
+                        <th>Status</th>
+                        <th>CreateTime</th>
+                        <th>LastLoginTime</th>
+                        <th>IsDeleted</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in AuthUserList">
+                        <td><span ng-bind="item.id">Id</span></td>
+                        <td><span ng-bind="item.userName">UserName</span></td>
+                        <td><span ng-bind="item.trueName">TrueName</span></td>
+                        <td><span ng-bind="item.mobileNo">MobileNo</span></td>
+                        <td><span ng-bind="item.eMail">EMail</span></td>
+                        <td><span ng-bind="item.authRoleType">AuthRoleType</span></td>
+                        <td><span ng-bind="item.authRoleName">AuthRoleName</span></td>
+                        <td><span ng-bind="item.status">Status</span></td>
+                        <td><span ng-bind="item.createTime">CreateTime</span></td>
+                        <td><span ng-bind="item.lastLoginTime">LastLoginTime</span></td>
+                        <td><span ng-bind="item.isDeleted">IsDeleted</span></td>
+                    </tr>
+                    <tr>
+                        <td>+</td>
+                        <td><input type="text" ng-model="newUser.UserName" /></td>
+                        <td><input type="text" ng-model="newUser.TrueName" /></td>
+                        <td><input type="text" ng-model="newUser.MobileNo" /></td>
+                        <td><input type="text" ng-model="newUser.EMail" /></td> 
+                        <td>
+                            <select ng-model="newUser.AuthRoleType">
+                                <option value="2">admin</option>
+                            </select>
+                        </td>
+                        <td>
+                            <section ng-model="newUser.AuthRoleId">
+                                <option></option>
+                            </section>
+                        </td> 
+                        <td colspan="4">
+                            <button ng-click="AddNewUser()"> + NEW </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div> 
+</div>
+
+ 

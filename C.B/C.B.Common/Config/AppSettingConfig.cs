@@ -1,62 +1,42 @@
-﻿using Microsoft.Extensions.Configuration;
-using System.Configuration;
+﻿using System.Configuration;
+using Microsoft.Extensions.Configuration;
 
-namespace C.B.Common.Config
-{
-    public class AppSettingConfig
-    {
+namespace C.B.Common.Config {
+    public class AppSettingConfig {
+        #region  .  base  
 
         private static IConfigurationRoot Configuration = ConfigBuilder.Configuration;
-
-        public static string TDES_Key
-        {
-            get { return "";  /* ConfigurationManager.AppSettings["TDES_Key"]; */}
+        public static T Get<T> (string key, T defaultValue = default (T)) where T : struct {
+            return Configuration.GetValue (key, defaultValue);
         }
-        public static string TDES_IV
-        {
+        public static string Get (string key, string defaultValue = "") {
+            return Configuration.GetValue (key, defaultValue);
+        }
+        public static IConfigurationSection GetSection (string key) {
+            var section = Configuration.GetSection (key);
+            if (!section.Exists ()) return null;
+            return section;
+        }
+
+        #endregion
+
+        public static string TDES_Key {
+            get { return ""; /* ConfigurationManager.AppSettings["TDES_Key"]; */ }
+        }
+        public static string TDES_IV {
             get { return ""; /* ConfigurationManager.AppSettings["TDES_IV"];*/ }
         }
-        public static string MgConn => Get("MgConn");
+        public static string MgConn => Get ("MgConn");
+        public static string MgDBName => Get ("MgDBName");
+        public static string MgPrefix => Get ("MgPrefix");
 
-        public static string MgDBName => Get("MgDBName");
+        public static string WebPort => Get ("WebPort");
 
-        public static string MgPrefix => Get("MgPrefix");
-
-
-        public static string WebPort => Get("WebPort");
-
-
-        public static string VideoThumbTime => Get("VideoThumbTime");
-
-        public static string Get(string key) => Configuration[key];
+        public static string VideoThumbTime => Get ("VideoThumbTime");
 
         /*
-        public static string MqHost
-        {
-            get { return ConfigurationManager.AppSettings["MqHost"]; }
-        }
-        public static string MqUser
-        {
-            get { return ConfigurationManager.AppSettings["MqUser"]; }
-        }
-
-        public static string MqPwd
-        {
-            get { return ConfigurationManager.AppSettings["MqPwd"]; }
-        }
-
-        public static string MqExchange
-        {
-            get { return ConfigurationManager.AppSettings["MqExchange"]; }
-        }
-        public static string MqQueue
-        {
-            get { return ConfigurationManager.AppSettings["MqQueue"]; }
-        }
+        public static string Get (string key) => Configuration[key];
         */
-
-
-
 
     }
 }

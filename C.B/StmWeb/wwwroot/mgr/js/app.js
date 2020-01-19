@@ -639,9 +639,7 @@ module.controller('mgrPasswordCtl', function ($scope, $http) {
 
 
 module.controller('mgrNavCtl', function ($scope, $http) {
-
     $scope.Title = "System Nav";
-
 
     // zTree 的参数配置，深入使用请参考 API 文档（setting 配置详解）
     var setting = {
@@ -673,8 +671,9 @@ module.controller('mgrNavCtl', function ($scope, $http) {
     function zTreeOnClick(event, treeId, treeNode) {
 
         $scope.NewType.Id = treeNode.id;
-        $("#hdEventTypeId").val(treeNode.id);
-        $scope.NewType.Id = treeNode.id;
+        $("#hdNavId").val(treeNode.id);
+        $scope.nav = treeNode;
+
         $scope.NewType.ParentId = treeNode.parentId;
         $scope.NewType.Name = treeNode.name;
         $scope.NewType.Show = treeNode.isShow == 1;
@@ -683,5 +682,148 @@ module.controller('mgrNavCtl', function ($scope, $http) {
         $scope.$apply();
     }
 
+    $scope.getAuthNavs = function () {
+        $http.get("GetAuthNavs").success(function (response) {
+            var zTreeObj1 = $.fn.zTree.init($("#ulNavs"), setting, response.data);
+            zTreeObj1.expandAll(true);
+        });
+    }
 
+    $scope.modifyNav = function () {
+        $http.post("SaveAuthNav", $scope.nav).success(function (response) {
+            if (response.success) {
+                alert("保存成功！");
+                $scope.getAuthNavs();
+            } else
+                alert("保存失败！");
+        });
+    }
+
+});
+
+
+module.controller('mgrRoleNavCtl', function ($scope, $http) {
+    $scope.Title = "Role Nav Manage";
+    $scope.newRole = {
+        id: 0,
+        AuthRoleType: 2,
+        AuthRoleName: "",
+        AuthRoleCode: ""
+    };
+    $scope.pager = { pageIndex: 1, pageSize: 20, pageCount: 1, totalCount=0 };
+
+    $scope.addAuthRole = function () {
+        var url = "SaveAuthRole";
+        $http.post(url, $scope.newRole).success(function (response) {
+            $scope.getAuthRoles();
+            if (response.success)
+                alert("成功！");
+            else
+                alert(response.message);
+        });
+    }
+
+    $scope.getAuthRoles = function () {
+        var url = "GetAuthRoleByPage";
+        var request = {};
+        $http.get(url).success(function (response) {
+            if (response.success) {
+                $.each(response.data, function (index, item) {
+
+                });
+                $scope.authRoleList = response.data;
+            } else
+                alert(response.message);
+        });
+    }
+
+
+    // zTree 的参数配置，深入使用请参考 API 文档（setting 配置详解）
+    var setting = {
+        check: {
+            enable: false,
+            chkStyle: "checkbox", //默认值
+            nocheckInherit: true,  //新加入子节点时，自动继承父节点 nocheck = true 的属性。
+            chkboxType: { "Y": "ps", "N": "ps" } //勾选 checkbox 对于父子节点的关联影响
+        },
+        data: {
+            simpleData: {
+                enable: true,
+                idKey: "id",
+                pIdKey: "parentId",
+                rootPId: 0
+            },
+            key: {
+                name: "name",
+                title: ""
+            }
+        },
+        view: {
+            showTitle: false
+        },
+        callback: {
+            onClick: zTreeOnClick
+        }
+    };
+
+    $scope.getAllNavs = function (roleId) {
+        $http.get("GetAuthNavs").success(function (response) {
+            if (response.success) {
+                var zTreeObj1 = $.fn.zTree.init($("#ulRoleNavs"), setting, response.data);
+                zTreeObj1.expandAll(true);
+            } else
+                alert(response.message);
+        });
+    }
+
+    $scope.getAuthRoleNavs = function (roleId) {
+        $http.get("GetAuthRoleNavs?authRoleId=" + roleId).success(function (response) {
+            if (response.success) {
+                var zTreeObj1 = $.fn.zTree.init($("#ulRoleNavs"), setting, response.data);
+                zTreeObj1.expandAll(true);
+            } else
+                alert(response.message);
+        });
+    }
+
+    $scope.setAuthRoleNavs = function () {
+        var request = [];
+        $http.post("SaveAuthRoleNavs", $scope.newRole).success(function (response) {
+            if (response.success)
+                alert("成功！");
+            else
+                alert(response.message);
+        });
+    }
+});
+
+
+module.controller('mgrUserNavCtl', function ($scope, $http) {
+    $scope.Title = "User Nav Manage";
+
+    $scope.newUser = {
+        UserName: "",
+        TrueName: "",
+        MobileNo: 2,
+        EMail: 2,
+        AuthRoleType: 2,
+        AuthRoleId: 1,
+    };
+    $scope.AddNewUser = function () {
+        var url = "SaveAuthUser";
+        $http.post(url, $scope.newUser).success(function (response) {
+            $scope.GetUserList();
+        });
+    }
+
+    $scope.getAuthUsers = function () {
+        var url = "GetAuthUserByPage";
+        $http.get(url).success(function (response) {
+            if (response.success) {
+                $scope.AuthUserList = response.data;
+            } else
+                alert(response.message);
+        });
+    }
+    $scope.GetUserList();
 });

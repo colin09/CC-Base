@@ -1,0 +1,54 @@
+﻿@{
+    ViewData["Title"] = "Role Navs";
+}
+
+<div class="card"  ng-controller="mgrRoleNavCtl">
+    <div class="card-body">
+        <h4 class="card-title">{{Title}}</h4>
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>AuthRoleType</th>
+                        <th>RoleName</th>
+                        <th>RoleCode</th> 
+
+                        <th>CreateTime</th>
+                        <th>IsDeleted</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in authRoleList">
+                        <td><span ng-bind="item.id">Id</span></td>
+                        <td><span ng-bind="item.AuthRoleType">AuthRoleType</span></td>
+                        <td><span ng-bind="item.RoleName">RoleName</span></td>
+                        <td><span ng-bind="item.RoleCode">RoleCode</span></td> 
+
+                        <td><span ng-bind="item.createTime">CreateTime</span></td>
+                        <td><span ng-bind="item.isDeleted">IsDeleted</span></td>
+                        <td><button ng-click='setAuthRoleNavs()'> 设置权限 </button></td>
+                    </tr>
+                    <tr>
+                        <td>+</td>
+                        <td><input type="text" ng-model="newRole.AuthRoleType" /></td>
+                        <td><input type="text" ng-model="newRole.RoleName" /></td>
+                        <td><input type="text" ng-model="newRole.RoleCode" /></td> 
+                       
+                        <td colspan="3">
+                            <button ng-click="addAuthRole()"> + NEW </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div> 
+</div>
+
+ 
+
+
+
+
+

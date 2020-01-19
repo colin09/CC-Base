@@ -13,7 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\C.B.Models\C.B.Models.csproj" />
-    <ProjectReference Include="..\C.B.MySql\C.B.MySql.csproj" />
+    <ProjectReference Include="..\C.B.Mysql\C.B.MySql.csproj" />
     <ProjectReference Include="..\C.B.Common\C.B.Common.csproj" />
   </ItemGroup>
 

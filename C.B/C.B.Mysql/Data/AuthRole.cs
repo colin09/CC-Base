@@ -13,9 +13,9 @@ namespace C.B.MySql.Data {
     }
 
     public enum AuthRoleType {
-        system = 0,
-        admin = 1,
-        guest = 2,
+        system = 1,
+        admin = 2,
+        registered = 3,
     }
 
 }

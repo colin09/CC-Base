@@ -1,24 +1,27 @@
 ﻿using System.IO;
 using Microsoft.Extensions.Configuration;
 
-namespace C.B.Common.Config
-{
-    public class ConfigBuilder
-    {
-        static ConfigBuilder()
-        {
-            var builder = new ConfigurationBuilder()
-                .SetBasePath($"{Directory.GetCurrentDirectory()}/configurations/")
-                .AddJsonFile("appsettings.json");
+namespace C.B.Common.Config {
 
-            Configuration = builder.Build();
+    public class ConfigBuilder {
+        static ConfigBuilder () {
+            //默认使用运行目录中的 appsettings.json 文件作为配置文件。
+            var builder = new ConfigurationBuilder ()
+                .SetBasePath (Path.Combine (AppDomain.CurrentDomain.BaseDirectory, "configurations"))
+                .AddJsonFile ("appsettings.json", optional : true, reloadOnChange : true);
+
+            string environment = Environment.GetEnvironmentVariable ("ASPNETCORE_ENVIRONMENT");
+            if (!environment.IsNullOrWhiteSpace ()) {
+                builder = builder.AddJsonFile ($"appsettings.{environment}.json", optional : true);
+            }
+            Configuration = builder.Build ();
         }
 
         public static IConfigurationRoot Configuration { get; private set; }
 
     }
-}
 
+}
 
 /**
  * 
