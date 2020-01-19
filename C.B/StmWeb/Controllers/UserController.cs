@@ -1,14 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using C.B.Common.helper;
+using C.B.Common.Helper;
 using C.B.Common.Mvc;
+using C.B.Models.Data;
+using C.B.MySql.Repository.EntityRepositories;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using StmWeb.Models;
 
 namespace StmWeb.Controllers {
-    public class HomeController : BaseController // Controller
+    public class UserController : BaseController // Controller
     {
         private readonly AuthUserRepository _authUserRepository;
         private readonly AuthRoleRepository _authRoleRepository;
@@ -25,7 +31,8 @@ namespace StmWeb.Controllers {
             return View ();
         }
 
-        public async Task<IActionResult> SignIn (string name, string passwprd) {
+        [HttpGet]
+        public async Task<IActionResult> SignIn (string userName, string password, string verifyCode) {
             if (verifyCode.IsEmpty ())
                 return Json (BaseResponse.ErrorResponse ("请填写验证码。"));
             var code = HttpContext.Session.GetString ("Session.SignInValidateCode");
@@ -68,11 +75,13 @@ namespace StmWeb.Controllers {
             var user = _authUserRepository.FirstOrDefault (m => m.UserName == model.userName);
             if (user != null) return Json (BaseResponse.ErrorResponse ("用户名已存在。"));
 
-            var user = _authUserRepository.FirstOrDefault (m => m.EMail == model.email);
+            user = _authUserRepository.FirstOrDefault (m => m.EMail == model.email);
             if (user != null) return Json (BaseResponse.ErrorResponse ("邮箱地址已存在。"));
 
             var code = HttpContext.Session.GetString ("Session.SignUpValidateCode");
             HttpContext.Session.SetString ("Session.SignInValidateCode", "empty-empty");
+
+            return Json (BaseResponse.SuccessResponse ());
         }
 
         public async Task<IActionResult> SendValidateCode (string email) {
@@ -81,6 +90,8 @@ namespace StmWeb.Controllers {
 
             MailHelper.SendMail ("注册验证码", email, code);
             HttpContext.Session.SetString ("Session.SignUpValidateCode", code);
+
+            return Json (BaseResponse.SuccessResponse ());
         }
 
         public async Task<IActionResult> SignOut () {

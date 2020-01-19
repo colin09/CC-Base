@@ -1,3 +1,9 @@
+using System.IO;
+using C.B.Common.Config;
+using MailKit.Net.Smtp;
+using MimeKit;
+using MimeKit.Text;
+
 namespace C.B.Common.helper {
 
     public class MailHelper {
@@ -26,7 +32,7 @@ namespace C.B.Common.helper {
             if (!string.IsNullOrWhiteSpace (filepath)) {
                 //生产一个绝对路径
                 //filepath = "Upload//NewsPhoto//readme.txt";
-                var absolutePath = Path.Combine (_hostingEnv.WebRootPath, string.Format (filepath));
+                var absolutePath = Path.Combine (Directory.GetCurrentDirectory (), string.Format (filepath));
                 //附件
                 var attachment = new MimePart () {
                     //读取文件(只能用绝对路径)
@@ -47,7 +53,7 @@ namespace C.B.Common.helper {
         private static void Send (MimeMessage message) {
 
             var smtpServerUrl = AppSettingConfig.Get ("EMail.SmtpServerUrl");
-            int smtpServerPort = AppSettingConfig.Get ("EMail.SmtpServerPort");
+            int smtpServerPort = AppSettingConfig.Get<int> ("EMail.SmtpServerPort");
             var smtpServerUserName = AppSettingConfig.Get ("EMail.SmtpServerUserName");
             var smtpServerPassword = AppSettingConfig.Get ("EMail.SmtpServerPassword");
 

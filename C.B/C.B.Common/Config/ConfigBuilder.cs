@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
+using C.B.Common.helper;
 using Microsoft.Extensions.Configuration;
 
 namespace C.B.Common.Config {
@@ -11,7 +13,7 @@ namespace C.B.Common.Config {
                 .AddJsonFile ("appsettings.json", optional : true, reloadOnChange : true);
 
             string environment = Environment.GetEnvironmentVariable ("ASPNETCORE_ENVIRONMENT");
-            if (!environment.IsNullOrWhiteSpace ()) {
+            if (environment.IsNotEmpty ()) {
                 builder = builder.AddJsonFile ($"appsettings.{environment}.json", optional : true);
             }
             Configuration = builder.Build ();

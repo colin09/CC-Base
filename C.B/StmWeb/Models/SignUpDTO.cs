@@ -1,4 +1,6 @@
 using System;
+using System.Text.RegularExpressions;
+using C.B.Common.helper;
 
 namespace StmWeb.Models {
     public class SignUpDTO {
@@ -16,13 +18,15 @@ namespace StmWeb.Models {
             if (userName.Length < 6) return "用户名。";
             if (userName.Length < 6) return "密码不能少于6位。";
 
-            var emailReg = "^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$";
+            var emailReg = @"^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$";
             var regex = new Regex (emailReg);
             if (!regex.IsMatch (email)) return "邮箱格式错误。";
 
-            var mobilReg = " /^1\d{11}$/";
+            var mobilReg = @"/^1\d{11}$/";
             regex = new Regex (mobilReg);
             if (mobileNo.IsNotEmpty () && !regex.IsMatch (mobileNo)) return "联系电话错误。";
+
+            return null;
         }
 
     }
