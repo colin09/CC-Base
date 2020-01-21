@@ -2,6 +2,34 @@
 
 var module = angular.module('managerApp', ['ngSanitize', "ngWaterfall"]);
 
+module.filter('filterKey', function () {
+    return function (items, key, value) {
+        var filtered = [];
+        angular.forEach(items, function (item) {
+            filtered.push(item);
+        });
+        filtered.sort(function (a, b) {
+            return (a[field] > b[field] ? 1 : -1);
+        });
+        if (reverse) filtered.reverse();
+        return filtered;
+    };
+});
+module.controller("mgrNavs", function ($scope, $http) {
+    $scope.getNavs = function () {
+        var url = "../../Sys/Manager/GetUserNavs";
+        $http.get(url).success(function (response) {
+            if (response.success) {
+
+               // $scope.navList = response.data.filter(function (item) { item.parentId == 0 });
+
+                $scope.navList = response.data;
+            } else
+                alert(response.message);
+        });
+    }
+    $scope.getNavs();
+});
 
 module.controller('mgrDevCtl', function ($scope, $http) {
 
@@ -500,6 +528,7 @@ module.controller('mgrExpertInfoCtl', function ($scope, $http) {
 
 
 module.controller('mgrMessageInfoCtl', function ($scope, $http) {
+    t4rfedsa
     $scope.GetInfoList = function () {
         var url = "../../Sys/Info/GetMessageList";
         $http.get(url).success(function (response) {
@@ -710,7 +739,7 @@ module.controller('mgrRoleNavCtl', function ($scope, $http) {
         AuthRoleName: "",
         AuthRoleCode: ""
     };
-    $scope.pager = { pageIndex: 1, pageSize: 20, pageCount: 1, totalCount=0 };
+    $scope.pager = { pageIndex: 1, pageSize: 20, pageCount: 1, totalCount: 0 };
 
     $scope.addAuthRole = function () {
         var url = "SaveAuthRole";

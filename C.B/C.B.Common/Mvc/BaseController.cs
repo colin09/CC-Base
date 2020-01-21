@@ -23,8 +23,8 @@ namespace C.B.Common.Mvc {
                 UserName = curUser.FindFirst (ClaimTypes.Sid).Value,
                 TrueName = curUser.FindFirst (ClaimTypes.Name).Value,
 
-                RoleType = curUser.FindFirst (ClaimTypes.PrimaryGroupSid).Value,
-                RoleId = curUser.FindFirst (ClaimTypes.Role).Value,
+                RoleId = Convert.ToInt64 (curUser.FindFirst (ClaimTypes.PrimaryGroupSid).Value),
+                RoleType = curUser.FindFirst (ClaimTypes.Role).Value,
 
                 MobileNo = curUser.FindFirst (ClaimTypes.MobilePhone).Value,
                 Email = curUser.FindFirst (ClaimTypes.Email).Value,

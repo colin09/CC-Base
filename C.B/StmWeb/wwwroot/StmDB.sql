@@ -360,7 +360,7 @@ VALUES ('2018-12-12 12:12:12', '2018-12-12 12:12:12', '0', 'dev', 'e10adc3949ba5
 
 
 INSERT INTO `StmDB`.`AuthRole`(`CreateTime`, `UpdateTime`, `IsDeleted`,`AuthRoleType`, `RoleName`, `RoleCode`, `Sort`) 
-VALUES (now(), now(), 0, 0, 'System', 'System', 0);
+VALUES (now(), now(), 0, 1, 'System', 'System', 0);
 
 INSERT INTO `StmDB`.`AuthUser`(`CreateTime`, `UpdateTime`, `IsDeleted`, `UserName`, `Password`, `TrueName`, `MobileNo`, `EMail`, `LastLoginTime`, `Status`, `AuthRoleId`) 
 VALUES (now(),now(), 0, 'System', 'e10adc3949ba59abbe56e057f20f883e', 'System', '99999999999', '99@99.com', now(), 1, 1);

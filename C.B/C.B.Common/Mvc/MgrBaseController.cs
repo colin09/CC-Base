@@ -2,32 +2,38 @@ using System;
 using System.Security.Claims;
 using C.B.Common.helper;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace C.B.Common.Mvc {
 
     [Area ("Sys")]
-    [ErrorFilter, LoggerFilter]
+    [MgrErrorFilter, LoggerFilter]
     public class MgrBaseController : Controller {
-        private CurrentUser _currentUser = null;
-        //protected CurrentUser CurrentUser => GetCurrentUser();
+        protected CurrentUser currentUser = null;
 
         protected string UserName = "";
 
-        protected CurrentUser GetCurrentUserInfo (ClaimsPrincipal curUser) {
-            if (_currentUser != null)
-                return _currentUser;
+        public MgrBaseController () {
+            // currentUser = GetCurrentUserInfo ();
+        }
 
-            //var curUser = HttpContext.User;
+        // protected CurrentUser GetCurrentUserInfo (HttpContext httpContext) {
+        //     return GetCurrentUserInfo (httpContext.User);
+        // }
+
+        protected CurrentUser GetCurrentUserInfo (ClaimsPrincipal curUser) {
             var userId = curUser.FindFirst (ClaimTypes.PrimarySid).Value.ToInt ();
-            System.Console.WriteLine ($"==========> ClaimTypes.PrimarySid: {userId}");
+            if (userId.HasValue)
+                System.Console.WriteLine ($"==========> ClaimTypes.PrimarySid: {userId}");
+
             return new CurrentUser {
                 Id = userId.HasValue ? userId.Value : 0,
                     UserName = curUser.FindFirst (ClaimTypes.Sid).Value,
                     TrueName = curUser.FindFirst (ClaimTypes.Name).Value,
 
-                    RoleType = curUser.FindFirst (ClaimTypes.PrimaryGroupSid).Value,
-                    RoleId = curUser.FindFirst (ClaimTypes.Role).Value,
+                    RoleId = Convert.ToInt64 (curUser.FindFirst (ClaimTypes.PrimaryGroupSid).Value),
+                    RoleType = curUser.FindFirst (ClaimTypes.Role).Value,
 
                     MobileNo = curUser.FindFirst (ClaimTypes.MobilePhone).Value,
                     Email = curUser.FindFirst (ClaimTypes.Email).Value,
@@ -41,7 +47,7 @@ namespace C.B.Common.Mvc {
         public string UserName { set; get; }
         public string TrueName { set; get; }
         public string RoleType { set; get; }
-        public string RoleId { set; get; }
+        public long RoleId { set; get; }
 
         public string Email { set; get; }
         public string MobileNo { set; get; }
