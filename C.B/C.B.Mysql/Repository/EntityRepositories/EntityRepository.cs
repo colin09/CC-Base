@@ -22,5 +22,6 @@ namespace C.B.MySql.Repository.EntityRepositories {
     public partial class AuthUserRepository : BaseRepository<AuthUser> { }
     public partial class AuthRoleNavsRepository : BaseRepository<AuthRoleNavs> { }
     public partial class AuthUserNavsRepository : BaseRepository<AuthUserNavs> { }
+    public partial class UserWorkRepository : BaseRepository<UserWork> { }
 
 }

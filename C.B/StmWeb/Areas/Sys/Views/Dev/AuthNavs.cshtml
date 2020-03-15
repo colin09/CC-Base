@@ -1,6 +1,8 @@
 ﻿@{
     ViewData["Title"] = "Navs";
 }
+<link rel="stylesheet" href="../../mgr/css/zTreeStyle/zTreeStyle.css" type="text/css" />
+<script type="text/javascript" src="../../mgr/js/jquery.ztree.core.min.js"></script>
 
 <div ng-controller="mgrNavCtl">
 
@@ -10,12 +12,14 @@
             <div class="col-xs-6">
                 <ul id="ulNavs" class="ztree"></ul>
             </div>
-            <div class="col-xs-4">
+            <div class="col-xs-5">
                 <table>
                     <tr>
                         <td> Type：</td>
                         <td>
-                            <input type="text" ng-model="nav.NavType" />
+                            <input type="text" ng-model="navigate.NavType" />
+                            <input type="radio" name="rdoNavType" ng-value="1" ng-model="navigate.NavType">目录 
+                            <input type="radio" name="rdoNavType" ng-value="2" ng-model="navigate.NavType">菜单                            
                         </td>
                     </tr>
                     <tr>
@@ -23,7 +27,7 @@
                             Title：
                         </td>
                         <td>
-                            <input type="text" ng-model="nav.Title" />
+                            <input type="text" class="form-control"  ng-model="navigate.Title" />
                         </td>
                     </tr>
                     <tr>
@@ -31,7 +35,7 @@
                             NavCode：
                         </td>
                         <td>
-                            <input type="checkbox" ng-model="nav.NavCode">
+                            <input type="text" class="form-control" ng-model="navigate.NavCode">
                         </td>
                     </tr>
                     <tr>
@@ -39,7 +43,7 @@
                             Desc：
                         </td>
                         <td>
-                            <input type="checkbox" ng-model="nav.Desc">
+                            <input type="text" class="form-control" ng-model="navigate.Desc">
                         </td>
                     </tr>
                     <tr>
@@ -47,7 +51,7 @@
                             Icon：
                         </td>
                         <td>
-                            <input type="text" ng-model="nav.Icon" />
+                            <input type="text" class="form-control" ng-model="navigate.Icon" />
                         </td>
                     </tr>
                     <tr>
@@ -55,7 +59,7 @@
                             Url：
                         </td>
                         <td>
-                            <input type="text" ng-model="nav.Url" />
+                            <input type="text" class="form-control" ng-model="navigate.Url" />
                         </td>
                     </tr>
                     <tr>
@@ -63,7 +67,7 @@
                             Module：
                         </td>
                         <td>
-                            <input type="text" ng-model="nav.Module" />
+                            <input type="text" class="form-control" ng-model="navigate.Module" />
                         </td>
                     </tr>
                     <tr>
@@ -71,7 +75,7 @@
                             Target：
                         </td>
                         <td>
-                            <input type="text" ng-model="nav.Target" />
+                            <input type="text" class="form-control" ng-model="navigate.Target" />
                         </td>
                     </tr>
                     <tr>
@@ -79,15 +83,19 @@
                             Sort：
                         </td>
                         <td>
-                            <input type="text" ng-model="nav.Sort" />
+                            <input type="text" class="form-control" ng-model="navigate.Sort" />
                         </td>
                     </tr>
                     <tr>
                         <td></td>
                         <td>
-                            <input type="hidden" ng-model="nav.Id" id="hdNavId" />
-                            <button type="button" class="btn btn-primary btn-fw" ng-click="SaveNav()"> 添加为子类别 </button>
-                            <button type="button" class="btn btn-primary btn-fw" ng-click="ModifyNav()"> 修 改 </button>
+                            <br />
+                            <input type="hidden" ng-model="navigate.Id" id="hdNavId" />
+                            <button type="button" class="btn btn-primary btn-fw" ng-click="SaveNav(0)"> 添加根节点 </button>
+                            <button type="button" class="btn btn-primary btn-fw" ng-click="SaveNav(99999)"> 添加子节点 </button>
+                            <button type="button" class="btn btn-primary btn-fw" ng-click="SaveNav(999)"> 添加同级节点 </button>
+                            <br />    <br />
+                            <button type="button" class="btn btn-primary btn-fw" ng-click="modifyNav()"> 修 改 </button>
                             <button type="button" class="btn btn-primary btn-fw" ng-click="RemoveNav()"> 删 除 </button>
                         </td>
                     </tr>

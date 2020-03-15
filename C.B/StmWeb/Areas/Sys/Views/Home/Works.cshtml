@@ -1,0 +1,39 @@
+﻿@{
+    ViewData["Title"] = "Index";
+}
+
+
+<div ng-controller="mgrWorksCtl">
+    <ul>
+        <li np-repeat="item in workList">
+            <div class="row">
+                <div class="col-md-10">
+                    <h3>这是标题********************  </h3>  
+                    <h3>(这是赛事名称######)</h3>
+                </div>
+                <div class="col-md-3 col-md-offset-1">
+                    <div>
+                        <img height="200px" url="{{item.Url}}" />
+                    </div>
+                    <div>
+                        <button type="button" class="btn btn-success" data-dismiss="modal"> 提 交 </button>
+                        <button type="button" class="btn btn-warning" data-dismiss="modal" > 删 除 </button>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    描述：
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2 col-md-offset-1" >
+                    <h1> 8.0</h1>
+                    <h5>分数</h5>
+                </div>
+                <div class="col-md-8">
+                    评语：
+                </div>
+            </div>
+        </li>
+    </ul>
+
+</div>

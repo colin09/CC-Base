@@ -97,6 +97,10 @@ namespace StmWeb.Area.Sys.Controllers {
             var roleNavs = _authRoleNavsRepository.Where (m => m.AuthRoleId == user.RoleId);
             var navIds = roleNavs.Select (m => m.AuthNavId).ToArray ();
             var navs = _authNavsRepository.Where (m => navIds.Contains (m.Id)).ToList ();
+
+            if (user.RoleType == "system")
+                navs = _authNavsRepository.Where (m => m.IsDeleted == 0).OrderBy (m => m.Sort).ToList ();
+
             return Json (BaseResponse.SuccessResponse (navs));
         }
 

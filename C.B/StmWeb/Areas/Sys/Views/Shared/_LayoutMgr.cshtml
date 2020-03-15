@@ -22,7 +22,8 @@
     <!-- <script src="https://cdn.staticfile.org/angular.js/1.4.6/angular.min.js"></script> -->
     <script src="~/js/angular.min.js"></script>
     <script src="~/js/angular-waterfall.js"></script>
-    <script src="https://cdn.bootcss.com/angular-sanitize/1.4.6/angular-sanitize.min.js"></script>
+    @* <script src="https://cdn.bootcss.com/angular-sanitize/1.4.6/angular-sanitize.min.js"></script> *@
+    <script src="~/js/angular-sanitize.min.js"></script>
     <script src="~/mgr/js/app.js"></script>
 </head>
 <body>
@@ -206,8 +207,8 @@
         <div class="container-fluid page-body-wrapper">
 
             <nav class="sidebar sidebar-offcanvas" id="sidebar" ng-controller="mgrNavs">
-                <ul class="nav">
-                    <!-- <li class="nav-item nav-profile">
+                <!-- <ul class="nav">
+                    <! -- <li class="nav-item nav-profile">
                         <div class="nav-link">
                             <div class="user-wrapper">
                                 <div class="profile-image">
@@ -226,7 +227,7 @@
                                 <i class="mdi mdi-plus"></i>
                             </button>
                         </div>
-                    </li> -->
+                    </li> -- >
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#ui-eventInc" aria-expanded="false" aria-controls="ui-expertInc">
                             <i class="menu-icon mdi mdi-television"></i>
@@ -335,10 +336,21 @@
                             </ul>
                         </div>
                     </li>
-                </ul>
-                <ul ng-repeat="nav in navList">
-                    <li class="nav-item active" >
-{{nav.title}}
+                </ul> -->
+                <ul class="nav" ng-repeat="nav in navList | filterKey : 0 ">
+                    <li class="nav-item " >
+                        <a class="nav-link" href="#ui-devFeature" aria-expanded="false" aria-controls="ui-devFeature">
+                            <i class="menu-icon mdi {{nav.icon}}"></i>
+                            <span class="menu-title" ng-bind="nav.title">develop Pages</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse show" id="ui-devFeature1">
+                            <ul class="nav flex-column sub-menu" ng-repeat="sub in navList | filterKey : nav.id">
+                                <li class="nav-item">
+                                    <a class="nav-link " ng-href="{{sub.url}}" ng-bind="sub.title" >用户管理</a>
+                                </li>
+                            </ul>
+                        </div>
                     </li>
                 </ul>
                 <hr>

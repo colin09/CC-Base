@@ -83,7 +83,7 @@ namespace StmWeb.Area.Sys.Controllers {
 
         [HttpGet]
         public IActionResult GetAuthNavs () {
-            var result = _authNavsRepository.Where (m => m.IsDeleted == 0);
+            var result = _authNavsRepository.Where (m => m.IsDeleted == 0).OrderBy (m => m.Sort);
             return Json (BaseResponse.SuccessResponse (result));
         }
 

@@ -2,17 +2,10 @@
 
 var module = angular.module('managerApp', ['ngSanitize', "ngWaterfall"]);
 
-module.filter('filterKey', function () {
-    return function (items, key, value) {
-        var filtered = [];
-        angular.forEach(items, function (item) {
-            filtered.push(item);
-        });
-        filtered.sort(function (a, b) {
-            return (a[field] > b[field] ? 1 : -1);
-        });
-        if (reverse) filtered.reverse();
-        return filtered;
+module.filter('filterKey', function ($filter) {
+    return function (items, value) {
+        var list = $filter("filter")(items, { "parentId": value }, true);
+        return list;
     };
 });
 module.controller("mgrNavs", function ($scope, $http) {
@@ -21,7 +14,7 @@ module.controller("mgrNavs", function ($scope, $http) {
         $http.get(url).success(function (response) {
             if (response.success) {
 
-               // $scope.navList = response.data.filter(function (item) { item.parentId == 0 });
+                // $scope.navList = response.data.filter(function (item) { item.parentId == 0 });
 
                 $scope.navList = response.data;
             } else
@@ -669,11 +662,15 @@ module.controller('mgrPasswordCtl', function ($scope, $http) {
 
 module.controller('mgrNavCtl', function ($scope, $http) {
     $scope.Title = "System Nav";
+    $scope.navigate = {
+        Id: 0, ParentId: 0, NavType: 1, Title: "", NavCode: "", Desc: "",
+        Icon: "", Url: "", Module: "", Target: "", Sort: 999
+    };
 
     // zTree 的参数配置，深入使用请参考 API 文档（setting 配置详解）
     var setting = {
         check: {
-            enable: false,
+            enable: true,
             chkStyle: "checkbox", //默认值
             nocheckInherit: true,  //新加入子节点时，自动继承父节点 nocheck = true 的属性。
             chkboxType: { "Y": "ps", "N": "ps" } //勾选 checkbox 对于父子节点的关联影响
@@ -686,12 +683,13 @@ module.controller('mgrNavCtl', function ($scope, $http) {
                 rootPId: 0
             },
             key: {
-                name: "name",
-                title: ""
+                name: "title",
+                title: "url",
+                url: ""
             }
         },
         view: {
-            showTitle: false
+            showTitle: true
         },
         callback: {
             onClick: zTreeOnClick
@@ -699,14 +697,20 @@ module.controller('mgrNavCtl', function ($scope, $http) {
     };
     function zTreeOnClick(event, treeId, treeNode) {
 
-        $scope.NewType.Id = treeNode.id;
-        $("#hdNavId").val(treeNode.id);
-        $scope.nav = treeNode;
+        $scope.navigate.Id = treeNode.id;
+        // $("#hdNavId").val(treeNode.id);
+        // $scope.navigate = treeNode;
 
-        $scope.NewType.ParentId = treeNode.parentId;
-        $scope.NewType.Name = treeNode.name;
-        $scope.NewType.Show = treeNode.isShow == 1;
-        $scope.NewType.SortNo = treeNode.sortNo;
+        $scope.navigate.ParentId = treeNode.parentId;
+        $scope.navigate.Title = treeNode.title;
+        $scope.navigate.NavType = treeNode.navType;
+        $scope.navigate.NavCode = treeNode.navCode;
+        $scope.navigate.Desc = treeNode.desc;
+        $scope.navigate.Icon = treeNode.icon;
+        $scope.navigate.Url = treeNode.url;
+        $scope.navigate.Module = treeNode.module;
+        $scope.navigate.Target = treeNode.target;
+        $scope.navigate.Sort = treeNode.sort;
 
         $scope.$apply();
     }
@@ -717,9 +721,29 @@ module.controller('mgrNavCtl', function ($scope, $http) {
             zTreeObj1.expandAll(true);
         });
     }
+    $scope.getAuthNavs();
 
+    $scope.SaveNav = function (root) {
+        if (root === 0) {
+            $scope.navigate.ParentId = 0;
+            $scope.navigate.Id = 0;
+        }
+        else if (root === 999) {
+            $scope.navigate.Id = 0;
+        } else {
+            $scope.navigate.ParentId = $scope.navigate.Id;
+            $scope.navigate.Id = 0;
+        }
+        $http.post("SaveAuthNav", $scope.navigate).success(function (response) {
+            if (response.success) {
+                alert("保存成功！");
+                $scope.getAuthNavs();
+            } else
+                alert("保存失败！");
+        });
+    }
     $scope.modifyNav = function () {
-        $http.post("SaveAuthNav", $scope.nav).success(function (response) {
+        $http.post("SaveAuthNav", $scope.navigate).success(function (response) {
             if (response.success) {
                 alert("保存成功！");
                 $scope.getAuthNavs();
@@ -855,4 +879,21 @@ module.controller('mgrUserNavCtl', function ($scope, $http) {
         });
     }
     $scope.GetUserList();
+});
+
+
+module.controller('mgrWorksCtl', function ($scope, $http){
+
+    $scope.getWorkList = function(){
+        var url = "GetWorkList";
+        $http.get(url).success(function (response) {
+            if (response.success) {
+                $scope.workList = response.data;
+            } else
+                alert(response.message);
+        });
+
+
+        
+    }
 });

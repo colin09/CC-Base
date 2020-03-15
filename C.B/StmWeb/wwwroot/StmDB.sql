@@ -322,6 +322,37 @@ CREATE TABLE `AuthUserNavs`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 
+-- ----------------------------
+-- Table structure for UserWork
+-- ----------------------------
+DROP TABLE IF EXISTS `UserWork`;
+CREATE TABLE `UserWork`  (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  
+  `Title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `Description` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
+  `State` int(11) NOT NULL,
+  
+  `EventId` int(11)  NULL,
+  `AuditUserId` int(11)  NULL,
+  `AuditTime` datetime(0)  NULL,
+  `AuditScore` decimal(6,2) NULL,
+  `AuditRemark` text NULL,
+  
+  `CreateTime` datetime(0) NOT NULL,
+  `UpdateTime` datetime(0) NOT NULL,
+  `IsDeleted` int(11) NOT NULL,
+  `Filepath` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `Url` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `FileMd5` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `FileName` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `Sort` int(11) NOT NULL,
+  
+  PRIMARY KEY (`Id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+SET FOREIGN_KEY_CHECKS = 1;
+
 
 
 
@@ -362,7 +393,51 @@ VALUES ('2018-12-12 12:12:12', '2018-12-12 12:12:12', '0', 'dev', 'e10adc3949ba5
 INSERT INTO `StmDB`.`AuthRole`(`CreateTime`, `UpdateTime`, `IsDeleted`,`AuthRoleType`, `RoleName`, `RoleCode`, `Sort`) 
 VALUES (now(), now(), 0, 1, 'System', 'System', 0);
 
+
+
+INSERT INTO `StmDB`.`AuthNavs`(`CreateTime`, `UpdateTime`, `IsDeleted`, `ParentId`, `NavCode`, `NavType`, `Title`, `Desc`, `Icon`, `Url`, `Module`, `Target`, `Sort`) 
+VALUES 
+ (NOW(),  NOW(), 0, 0, 'System_Navs', 1, 'system tool', NULL, 'mdi-content-copy', '#', NULL, NULL, 900),
+ (NOW(),  NOW(), 0, 1, 'System_AuthNavs', 2, 'Navs', NULL, NULL, '../../Sys/Dev/AuthNavs', NULL, NULL, 901),
+ (NOW(),  NOW(), 0, 1, 'System_AuthRole', 2, 'Roles', NULL, NULL, '../../Sys/Dev/AuthRoleNavs', NULL, NULL, 902),
+ (NOW(),  NOW(), 0, 1, 'System_AuthUser', 2, 'Users', NULL, NULL, '../../Sys/Dev/AuthUserNavs', NULL, NULL, 903),
+
+ (NOW(),  NOW(), 0, 0, 'System_Info', 1, '个人中心', NULL, 'mdi-content-copy', '#', NULL, NULL, 510),
+ (NOW(),  NOW(), 0, 5, 'System_Navs', 2, '基本信息', NULL, NULL, '../../Sys/Home/BaseInfo', NULL, NULL, 511),
+ (NOW(),  NOW(), 0, 5, 'System_Navs', 2, '我的作品', NULL, NULL, '../../Sys/Home/Works', NULL, NULL, 512),
+ (NOW(),  NOW(), 0, 5, 'System_Navs', 2, '作品审核', NULL, NULL, '../../Sys/Home/Audits', NULL, NULL, 513),
+
+ (NOW(),  NOW(), 0, 0, 'Event_Info', 1, '赛事介绍', NULL, 'mdi-content-copy', '#', NULL, NULL, 610),
+ (NOW(),  NOW(), 0, 9, 'Event_Info_List', 2, '赛事信息', NULL, NULL, '../../Sys/Info/EventIndex', NULL, NULL, 611),
+ (NOW(),  NOW(), 0, 9, 'Event_Info_New', 2, '发布赛事', NULL, NULL, '../../Sys/Info/Editor?type=1', NULL, NULL, 612),
+
+ (NOW(),  NOW(), 0, 0, 'Expert_Info', 1, '专家介绍', NULL, 'mdi-content-copy', '#', NULL, NULL, 620),
+ (NOW(),  NOW(), 0, 12, 'Expert_Info_List', 2, '专家信息', NULL, NULL, '../../Sys/Info/ExpertIndex', NULL, NULL, 621),
+ (NOW(),  NOW(), 0, 12, 'Expert_Info_New', 2, '新增专家信息', NULL, NULL, '../../Sys/Info/Editor?type=2', NULL, NULL, 622),
+
+ (NOW(),  NOW(), 0, 0, 'News_Info', 1, '新闻信息', NULL, 'mdi-content-copy', '#', NULL, NULL, 630),
+ (NOW(),  NOW(), 0, 15, 'News_Info_List', 2, '新闻（图片/视频/赛事）', NULL, NULL, '../../Sys/Info/NewsIndex', NULL, NULL, 631),
+ (NOW(),  NOW(), 0, 15, 'News_Info_New', 2, '发布新闻', NULL, NULL, '../../Sys/Info/Editor?type=3', NULL, NULL, 632),
+
+ (NOW(),  NOW(), 0, 0, 'Notice_Info', 1, '通知公告', NULL, 'mdi-content-copy', '#', NULL, NULL, 640),
+ (NOW(),  NOW(), 0, 18, 'Notice_Info_List', 2, '通知公告信息', NULL, NULL, '../../Sys/Info/NoticeIndex', NULL, NULL, 641),
+ (NOW(),  NOW(), 0, 18, 'Notice_Info_New', 2, '发布通知公告', NULL, NULL, '../../Sys/Info/Editor?type=4', NULL, NULL,642),
+
+ (NOW(),  NOW(), 0, 0, 'Message_Info', 1, '互动留言', NULL, 'mdi-content-copy', '#', NULL, NULL, 650),
+ (NOW(),  NOW(), 0, 21, 'Message_Info_List', 2, '互动留言', NULL, NULL, '../../Sys/Info/MessageIndex', NULL, NULL, 651),
+
+ (NOW(),  NOW(), 0, 0, 'Reoursce_Info', 1, '文件管理', NULL, 'mdi-content-copy', '#', NULL, NULL, 900),
+ (NOW(),  NOW(), 0, 23, 'Reoursce_Info_List', 2, '资源文件', NULL, NULL, '../../Sys/File/Resource', NULL, NULL, 670),
+ (NOW(),  NOW(), 0, 23, 'Reoursce_Info_Upload', 2, '上传文件', NULL, NULL, '../../Sys/File/Upload', NULL, NULL, 671);
+
+
 INSERT INTO `StmDB`.`AuthUser`(`CreateTime`, `UpdateTime`, `IsDeleted`, `UserName`, `Password`, `TrueName`, `MobileNo`, `EMail`, `LastLoginTime`, `Status`, `AuthRoleId`) 
-VALUES (now(),now(), 0, 'System', 'e10adc3949ba59abbe56e057f20f883e', 'System', '99999999999', '99@99.com', now(), 1, 1);
+SELECT NOW(), NOW(), 0, 'System', 'e10adc3949ba59abbe56e057f20f883e', 'System', '99999999999', '99@99.com', now(), 1, id FROM AuthRole;
+
+
+INSERT INTO `StmDB`.`AuthRoleNavs`(`CreateTime`, `UpdateTime`, `IsDeleted`, `AuthRoleId`, `AuthNavId`, `Sort`) 
+SELECT NOW(),  NOW(), 0, (SELECT MIN(Id) FROM `StmDB`.`AuthRole`), Id, 900 FROM `StmDB`.`AuthNavs`;
+
+
 
 
